@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+Route::view('/inicio', 'index')->name('inicio');
+Route::view('/noticias', 'noticias')->name('noticias');
+Route::view('/cursos', 'cursos')->name('cursos');
+Route::view('/eventos', 'eventos')->name('eventos');
+Route::view('/galeria', 'galeria')->name('galeria');
+Route::view('/videos', 'videos')->name('videos');
