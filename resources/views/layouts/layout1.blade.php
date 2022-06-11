@@ -71,11 +71,11 @@
                         </li>
 
 
-                        <template id="SiSesion">
+                        {{-- <template id="SiSesion"> --}}
                         <li class="nav-item">
                             <a class="nav-link @yield('activeAdmin')" href="">ADMIN</a>
                         </li>
-                    </template> 
+                    {{-- </template>  --}}
                     </ul>
 
   {{-- 
