@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCountriesTable extends Migration
+class CreateDocumentTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCountriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
-            $table->mediumIncrements('id');
-            $table->string('name');
-            $table->string('slug');
+        Schema::create('document_types', function (Blueprint $table) {
+            $table->tinyIncrements('id');
+            $table->string('name'); // Tarjeta de Identidad
+            $table->string('slug'); // C.C T.I
+            $table->tinyText('description')->nullable();
+
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateCountriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('document_types');
     }
 }

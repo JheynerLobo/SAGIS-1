@@ -23,11 +23,13 @@ class CreatePeopleTable extends Migration
             $table->string('address');
             $table->string('telephone')->nullable();
             $table->string('email')->unique();
-            $table->unsignedMediumInteger('birthdate_place_id');
+            $table->unsignedBigInteger('birthdate_place_id');
             $table->date('birthdate');
-            $table->string('');
 
             $table->timestamps();
+
+            $table->foreign('document_type_id')->references('id')->on('document_types')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('birthdate_place_id')->references('id')->on('cities')->cascadeOnUpdate()->restrictOnDelete();
         });
     }
 
