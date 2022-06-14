@@ -5,24 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class State extends Model
+class academicLevel extends Model
 {
     use HasFactory;
+
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['country_id', 'name', 'slug'];
-
-
+    protected $fillable = ['name'];
 
 
 
      /** Relation Methods */
-    public function country()
-    {
-        return $this->belongsTo(Country::class);
-    }
+     public function program()
+     {
+        return $this->belongsToMany(Program::class);
+     }
 }
+

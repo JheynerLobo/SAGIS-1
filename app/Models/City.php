@@ -16,6 +16,10 @@ class City extends Model
      */
     protected $fillable = ['state_id', 'name', 'slug'];
 
+
+
+
+     /** Relation Methods */
     public function state()
     {
         return $this->belongsTo(State::class);

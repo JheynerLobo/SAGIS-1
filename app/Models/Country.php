@@ -51,6 +51,8 @@ class Country extends Model
     //     return Str::upper($this->attributes['name']);
     // }
 
+
+    
     /** Relation Methods */
     public function states()
     {

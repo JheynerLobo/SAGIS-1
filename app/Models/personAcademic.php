@@ -5,9 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DocumentType extends Model
+class personAcademic extends Model
 {
     use HasFactory;
+
 
 
 /**
@@ -15,13 +16,21 @@ class DocumentType extends Model
  *
  * @var array
  */
-protected $fillable = ['name', 'description'];
+protected $fillable = ['person_id', 'program_id', 'year'];
 
 
 
-/** Relation Methods */
+
+
+ /** Relation Methods */
+public function program()
+{
+    return $this->belongsTo(Program::class);
+}
+
 public function people()
 {
     return $this->hasMany(Person::class);
 }
+
 }
