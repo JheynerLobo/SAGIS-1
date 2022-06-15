@@ -14,7 +14,8 @@ class UniversityFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => 'Universidad ' . $this->faker->unique()->company,
+            'address' => $this->faker->address
         ];
     }
 }

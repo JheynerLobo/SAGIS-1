@@ -14,7 +14,8 @@ class StateFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->unique()->words(2, true),
+            'slug' => $this->faker->unique()->slug(1)
         ];
     }
 }

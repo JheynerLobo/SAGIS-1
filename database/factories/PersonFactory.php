@@ -14,7 +14,14 @@ class PersonFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'lastname' => $this->faker->lastName,
+            'document' => '1090' . $this->faker->unique()->randomNumber(4, true),
+            'phone' => $this->faker->phoneNumber,
+            'address' => $this->faker->address,
+            'telephone' => $this->faker->e164PhoneNumber,
+            'email' => $this->faker->unique()->email,
+            'birthdate' => $this->faker->date('Y-m-d', '-18 years')
         ];
     }
 }

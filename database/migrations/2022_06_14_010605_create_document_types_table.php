@@ -17,7 +17,7 @@ class CreateDocumentTypesTable extends Migration
             $table->tinyIncrements('id');
             $table->string('name'); // Tarjeta de Identidad
             $table->string('slug'); // C.C T.I
-            $table->tinyText('description')->nullable();
+            $table->string('description')->nullable();
 
             $table->timestamps();
         });

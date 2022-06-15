@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFacultiesTable extends Migration
+class CreateAcademicLevelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateFacultiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('faculties', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('university_id')->nullable();
+        Schema::create('academic_levels', function (Blueprint $table) {
+            $table->tinyIncrements('id');
             $table->string('name');
-
+            $table->string('description')->nullable();
             $table->timestamps();
 
-            $table->foreign('university_id')->references('id')->on('universities')->cascadeOnUpdate()->nullOnDelete();
         });
     }
 
@@ -31,6 +29,6 @@ class CreateFacultiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('faculties');
+        Schema::dropIfExists('academic_levels');
     }
 }

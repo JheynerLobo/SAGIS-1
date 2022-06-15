@@ -14,7 +14,7 @@ class CreateUniversitiesTable extends Migration
     public function up()
     {
         Schema::create('universities', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->id();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('name');
             $table->string('address');
@@ -22,6 +22,7 @@ class CreateUniversitiesTable extends Migration
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities')->cascadeOnUpdate()->nullOnDelete();
+            $table->unique(['city_id', 'name'], 'unique_universities');
         });
     }
 

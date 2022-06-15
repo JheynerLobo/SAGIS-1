@@ -17,11 +17,12 @@ class CreateStatesTable extends Migration
             $table->integerIncrements('id');
             $table->unsignedMediumInteger('country_id')->nullable();
             $table->string('name', 80);
-            $table->string('slug', 5);
+            $table->string('slug');
 
             $table->timestamps();
- 
+
             $table->foreign('country_id')->references('id')->on('countries')->cascadeOnUpdate()->nullOnDelete();
+            $table->unique(['country_id', 'name'], 'unique_countries');
         });
     }
 

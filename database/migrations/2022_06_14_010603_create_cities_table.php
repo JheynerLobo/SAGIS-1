@@ -14,7 +14,7 @@ class CreateCitiesTable extends Migration
     public function up()
     {
         Schema::create('cities', function (Blueprint $table) {
-            $table->smallIncrements('id');
+            $table->id();
             $table->unsignedInteger('state_id')->nullable();
             $table->string('name', 80);
             $table->string('slug');
@@ -22,6 +22,8 @@ class CreateCitiesTable extends Migration
             $table->timestamps();
 
             $table->foreign('state_id')->references('id')->on('states')->cascadeOnUpdate()->nullOnDelete();
+
+            $table->unique(['state_id', 'name'], 'unique_cities');
         });
     }
 

@@ -2,10 +2,19 @@
 
 namespace Database\Seeders;
 
+use App\Repositories\DocumentTypeRepository;
 use Illuminate\Database\Seeder;
 
 class DocumentTypeSeeder extends Seeder
 {
+    /** @var DocumentTypeRepository */
+    protected $documentTypeRepository;
+
+    public function __construct(DocumentTypeRepository $documentTypeRepository)
+    {
+        $this->documentTypeRepository = $documentTypeRepository;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -13,6 +22,25 @@ class DocumentTypeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $items = [
+            [
+                'name' => 'cédula de ciudadanía',
+                'slug' => 'c.c'
+            ],
+
+            [
+                'name' => 'cédula de extranjería',
+                'slug' => 'c.e'
+            ],
+
+            [
+                'name' => 'tarjeta de identidad',
+                'slug' => 't.i'
+            ],
+        ];
+
+        foreach ($items as $item) {
+            $this->documentTypeRepository->create($item);
+        }
     }
 }

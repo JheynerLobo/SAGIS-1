@@ -2,10 +2,26 @@
 
 namespace Database\Seeders;
 
+use App\Repositories\CityRepository;
+use App\Repositories\UniversityRepository;
 use Illuminate\Database\Seeder;
 
 class UniversitySeeder extends Seeder
 {
+    /** @var UniversityRepository */
+    protected $universityRepository;
+
+    /** @var CityRepository */
+    protected $cityRepository;
+
+    public function __construct(
+        UniversityRepository $universityRepository,
+        CityRepository $cityRepository
+    ) {
+        $this->universityRepository = $universityRepository;
+        $this->cityRepository = $cityRepository;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -13,6 +29,9 @@ class UniversitySeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->cityRepository->all()->map(function ($city){
+            $randomNumber = 2;
+            $this->universityRepository->createFactory($randomNumber, ['city_id' => $city->id]);
+        });
     }
 }
