@@ -35,7 +35,7 @@
 
                 <form action="../../index3.html" method="post">
                     <div class="input-group mb-3">
-                        <input type="number" class="form-control" placeholder="Cedula" required>
+                        <input type="email" class="form-control" placeholder="Correo"   pattern=".+@ufps.edu.co" required>
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
