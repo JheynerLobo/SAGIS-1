@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'dev.admin.administrarGraduados');
+Route::view('/', 'dev.pages.login');
 
 Route::view('home', 'dev.pages.index')->name('dev.home');
 Route::view('notices', 'dev.pages.notices')->name('dev.notices');
