@@ -54,14 +54,19 @@
                 <li class="nav-item dropdown" style="list-style-type: none;">
                     <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Jarlin Fonseca
+                        {{ Auth()->user()->person->fullname() }}
                     </a>
                     <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="#">Mi perfil</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Salir</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);"
+                                onclick="event.preventDefault(); $('#logout').submit();">Salir</a></li>
+
+                        <form action="{{ route('logout') }}" method="post" id="logout">
+                            @csrf
+                        </form>
                     </ul>
                 </li>
 

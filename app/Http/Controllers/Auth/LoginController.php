@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Repositories\RoleRepository;
+use App\Traits\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -28,23 +29,28 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    /** @var RoleRepository */
+    protected $roleRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(RoleRepository $roleRepository)
     {
         $this->middleware('guest')->except('logout');
+        $this->roleRepository = $roleRepository;
     }
 
     /**
-     * Get the login username to be used by the controller.
+     * Show the application's login form.
      *
-     * @return string
+     * @return \Illuminate\View\View
      */
-    public function username()
+    public function showLoginForm()
     {
-        return 'code';
+        $roles = $this->roleRepository->all();
+        return view('auth.login', compact('roles'));
     }
 }
