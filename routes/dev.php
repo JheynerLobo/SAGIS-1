@@ -35,3 +35,5 @@ Route::view('students/academics/create', 'dev.admin.pages.students.academic.crea
 Route::view('students/academics/edit', 'dev.admin.pages.students.academic.edit')->name('dev.students.academics.edit');
 
 Route::view('students/all_information', 'dev.admin.pages.students.academic.full')->name('dev.students.academics.information');
+
+Route::view('statistics/view_statistic', 'dev.admin.pages.statistics.view_statistic')->name('dev.statistics.view_statistic') ; 
