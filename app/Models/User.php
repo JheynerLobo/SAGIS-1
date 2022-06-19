@@ -50,6 +50,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Person::class);
     }
+
+    /**
+     * Get the User's roles.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'user_role')->withTimestamps();
+    }
 }
-
-

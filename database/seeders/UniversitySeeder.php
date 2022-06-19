@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+
 use App\Repositories\CityRepository;
 use App\Repositories\UniversityRepository;
-use Illuminate\Database\Seeder;
 
 class UniversitySeeder extends Seeder
 {

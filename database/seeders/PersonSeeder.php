@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+
 use App\Repositories\CityRepository;
 use App\Repositories\DocumentTypeRepository;
 use App\Repositories\PersonRepository;
-use Illuminate\Database\Seeder;
 
 class PersonSeeder extends Seeder
 {
@@ -35,9 +36,17 @@ class PersonSeeder extends Seeder
      */
     public function run()
     {
-        $this->personRepository->createFactory(500, [
-            'document_type_id' => $this->documentTypeRepository->randomFirst()->id,
-            'birthdate_place_id' => $this->cityRepository->randomFirst()->id
-        ]);
+        $randomNumber = 500;
+
+        $documentTypes = $this->documentTypeRepository->all();
+        $cities = $this->cityRepository->all();
+
+        do {
+            $this->personRepository->createFactory(1, [
+                'document_type_id' => $documentTypes->random(1)->first()->id,
+                'birthdate_place_id' => $cities->random(1)->first()->id
+            ]);
+            $randomNumber--;
+        } while ($randomNumber > 0);
     }
 }

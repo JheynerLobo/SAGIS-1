@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Repositories\AcademicLevelRepository;
 use Illuminate\Database\Seeder;
+
+use App\Repositories\AcademicLevelRepository;
 
 class AcademicLevelSeeder extends Seeder
 {

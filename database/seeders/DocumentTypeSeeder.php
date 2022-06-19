@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Repositories\DocumentTypeRepository;
 use Illuminate\Database\Seeder;
+
+use App\Repositories\DocumentTypeRepository;
 
 class DocumentTypeSeeder extends Seeder
 {

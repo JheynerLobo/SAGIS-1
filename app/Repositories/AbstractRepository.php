@@ -57,6 +57,17 @@ class AbstractRepository
         return $this->model->findOrFail($id);
     }
 
+    /**
+     * @param string $attribute
+     * @param $value
+     *
+     * @return Model
+     */
+    function getByAttribute($attribute, $value)
+    {
+        return $this->model->where($attribute, $value)->first();
+    }
+
     function find($id, $columns = array('*'))
     {
         return $this->model->find($id, $columns);
@@ -71,11 +82,10 @@ class AbstractRepository
      * @param int $count
      * @param array $params
      * 
-     * @return static
      */
     public function createFactory(int $count = 1, array $params = [])
     {
-        $this->model->factory()->count($count)->create($params);
+        return $this->model->factory()->count($count)->create($params);
     }
 
     /**

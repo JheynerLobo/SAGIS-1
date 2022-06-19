@@ -4,8 +4,19 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use App\Repositories\RoleRepository;
+
 class RoleSeeder extends Seeder
 {
+
+    /** @var RoleRepository */
+    protected $roleRepository;
+
+    public function __construct(RoleRepository $roleRepository)
+    {
+        $this->roleRepository = $roleRepository;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -13,6 +24,21 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $roles = [
+            [
+                'name' => 'Administrador',
+                'description' => 'Administrador del Sistema'
+            ],
+
+            [
+                'name' => 'Graduado',
+                'description' => 'Estudiante Graduado'
+            ],
+        ];
+
+        foreach ($roles as $role) {
+            $this->roleRepository->create($role);
+        }
+
     }
 }

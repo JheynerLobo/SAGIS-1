@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Repositories\CountryRepository;
 use Illuminate\Database\Seeder;
+
+use App\Repositories\CountryRepository;
 
 class CountrySeeder extends Seeder
 {

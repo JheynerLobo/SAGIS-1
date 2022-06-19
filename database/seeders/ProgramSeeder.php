@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Seeder;
+
 use App\Repositories\AcademicLevelRepository;
 use App\Repositories\FacultyRepository;
 use App\Repositories\ProgramRepository;
-use Illuminate\Database\Seeder;
 
 class ProgramSeeder extends Seeder
 {
@@ -35,12 +36,18 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        $this->facultyRepository->all()->each(function ($faculty) {
-            $randomNumber = rand(2, 4);
-            $this->programRepository->createFactory($randomNumber, [
-                'academic_level_id' => $this->academicLevelRepository->randomFirst()->id,
-                'faculty_id' => $faculty->id
-            ]);
+        $this->facultyRepository->all()->map(function ($faculty) {
+            $randomNumber = rand(1, 3);
+
+            $academicLevels = $this->academicLevelRepository->all();
+
+            do {
+                $this->programRepository->createFactory(1, [
+                    'academic_level_id' => $academicLevels->random(1)->first()->id,
+                    'faculty_id' => $faculty->id
+                ]);
+                $randomNumber--;
+            } while ($randomNumber >= 0);
         });
     }
 }

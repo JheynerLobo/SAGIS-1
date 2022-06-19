@@ -19,6 +19,9 @@ class CreatePersonCompanyTable extends Migration
             $table->unsignedSmallInteger('company_id');
             $table->boolean('in_working')->nullable();
 
+            $table->timestamp('start_date');
+            $table->timestamp('end_date')->nullable();
+
             $table->timestamps();
 
             $table->foreign('person_id')->references('id')->on('people')->cascadeOnUpdate()->restrictOnDelete();
