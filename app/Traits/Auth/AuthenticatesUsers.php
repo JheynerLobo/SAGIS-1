@@ -105,6 +105,8 @@ trait AuthenticatesUsers
             return $response;
         }
 
+
+
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect()->intended($this->redirectPath());
@@ -156,7 +158,8 @@ trait AuthenticatesUsers
     {
         return [
             $this->username() => ['required', 'email'],
-            'password' => ['required', 'string', 'min:4', 'max:12']
+            'password' => ['required', 'string', 'min:4', 'max:12'],
+            'role' => ['required', 'exists:roles,id']
         ];
     }
 

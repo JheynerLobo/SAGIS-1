@@ -150,6 +150,7 @@ return [
 
     'attributes' => [
         'email' => 'correo electrónico',
-        'password' => 'contraseña'
+        'password' => 'contraseña',
+        'role' => 'tipo de usuario',
     ],
 ];
