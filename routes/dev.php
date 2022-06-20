@@ -39,6 +39,7 @@ Route::view('students/all_information', 'dev.admin.pages.students.academic.full'
 
 
 Route::view('statistics/view_statistic', 'dev.admin.pages.statistics.view_statistic')->name('dev.statistics.view_statistic') ; 
+Route::view('statistics/reports', 'dev.admin.pages.statistics.reports')->name('dev.statistics.reports') ; 
 
 
 
