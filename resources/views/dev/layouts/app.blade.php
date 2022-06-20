@@ -28,6 +28,8 @@
     <!--Link del boostrap-->
     <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
 
+    @yield('custom_css')
+
 
 </head>
 
