@@ -20,9 +20,8 @@ Route::post('login', [LoginController::class, 'login'])->name('loggin');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('home', [HomeController::class, 'home'])->name('home');
-
-Route::view('notices', 'pages.notices')->name('notices');
-Route::view('courses', 'pages.courses')->name('courses');
-Route::view('events', 'pages.events')->name('events');
-Route::view('gallerys', 'pages.gallerys')->name('gallery');
-Route::view('videos', 'pages.videos')->name('videos');
+Route::get('notices', [HomeController::class, 'notices'])->name('notices');
+Route::get('courses', [HomeController::class, 'courses'])->name('courses');
+Route::get('events', [HomeController::class, 'events'])->name('events');
+Route::get('gallerys', [HomeController::class, 'gallerys'])->name('gallerys');
+Route::get('videos', [HomeController::class, 'videos'])->name('videos');

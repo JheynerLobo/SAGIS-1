@@ -30,8 +30,8 @@
                         href="{{ route('events') }}">EVENTOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('gallery', 'active') }}"
-                        href="{{ route('gallery') }}">GALERIA</a>
+                    <a class="nav-link {{ isActiveRoute('gallerys', 'active') }}"
+                        href="{{ route('gallerys') }}">GALERIA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ isActiveRoute('videos', 'active') }}"

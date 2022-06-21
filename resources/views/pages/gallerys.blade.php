@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('tittle', 'Galeria SAGIS')
+@section('tittle', 'Galeria')
 
 @section('content')
 

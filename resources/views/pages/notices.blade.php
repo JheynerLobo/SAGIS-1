@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 
-@section('tittle', 'Noticias SAGIS')
+@section('tittle', 'Noticias')
 
 
 @section('content')

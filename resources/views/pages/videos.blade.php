@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('tittle', 'Videos SAGIS')
+@section('tittle', 'Videos')
 
 @section('content')
 

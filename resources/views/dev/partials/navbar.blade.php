@@ -30,8 +30,8 @@
                         href="{{ route('dev.events') }}">EVENTOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('dev.gallery', 'active') }}"
-                        href="{{ route('dev.gallery') }}">GALERIA</a>
+                    <a class="nav-link {{ isActiveRoute('dev.gallerys', 'active') }}"
+                        href="{{ route('dev.gallerys') }}">GALERIA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ isActiveRoute('dev.videos', 'active') }}"
@@ -54,21 +54,14 @@
                 <li class="nav-item dropdown" style="list-style-type: none;">
                     <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ Auth()->user()->person->fullname() }}
-                        <hr>
-                        {{ Session::get('role')->name }}
+                        Jarlin Fonseca
                     </a>
                     <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="#">Mi perfil</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="javascript:void(0);"
-                                onclick="event.preventDefault(); $('#logout').submit();">Salir</a></li>
-
-                        <form action="{{ route('logout') }}" method="post" id="logout">
-                            @csrf
-                        </form>
+                        <li><a class="dropdown-item" href="#">Salir</a></li>
                     </ul>
                 </li>
 

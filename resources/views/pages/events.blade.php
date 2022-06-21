@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('tittle', 'Eventos SAGIS')
+@section('tittle', 'Eventos')
 
 @section('content')
 

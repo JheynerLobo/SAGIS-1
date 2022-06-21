@@ -15,4 +15,29 @@ class HomeController extends Controller
     {
         return view('pages.home');
     }
+
+    public function notices()
+    {
+        return view('pages.notices');
+    }
+
+    public function courses()
+    {
+        return view('pages.courses');
+    }
+
+    public function events()
+    {
+        return view('pages.events');
+    }
+
+    public function gallerys()
+    {
+        return view('pages.gallerys');
+    }
+
+    public function videos()
+    {
+        return view('pages.videos');
+    }
 }

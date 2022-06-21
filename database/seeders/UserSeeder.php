@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
-use App\Repositories\RoleRepository;
+// use App\Repositories\RoleRepository;
 
 class UserSeeder extends Seeder
 {
@@ -16,17 +16,17 @@ class UserSeeder extends Seeder
     /** @var PersonRepository */
     protected $personRepository;
 
-    /** @var RoleRepository */
-    protected $roleRepository;
+    // /** @var RoleRepository */
+    // protected $roleRepository;
 
     public function __construct(
         UserRepository $userRepository,
-        PersonRepository $personRepository,
-        RoleRepository $roleRepository
+        PersonRepository $personRepository
+        // RoleRepository $roleRepository
     ) {
         $this->userRepository = $userRepository;
         $this->personRepository = $personRepository;
-        $this->roleRepository = $roleRepository;
+        // $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -45,9 +45,9 @@ class UserSeeder extends Seeder
                 $this->userRepository->createFactory(1, [
                     'person_id' => $person->id
                 ]);
-                $admin = $this->userRepository->getByAttribute('person_id', $person->id);
+                // $admin = $this->userRepository->getByAttribute('person_id', $person->id);
 
-                $admin->roles()->attach(1);
+                // $admin->roles()->attach(1);
 
                 // $admin->roles
             } else {
@@ -57,9 +57,9 @@ class UserSeeder extends Seeder
                     'person_id' => $person->id
                 ]);
 
-                $user = $this->userRepository->getByAttribute('person_id', $person->id);
+                // $user = $this->userRepository->getByAttribute('person_id', $person->id);
 
-                $user->roles()->attach(2);
+                // $user->roles()->attach(2);
             }
         });
     }
