@@ -23,11 +23,11 @@ class DatabaseSeeder extends Seeder
             AcademicLevelSeeder::class,
             FacultySeeder::class,
             ProgramSeeder::class,
-            // RoleSeeder::class,
+            RoleSeeder::class,
             PersonSeeder::class,
             PersonAcademicSeeder::class,
             PersonCompanySeeder::class,
-            UserSeeder::class
+            // UserSeeder::class
         ]);
     }
 }

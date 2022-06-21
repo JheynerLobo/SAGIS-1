@@ -30,6 +30,13 @@ class FacultySeeder extends Seeder
      */
     public function run()
     {
+        if ($universityUFPS = $this->universityRepository->getByAttribute('name', 'Universidad Francisco de Paula Santander')) {
+            $this->facultyRepository->create([
+                'university_id' => $universityUFPS->id,
+                'name' => 'Facultad de Ingeniería'
+            ]);
+        }
+
         $this->universityRepository->all()->map(function ($university) {
             $randomNumber = rand(1, 3);
             $this->facultyRepository

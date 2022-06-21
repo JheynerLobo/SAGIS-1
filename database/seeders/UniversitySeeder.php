@@ -30,7 +30,15 @@ class UniversitySeeder extends Seeder
      */
     public function run()
     {
-        $this->cityRepository->all()->map(function ($city){
+        if ($cityCucuta = $this->cityRepository->getByAttribute('slug', 'cuc')) {
+            $this->universityRepository->create([
+                'city_id' => $cityCucuta->id,
+                'name' => 'Universidad Francisco de Paula Santander',
+                'address' => '#0- a Avenida Gran Colombia No. 12E-96'
+            ]);
+        }
+
+        $this->cityRepository->all()->map(function ($city) {
             $randomNumber = 2;
             $this->universityRepository->createFactory($randomNumber, ['city_id' => $city->id]);
         });

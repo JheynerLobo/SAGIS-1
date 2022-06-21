@@ -36,10 +36,20 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        $this->facultyRepository->all()->map(function ($faculty) {
-            $randomNumber = rand(1, 3);
+        $academicLevels = $this->academicLevelRepository->all();
 
-            $academicLevels = $this->academicLevelRepository->all();
+        if ($facultySistemasUFPS = $this->facultyRepository->getByAttribute('name', 'Facultad de Ingeniería')) {
+            $academicLevelPregrado = $academicLevels->where('name', 'pregrado')->first();
+
+            $this->programRepository->create([
+                'faculty_id' => $facultySistemasUFPS->id,
+                'academic_level_id' => $academicLevelPregrado->id,
+                'name' => 'Programa de Ingeniería de Sistemas',
+            ]);
+        }
+
+        $this->facultyRepository->all()->map(function ($faculty) use ($academicLevels) {
+            $randomNumber = rand(1, 3);
 
             do {
                 $this->programRepository->createFactory(1, [

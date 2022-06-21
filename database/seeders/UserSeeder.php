@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
-// use App\Repositories\RoleRepository;
+use App\Repositories\RoleRepository;
 
 class UserSeeder extends Seeder
 {
@@ -16,17 +16,17 @@ class UserSeeder extends Seeder
     /** @var PersonRepository */
     protected $personRepository;
 
-    // /** @var RoleRepository */
-    // protected $roleRepository;
+    /** @var RoleRepository */
+    protected $roleRepository;
 
     public function __construct(
         UserRepository $userRepository,
-        PersonRepository $personRepository
-        // RoleRepository $roleRepository
+        PersonRepository $personRepository,
+        RoleRepository $roleRepository
     ) {
         $this->userRepository = $userRepository;
         $this->personRepository = $personRepository;
-        // $this->roleRepository = $roleRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -36,30 +36,34 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $cont = 0;
+        $roles = $this->roleRepository->all();
 
-        $this->personRepository->all()->map(function ($person, $key) {
+        $this->personRepository->all()->map(function ($person, $key) use ($roles) {
+            $user = $this->userRepository->getByAttribute('person_id', $person->id);
             if ($key == 0) {
+
+                /** @var \Spatie\Permission\Models\Role */
+                $roleAdmin = $roles->where('name', 'admin')->first();
 
                 /** Creating Admin */
                 $this->userRepository->createFactory(1, [
                     'person_id' => $person->id
                 ]);
-                // $admin = $this->userRepository->getByAttribute('person_id', $person->id);
 
-                // $admin->roles()->attach(1);
+                $user->roles()->attach($roleAdmin->id);
 
                 // $admin->roles
             } else {
+
+                /** @var \Spatie\Permission\Models\Role */
+                $roleGraduate = $roles->where('name', 'graduate')->first();
 
                 /** Creating Graduates */
                 $user = $this->userRepository->createFactory(1, [
                     'person_id' => $person->id
                 ]);
 
-                // $user = $this->userRepository->getByAttribute('person_id', $person->id);
-
-                // $user->roles()->attach(2);
+                $user->roles()->attach($roleGraduate);
             }
         });
     }

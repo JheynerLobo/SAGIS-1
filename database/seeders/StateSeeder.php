@@ -30,6 +30,16 @@ class StateSeeder extends Seeder
      */
     public function run()
     {
+
+
+        if ($countryColombia = $this->countryRepository->getByAttribute('slug', 'co')) {
+            $this->stateRepository->create([
+                'country_id' => $countryColombia->id,
+                'name' => 'Norte de Santander',
+                'slug' => 'nsa'
+            ]);
+        }
+
         $this->countryRepository->all()->map(function ($country) {
             $randomNumber = rand(2, 5);
             $this->stateRepository->createFactory($randomNumber, ['country_id' => $country->id]);
