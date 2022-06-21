@@ -39,30 +39,27 @@ class UserSeeder extends Seeder
         $roles = $this->roleRepository->all();
 
         $this->personRepository->all()->map(function ($person, $key) use ($roles) {
+
+            $this->userRepository->createFactory(1, [
+                'person_id' => $person->id
+            ]);
+
+            /** @var \App\Models\User */
             $user = $this->userRepository->getByAttribute('person_id', $person->id);
+
             if ($key == 0) {
 
                 /** @var \Spatie\Permission\Models\Role */
                 $roleAdmin = $roles->where('name', 'admin')->first();
 
                 /** Creating Admin */
-                $this->userRepository->createFactory(1, [
-                    'person_id' => $person->id
-                ]);
-
                 $user->roles()->attach($roleAdmin->id);
-
-                // $admin->roles
             } else {
 
                 /** @var \Spatie\Permission\Models\Role */
                 $roleGraduate = $roles->where('name', 'graduate')->first();
 
-                /** Creating Graduates */
-                $user = $this->userRepository->createFactory(1, [
-                    'person_id' => $person->id
-                ]);
-
+                /** Creating Graduate */
                 $user->roles()->attach($roleGraduate);
             }
         });

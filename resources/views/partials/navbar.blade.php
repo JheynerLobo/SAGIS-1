@@ -12,7 +12,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-2">
                 <li class="nav-item">
                     <a class="nav-link {{ isActiveRoute('home', 'active') }}" aria-current="page"
                         href="{{ route('home') }}">INICIO</a>
@@ -52,7 +52,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false">
                             {{ Auth()->user()->person->fullname() }}
                             <hr>
-                            {{ Session::get('role')->name }}
+                            {{ Session::get('role')->fullname }}
                         </a>
                         <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="#">Mi perfil</a></li>

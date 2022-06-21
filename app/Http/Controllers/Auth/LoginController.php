@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 use App\Providers\RouteServiceProvider;
 
 use App\Repositories\RoleRepository;
-
+use App\Repositories\UserRepository;
 use App\Traits\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -38,15 +38,21 @@ class LoginController extends Controller
     /** @var RoleRepository */
     protected $roleRepository;
 
+    /** @var UserRepository */
+    protected $userRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(RoleRepository $roleRepository)
-    {
+    public function __construct(
+        RoleRepository $roleRepository,
+        UserRepository $userRepository
+    ) {
         $this->middleware('guest')->except('logout');
         $this->roleRepository = $roleRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -83,6 +89,7 @@ class LoginController extends Controller
             : redirect()->intended($this->redirectPath());
     }
 
+   
     /**
      * @param Request $request
      * @param int $role_id

@@ -74,7 +74,7 @@
                             class="form-control text-gray {{ isInvalidInput('role') }}">
                             <option value="-1">Seleccione Tipo de Usuario</option>
                             @foreach ($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}">{{ $role->fullname }}</option>
                             @endforeach
                         </select>
                         <div class="input-group-append">

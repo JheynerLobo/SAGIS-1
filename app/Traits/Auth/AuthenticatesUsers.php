@@ -2,13 +2,23 @@
 
 namespace App\Traits\Auth;
 
+use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 trait AuthenticatesUsers
 {
+    /** @var UserRepository */
+    protected $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     use RedirectsUsers, ThrottlesLogins;
 
     /**
@@ -61,7 +71,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
-        $request->validate($this->loginRules());
+        $request->validate($this->loginRules($request->get('email'), $request->get('role')));
     }
 
     /**
@@ -113,6 +123,27 @@ trait AuthenticatesUsers
     }
 
     /**
+     * Get the Login Rules Loggin
+     * 
+     * @param string $email
+     * 
+     * @return array
+     */
+    protected function loginRules(string $email, $role_id): array
+    {
+        $user = $this->userRepository->getByAttribute('email', $email);
+
+        return [
+            $this->username() => ['required', 'email'],
+            'password' => ['required', 'string', 'min:4', 'max:12'],
+            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($user, $role_id) {
+                return $query
+                    ->where('model_id', $user->id);
+            })]
+        ];
+    }
+
+    /**
      * The user has been authenticated.
      *
      * @param  Request  $request
@@ -149,19 +180,7 @@ trait AuthenticatesUsers
         return 'email';
     }
 
-    /**
-     * Get the Login Rules Loggin
-     * 
-     * @return array
-     */
-    protected function loginRules()
-    {
-        return [
-            $this->username() => ['required', 'email'],
-            'password' => ['required', 'string', 'min:4', 'max:12'],
-            'role' => ['required', 'exists:roles,id']
-        ];
-    }
+
 
     /**
      * Log the user out of the application.
