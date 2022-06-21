@@ -68,7 +68,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
+                                <table class="display table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>N°</th>
@@ -115,7 +115,7 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
+                                <table class="display table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr>
                                             <th>N°</th>
@@ -177,7 +177,7 @@
 
 @endsection
 
-@section('datatables')
+@section('js')
     <!-- DataTables  & Plugins -->
 
 
@@ -194,10 +194,16 @@
 @endsection
 
 
-@section('jsTables')
+@section('custom_js')
 
 
-
+<script>
     $(document).ready(function () {
     $('table.display').DataTable({
-" language": { "url" : "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" } } ); }); @endsection
+" language": { "url" : "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json" } } ); }); 
+
+</script>
+
+
+
+@endsection
