@@ -71,7 +71,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
-        $request->validate($this->loginRules($request->get('email'), $request->get('role')));
+        $request->validate($this->loginRules($request->get('email')));
     }
 
     /**
@@ -129,14 +129,14 @@ trait AuthenticatesUsers
      * 
      * @return array
      */
-    protected function loginRules(string $email, $role_id): array
+    protected function loginRules(string $email): array
     {
         $user = $this->userRepository->getByAttribute('email', $email);
 
         return [
             $this->username() => ['required', 'email'],
             'password' => ['required', 'string', 'min:4', 'max:12'],
-            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($user, $role_id) {
+            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($user) {
                 return $query
                     ->where('model_id', $user->id);
             })]
