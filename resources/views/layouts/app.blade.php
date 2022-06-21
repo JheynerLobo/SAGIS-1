@@ -36,7 +36,7 @@
 
 
     <!-- Nav -->
-    @include('dev.partials.navbar')
+    @include('partials.navbar')
     <!-- ./Nav -->
 
 
@@ -45,7 +45,7 @@
 
 
     <!-- Footer -->
-    @include('dev.partials.footer')
+    @include('partials.footer')
     <!-- ./Footer -->
 
 

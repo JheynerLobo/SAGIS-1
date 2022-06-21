@@ -19,6 +19,8 @@ class CreatePersonCompanyTable extends Migration
             $table->unsignedSmallInteger('company_id');
             $table->boolean('in_working')->nullable();
 
+            $table->bigInteger('salary');
+
             $table->timestamp('start_date');
             $table->timestamp('end_date')->nullable();
 

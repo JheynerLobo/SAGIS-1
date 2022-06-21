@@ -20,3 +20,9 @@ Route::post('login', [LoginController::class, 'login'])->name('loggin');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('home', [HomeController::class, 'home'])->name('home');
+
+Route::view('notices', 'pages.notices')->name('notices');
+Route::view('courses', 'pages.courses')->name('courses');
+Route::view('events', 'pages.events')->name('events');
+Route::view('gallerys', 'pages.gallerys')->name('gallery');
+Route::view('videos', 'pages.videos')->name('videos');

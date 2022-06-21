@@ -55,6 +55,8 @@
                     <a class="nav-link dropdown-toggle link-dark" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ Auth()->user()->person->fullname() }}
+                        <hr>
+                        {{ Session::get('role')->name }}
                     </a>
                     <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
                         <li><a class="dropdown-item" href="#">Mi perfil</a></li>

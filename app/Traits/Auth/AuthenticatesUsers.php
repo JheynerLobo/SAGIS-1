@@ -183,7 +183,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/login');
+            : redirect('/home');
     }
 
     /**
