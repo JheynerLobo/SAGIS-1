@@ -14,13 +14,13 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Graduados',
-                'route' => route('dev.students'),
+                'name' => 'Reportes',
+                'route' => null,
                 'isActive' => null,
             ],
             [
-                'name' => 'Estadisticas',
-                'route' => null,
+                'name' => 'Estadísticas',
+                'route' => route('dev.reports.statistics'),
                 'isActive' => 'active'
             ]
         ],
