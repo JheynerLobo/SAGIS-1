@@ -20,7 +20,15 @@ class Person extends Model
         'birthdate', 'birthdate_place_id', 'address'
     ];
 
-
+    /**
+     * Get User's fullname.
+     * 
+     * @return string
+     */
+    public function fullname()
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
 
     /** Relation Methods */
     public function personCompany()
@@ -32,7 +40,6 @@ class Person extends Model
     {
         return $this->belongsTo(DocumentType::class);
     }
-
 
     public function personAcademic()
     {

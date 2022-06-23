@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Repositories\AcademicLevelRepository;
 use App\Repositories\FacultyRepository;
 use App\Repositories\ProgramRepository;
+use Exception;
 
 class ProgramSeeder extends Seeder
 {
@@ -36,18 +37,32 @@ class ProgramSeeder extends Seeder
      */
     public function run()
     {
-        $this->facultyRepository->all()->map(function ($faculty) {
-            $randomNumber = rand(1, 3);
-
+        try {
             $academicLevels = $this->academicLevelRepository->all();
 
-            do {
-                $this->programRepository->createFactory(1, [
-                    'academic_level_id' => $academicLevels->random(1)->first()->id,
-                    'faculty_id' => $faculty->id
+            if ($facultySistemasUFPS = $this->facultyRepository->getByAttribute('name', 'Facultad de Ingeniería')) {
+                $academicLevelPregrado = $academicLevels->where('name', 'pregrado')->first();
+
+                $this->programRepository->create([
+                    'faculty_id' => $facultySistemasUFPS->id,
+                    'academic_level_id' => $academicLevelPregrado->id,
+                    'name' => 'Programa de Ingeniería de Sistemas',
                 ]);
-                $randomNumber--;
-            } while ($randomNumber >= 0);
-        });
+            }
+
+            $this->facultyRepository->all()->map(function ($faculty) use ($academicLevels) {
+                $randomNumber = rand(1, 3);
+
+                do {
+                    $this->programRepository->createFactory(1, [
+                        'academic_level_id' => $academicLevels->random(1)->first()->id,
+                        'faculty_id' => $faculty->id
+                    ]);
+                    $randomNumber--;
+                } while ($randomNumber >= 0);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

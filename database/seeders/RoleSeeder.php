@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 
 use App\Repositories\RoleRepository;
+use Exception;
 
 class RoleSeeder extends Seeder
 {
@@ -26,19 +27,23 @@ class RoleSeeder extends Seeder
     {
         $roles = [
             [
-                'name' => 'Administrador',
-                'description' => 'Administrador del Sistema'
+                'name' => 'superadmin',
+                'fullname' => 'Administrador del Sistema',
+                'guard_name' => 'admin'
             ],
 
             [
-                'name' => 'Graduado',
-                'description' => 'Estudiante Graduado'
+                'name' => 'graduate',
+                'fullname' => 'Estudiante Graduado'
             ],
         ];
 
-        foreach ($roles as $role) {
-            $this->roleRepository->create($role);
+        try {
+            foreach ($roles as $role) {
+                $this->roleRepository->create($role);
+            }
+        } catch (Exception $th) {
+            print($th->getMessage());
         }
-
     }
 }

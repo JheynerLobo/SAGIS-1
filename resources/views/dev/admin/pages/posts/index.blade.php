@@ -1,9 +1,32 @@
-@extends('layouts/layoutadmin')
+@extends('dev.admin.layouts.app')
+
+@section('title', 'Agregar Contenidos')
 
 
-@section('contenidoA', 'active')
 
-@section('content2', 'Gestionar contenidos de información')
+@section('content-header')
+    @include('dev.admin.partials.content-header', [
+        'title' => 'Agregar contenidos informativos',
+        'items' => [
+            [
+                'name' => 'Inicio',
+                'route' => route('dev.home'),
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Graduados',
+                'route' => route('dev.students'),
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Estadisticas',
+                'route' => null,
+                'isActive' => 'active'
+            ]
+        ],
+    ])
+@endsection
+
 
 @section('content')
 

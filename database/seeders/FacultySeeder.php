@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\FacultyRepository;
 use App\Repositories\UniversityRepository;
@@ -30,10 +31,21 @@ class FacultySeeder extends Seeder
      */
     public function run()
     {
-        $this->universityRepository->all()->map(function ($university) {
-            $randomNumber = rand(1, 3);
-            $this->facultyRepository
-                ->createFactory($randomNumber, ['university_id' => $university->id]);
-        });
+        try {
+            if ($universityUFPS = $this->universityRepository->getByAttribute('name', 'Universidad Francisco de Paula Santander')) {
+                $this->facultyRepository->create([
+                    'university_id' => $universityUFPS->id,
+                    'name' => 'Facultad de Ingeniería'
+                ]);
+            }
+
+            $this->universityRepository->all()->map(function ($university) {
+                $randomNumber = rand(1, 3);
+                $this->facultyRepository
+                    ->createFactory($randomNumber, ['university_id' => $university->id]);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }
