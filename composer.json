@@ -36,7 +36,8 @@
         },
         "files": [
             "app/Supports/NavHelper.php",
-            "app/Supports/FormHelper.php"
+            "app/Supports/FormHelper.php",
+            "app/Supports/AnotherHelper.php"
         ]
     },
     "autoload-dev": {

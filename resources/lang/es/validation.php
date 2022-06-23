@@ -152,5 +152,7 @@ return [
         'email' => 'correo electrónico',
         'password' => 'contraseña',
         'role' => 'tipo de usuario',
+        'created_at_from' => 'fecha de inicio de creación',
+        'created_at_to' => 'fecha de fin de creación',
     ],
 ];

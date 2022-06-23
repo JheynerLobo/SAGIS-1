@@ -30,8 +30,8 @@
                         href="{{ route('dev.events') }}">EVENTOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('dev.gallerys', 'active') }}"
-                        href="{{ route('dev.gallerys') }}">GALERIA</a>
+                    <a class="nav-link {{ isActiveRoute('dev.gallery', 'active') }}"
+                        href="{{ route('dev.gallery') }}">GALERIA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link {{ isActiveRoute('dev.videos', 'active') }}"

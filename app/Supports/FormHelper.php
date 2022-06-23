@@ -16,3 +16,32 @@ if (!function_exists('isInvalidInput')) {
         return $errors->has($key) ? 'is-invalid' : null;
     }
 }
+
+if (!function_exists('getParamValue')) {
+
+    /**
+     * Get param from filters
+     * @param string $param
+     * @return string
+     */
+    function getParamValue(array $params, string $key)
+    {
+        return isset($params[$key]) ? $params[$key] : null;
+    }
+}
+
+if (!function_exists('isSelectedOption')) {
+
+    /**
+     * Get param from filters
+     * @param string $param
+     * @param string $key
+     * @param string $value
+     * 
+     * @return string
+     */
+    function isSelectedOption(array $params, string $key, string $value)
+    {
+        return isset($params[$key]) && $params[$key] == $value ? 'selected' : null;
+    }
+}
