@@ -6,6 +6,7 @@ use App\Repositories\PostCategoryRepository;
 use Illuminate\Database\Seeder;
 
 use App\Repositories\PostRepository;
+use Exception;
 
 class PostSeeder extends Seeder
 {
@@ -32,15 +33,19 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        $this->postCategoryRepository->all()->map(function ($postCategory) {
-            $randomNumber = rand(25, 50);
+        try {
+            $this->postCategoryRepository->all()->map(function ($postCategory) {
+                $randomNumber = rand(25, 50);
 
-            do {
-                $this->postRepository->createFactory(1, [
-                    'post_category_id' => $postCategory->id
-                ]);
-                $randomNumber--;
-            } while ($randomNumber > 0);
-        });
+                do {
+                    $this->postRepository->createFactory(1, [
+                        'post_category_id' => $postCategory->id
+                    ]);
+                    $randomNumber--;
+                } while ($randomNumber > 0);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

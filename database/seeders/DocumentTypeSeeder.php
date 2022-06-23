@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\DocumentTypeRepository;
 
@@ -40,8 +41,12 @@ class DocumentTypeSeeder extends Seeder
             ],
         ];
 
-        foreach ($items as $item) {
-            $this->documentTypeRepository->create($item);
+        try {
+            foreach ($items as $item) {
+                $this->documentTypeRepository->create($item);
+            }
+        } catch (Exception $th) {
+            print($th->getMessage());
         }
     }
 }

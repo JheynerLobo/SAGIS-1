@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
+use Exception;
 
 class UserSeeder extends Seeder
 {
@@ -36,32 +37,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $roles = $this->roleRepository->all();
+        try {
+            $roles = $this->roleRepository->all();
 
-        $this->personRepository->all()->map(function ($person, $key) use ($roles) {
+            $this->personRepository->all()
+                ->whereNotIn('id', [1, 2])
+                ->map(function ($person) use ($roles) {
+                    $this->userRepository->createFactory(1, [
+                        'person_id' => $person->id
+                    ]);
 
-            $this->userRepository->createFactory(1, [
-                'person_id' => $person->id
-            ]);
+                    /** @var \App\Models\User */
+                    $user = $this->userRepository->getByAttribute('person_id', $person->id);
 
-            /** @var \App\Models\User */
-            $user = $this->userRepository->getByAttribute('person_id', $person->id);
+                    /** @var \Spatie\Permission\Models\Role */
+                    $roleGraduate = $roles->where('name', 'graduate')->first();
 
-            if ($key == 0) {
-
-                /** @var \Spatie\Permission\Models\Role */
-                $roleAdmin = $roles->where('name', 'admin')->first();
-
-                /** Creating Admin */
-                $user->roles()->attach($roleAdmin->id);
-            } else {
-
-                /** @var \Spatie\Permission\Models\Role */
-                $roleGraduate = $roles->where('name', 'graduate')->first();
-
-                /** Creating Graduate */
-                $user->roles()->attach($roleGraduate);
-            }
-        });
+                    /** Creating Graduate */
+                    $user->roles()->attach($roleGraduate);
+                });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

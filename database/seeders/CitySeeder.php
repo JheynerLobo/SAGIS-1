@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\StateRepository;
 use App\Repositories\CityRepository;
@@ -30,17 +31,21 @@ class CitySeeder extends Seeder
      */
     public function run()
     {
-        if ($stateNSA = $this->stateRepository->getByAttribute('slug', 'nsa')) {
-            $this->cityRepository->create([
-                'state_id' => $stateNSA->id,
-                'name' => 'Cúcuta',
-                'slug' => 'cuc'
-            ]);
-        }
+        try {
+            if ($stateNSA = $this->stateRepository->getByAttribute('slug', 'nsa')) {
+                $this->cityRepository->create([
+                    'state_id' => $stateNSA->id,
+                    'name' => 'Cúcuta',
+                    'slug' => 'cuc'
+                ]);
+            }
 
-        $this->stateRepository->all()->map(function ($state) {
-            $randomNumber = rand(5, 10);
-            $this->cityRepository->createFactory($randomNumber, ['state_id' => $state->id]);
-        });
+            $this->stateRepository->all()->map(function ($state) {
+                $randomNumber = rand(5, 10);
+                $this->cityRepository->createFactory($randomNumber, ['state_id' => $state->id]);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

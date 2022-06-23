@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\PostImageRepository;
 use App\Repositories\PostRepository;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class PostImageSeeder extends Seeder
@@ -36,26 +37,30 @@ class PostImageSeeder extends Seeder
      */
     public function run()
     {
-        $postCategories = $this->postCategoryRepository->all();
+        try {
+            $postCategories = $this->postCategoryRepository->all();
 
-        $posts = $this->postRepository->all();
+            $posts = $this->postRepository->all();
 
 
-        /** Notice */
-        $postNotice = $postCategories->where('name', 'Noticias')->first();
-        $this->createPostAssets($postNotice, $posts);
+            /** Notice */
+            $postNotice = $postCategories->where('name', 'Noticias')->first();
+            $this->createPostAssets($postNotice, $posts);
 
-        /** Course */
-        $postCourse = $postCategories->where('name', 'Cursos')->first();
-        $this->createPostAssets($postCourse, $posts);
+            /** Course */
+            $postCourse = $postCategories->where('name', 'Cursos')->first();
+            $this->createPostAssets($postCourse, $posts);
 
-        /** Evento */
-        $postEvent = $postCategories->where('name', 'Eventos')->first();
-        $this->createPostAssets($postEvent, $posts);
+            /** Evento */
+            $postEvent = $postCategories->where('name', 'Eventos')->first();
+            $this->createPostAssets($postEvent, $posts);
 
-        /** Galería */
-        $postGallery = $postCategories->where('name', 'Galería')->first();
-        $this->createPostAssets($postGallery, $posts);
+            /** Galería */
+            $postGallery = $postCategories->where('name', 'Galería')->first();
+            $this->createPostAssets($postGallery, $posts);
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 
     /**

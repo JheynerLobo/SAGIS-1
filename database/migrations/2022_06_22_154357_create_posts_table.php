@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->unsignedTinyInteger('post_category_id');
             $table->string('title');
-            $table->tinyText('description')->nullable();
+            $table->longText('description')->nullable();
             $table->date('date');
 
             $table->timestamps();

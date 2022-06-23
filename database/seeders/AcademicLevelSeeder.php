@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\AcademicLevelRepository;
 
@@ -32,8 +33,12 @@ class AcademicLevelSeeder extends Seeder
             ['name' => 'doctorado'],
         ];
 
-        foreach ($items as $item) {
-            $this->academicLevelRepository->create($item);
+        try {
+            foreach ($items as $item) {
+                $this->academicLevelRepository->create($item);
+            }
+        } catch (Exception $th) {
+            print($th->getMessage());
         }
     }
 }

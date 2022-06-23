@@ -15,7 +15,7 @@ class PostFactory extends Factory
     {
         return [
             'title' => $this->faker->unique()->words(4, true),
-            'description' => $this->faker->text,
+            'description' => $this->faker->realText(500),
             'date' => $this->faker->dateTimeBetween('-4 months', '-1 week')
         ];
     }

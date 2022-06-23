@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Repositories\CityRepository;
 use App\Repositories\UniversityRepository;
+use Exception;
 
 class UniversitySeeder extends Seeder
 {
@@ -30,17 +31,21 @@ class UniversitySeeder extends Seeder
      */
     public function run()
     {
-        if ($cityCucuta = $this->cityRepository->getByAttribute('slug', 'cuc')) {
-            $this->universityRepository->create([
-                'city_id' => $cityCucuta->id,
-                'name' => 'Universidad Francisco de Paula Santander',
-                'address' => '#0- a Avenida Gran Colombia No. 12E-96'
-            ]);
-        }
+        try {
+            if ($cityCucuta = $this->cityRepository->getByAttribute('slug', 'cuc')) {
+                $this->universityRepository->create([
+                    'city_id' => $cityCucuta->id,
+                    'name' => 'Universidad Francisco de Paula Santander',
+                    'address' => '#0- a Avenida Gran Colombia No. 12E-96'
+                ]);
+            }
 
-        $this->cityRepository->all()->map(function ($city) {
-            $randomNumber = 2;
-            $this->universityRepository->createFactory($randomNumber, ['city_id' => $city->id]);
-        });
+            $this->cityRepository->all()->map(function ($city) {
+                $randomNumber = 2;
+                $this->universityRepository->createFactory($randomNumber, ['city_id' => $city->id]);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

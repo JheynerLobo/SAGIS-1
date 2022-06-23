@@ -62,7 +62,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $roles = $this->roleRepository->all();
+        $roles = $this->roleRepository->all()->where('guard_name', 'web');
         return view('auth.login', compact('roles'));
     }
 

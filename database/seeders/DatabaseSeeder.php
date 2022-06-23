@@ -31,11 +31,13 @@ class DatabaseSeeder extends Seeder
             PersonCompanySeeder::class,
 
             RoleSeeder::class,
+            AdminSeeder::class,
             UserSeeder::class,
 
             PostCategorySeeder::class,
             PostSeeder::class,
-            PostImageSeeder::class
+            PostImageSeeder::class,
+            PostVideoSeeder::class
         ]);
     }
 }

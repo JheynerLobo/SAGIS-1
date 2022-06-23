@@ -54,8 +54,23 @@ class HomeController extends Controller
         } catch (Exception $th) {
             throw $th;
         }
+    }
 
-        // return view('pages.notices');
+    /**
+     * @param int $id
+     */
+    public function showNotice($id)
+    {
+        try {
+            $item = $this->postRepository->getById($id);
+
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+
+            return view($this->viewLocation . 'notices.show', compact('item', 'imageHeader', 'images'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function courses(CourseFilterRequest $request)
@@ -73,6 +88,23 @@ class HomeController extends Controller
                 ->nest('filters', $this->viewLocation . 'courses.filters', compact('params', 'total'))
                 ->nest('table', $this->viewLocation . 'courses.table', compact('items'));
         } catch (Exception $th) {
+            throw $th;
+        }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function showCourse($id)
+    {
+        try {
+            $item = $this->postRepository->getById($id);
+
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+
+            return view($this->viewLocation . 'courses.show', compact('item', 'imageHeader', 'images'));
+        } catch (\Throwable $th) {
             throw $th;
         }
     }
@@ -96,6 +128,23 @@ class HomeController extends Controller
         }
     }
 
+    /**
+     * @param int $id
+     */
+    public function showEvent($id)
+    {
+        try {
+            $item = $this->postRepository->getById($id);
+
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+
+            return view($this->viewLocation . 'events.show', compact('item', 'imageHeader', 'images'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
     public function gallerys(GalleryFilterRequest $request)
     {
         $postGallery = $this->postCategoryRepository->getByAttribute('name', 'Galería');
@@ -111,6 +160,23 @@ class HomeController extends Controller
                 ->nest('filters', $this->viewLocation . 'gallerys.filters', compact('params', 'total'))
                 ->nest('table', $this->viewLocation . 'gallerys.table', compact('items'));
         } catch (Exception $th) {
+            throw $th;
+        }
+    }
+
+    /**
+     * @param int $id
+     */
+    public function showGallery($id)
+    {
+        try {
+            $item = $this->postRepository->getById($id);
+
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+
+            return view($this->viewLocation . 'gallerys.show', compact('item', 'imageHeader', 'images'));
+        } catch (\Throwable $th) {
             throw $th;
         }
     }

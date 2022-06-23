@@ -18,6 +18,7 @@
                 </div>
             </div>
         @empty
+            <h4>No hay videos registrados.</h4>
         @endforelse
     </div>
 

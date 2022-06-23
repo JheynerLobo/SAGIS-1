@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Repositories\CityRepository;
 use App\Repositories\CompanyRepository;
+use Exception;
 
 class CompanySeeder extends Seeder
 {
@@ -29,9 +30,13 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        $this->cityRepository->all()->map(function ($city) {
-            $randomNumber = 1;
-            $this->companyRepository->createFactory($randomNumber, ['city_id' => $city->id]);
-        });
+        try {
+            $this->cityRepository->all()->map(function ($city) {
+                $randomNumber = 1;
+                $this->companyRepository->createFactory($randomNumber, ['city_id' => $city->id]);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

@@ -11,7 +11,8 @@
                         <p class="card-text">{{ $item->description }}</p>
                     </div>
                     <div class="card-footer">
-                        <a href="#" class="botonGC btn btn-danger">Leer más...</a>
+                        <a href="{{ route('gallerys.show', $item->id) }}" class="botonGC btn btn-danger">Leer
+                            más...</a>
                     </div>
                 </div>
             </div>

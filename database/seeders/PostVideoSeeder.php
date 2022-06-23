@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\PostVideoRepository;
+use Exception;
 use Illuminate\Database\Seeder;
 
 class PostVideoSeeder extends Seeder
@@ -54,26 +55,30 @@ class PostVideoSeeder extends Seeder
      */
     protected function createPostAssets($postCategory, $posts)
     {
-        $randomNumber = generateRandomPostAssets(3, 8);
+        try {
+            $randomNumber = generateRandomPostAssets(3, 8);
 
-        $posts->map(function ($post) use ($randomNumber) {
-            $randomVideo = rand(0, count($this->videosYT) - 1);
-
-            $this->postVideoRepository->create([
-                'post_id' => $post->id,
-                'asset_url' => $this->videosYT[$randomVideo],
-                'is_header' => true
-            ]);
-
-            do {
+            $posts->map(function ($post) use ($randomNumber) {
                 $randomVideo = rand(0, count($this->videosYT) - 1);
+
                 $this->postVideoRepository->create([
                     'post_id' => $post->id,
                     'asset_url' => $this->videosYT[$randomVideo],
+                    'is_header' => true
                 ]);
 
-                $randomNumber--;
-            } while ($randomNumber > 0);
-        });
+                do {
+                    $randomVideo = rand(0, count($this->videosYT) - 1);
+                    $this->postVideoRepository->create([
+                        'post_id' => $post->id,
+                        'asset_url' => $this->videosYT[$randomVideo],
+                    ]);
+
+                    $randomNumber--;
+                } while ($randomNumber > 0);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

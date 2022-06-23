@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\PostCategoryRepository;
 
@@ -25,20 +26,24 @@ class PostCategorySeeder extends Seeder
      */
     public function run()
     {
-        $this->postCategoryRepository->create([
-            'name' => 'Noticias'
-        ]);
-        $this->postCategoryRepository->create([
-            'name' => 'Cursos'
-        ]);
-        $this->postCategoryRepository->create([
-            'name' => 'Eventos'
-        ]);
-        $this->postCategoryRepository->create([
-            'name' => 'Galería'
-        ]);
-        $this->postCategoryRepository->create([
-            'name' => 'Vídeos'
-        ]);
+        try {
+            $this->postCategoryRepository->create([
+                'name' => 'Noticias'
+            ]);
+            $this->postCategoryRepository->create([
+                'name' => 'Cursos'
+            ]);
+            $this->postCategoryRepository->create([
+                'name' => 'Eventos'
+            ]);
+            $this->postCategoryRepository->create([
+                'name' => 'Galería'
+            ]);
+            $this->postCategoryRepository->create([
+                'name' => 'Vídeos'
+            ]);
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }
