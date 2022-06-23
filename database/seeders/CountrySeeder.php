@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\CountryRepository;
 
@@ -22,6 +23,17 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        $this->countryRepository->createFactory(50);
+        try {
+            $this->countryRepository->createFactory(25);
+
+            if (!$this->countryRepository->getByAttribute('name', 'Colombia')) {
+                $this->countryRepository->create([
+                    'name' => 'Colombia',
+                    'slug' => 'co'
+                ]);
+            }
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

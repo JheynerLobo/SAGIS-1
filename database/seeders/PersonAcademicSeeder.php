@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Exception;
 
 use App\Repositories\PersonAcademicRepository;
 use App\Repositories\PersonRepository;
@@ -36,28 +37,30 @@ class PersonAcademicSeeder extends Seeder
      */
     public function run()
     {
-        $programs = $this->programRepository->all();
+        try {
+            $programs = $this->programRepository->all();
 
-        $this->personRepository->all()->map(function ($person) use ($programs) {
-            $pregrade = $programs->where('academic_level_id', 1)->random(1)->first();
+            $this->personRepository->all()->map(function ($person) use ($programs) {
+                $pregrade = $programs->where('name', 'Programa de Ingeniería de Sistemas')->first();
 
-            $this->personAcademicRepository->createFactory(1, [
-                'person_id' => $person->id,
-                'program_id' => $pregrade->id,
-            ]);
-
-            $randomNumber = rand(1, 3);
-
-            $anotherProgram = $programs->where('academic_level_id', '!=', 1);
-
-            do {
-                $randomProgram = $anotherProgram->random(1)->first();
                 $this->personAcademicRepository->createFactory(1, [
                     'person_id' => $person->id,
-                    'program_id' => $randomProgram->id
+                    'program_id' => $pregrade->id,
                 ]);
-                $randomNumber--;
-            } while ($randomNumber > 0);
-        });
+
+                $randomNumber = rand(1, 3);
+
+                do {
+                    $randomProgram = $programs->except($pregrade->id)->random(1)->first();
+                    $this->personAcademicRepository->createFactory(1, [
+                        'person_id' => $person->id,
+                        'program_id' => $randomProgram->id
+                    ]);
+                    $randomNumber--;
+                } while ($randomNumber > 0);
+            });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

@@ -17,17 +17,27 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             StateSeeder::class,
             CitySeeder::class,
+
             CompanySeeder::class,
-            DocumentTypeSeeder::class,
-            UniversitySeeder::class,
+
             AcademicLevelSeeder::class,
+            UniversitySeeder::class,
             FacultySeeder::class,
             ProgramSeeder::class,
-            RoleSeeder::class,
+
+            DocumentTypeSeeder::class,
             PersonSeeder::class,
             PersonAcademicSeeder::class,
             PersonCompanySeeder::class,
-            UserSeeder::class
+
+            RoleSeeder::class,
+            AdminSeeder::class,
+            UserSeeder::class,
+
+            PostCategorySeeder::class,
+            PostSeeder::class,
+            PostImageSeeder::class,
+            PostVideoSeeder::class
         ]);
     }
 }

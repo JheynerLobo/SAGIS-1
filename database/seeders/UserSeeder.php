@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
+use Exception;
 
 class UserSeeder extends Seeder
 {
@@ -36,31 +37,27 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $cont = 0;
+        try {
+            $roles = $this->roleRepository->all();
 
-        $this->personRepository->all()->map(function ($person, $key) {
-            if ($key == 0) {
+            $this->personRepository->all()
+                ->whereNotIn('id', [1, 2])
+                ->map(function ($person) use ($roles) {
+                    $this->userRepository->createFactory(1, [
+                        'person_id' => $person->id
+                    ]);
 
-                /** Creating Admin */
-                $this->userRepository->createFactory(1, [
-                    'person_id' => $person->id
-                ]);
-                $admin = $this->userRepository->getByAttribute('person_id', $person->id);
+                    /** @var \App\Models\User */
+                    $user = $this->userRepository->getByAttribute('person_id', $person->id);
 
-                $admin->roles()->attach(1);
+                    /** @var \Spatie\Permission\Models\Role */
+                    $roleGraduate = $roles->where('name', 'graduate')->first();
 
-                // $admin->roles
-            } else {
-
-                /** Creating Graduates */
-                $user = $this->userRepository->createFactory(1, [
-                    'person_id' => $person->id
-                ]);
-
-                $user = $this->userRepository->getByAttribute('person_id', $person->id);
-
-                $user->roles()->attach(2);
-            }
-        });
+                    /** Creating Graduate */
+                    $user->roles()->attach($roleGraduate);
+                });
+        } catch (Exception $th) {
+            print($th->getMessage());
+        }
     }
 }

@@ -16,6 +16,7 @@ class PersonCompanyFactory extends Factory
         $startDate = $this->faker->dateTimeBetween('-5 years', '-5 months');
         return [
             'start_date' => $startDate,
+            'salary' => $this->faker->randomNumber(9),
             'end_date' => $this->faker->dateTimeBetween($startDate, $startDate->format('Y-m-d H:i:s').' +1 year')
         ];
     }
