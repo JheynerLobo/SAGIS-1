@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CommandController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,3 +36,12 @@ Route::get('gallerys/{id}', [HomeController::class, 'showGallery'])->name('galle
 
 Route::get('videos', [HomeController::class, 'videos'])->name('videos');
 Route::get('videos/{id}', [HomeController::class, 'showVideo'])->name('videos.show');
+
+
+
+/** Commands  */
+
+Route::prefix('commands')->group(function () {
+    Route::get('optimize', [CommandController::class, 'runOptimize']);
+    Route::get('migrate', [CommandController::class, 'runMigrateFresh']);
+});
