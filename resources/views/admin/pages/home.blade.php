@@ -15,10 +15,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-
-            </div>
-            <!-- /.row -->
+           <h4>Funcionalidad Prevista para Software, Dashboard con diferentes tarjetas de información..</h4>
         </div>
         <!-- /.container-fluid -->
     </section>

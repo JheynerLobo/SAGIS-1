@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\HomeController;
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,5 @@ Route::post('login', [LoginController::class, 'login'])->name('admin.loggin');
 Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::get('home', [HomeController::class, 'home'])->name('admin.home');
+
+Route::resource('graduates', GraduateController::class, ['as' => 'admin']);

@@ -43,7 +43,7 @@ class Person extends Model
     /** Relation Methods */
     public function personCompany()
     {
-        return $this->belongsTo(PersonCompany::class);
+        return $this->hasMany(PersonCompany::class);
     }
 
     public function documentType()
@@ -53,11 +53,16 @@ class Person extends Model
 
     public function personAcademic()
     {
-        return $this->belongsTo(PersonAcademic::class);
+        return $this->hasMany(PersonAcademic::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
+    }
+
+    public function birthdatePlace()
+    {
+        return $this->belongsTo(City::class, 'birthdate_place_id', 'id');
     }
 }

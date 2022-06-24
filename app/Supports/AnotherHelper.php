@@ -42,3 +42,17 @@ if (!function_exists('set_sub_month_date_filter')) {
         return $array;
     }
 }
+
+if (!function_exists('transformBoolToText')) {
+    /**
+     * @param array $array
+     * @param string $key
+     * @param int $subMonth
+     * @return array
+     */
+    function transformBoolToText(bool $bool, string $text, string $text2)
+    {
+
+        return $bool ? $text : $text2;
+    }
+}
