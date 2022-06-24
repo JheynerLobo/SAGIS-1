@@ -55,7 +55,7 @@
                             {{ Session::get('role')->fullname }}
                         </a>
                         <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
-                            <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('profile') }}">Mi perfil</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -69,8 +69,8 @@
                     </li>
 
                     <div class="user">
-                        <img src="{{ asset('img/imgUser.png') }}" width="70" height="70"
-                            class="rounded-circle me-2">
+                        <img src="{{ asset(Auth::guard('web')->user()->person->fullAsset()) }}" width="70"
+                            height="70" class="rounded-circle me-2">
                     </div>
 
                 </ul>
@@ -80,8 +80,7 @@
             @guest
                 <ul class="navbar-nav ml-auto m-2">
                     <li class="nav-item ml-auto m-4">
-                        <a class="nav-link"
-                            href="{{ route('login') }}">INICIAR SESIÓN</a>
+                        <a class="nav-link" href="{{ route('login') }}">INICIAR SESIÓN</a>
                     </li>
                 </ul>
             @endguest

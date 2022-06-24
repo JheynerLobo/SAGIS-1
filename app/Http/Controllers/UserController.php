@@ -26,6 +26,8 @@ class UserController extends Controller
     {
         try {
             $user = $this->userRepository->getById(Auth::guard('web')->user()->id);
+
+            return view('pages.profile');
         } catch (\Throwable $th) {
             throw $th;
         }

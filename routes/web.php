@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,8 @@ Route::redirect('/', 'login');
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('loggin');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+Route::get('profile', [UserController::class, 'profile'])->name('profile');
 
 Route::get('home', [HomeController::class, 'home'])->name('home');
 

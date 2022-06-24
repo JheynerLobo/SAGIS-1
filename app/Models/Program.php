@@ -25,9 +25,9 @@ class Program extends Model
         return $this->belongsTo(Faculty::class);
     }
 
-    public function academicLevels()
+    public function academicLevel()
     {
-        return $this->hasMany(AcdemicLevel::class);
+        return $this->belongsTo(AcademicLevel::class);
     }
 
     public function personAcademics()

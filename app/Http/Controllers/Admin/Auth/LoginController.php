@@ -34,7 +34,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
+    protected $redirectTo = RouteServiceProvider::HOME_ADMIN;
 
     /** @var RoleRepository */
     protected $roleRepository;
@@ -51,7 +51,7 @@ class LoginController extends Controller
         RoleRepository $roleRepository,
         AdminRepository $adminRepository
     ) {
-        $this->middleware('guest')->only('showLoginForm');
+        $this->middleware('guest:admin')->only('showLoginForm');
         $this->roleRepository = $roleRepository;
         $this->adminRepository = $adminRepository;
     }
