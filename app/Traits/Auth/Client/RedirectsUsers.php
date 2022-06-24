@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Auth;
+namespace App\Traits\Auth\Client;
 
 trait RedirectsUsers
 {

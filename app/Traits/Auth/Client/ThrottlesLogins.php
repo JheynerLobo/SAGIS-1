@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Traits\Auth;
+namespace App\Traits\Auth\Client;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Cache\RateLimiter;
