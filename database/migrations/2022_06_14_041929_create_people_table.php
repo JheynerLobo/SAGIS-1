@@ -26,6 +26,9 @@ class CreatePeopleTable extends Migration
             $table->unsignedBigInteger('birthdate_place_id');
             $table->date('birthdate');
 
+            $table->string('image_url');
+            $table->string('image')->nullable();
+
             $table->timestamps();
 
             $table->foreign('document_type_id')->references('id')->on('document_types')->cascadeOnUpdate()->restrictOnDelete();

@@ -30,6 +30,16 @@ class Person extends Model
         return $this->name . ' ' . $this->lastname;
     }
 
+    /**
+     * Get full asset image
+     * 
+     * @return string
+     */
+    public function fullAsset()
+    {
+        return $this->image_url . $this->image;
+    }
+
     /** Relation Methods */
     public function personCompany()
     {

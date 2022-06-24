@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Exception;
 
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
-use Exception;
 
 class UserSeeder extends Seeder
 {
