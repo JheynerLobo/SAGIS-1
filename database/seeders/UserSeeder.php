@@ -44,9 +44,9 @@ class UserSeeder extends Seeder
             $this->personRepository->all()
                 ->whereNotIn('id', [1, 2])
                 ->map(function ($person) use ($roles) {
-                    $email = Str::$this->userRepository->createFactory(1, [
-                            'person_id' => $person->id
-                        ]);
+                    $this->userRepository->createFactory(1, [
+                        'person_id' => $person->id
+                    ]);
 
                     /** @var \App\Models\User */
                     $user = $this->userRepository->getByAttribute('person_id', $person->id);
