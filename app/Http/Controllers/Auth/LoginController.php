@@ -11,7 +11,8 @@ use App\Providers\RouteServiceProvider;
 
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use App\Traits\Auth\AuthenticatesUsers;
+
+use App\Traits\Auth\Client\AuthenticatesUsers;
 
 class LoginController extends Controller
 {

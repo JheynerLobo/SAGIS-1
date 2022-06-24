@@ -14,7 +14,7 @@
     </section>
 
     <div class="container">
-        {{ $items->links() }}
+        {{ $items->links('partials.pagination.default') }}
     </div>
 
 @endsection

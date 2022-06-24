@@ -47,6 +47,9 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * @return \App\Models\Person
+     */
     public function person()
     {
         return $this->belongsTo(Person::class);

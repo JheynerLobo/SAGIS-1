@@ -25,7 +25,7 @@
         <div class="card">
             <div class="login-logo">
                 <img src="{{ asset('img/logo_sistemas.jpg') }}" alt="">
-                <h1>Seguimiento y Acompañamiento de Graduados
+                <h1>Administrador
                     <hr>
                     <b>SAGIS</b>
                 </h1>
@@ -35,7 +35,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Ingresa tus datos para iniciar sesión</p>
 
-                <form action="{{ route('loggin') }}" method="post">
+                <form action="{{ route('admin.loggin') }}" method="post">
                     @csrf
 
                     <!-- Email -->
