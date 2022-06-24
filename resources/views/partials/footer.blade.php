@@ -3,31 +3,31 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 redes" style="background-color: #333333">
-                <a href="https://api.whatsapp.com/send/?phone=573112810082&text&app_absent=0"><img
+                <a href="https://api.whatsapp.com/send/?phone=5731155410082&text&app_absent=0"><img
                         src="/img/whatsapp.png"></a>
-                <a href="https://web.facebook.com/profile.php?id=100075532121136"><img src="/img/facebook.png"></a>
-                <a href="https://www.instagram.com/lubrillantasjag/"><img src="/img/instagram.png"></a>
+                <a href="https://www.facebook.com/groups/140309882649983/?ref=share"><img src="/img/facebook.png"></a>
+                <a href="https://www.instagram.com/ingsistemasufps/"><img src="/img/instagram.png"></a>
             </div>
         </div>
         <div class="row" style="background-color: #272727">
 
             <div class="col-12 col-sm-3 col-md-3 col-lg-3 mt-4">
-                <img src="https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_ufps.png" alt="Logo Jezreel"
+                <img src="https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_ufps.png" alt="Logo UFPS"
                     id="imgFooter">
             </div>
 
 
             <div class="col-12 col-sm-3 col-md-3 col-lg-3">
                 <img src="https://ingsistemas.cloud.ufps.edu.co/rsc/img/logo_ingsistemas_vertical_invertido.png"
-                    alt="Logo Jezreel" id="imgFooter">
+                    alt="Logo UFPS" id="imgFooter">
             </div>
 
             <div class="col-12  col-sm-3 col-md-3 col-lg-3 horario">
                 <h4>HORARIOS DE ATENCIÓN</h4>
                 <p>Lunes a Viernes</p>
-                <p>7:30 AM a 6:00 PM</p>
+                <p>6:00 AM a 6:00 PM</p>
                 <p>Sábado</p>
-                <p>7:30 AM a 5:00 PM</p>
+                <p>7:30 AM a 6:00 PM</p>
             </div>
 
             <div class="col-12  col-sm-3 col-md-3 col-lg-3 footer-contacto">
