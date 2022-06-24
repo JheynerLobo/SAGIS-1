@@ -16,10 +16,14 @@ use App\Http\Controllers\Admin\HomeController;
 |
 */
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-Route::post('login', [LoginController::class, 'login'])->name('admin.loggin');
+Route::middleware('guest:admin')->group(function () {
+    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+    Route::post('login', [LoginController::class, 'login'])->name('admin.loggin');
+});
+
 Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-Route::get('home', [HomeController::class, 'home'])->name('admin.home');
-
-Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
+Route::middleware('auth:admin')->group(function () {
+    Route::get('home', [HomeController::class, 'home'])->name('admin.home');
+    Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
+});

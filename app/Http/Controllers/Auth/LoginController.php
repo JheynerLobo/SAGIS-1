@@ -51,7 +51,7 @@ class LoginController extends Controller
         RoleRepository $roleRepository,
         UserRepository $userRepository
     ) {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:web')->except('logout');
         $this->roleRepository = $roleRepository;
         $this->userRepository = $userRepository;
     }
@@ -90,7 +90,7 @@ class LoginController extends Controller
             : redirect()->intended($this->redirectPath());
     }
 
-   
+
     /**
      * @param Request $request
      * @param int $role_id

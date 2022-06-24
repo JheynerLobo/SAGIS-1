@@ -116,12 +116,10 @@ trait AuthenticatesUsers
         if ($response = $this->authenticated($request, $this->guard()->user())) {
             return $response;
         }
-
-
-
+        
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
+            : redirect()->route('home');
     }
 
     /**
@@ -194,10 +192,6 @@ trait AuthenticatesUsers
     {
         $this->guard()->logout();
 
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
         if ($response = $this->loggedOut($request)) {
             return $response;
         }
@@ -225,6 +219,6 @@ trait AuthenticatesUsers
      */
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('web');
     }
 }
