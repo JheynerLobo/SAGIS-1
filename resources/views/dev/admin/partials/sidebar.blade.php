@@ -40,9 +40,19 @@
                 data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
+
+                     <li class="nav-item">
+                        <a href="{{ route('dev.students') }}" class="nav-link">
+                            <i class="nav-icon fas fa-user"></i>
+                            <p>
+                                Perfil
+    
+                            </p>
+                        </a>
+                    </li>
                 <li class="nav-item">
                     <a href="{{ route('dev.students') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <i class="fa fa-graduation-cap"></i>
                         <p>
                             Graduados
 

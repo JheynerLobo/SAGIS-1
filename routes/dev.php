@@ -44,3 +44,7 @@ Route::view('reports/graduates', 'dev.admin.pages.reports.graduates')->name('dev
 
 
 Route::view('posts/create', 'dev.admin.pages.posts.create')->name('dev.posts.create');
+
+Route::view('profile/view_profile', 'dev.admin.pages.profile.view_profile')->name('dev.profile.view_profile');
+Route::view('profile/edit_profile', 'dev.admin.pages.profile.edit_profile')->name('dev.profile.edit_profile');
+Route::view('profile/edit_password', 'dev.admin.pages.profile.edit_password')->name('dev.profile.edit_password');
