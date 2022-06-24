@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 
@@ -10,9 +10,9 @@ use Illuminate\Http\JsonResponse;
 use App\Providers\RouteServiceProvider;
 
 use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
+use App\Repositories\AdminRepository;
 
-use App\Traits\Auth\Client\AuthenticatesUsers;
+use App\Traits\Auth\Admin\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
@@ -34,13 +34,13 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
 
     /** @var RoleRepository */
     protected $roleRepository;
 
-    /** @var UserRepository */
-    protected $userRepository;
+    /** @var AdminRepository */
+    protected $adminRepository;
 
     /**
      * Create a new controller instance.
@@ -49,11 +49,11 @@ class LoginController extends Controller
      */
     public function __construct(
         RoleRepository $roleRepository,
-        UserRepository $userRepository
+        AdminRepository $adminRepository
     ) {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->only('showLoginForm');
         $this->roleRepository = $roleRepository;
-        $this->userRepository = $userRepository;
+        $this->adminRepository = $adminRepository;
     }
 
     /**
@@ -63,8 +63,8 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        $roles = $this->roleRepository->all()->where('guard_name', 'web');
-        return view('auth.login', compact('roles'));
+        $roles = $this->roleRepository->all()->where('guard_name', 'admin');
+        return view('admin.auth.login', compact('roles'));
     }
 
     /**
@@ -90,7 +90,7 @@ class LoginController extends Controller
             : redirect()->intended($this->redirectPath());
     }
 
-   
+
     /**
      * @param Request $request
      * @param int $role_id
@@ -98,12 +98,12 @@ class LoginController extends Controller
     protected function saveRoleSession($role_id)
     {
         $role = $this->roleRepository->getById($role_id);
-        session()->put('role', $role);
+        session()->put('role_admin', $role);
     }
 
 
     protected function deleteRoleSession()
     {
-        session()->forget('role');
+        session()->forget('role_admin');
     }
 }

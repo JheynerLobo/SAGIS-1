@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Traits\Auth;
+namespace App\Traits\Auth\Client;
 
-use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
+use App\Repositories\UserRepository;
+
 trait AuthenticatesUsers
 {
+    use RedirectsUsers, ThrottlesLogins;
+
     /** @var UserRepository */
     protected $userRepository;
 
@@ -18,8 +21,6 @@ trait AuthenticatesUsers
     {
         $this->userRepository = $userRepository;
     }
-
-    use RedirectsUsers, ThrottlesLogins;
 
     /**
      * Handle a login request to the application.
@@ -71,6 +72,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        $request->validate(['email' => ['required', 'email']]);
         $request->validate($this->loginRules($request->get('email')));
     }
 

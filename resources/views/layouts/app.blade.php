@@ -19,17 +19,19 @@
     <link rel="stylesheet" href="{{ asset('css/lightbox.css') }}">
 
     <!-- Theme style -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.1/dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
 
     <!--Importar CSS y script del menú -->
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/index.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/footer.css') }}">
 
+    <!-- SweetAlert -->
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
 
+    @yield('css')
 
-
-
+    @yield('custom_css')
 
 </head>
 
@@ -65,7 +67,26 @@
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous">
     </script>
 
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
 
+    @yield('js')
+
+    @if ($message = Session::get('alert_message'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: "{{ $message['icon'] }}",
+                title: "{{ $message['title'] }}",
+                text: "{{ $message['text'] }}",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok',
+                timer: 3500
+            })
+        </script>
+    @endif
+
+    @yield('custom_js')
 
 </body>
 

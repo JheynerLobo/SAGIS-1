@@ -1,25 +1,28 @@
 <?php
 
-namespace App\Traits\Auth;
+namespace App\Traits\Auth\Admin;
 
-use App\Repositories\UserRepository;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
+use App\Repositories\AdminRepository;
+use Exception;
+
 trait AuthenticatesUsers
 {
-    /** @var UserRepository */
-    protected $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
-
     use RedirectsUsers, ThrottlesLogins;
+
+    /** @var AdminRepository */
+    protected $adminRepository;
+
+    public function __construct(AdminRepository $adminRepository)
+    {
+        $this->adminRepository = $adminRepository;
+    }
 
     /**
      * Handle a login request to the application.
@@ -71,6 +74,7 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
+        $request->validate(['email' => ['required', 'email']]);
         $request->validate($this->loginRules($request->get('email')));
     }
 
@@ -131,14 +135,14 @@ trait AuthenticatesUsers
      */
     protected function loginRules(string $email): array
     {
-        $user = $this->userRepository->getByAttribute('email', $email);
+        $admin = $this->adminRepository->getByAttribute('email', $email);
 
         return [
             $this->username() => ['required', 'email'],
             'password' => ['required', 'string', 'min:4', 'max:12'],
-            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($user) {
+            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($admin) {
                 return $query
-                    ->where('model_id', $user->id);
+                    ->where('model_id', $admin->id);
             })]
         ];
     }
@@ -202,7 +206,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/home');
+            : redirect('/admin/home');
     }
 
     /**
@@ -223,6 +227,6 @@ trait AuthenticatesUsers
      */
     protected function guard()
     {
-        return Auth::guard();
+        return Auth::guard('admin');
     }
 }

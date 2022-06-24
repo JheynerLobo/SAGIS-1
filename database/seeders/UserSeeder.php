@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+use Exception;
 
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
-use Exception;
 
 class UserSeeder extends Seeder
 {
@@ -43,9 +44,9 @@ class UserSeeder extends Seeder
             $this->personRepository->all()
                 ->whereNotIn('id', [1, 2])
                 ->map(function ($person) use ($roles) {
-                    $this->userRepository->createFactory(1, [
-                        'person_id' => $person->id
-                    ]);
+                    $email = Str::$this->userRepository->createFactory(1, [
+                            'person_id' => $person->id
+                        ]);
 
                     /** @var \App\Models\User */
                     $user = $this->userRepository->getByAttribute('person_id', $person->id);
