@@ -72,13 +72,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('dev.reports.statistics') }}" class="nav-link">
+                            <a href="{{ route('admin.home') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Estadísticas</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('dev.reports.graduates') }}" class="nav-link">
+                            <a href="{{ route('admin.home') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Reportes</p>
                             </a>

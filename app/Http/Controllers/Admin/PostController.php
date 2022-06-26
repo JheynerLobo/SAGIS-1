@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\PostCategoryRepository;
-use App\Repositories\PostRepository;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Requests\Posts\StoreRequest;
+use App\Http\Requests\Posts\UpdateRequest;
+
+use App\Repositories\PostRepository;
+use App\Repositories\PostCategoryRepository;
 
 class PostController extends Controller
 {
@@ -19,6 +25,8 @@ class PostController extends Controller
         PostRepository $postRepository,
         PostCategoryRepository $postCategoryRepository
     ) {
+        $this->middleware('auth:admin');
+
         $this->postRepository = $postRepository;
         $this->postCategoryRepository = $postCategoryRepository;
     }
@@ -54,7 +62,13 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $postCategories = $this->postCategoryRepository->all();
+
+            return view('admin.pages.posts.create', compact('postCategories'));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -63,9 +77,21 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $this->postRepository->create($request->all());
+
+            DB::commit();
+
+            return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
+        }
     }
 
     /**
@@ -87,7 +113,17 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $item = $this->postRepository->getById($id);
+
+            $postCategories = $this->postCategoryRepository->all();
+
+            return view('admin.pages.posts.edit', compact('item', 'postCategories'));
+
+            return redirect()->route('admin.posts,edit', $id)->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
+        } catch (\Exception $th) {
+            return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No hemos podido encontrar esta publicación.']);
+        }
     }
 
     /**
@@ -97,9 +133,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        try {
+            DB::beginTransaction();
+
+            $post = $this->postRepository->getById($id);
+
+            $this->postRepository->update($post, $request->all());
+
+            $this->postRepository->create($request->all());
+
+            DB::commit();
+
+            return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
+        }
     }
 
     /**
@@ -110,6 +162,20 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $post = $this->postRepository->getById($id);
+
+            DB::beginTransaction();
+
+            $this->postRepository->delete($post);
+
+            DB::commit();
+
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
     }
 }

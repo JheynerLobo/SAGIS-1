@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Graduados')
+@section('title', 'Publicaciones')
 
 @section('content-header')
     @include('admin.partials.content-header', [
@@ -38,4 +38,6 @@
             </div>
         </div>
     </section>
+
+    @include('admin.partials.button_delete')
 @endsection

@@ -8,12 +8,12 @@
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('dev.home'),
+                'route' => route('admin.home'),
                 'isActive' => null,
             ],
             [
                 'name' => 'Graduados',
-                'route' => route('dev.students.create'),
+                'route' => route('admin.graduates.create'),
                 'isActive' => null,
             ],
             [

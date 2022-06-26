@@ -134,11 +134,11 @@ class GraduateController extends Controller
 
             DB::commit();
 
-            return back()->with('success', ['icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+            return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
-            return back()->with('error', ['icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
         }
     }
 
@@ -171,7 +171,16 @@ class GraduateController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $item = $this->personRepository->getById($id);
+
+            $documentTypes = $this->documentTypeRepository->all();
+            $cities = $this->cityRepository->allOrderBy('countries.id');
+
+            return view('admin.pages.graduates.edit', compact('item', 'documentTypes', 'cities'));
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
     }
 
     /**
