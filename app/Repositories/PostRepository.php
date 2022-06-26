@@ -22,12 +22,14 @@ class PostRepository extends AbstractRepository
      * 
      * @return $query
      */
-    public function search(array $params = [], int $postCategoryId, string $with = null)
+    public function search(array $params = [], int $postCategoryId = null, string $with = null)
     {
         $query = $this->model
             ->select();
 
-        $query->where('post_category_id', $postCategoryId);
+        if (isset($postCategoryId) && $postCategoryId) {
+            $query->where('post_category_id', $postCategoryId);
+        }
 
         if (isset($with)) {
             $query->with($with);
@@ -75,7 +77,7 @@ class PostRepository extends AbstractRepository
     {
         try {
 
-            $perPage = 3;
+            $perPage = 10;
             $pageName = 'page';
             $offset = ($pageNumber -  1) * $perPage;
 

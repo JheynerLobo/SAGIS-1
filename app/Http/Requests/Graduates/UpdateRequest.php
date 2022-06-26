@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Graduates;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UpdateRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::guard('admin')->check();
     }
 
     /**
@@ -24,7 +25,26 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string'],
+            'lastname' => ['required', 'string'],
+
+            'document_type_id' => ['required', 'exists:document_types,id'],
+            'document' => ['required', 'unique:people,id,' . $this->id],
+
+            'birthdate' => ['required', 'date'],
+            'birthdate_place_id' => ['required', 'exists:cities,id'],
+
+            'phone' => ['required', 'string'],
+            'telephone' => ['required', 'string'],
+            'address' => ['required', 'string'],
+
+
+            'code' => ['required', 'numeric', 'unique:users,id'],
+            'email' => ['required', 'email', 'unique:people,id'],
+            'company_email' => ['required', 'email', 'unique:users,email'],
+
+            'image' => ['required', 'image', 'mimes:png,jpg']
+
         ];
     }
 }

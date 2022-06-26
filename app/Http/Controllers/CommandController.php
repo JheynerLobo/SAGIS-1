@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
 use Illuminate\Support\Facades\Artisan;
 
 class CommandController extends Controller
@@ -14,8 +13,8 @@ class CommandController extends Controller
             Artisan::call('optimize');
 
             return 'Optimized!';
-        } catch (Exception $th) {
-            return $th->getMessage();
+        } catch (\Exception $th) {
+            throw $th->getMessage();
         }
     }
 
@@ -25,8 +24,17 @@ class CommandController extends Controller
             Artisan::call('migrate:fresh', [
                 '--seed' => true
             ]);
-        } catch (Exception $th) {
-            return $th->getMessage();
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
+    }
+
+    public function storageLink()
+    {
+        try {
+            Artisan::call('storage:link');
+        } catch (\Exception $th) {
+            throw $th->getMessage();
         }
     }
 }

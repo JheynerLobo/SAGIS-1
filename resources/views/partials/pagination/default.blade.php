@@ -1,5 +1,5 @@
 @if ($paginator->hasPages())
-    <nav aria-label="Page navigation example">
+    <nav aria-label="Page navigation ">
         <ul class="pagination">
             @if (!$paginator->onFirstPage())
                 <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}">Anterior</a></li>

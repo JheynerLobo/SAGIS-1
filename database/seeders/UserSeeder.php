@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
-use Exception;
+use Illuminate\Support\Facades\Storage;
 
 use App\Repositories\UserRepository;
 use App\Repositories\PersonRepository;
@@ -21,14 +21,19 @@ class UserSeeder extends Seeder
     /** @var RoleRepository */
     protected $roleRepository;
 
+    /** @var Storage */
+    protected $storage;
+
     public function __construct(
         UserRepository $userRepository,
         PersonRepository $personRepository,
-        RoleRepository $roleRepository
+        RoleRepository $roleRepository,
+        Storage $storage
     ) {
         $this->userRepository = $userRepository;
         $this->personRepository = $personRepository;
         $this->roleRepository = $roleRepository;
+        $this->storage = $storage;
     }
 
     /**
@@ -57,7 +62,7 @@ class UserSeeder extends Seeder
                     /** Creating Graduate */
                     $user->roles()->attach($roleGraduate);
                 });
-        } catch (Exception $th) {
+        } catch (\Exception $th) {
             print($th->getMessage());
         }
     }

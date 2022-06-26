@@ -46,6 +46,8 @@ class GraduateController extends Controller
         DocumentTypeRepository $documentTypeRepository,
         CityRepository $cityRepository
     ) {
+        $this->middleware('auth:admin');
+
         $this->userRepository = $userRepository;
         $this->personRepository = $personRepository;
         $this->roleRepository = $roleRepository;
