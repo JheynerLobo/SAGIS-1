@@ -49,4 +49,5 @@ Route::get('videos/{id}', [HomeController::class, 'showVideo'])->name('videos.sh
 Route::prefix('commands')->group(function () {
     Route::get('optimize', [CommandController::class, 'runOptimize']);
     Route::get('migrate', [CommandController::class, 'runMigrateFresh']);
+    Route::get('storage-link', [CommandController::class, 'storageLink']);
 });

@@ -59,7 +59,8 @@
                                     @forelse ($items as $item)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset($item->person->fullAsset()) }}" alt="" width="55rem">
+                                                <img src="{{ asset($item->person->fullAsset()) }}" alt=""
+                                                    width="55rem">
                                             </td>
                                             <td>{{ $item->person->fullName() }}</td>
                                             <td>{{ $item->person->document }}</td>
@@ -84,20 +85,10 @@
                                                 <div class="icons-acciones">
                                                     <div class="mr-3">
                                                         <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('dev.students.edit') }}">
+                                                            href="{{ route('admin.graduates.edit', $item->id) }}">
 
                                                             <button type="button" class="fas fa-edit"
-                                                                style="width: 30px; height: 30px"
-                                                                data-bs-whatever="<%=persona.getContraseña()%>"></button>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('dev.students.edit_password') }}">
-
-                                                            <button type="button" class="fas fa-key"
-                                                                style="width: 25px; height: 25px"
-                                                                data-bs-whatever="<%=persona.getContraseña()%>"></button>
+                                                                style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>
                                                 </div>

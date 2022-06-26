@@ -1,4 +1,4 @@
-@extends('dev.admin.layouts.app')
+@extends('admin.layouts.app')
 
 @section('title', 'Datos del graduado')
 
