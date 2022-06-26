@@ -19,9 +19,14 @@ class City extends Model
 
 
 
-     /** Relation Methods */
+    /** Relation Methods */
     public function state()
     {
         return $this->belongsTo(State::class);
+    }
+
+    public function country()
+    {
+        return $this->hasOneThrough(Country::class, State::class, 'country_id', 'id', 'state_id');
     }
 }

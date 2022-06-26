@@ -51,6 +51,7 @@ trait AuthenticatesUsers
                 $request->session()->put('auth.password_confirmed_at', time());
             }
 
+            // dd("holaaaaa");
             return $this->sendLoginResponse($request);
         }
 
@@ -109,6 +110,8 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
+
+        dd("hola");
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
@@ -116,10 +119,10 @@ trait AuthenticatesUsers
         if ($response = $this->authenticated($request, $this->guard()->user())) {
             return $response;
         }
-        
+
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect()->route('home');
+            : redirect()->route('a');
     }
 
     /**
@@ -131,15 +134,12 @@ trait AuthenticatesUsers
      */
     protected function loginRules(string $email): array
     {
-        $user = $this->userRepository->getByAttribute('email', $email);
+        // $user = $this->userRepository->getByAttribute('email', $email);
 
         return [
             $this->username() => ['required', 'email'],
             'password' => ['required', 'string', 'min:4', 'max:12'],
-            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($user) {
-                return $query
-                    ->where('model_id', $user->id);
-            })]
+            'role' => ['required', 'exists:roles,id']
         ];
     }
 

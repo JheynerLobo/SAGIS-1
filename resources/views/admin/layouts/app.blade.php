@@ -23,6 +23,9 @@
     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
+    <!-- SweetAlert2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
+
 
     <link rel="stylesheet" href="{{ asset('css/adminGraduados.css') }}">
 
@@ -80,11 +83,28 @@
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
     <!-- Font Awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
         integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous">
     </script>
 
+    <!-- SweetAlert2 -->
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.all.min.js') }}"></script>
+
     @yield('js')
+
+    @if ($alert = Session::get('success'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: "{{ $alert['icon'] }}",
+                title: "¡Éxito!",
+                text: "{{ $alert['message'] }}",
+                showConfirmButton: true,
+                confirmButtonText: 'Ok',
+                timer: 3500
+            })
+        </script>
+    @endif
 
     @yield('custom_js')
 

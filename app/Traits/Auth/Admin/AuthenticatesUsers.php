@@ -10,7 +10,10 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
 use App\Repositories\AdminRepository;
+use App\Repositories\RoleRepository;
 use Exception;
+
+use function PHPUnit\Framework\isNull;
 
 trait AuthenticatesUsers
 {
@@ -19,9 +22,13 @@ trait AuthenticatesUsers
     /** @var AdminRepository */
     protected $adminRepository;
 
-    public function __construct(AdminRepository $adminRepository)
+    /** @var RoleRepository */
+    protected $roleRepository;
+
+    public function __construct(AdminRepository $adminRepository, RoleRepository $roleRepository)
     {
         $this->adminRepository = $adminRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -111,6 +118,7 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
+        dd("hola");
         $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
@@ -135,15 +143,10 @@ trait AuthenticatesUsers
      */
     protected function loginRules(string $email): array
     {
-        $admin = $this->adminRepository->getByAttribute('email', $email);
-
         return [
             $this->username() => ['required', 'email'],
             'password' => ['required', 'string', 'min:4', 'max:12'],
-            'role' => ['required', 'exists:roles,id', Rule::exists('model_has_roles', 'role_id')->where(function ($query) use ($admin) {
-                return $query
-                    ->where('model_id', $admin->id);
-            })]
+            'role' => ['required', 'exists:roles,id']
         ];
     }
 

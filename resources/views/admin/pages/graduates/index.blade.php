@@ -4,12 +4,12 @@
 @section('title', 'Graduados')
 
 @section('content-header')
-    @include('dev.admin.partials.content-header', [
+    @include('admin.partials.content-header', [
         'title' => 'Graduados',
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('dev.home'),
+                'route' => route('home'),
                 'isActive' => null,
             ],
             [
@@ -31,13 +31,20 @@
                     <div class="card">
                         <div class="card-header  border-info">
                             <h3 class="card-title"><b>Graduados registrados</b> </h3>
+                            <div class="mt-5">
+                                <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-danger">
+                                    Añadir nuevo
+                                    graduado</a>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+
+
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>N°</th>
+                                        <th>Foto</th>
                                         <th>Nombre</th>
                                         <th>Cedula</th>
                                         <th>Código</th>
@@ -51,7 +58,10 @@
                                 <tbody>
                                     @forelse ($items as $item)
                                         <tr>
-                                            <td>{{ $loop->index }}</td>
+                                            <td>
+                                                <img src="{{ asset($item->person->fullAsset()) }}" alt=""
+                                                    width="55rem">
+                                            </td>
                                             <td>{{ $item->person->fullName() }}</td>
                                             <td>{{ $item->person->document }}</td>
                                             <td>{{ $item->code }}</td>
@@ -75,20 +85,10 @@
                                                 <div class="icons-acciones">
                                                     <div class="mr-3">
                                                         <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('dev.students.edit') }}">
+                                                            href="{{ route('admin.graduates.edit', $item->id) }}">
 
                                                             <button type="button" class="fas fa-edit"
-                                                                style="width: 30px; height: 30px"
-                                                                data-bs-whatever="<%=persona.getContraseña()%>"></button>
-                                                        </a>
-                                                    </div>
-                                                    <div>
-                                                        <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('dev.students.edit_password') }}">
-
-                                                            <button type="button" class="fas fa-key"
-                                                                style="width: 25px; height: 25px"
-                                                                data-bs-whatever="<%=persona.getContraseña()%>"></button>
+                                                                style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -105,13 +105,6 @@
 
                             {{-- <form action="" class="mt-5" > --}}
 
-                            <a href="{{ route('dev.students.create') }}"> <button type="button"
-                                    class="btn btn-danger btn-lg  btn-sm mt-5" style="float: right;"> Añadir nuevo
-                                    graduado </button></a>
-
-
-
-                            {{-- type="submit" --}}
 
                             {{-- </form> --}}
 

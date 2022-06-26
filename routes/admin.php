@@ -3,8 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+
 use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,7 +26,7 @@ Route::middleware('guest:admin')->group(function () {
 
 Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
-Route::middleware('auth:admin')->group(function () {
-    Route::get('home', [HomeController::class, 'home'])->name('admin.home');
-    Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
-});
+Route::get('home', [HomeController::class, 'home'])->name('admin.home');
+
+Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
+Route::resource('posts', PostController::class, ['as' => 'admin']);

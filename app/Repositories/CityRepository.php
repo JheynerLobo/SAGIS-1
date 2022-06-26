@@ -11,4 +11,10 @@ class CityRepository extends AbstractRepository
     {
         $this->model = $model;
     }
+
+    public function allOrderBy(string $order)
+    {
+        return $this->model
+            ->with('state')->get();
+    }
 }
