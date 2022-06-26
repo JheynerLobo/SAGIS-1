@@ -154,5 +154,23 @@ return [
         'role' => 'tipo de usuario',
         'created_at_from' => 'fecha de inicio de creación',
         'created_at_to' => 'fecha de fin de creación',
+
+        /** People */
+        'name' => 'nombres',
+        'lastname' => 'apellidos',
+        
+        'document' => 'documento de identidad',
+        'document_type_id' => 'tipo de documento',
+
+        'birthdate' => 'fecha de nacimiento',
+        'birthdate_place_id' => 'lugar de nacimiento',
+        'address' => 'dirección de residencia',
+
+        'phone' => 'celular',
+        'telephone' => 'teléfono',
+        
+        'code' => 'código institucional',
+        'company_email' => 'correo electrónico institucional',
+        'email' => 'correo electrónico personal',
     ],
 ];

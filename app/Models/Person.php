@@ -17,7 +17,7 @@ class Person extends Model
      */
     protected $fillable = [
         'name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email',
-        'birthdate', 'birthdate_place_id', 'address'
+        'birthdate', 'birthdate_place_id', 'address', 'image_url', 'image'
     ];
 
     /**

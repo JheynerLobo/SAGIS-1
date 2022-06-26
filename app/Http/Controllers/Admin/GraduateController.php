@@ -3,10 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
+use App\Http\Requests\Graduates\StoreRequest;
+
+use App\Repositories\CityRepository;
+use App\Repositories\DocumentTypeRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Http\Request;
+
 
 class GraduateController extends Controller
 {
@@ -21,17 +30,27 @@ class GraduateController extends Controller
     /** @var RoleRepository */
     protected $roleRepository;
 
+    /** @var DocumentTypeRepository */
+    protected $documentTypeRepository;
+
+    /** @var CityRepository */
+    protected $cityRepository;
+
     /** @var \Spatie\Permission\Models\Role */
     protected $role;
 
     public function __construct(
         UserRepository $userRepository,
         PersonRepository $personRepository,
-        RoleRepository $roleRepository
+        RoleRepository $roleRepository,
+        DocumentTypeRepository $documentTypeRepository,
+        CityRepository $cityRepository
     ) {
         $this->userRepository = $userRepository;
         $this->personRepository = $personRepository;
         $this->roleRepository = $roleRepository;
+        $this->documentTypeRepository = $documentTypeRepository;
+        $this->cityRepository = $cityRepository;
 
         $this->role = $this->roleRepository->getByAttribute('name', 'graduate');
     }
@@ -58,7 +77,16 @@ class GraduateController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            $documentTypes = $this->documentTypeRepository->all();
+            $cities = $this->cityRepository->allOrderBy('countries.id');
+
+            // return $cities;
+
+            return view('admin.pages.graduates.create', compact('documentTypes', 'cities'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     /**
@@ -67,9 +95,49 @@ class GraduateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        try {
+
+            DB::beginTransaction();
+
+            /** Saving Photo */
+            $fileParams = $this->saveImage($request);
+
+
+            /** Creating Person */
+            $personParams = $request->except(['code', 'company_email', 'image', '_token']);
+            $personParams = array_merge($personParams, $fileParams);
+
+            $this->personRepository->create($personParams);
+
+            /** Searching created Person */
+            $person = $this->personRepository->getByAttribute('email', $request->email);
+
+            /** Creating User */
+            $userParams = $request->only(['code', 'company_email']);
+
+            $userParams['email'] = $userParams['company_email'];
+            $userParams['person_id'] = $person->id;
+            $userParams['password'] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+
+            unset($userParams['company_email']);
+
+            $this->userRepository->create($userParams);
+
+            /** Searching User */
+            $user = $this->userRepository->getByAttribute('email', $userParams['email']);
+
+            $user->roles()->attach($this->role);
+
+            DB::commit();
+
+            return back()->with('success', ['icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('error', ['icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+        }
     }
 
     /**
@@ -125,5 +193,25 @@ class GraduateController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * @param StoreRequest $request
+     * @param array $params
+     */
+    public function saveImage($request): array
+    {
+        $file = $request->file('image');
+
+        $params = [];
+
+        $fileName = time() . '_people_image.' . $file->getClientOriginalExtension();
+
+        $this->personRepository->saveImage(File::get($file), $fileName);
+
+        $params['image_url'] =  'storage/images/people/';
+        $params['image'] = $fileName;
+
+        return $params;
     }
 }

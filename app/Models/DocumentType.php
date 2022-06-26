@@ -17,7 +17,16 @@ class DocumentType extends Model
  */
 protected $fillable = ['name', 'description'];
 
-
+/**
+ * Get the DocumentType's name.
+ *
+ * @param  string  $value
+ * @return string
+ */
+public function getNameAttribute($value)
+{
+    return ucwords($value);
+}
 
 /** Relation Methods */
 public function people()

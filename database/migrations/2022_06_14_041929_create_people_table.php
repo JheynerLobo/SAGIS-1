@@ -19,7 +19,7 @@ class CreatePeopleTable extends Migration
             $table->string('lastname');
             $table->unsignedTinyInteger('document_type_id');
             $table->string('document');
-            $table->string('phone')->nullable();
+            $table->string('phone');
             $table->string('address');
             $table->string('telephone')->nullable();
             $table->string('email')->unique();

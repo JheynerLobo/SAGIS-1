@@ -45,3 +45,18 @@ if (!function_exists('isSelectedOption')) {
         return isset($params[$key]) && $params[$key] == $value ? 'selected' : null;
     }
 }
+
+if (!function_exists('isSelectedOld')) {
+
+    /**
+     * Get param from filters
+     * @param string $key
+     * @param string $value
+     * 
+     * @return string
+     */
+    function isSelectedOld($key, string $value)
+    {
+        return $key == $value ? 'selected' : null;
+    }
+}
