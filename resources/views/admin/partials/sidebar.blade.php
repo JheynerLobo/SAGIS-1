@@ -78,7 +78,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.home') }}" class="nav-link">
+                            <a href="{{ route('admin.reports.graduates') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Reportes</p>
                             </a>

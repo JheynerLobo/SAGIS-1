@@ -142,8 +142,6 @@ class PostController extends Controller
 
             $this->postRepository->update($post, $request->all());
 
-            $this->postRepository->create($request->all());
-
             DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);

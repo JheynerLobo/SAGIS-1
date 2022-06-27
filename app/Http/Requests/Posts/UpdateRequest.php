@@ -29,7 +29,7 @@ class UpdateRequest extends FormRequest
 
         return [
             'post_category_id' => ['required', 'exists:post_categories,id'],
-            'title' => ['required', Rule::unique('posts', 'title')->where('post_category_id', $this->get('post_category_id'))->ignore($id)],
+            'title' => ['required'],
             'description' => ['required', 'string'],
             'date' => ['required', 'date']
         ];
