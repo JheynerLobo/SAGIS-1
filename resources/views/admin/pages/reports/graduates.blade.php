@@ -27,7 +27,6 @@
     ])
 @endsection
 
-
 @section('content')
 
     <!-- Main content -->
@@ -41,107 +40,72 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-8 mb-4">
-                                    <div class="row">
-                                        <!--fecha ini -->
-                                        <div class="col-md-5">
-                                            <div class="row ">
-                                                <label class="col-sm-3 col-form-label">Desde:</label>
-                                                <div class="col-sm-8">
-                                                    <input id="inicial" name="inicial" type="date"
-                                                        class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--fecha fin -->
-                                        <div class="col-md-5">
-                                            <div class="row mr-3">
-                                                <label class="col-sm-3 col-form-label">Hasta:</label>
-                                                <div class="col-sm-8">
-                                                    <input name="final" id="final" type="date"
-                                                        class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--fecha boton -->
-                                        <div class="col-md-2 ">
-                                            <button type="submit" class="btn btn-danger  ">
-                                                Filtrar
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Cedula</th>
-                                        <th>Correo personal</th>
-                                        <th>Fecha nacimiento</th>
-                                        <th>Lugar nacimiento</th>
-                                        <th>Celular</th>
-                                        <th>Dirección</th>
-                                        <th>Código</th>
-                                        <th>Correo institucional</th>
-                                        <th>Año grado pregado</th>
-                                        <th>Programa</th> {{-- El programa del pregrado inicial estudiado --}}
-                                        <th>Facultad</th> {{-- La facultad del pregrado inicial estudiado --}}
-                                        <th>Universidad</th> {{-- La universidad del pregrado inicial estudiado --}}
-                                        <th>Estudios potsgrados</th>
-                                        <th>Nombre empresa</th>
-                                        <th>Lugar empresa</th>
-                                        <th>Salario</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @forelse ($items as $item)
-                                        @php
-                                            $person = $item->person;
-
-                                            $personAcademic = $person->personAcademic->first();
-                                            $program = $personAcademic->program;
-                                            $faculty = $program->faculty;
-                                            $university = $faculty->university;
-
-                                            $personCompany = $person->personCompany()->where('in_working', true)->first();
-                                            $company = $personCompany->company;
-                                        @endphp
+                            <div class="table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>{{ $person->fullName() }}</td>
-                                            <td>{{ $person->document }}</td>
-                                            <td>{{ $person->email }}</td>
-                                            <td>{{ $person->birthdate }}</td>
-                                            <td>{{ $person->birthdatePlace->name }}</td>
-                                            <td>{{ $person->phone }}</td>
-                                            <td>{{ $person->telephone }}</td>
-                                            <td>{{ $person->address }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $personAcademic->year }}</td>
-                                            <td>{{ $program->name }}</td>
-                                            <td>{{ $faculty->name }}</td>
-                                            <td>{{ $university->name }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $company->name }}</td>
-                                            <td>{{ $company->address }}</td>
-                                            <td>{{ $personCompany->salary }} COP</td>
+                                            <th>Nombre</th>
+                                            <th>Cedula</th>
+                                            <th>Correo personal</th>
+                                            <th>Fecha nacimiento</th>
+                                            <th>Lugar nacimiento</th>
+                                            <th>Celular</th>
+                                            <th>Dirección</th>
+                                            <th>Código</th>
+                                            <th>Correo institucional</th>
+                                            <th>Año grado pregado</th>
+                                            <th>Programa</th> {{-- El programa del pregrado inicial estudiado --}}
+                                            <th>Facultad</th> {{-- La facultad del pregrado inicial estudiado --}}
+                                            <th>Universidad</th> {{-- La universidad del pregrado inicial estudiado --}}
+                                            <th>Estudios potsgrados</th>
+                                            <th>Nombre empresa</th>
+                                            <th>Lugar empresa</th>
+                                            <th>Salario</th>
                                         </tr>
-                                    @empty
-                                    @endforelse
-                                </tbody>
-
-                            </table>
-
-
+                                    </thead>
+                                    <tbody>
+                                        @forelse ($items as $item)
+                                            @php
+                                                $person = $item->person;
+                                                
+                                                $personAcademic = $person->personAcademic->first();
+                                                $program = $personAcademic->program;
+                                                $faculty = $program->faculty;
+                                                $university = $faculty->university;
+                                                
+                                                $personCompany = $person
+                                                    ->personCompany()
+                                                    ->where('in_working', true)
+                                                    ->first();
+                                                $company = $personCompany->company;
+                                            @endphp
+                                            <tr>
+                                                <td>{{ $person->fullName() }}</td>
+                                                <td>{{ $person->document }}</td>
+                                                <td>{{ $person->email }}</td>
+                                                <td>{{ $person->birthdate }}</td>
+                                                <td>{{ $person->birthdatePlace->name }}</td>
+                                                <td>{{ $person->phone }}</td>
+                                                <td>{{ $person->telephone }}</td>
+                                                <td>{{ $person->address }}</td>
+                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $personAcademic->year }}</td>
+                                                <td>{{ $program->name }}</td>
+                                                <td>{{ $faculty->name }}</td>
+                                                <td>{{ $university->name }}</td>
+                                                <td>{{ $item->email }}</td>
+                                                <td>{{ $company->name }}</td>
+                                                <td>{{ $company->address }}</td>
+                                                <td>{{ $personCompany->salary }} COP</td>
+                                            </tr>
+                                        @empty
+                                        @endforelse
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                         <!-- /.card-body -->
-
 
                     </div>
                     <!-- /.card -->
