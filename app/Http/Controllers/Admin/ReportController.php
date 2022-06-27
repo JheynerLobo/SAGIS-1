@@ -27,6 +27,8 @@ class ReportController extends Controller
         $this->personRepository = $personRepository;
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
+
+        $this->middleware('auth:admin');
     }
 
     public function graduates()

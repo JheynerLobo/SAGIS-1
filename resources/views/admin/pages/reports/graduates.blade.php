@@ -101,7 +101,17 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($items as $item)
-                                        @php $person = $item->person; @endphp
+                                        @php
+                                            $person = $item->person;
+
+                                            $personAcademic = $person->personAcademic->first();
+                                            $program = $personAcademic->program;
+                                            $faculty = $program->faculty;
+                                            $university = $faculty->university;
+
+                                            $personCompany = $person->personCompany()->where('in_working', true)->first();
+                                            $company = $personCompany->company;
+                                        @endphp
                                         <tr>
                                             <td>{{ $person->fullName() }}</td>
                                             <td>{{ $person->document }}</td>
@@ -112,6 +122,14 @@
                                             <td>{{ $person->telephone }}</td>
                                             <td>{{ $person->address }}</td>
                                             <td>{{ $item->email }}</td>
+                                            <td>{{ $personAcademic->year }}</td>
+                                            <td>{{ $program->name }}</td>
+                                            <td>{{ $faculty->name }}</td>
+                                            <td>{{ $university->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>{{ $company->name }}</td>
+                                            <td>{{ $company->address }}</td>
+                                            <td>{{ $personCompany->salary }} COP</td>
                                         </tr>
                                     @empty
                                     @endforelse
