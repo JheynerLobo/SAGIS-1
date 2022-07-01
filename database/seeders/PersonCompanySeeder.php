@@ -54,11 +54,13 @@ class PersonCompanySeeder extends Seeder
                     $randomNumber--;
                 } while ($randomNumber > 0);
 
-                $this->personCompanyRepository->createFactory(1, [
-                    'person_id' => $person->id,
-                    'company_id' => $companies->random(1)->first()->id,
-                    'in_working' => true
-                ]);
+                if ((bool) rand(0, 1)) {
+                    $this->personCompanyRepository->createFactory(1, [
+                        'person_id' => $person->id,
+                        'company_id' => $companies->random(1)->first()->id,
+                        'in_working' => true
+                    ]);
+                }
             });
         } catch (Exception $th) {
             print($th->getMessage());

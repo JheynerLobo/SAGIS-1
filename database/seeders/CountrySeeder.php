@@ -23,8 +23,10 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
+        $randomCountries = env('RANDOM_COUNTRIES', rand(50, 120));
+
         try {
-            $this->countryRepository->createFactory(25);
+            $this->countryRepository->createFactory($randomCountries);
 
             if (!$this->countryRepository->getByAttribute('name', 'Colombia')) {
                 $this->countryRepository->create([

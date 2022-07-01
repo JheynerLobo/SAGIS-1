@@ -35,4 +35,5 @@ Route::resource('posts', PostController::class, ['as' => 'admin']);
 
 Route::prefix('reports')->group(function () {
     Route::get('graduates', [ReportController::class, 'graduates'])->name('admin.reports.graduates');
+    Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');
 });

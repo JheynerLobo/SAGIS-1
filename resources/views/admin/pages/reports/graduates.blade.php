@@ -77,7 +77,11 @@
                                                     ->personCompany()
                                                     ->where('in_working', true)
                                                     ->first();
-                                                $company = $personCompany->company;
+                                                
+                                                $salary = isset($personCompany) && $personCompany ? $personCompany->salary : 'N/N';
+                                                
+                                                $company_name = isset($personCompany) && $personCompany ? $personCompany->company->name : 'N/N';
+                                                $company_address = isset($personCompany) && $personCompany ? $personCompany->company->address : 'N/N';
                                             @endphp
                                             <tr>
                                                 <td>{{ $person->fullName() }}</td>
@@ -94,9 +98,9 @@
                                                 <td>{{ $faculty->name }}</td>
                                                 <td>{{ $university->name }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                <td>{{ $company->name }}</td>
-                                                <td>{{ $company->address }}</td>
-                                                <td>{{ $personCompany->salary }} COP</td>
+                                                <td>{{ $company_name }}</td>
+                                                <td>{{ $company_address }}</td>
+                                                <td>{{ $salary }} COP</td>
                                             </tr>
                                         @empty
                                         @endforelse
