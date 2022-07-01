@@ -1,6 +1,6 @@
 @if ($editMode)
     <!-- Form -->
-    <form action="{{ route('admin.graduates.store', $item->id) }}" method="POST">
+    <form action="{{ route('admin.graduates.update', $item->id) }}" method="POST">
         @csrf
 
         <!-- Name -->
@@ -26,10 +26,12 @@
         <!-- DocumentType -->
         <div class="form-group">
             <label>Tipo de Documento:</label>
-            <select name="document_type_id" value="{{ $item->document_type_id }}" class="form-control select2bs4">
+            <select name="document_type_id" class="form-control select2bs4">
                 <option value="-1">Seleccione un tipo de documento..</option>
                 @forelse ($documentTypes as $documentType)
-                    <option value="{{ $documentType->id }}">{{ $documentType->name }}</option>
+                    <option value="{{ $documentType->id }}"
+                        {{ isSelectedOld($item->document_type_id, $documentType->id) }}>{{ $documentType->name }}
+                    </option>
                 @empty
                 @endforelse
             </select>
@@ -62,11 +64,10 @@
         <!-- BirthdatePlaceId -->
         <div class="form-group">
             <label>Lugar de Nacimiento:</label>
-            <select name="birthdate_place_id" value="{{ $item->birthdate_place_id }}"
-                class="form-control select2bs4">
+            <select name="birthdate_place_id" class="form-control select2bs4">
                 <option value="-1">Seleccione el lugar de Nacimiento..</option>
                 @forelse ($cities as $city)
-                    <option value="{{ $city->id }}">
+                    <option value="{{ $city->id }}"{{ isSelectedOld($item->birthdate_place_id, $city->id) }}>
                         {{ 'País: ' . $city->state->country->name . ' Departamento: ' . $city->state->name . '  Ciudad: ' . $city->name }}
                     </option>
                 @empty
@@ -121,7 +122,7 @@
         <!-- CompanyEmail -->
         <div class="form-group">
             <label class="form-label">Correo Institucional(@ufps):</label>
-            <input type="email" class="form-control " name="company_email" value="{{ $item->company_email }}"
+            <input type="email" class="form-control " name="company_email" value="{{ $item->user }}"
                 pattern=".+@ufps.edu.co" size="30">
         </div>
         @error('company_email')

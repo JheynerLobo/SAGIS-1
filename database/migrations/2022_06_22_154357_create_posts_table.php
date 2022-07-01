@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->timestamps();
 
             $table->foreign('post_category_id')->references('id')->on('post_categories')->cascadeOnUpdate()->restrictOnDelete();
+            $table->unique(['post_category_id', 'title']);
         });
     }
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 use App\Http\Requests\Graduates\StoreRequest;
-
+use App\Http\Requests\Graduates\UpdatePasswordRequest;
 use App\Repositories\CityRepository;
 use App\Repositories\DocumentTypeRepository;
 use App\Repositories\PersonRepository;
@@ -134,11 +134,11 @@ class GraduateController extends Controller
 
             DB::commit();
 
-            return back()->with('success', ['icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+            return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
-            return back()->with('error', ['icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
         }
     }
 
@@ -171,7 +171,34 @@ class GraduateController extends Controller
      */
     public function edit($id)
     {
-        //
+        try {
+            $item = $this->personRepository->getById($id);
+
+            $documentTypes = $this->documentTypeRepository->all();
+            $cities = $this->cityRepository->allOrderBy('countries.id');
+
+            return view('admin.pages.graduates.edit', compact('item', 'documentTypes', 'cities'));
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
+    }
+
+    /**
+     * Show the form for editing the Graduate's password.
+     * 
+     * @param int $id
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function edit_password($id)
+    {
+        try {
+            $item = $this->personRepository->getById($id);
+
+            return view('admin.pages.graduates.edit_password', compact('item'));
+        } catch (\Exception $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -184,6 +211,35 @@ class GraduateController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    /**
+     * @param UpdatePasswordRequest $request
+     * @param int $id
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function update_password(UpdatePasswordRequest $request, $id)
+    {
+        try {
+            $params = $request->all();
+
+            $item = $this->userRepository->getById($id);
+
+            $this->userRepository->update($item, $params);
+
+            return back()->with('alert', [
+                'title' => '¡Éxito!',
+                'icon' => 'success',
+                'message' => 'Se ha actualizado correctamente la contraseña'
+            ]);
+        } catch (\Exception $th) {
+            return back()->with('alert', [
+                'title' => '¡Error!',
+                'icon' => 'error',
+                'message' => 'No se ha podido actualizar correctamente la contraseña'
+            ]);
+        }
     }
 
     /**

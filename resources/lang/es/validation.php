@@ -151,6 +151,7 @@ return [
     'attributes' => [
         'email' => 'correo electrónico',
         'password' => 'contraseña',
+        'repeat_password' => 'confirmar contraseña',
         'role' => 'tipo de usuario',
         'created_at_from' => 'fecha de inicio de creación',
         'created_at_to' => 'fecha de fin de creación',
@@ -158,7 +159,7 @@ return [
         /** People */
         'name' => 'nombres',
         'lastname' => 'apellidos',
-        
+
         'document' => 'documento de identidad',
         'document_type_id' => 'tipo de documento',
 
@@ -168,9 +169,11 @@ return [
 
         'phone' => 'celular',
         'telephone' => 'teléfono',
-        
+
         'code' => 'código institucional',
         'company_email' => 'correo electrónico institucional',
         'email' => 'correo electrónico personal',
+
+        'post_category_id' => 'campo de categoría de la publicación'
     ],
 ];

@@ -92,12 +92,12 @@
 
     @yield('js')
 
-    @if ($alert = Session::get('success'))
+    @if ($alert = Session::get('alert'))
         <script>
             Swal.fire({
                 position: 'center',
                 icon: "{{ $alert['icon'] }}",
-                title: "¡Éxito!",
+                title: "{{ $alert['title'] }}",
                 text: "{{ $alert['message'] }}",
                 showConfirmButton: true,
                 confirmButtonText: 'Ok',
@@ -107,6 +107,9 @@
     @endif
 
     @yield('custom_js')
+
+
+
 
 </body>
 

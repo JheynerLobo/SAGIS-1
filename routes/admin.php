@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ReportController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -19,14 +21,22 @@ use App\Http\Controllers\Admin\PostController;
 |
 */
 
-Route::middleware('guest:admin')->group(function () {
-    Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('login', [LoginController::class, 'login'])->name('admin.loggin');
-});
+// Route::middleware('guest:admin')->group(function () {
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('admin.login');
+Route::post('login', [LoginController::class, 'login'])->name('admin.loggin');
+// });
 
 Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 
 Route::get('home', [HomeController::class, 'home'])->name('admin.home');
 
 Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
+Route::get('graduates/{graduate}/edit-password', [GraduateController::class, 'edit_password'])->name('admin.graduates.edit_password');
+Route::patch('graduates/{graduate}/update-password', [GraduateController::class, 'update_password'])->name('admin.graduates.update_password');
+
 Route::resource('posts', PostController::class, ['as' => 'admin']);
+
+Route::prefix('reports')->group(function () {
+    Route::get('graduates', [ReportController::class, 'graduates'])->name('admin.reports.graduates');
+    Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');
+});

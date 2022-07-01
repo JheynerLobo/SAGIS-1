@@ -48,7 +48,10 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-danger btn-sm">Filtrar</button>
+            <div class="btn-group">
+                <button class="btn btn-danger btn-sm">Filtrar</button>
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-primary btn-sm ml-2">Registrar</a>
+            </div>
             <hr>
             <h6 class="font-weight-bold">Total de Publicaciones: <a
                     class="btn btn-sm btn-danger">{{ $total }}</a></h6>

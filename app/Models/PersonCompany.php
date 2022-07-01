@@ -21,7 +21,7 @@ class PersonCompany extends Model
      *
      * @var array
      */
-    protected $fillable = ['person_id', 'company_id', 'in_working', 'start_date', 'end_date'];
+    protected $fillable = ['person_id', 'company_id', 'in_working', 'start_date', 'end_date', 'salary'];
 
 
     /** Relation Methods */
