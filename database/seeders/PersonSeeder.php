@@ -38,7 +38,7 @@ class PersonSeeder extends Seeder
     public function run()
     {
         try {
-            $randomNumber = env('RANDOM_PEOPLE', 1000);
+            $randomNumber = env('RANDOM_PEOPLE', 100);
 
             $documentTypes = $this->documentTypeRepository->all();
             $cities = $this->cityRepository->all();

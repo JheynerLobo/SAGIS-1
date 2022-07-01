@@ -85,9 +85,17 @@
                                                 <div class="icons-acciones">
                                                     <div class="mr-3">
                                                         <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('admin.graduates.edit', $item->id) }}">
+                                                            href="{{ route('admin.graduates.edit', $item->person->id) }}">
 
-                                                            <button type="button" class="fas fa-edit"
+                                                            <button type="button" class="btn btn-sm btn-danger fas fa-edit"
+                                                                style="width: 30px; height: 30px"></button>
+                                                        </a>
+                                                    </div>
+                                                    <div class="mr-3">
+                                                        <a style="text-decoration: none; color: #000000;"
+                                                            href="{{ route('admin.graduates.edit_password', $item->person->id) }}">
+
+                                                            <button type="button" class="btn btn-sm btn-warning fas fa-key"
                                                                 style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>

@@ -72,7 +72,7 @@
                 <option value="-1">Seleccione una categoría de publicación..</option>
                 @foreach ($postCategories as $postCategory)
                     <option value="{{ $postCategory->id }}"
-                        {{ isSelectedOld($item->post_category_id, $postCategory->id) }}>
+                        {{ isSelectedOld(old('post_category_id'), $postCategory->id) }}>
                         {{ $postCategory->name }}
                     </option>
                 @endforeach
@@ -87,7 +87,7 @@
         <div class="form-group">
             <label>Título:</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title"
-                value="{{ $item->title }}">
+                value="{{ old('title') }}">
         </div>
         @error('title')
             <small class="text-danger">{{ $message }}</small>
@@ -109,7 +109,7 @@
         <div class="form-group">
             <label>Fecha de Publicación:</label>
             <input type="date" class="form-control @error('date') is-invalid @enderror" name="date"
-                value="{{ $item->date }}">
+                value="{{ old('date') }}">
         </div>
         @error('date')
             <small class="text-danger">{{ $message }}</small>

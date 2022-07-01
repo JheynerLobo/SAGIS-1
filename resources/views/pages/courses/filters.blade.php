@@ -7,7 +7,7 @@
                 <div class="col-md-8">
                     <div class="input-group">
                         <input type="search" name="title" class="form-control form-control-lg"
-                            placeholder="Busca en Cursos" value="{{ getParamValue($params, 'title') }}">
+                            placeholder="Buscar en Cursos" value="{{ getParamValue($params, 'title') }}">
                     </div>
                 </div>
             </div>
