@@ -41,7 +41,7 @@ class PersonCompanySeeder extends Seeder
             $companies = $this->companyRepository->all();
 
             $this->personRepository->all()->map(function ($person) use ($companies) {
-                $randomNumber = rand(1, 3);
+                $randomNumber = rand(1, 2);
 
                 do {
                     $randomCompany = $companies->random(1)->first();

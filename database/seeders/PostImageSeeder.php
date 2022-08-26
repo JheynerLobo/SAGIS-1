@@ -71,7 +71,7 @@ class PostImageSeeder extends Seeder
      */
     protected function createPostAssets($postCategory, $posts)
     {
-        $randomNumber = generateRandomPostAssets(3, 8);
+        $randomNumber = generateRandomPostAssets(3, 5);
 
         $posts->where('post_category_id', $postCategory->id)->map(function ($post) use ($randomNumber) {
             $this->postImageRepository->createFactory(1, [

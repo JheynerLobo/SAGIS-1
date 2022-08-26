@@ -41,7 +41,7 @@ class StateSeeder extends Seeder
             }
 
             $this->countryRepository->all()->map(function ($country) {
-                $randomNumber = rand(2, 5);
+                $randomNumber = rand(2, 3);
                 $this->stateRepository->createFactory($randomNumber, ['country_id' => $country->id]);
             });
         } catch (Exception $th) {

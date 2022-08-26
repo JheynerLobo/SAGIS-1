@@ -51,7 +51,7 @@ class ProgramSeeder extends Seeder
             }
 
             $this->facultyRepository->all()->map(function ($faculty) use ($academicLevels) {
-                $randomNumber = rand(1, 3);
+                $randomNumber = rand(1, 2);
 
                 do {
                     $this->programRepository->createFactory(1, [

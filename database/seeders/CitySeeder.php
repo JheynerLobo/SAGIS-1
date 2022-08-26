@@ -41,7 +41,7 @@ class CitySeeder extends Seeder
             }
 
             $this->stateRepository->all()->map(function ($state) {
-                $randomNumber = rand(5, 10);
+                $randomNumber = rand(1, 2);
                 $this->cityRepository->createFactory($randomNumber, ['state_id' => $state->id]);
             });
         } catch (Exception $th) {
