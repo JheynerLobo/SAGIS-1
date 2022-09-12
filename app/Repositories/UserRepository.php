@@ -21,4 +21,5 @@ class UserRepository extends AbstractRepository
     {
         return $this->model->role($role)->get();
     }
+    
 }

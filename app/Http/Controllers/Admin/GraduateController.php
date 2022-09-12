@@ -250,7 +250,27 @@ class GraduateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $graduate = $this->userRepository->getById($id);
+
+            $person = $this->personRepository->getById($graduate->person_id);
+            
+            
+
+            DB::beginTransaction();
+
+            $this->personRepository->delete($person);
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
+
     }
 
     /**

@@ -21,7 +21,7 @@ class CreatePersonAcademicTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('people')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('person_id')->references('id')->on('people')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('program_id')->references('id')->on('programs')->cascadeOnUpdate()->restrictOnDelete();
         });
     }
