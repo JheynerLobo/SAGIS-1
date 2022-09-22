@@ -2,19 +2,20 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
-use App\Http\Requests\Graduates\StoreRequest;
-use App\Http\Requests\Graduates\UpdatePasswordRequest;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Controller;
 use App\Repositories\CityRepository;
-use App\Repositories\DocumentTypeRepository;
-use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\File;
+use App\Repositories\PersonRepository;
+use Illuminate\Support\Facades\Storage;
+use App\Repositories\DocumentTypeRepository;
+use App\Http\Requests\Graduates\StoreRequest;
+use App\Http\Requests\Graduates\UpdatePasswordRequest;
 
 
 class GraduateController extends Controller
@@ -105,11 +106,12 @@ class GraduateController extends Controller
 
             /** Saving Photo */
             $fileParams = $this->saveImage($request);
-
+  
 
             /** Creating Person */
             $personParams = $request->except(['code', 'company_email', 'image', '_token']);
-            $personParams = array_merge($personParams, $fileParams);
+            //$personParams = array_merge($personParams, $fileParams);
+            $personParams = array_merge($personParams,  $fileParams);
 
             $this->personRepository->create($personParams);
 
@@ -291,5 +293,6 @@ class GraduateController extends Controller
         $params['image'] = $fileName;
 
         return $params;
-    }
+
+    } 
 }

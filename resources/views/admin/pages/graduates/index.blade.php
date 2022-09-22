@@ -59,7 +59,7 @@
                                     @forelse ($items as $item)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset($item->person->fullAsset()) }}" alt=""
+                                                <img src="{{ asset($item->person->image_url . $item->person->image) }}" alt=""
                                                     width="55rem">
                                             </td>
                                             <td>{{ $item->person->fullName() }}</td>
