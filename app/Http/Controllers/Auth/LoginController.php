@@ -75,7 +75,7 @@ class LoginController extends Controller
      */
     protected function sendLoginResponse(Request $request)
     {
-        $request->session()->regenerate();
+       // $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
 
@@ -87,7 +87,8 @@ class LoginController extends Controller
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
+            //: redirect()->intended($this->redirectPath());
+            : redirect()->route('home');
     }
 
 
@@ -106,4 +107,5 @@ class LoginController extends Controller
     {
         session()->forget('role');
     }
+    
 }
