@@ -19,18 +19,6 @@ trait AuthenticatesUsers
 {
     use RedirectsUsers, ThrottlesLogins;
 
-    /** @var AdminRepository */
-    protected $adminRepository;
-
-    /** @var RoleRepository */
-    protected $roleRepository;
-
-    public function __construct(AdminRepository $adminRepository, RoleRepository $roleRepository)
-    {
-        $this->adminRepository = $adminRepository;
-        $this->roleRepository = $roleRepository;
-    }
-
     /**
      * Handle a login request to the application.
      *

@@ -122,7 +122,7 @@
     <section class="contenido mt-3 mb-5">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <a href=" {{ route('dev.gallery') }} "> <input class="boton2" id="botonServicios" type="button"
+            <a href=" #"> <input class="boton2" id="botonServicios" type="button"
                     value="Ver todos"></a>
 
         </div>
