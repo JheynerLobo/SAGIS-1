@@ -59,8 +59,11 @@
                                     @forelse ($items as $item)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset($item->person->image_url . $item->person->image) }}" alt=""
+                                                {{-- <img src="{{ asset($item->person->image_url . $item->person->image) }}" alt=""
+                                                    width="55rem"> --}}
+                                                    <img src="{{ asset($item->person->fullAsset()) }}" alt=""
                                                     width="55rem">
+                                                  {{--   {{ asset($item->person->fullAsset()) }} --}}
                                             </td>
                                             <td>{{ $item->person->fullName() }}</td>
                                             <td>{{ $item->person->document }}</td>

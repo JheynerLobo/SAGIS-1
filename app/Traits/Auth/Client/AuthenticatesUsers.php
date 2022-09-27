@@ -14,13 +14,6 @@ trait AuthenticatesUsers
 {
     use RedirectsUsers, ThrottlesLogins;
 
-    /** @var UserRepository */
-    protected $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
 
     /**
      * Handle a login request to the application.
@@ -74,6 +67,7 @@ trait AuthenticatesUsers
     protected function validateLogin(Request $request)
     {
         $request->validate(['email' => ['required', 'email']]);
+        //$request->validate($this->loginRules());
         $request->validate($this->loginRules($request->get('email')));
     }
 
@@ -111,8 +105,8 @@ trait AuthenticatesUsers
     protected function sendLoginResponse(Request $request)
     {
 
-        dd("hola");
-        $request->session()->regenerate();
+       // dd("hola");
+       // $request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
 
@@ -122,7 +116,8 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect()->route('a');
+             //: redirect()->route('home');
+             : redirect()->route('a');
     }
 
     /**
@@ -132,7 +127,7 @@ trait AuthenticatesUsers
      * 
      * @return array
      */
-    protected function loginRules(string $email): array
+    protected function loginRules(): array
     {
         // $user = $this->userRepository->getByAttribute('email', $email);
 
@@ -199,6 +194,7 @@ trait AuthenticatesUsers
         return $request->wantsJson()
             ? new JsonResponse([], 204)
             : redirect('/home');
+           
     }
 
     /**
