@@ -292,7 +292,7 @@
         <!-- File -->
         <div class="form-group">
             <label for="exampleFormControlFile1">Foto de Perfil</label>
-            <input type="file" class="form-control-file" name="image">
+            <input type="file" class="form-control-file" name="image" accept="image/*">
         </div>
         @error('image')
             <small class="text-danger">{{ $message }}</small>

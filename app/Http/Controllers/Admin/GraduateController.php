@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 
-use App\Http\Requests\Graduates\StoreRequest;
-use App\Http\Requests\Graduates\UpdatePasswordRequest;
+use Illuminate\Support\Facades\DB;
+
+use App\Http\Controllers\Controller;
 use App\Repositories\CityRepository;
-use App\Repositories\DocumentTypeRepository;
-use App\Repositories\PersonRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+use App\Repositories\PersonRepository;
+use App\Repositories\ProgramRepository;
+use Illuminate\Support\Facades\Storage;
+use App\Repositories\DocumentTypeRepository;
+use App\Http\Requests\Graduates\StoreRequest;
+use App\Repositories\PersonAcademicRepository;
+use App\Http\Requests\Graduates\UpdatePasswordRequest;
 
 class GraduateController extends Controller
 {
@@ -36,6 +39,12 @@ class GraduateController extends Controller
     /** @var CityRepository */
     protected $cityRepository;
 
+     /** @var PersonAcademicRepository */
+     protected $personAcademicRepository;
+
+       /** @var ProgramRepository */
+       protected $programRepository;
+
     /** @var \Spatie\Permission\Models\Role */
     protected $role;
 
@@ -44,7 +53,10 @@ class GraduateController extends Controller
         PersonRepository $personRepository,
         RoleRepository $roleRepository,
         DocumentTypeRepository $documentTypeRepository,
-        CityRepository $cityRepository
+        CityRepository $cityRepository,
+        ProgramRepository $programRepository,
+        PersonAcademicRepository $personAcademicRepository
+
     ) {
         $this->middleware('auth:admin');
 
@@ -53,6 +65,8 @@ class GraduateController extends Controller
         $this->roleRepository = $roleRepository;
         $this->documentTypeRepository = $documentTypeRepository;
         $this->cityRepository = $cityRepository;
+        $this->programRepository = $programRepository;
+        $this->personAcademicRepository = $personAcademicRepository;
 
         $this->role = $this->roleRepository->getByAttribute('name', 'graduate');
     }
@@ -82,6 +96,7 @@ class GraduateController extends Controller
         try {
             $documentTypes = $this->documentTypeRepository->all();
             $cities = $this->cityRepository->allOrderBy('countries.id');
+           // $programs = $this->progmamRepository->getByAttribute('level_id', 1);
 
             // return $cities;
 
@@ -105,11 +120,12 @@ class GraduateController extends Controller
 
             /** Saving Photo */
             $fileParams = $this->saveImage($request);
-
+  
 
             /** Creating Person */
             $personParams = $request->except(['code', 'company_email', 'image', '_token']);
-            $personParams = array_merge($personParams, $fileParams);
+            //$personParams = array_merge($personParams, $fileParams);
+            $personParams = array_merge($personParams,  $fileParams);
 
             $this->personRepository->create($personParams);
 
@@ -121,11 +137,27 @@ class GraduateController extends Controller
 
             $userParams['email'] = $userParams['company_email'];
             $userParams['person_id'] = $person->id;
-            $userParams['password'] = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi';
+            $userParams['password'] = 'password';
+      
 
             unset($userParams['company_email']);
 
             $this->userRepository->create($userParams);
+
+            /**Creating PersonAcademic */
+            $personAcademicParams = $request->only( ['person_id', 'program_id', 'year']);
+            $personAcademicParams['person_id'] = $person->id;
+
+           // $pregrade = $this->programRepository->getByAttribute('level_id', 1);
+           // $programs = $this->progmamRepository->getByAttribute('name', "Programa de Ingeniería de Sistema");
+           $programs = $this->programRepository->first()->id;
+
+           // dd($programs);
+            $personAcademicParams['program_id'] = $programs;
+            $personAcademicParams['year'] = 0;
+
+            $this->personAcademicRepository->create($personAcademicParams);
+
 
             /** Searching User */
             $user = $this->userRepository->getByAttribute('email', $userParams['email']);
@@ -250,7 +282,27 @@ class GraduateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $graduate = $this->userRepository->getById($id);
+
+            $person = $this->personRepository->getById($graduate->person_id);
+            
+            
+
+            DB::beginTransaction();
+
+            $this->personRepository->delete($person);
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
+
     }
 
     /**
@@ -271,5 +323,6 @@ class GraduateController extends Controller
         $params['image'] = $fileName;
 
         return $params;
-    }
+
+    } 
 }

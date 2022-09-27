@@ -59,8 +59,11 @@
                                     @forelse ($items as $item)
                                         <tr>
                                             <td>
-                                                <img src="{{ asset($item->person->fullAsset()) }}" alt=""
+                                                {{-- <img src="{{ asset($item->person->image_url . $item->person->image) }}" alt=""
+                                                    width="55rem"> --}}
+                                                    <img src="{{ asset($item->person->fullAsset()) }}" alt=""
                                                     width="55rem">
+                                                  {{--   {{ asset($item->person->fullAsset()) }} --}}
                                             </td>
                                             <td>{{ $item->person->fullName() }}</td>
                                             <td>{{ $item->person->document }}</td>
@@ -87,7 +90,7 @@
                                                         <a style="text-decoration: none; color: #000000;"
                                                             href="{{ route('admin.graduates.edit', $item->person->id) }}">
 
-                                                            <button type="button" class="btn btn-sm btn-danger fas fa-edit"
+                                                            <button type="button" class="btn btn-sm btn-success fas fa-edit"
                                                                 style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>
@@ -99,6 +102,30 @@
                                                                 style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>
+
+                                                    <div class="mr-3">
+                                                       {{--  <a  class="btn btn-sm btn-danger fa fa-trash"
+                                                         style="width: 30px; height: 30px"
+                                                            href="#" onclick="document.getElementById('delete-graduate').submit()">
+                                                           
+                                                              </a>  --}}
+
+                                                              <form action="{{ route('admin.graduates.destroy', $item->id) }}"
+                                                                id="{{ $item->id }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="btn btn-sm btn-danger" style="width: 30px; height: 30px"><i class="fas fa-trash"
+                                                                        onclick="destroy(event, {{ $item->id }}, '¡Se elimninará el graduado!')"></i></button>
+                                                            </form>
+
+                                                             
+                                            
+                                                    </div>
+
+                                                    {{-- <form id="delete-graduate" method="POST" 
+                                                    action="{{ route('admin.graduates.destroy', $item->person->id) }}" >
+                                                        @csrf @method('DELETE')
+                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -130,8 +157,10 @@
         <!-- /.container-fluid -->
     </section>
 
-
+    @include('admin.partials.button_delete')
 @endsection
+
+
 
 @section('js')
     <!-- DataTables  & Plugins -->
@@ -145,7 +174,7 @@
     <script src="{{ asset('plugins/pdfmake/pdfmake.min.js') }}"></script>
     <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>  
 @endsection
 
 @section('custom_js')

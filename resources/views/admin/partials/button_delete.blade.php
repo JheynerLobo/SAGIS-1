@@ -1,5 +1,8 @@
 <script>
     function destroy(event, id, title) {
+
+        
+        alert('Funcionando')
         event.preventDefault();
 
         let form = document.getElementById(id);
@@ -20,13 +23,13 @@
                 return false;
             }
         })
-
+      
     }
 </script>
 
 <script>
     //Initialize Select2 Elements
-    $('.select2bs4').select2({
-        theme: 'bootstrap4'
-    })
+    // $('.select2bs4').select2({
+    //     theme: 'bootstrap4'
+    // })
 </script>

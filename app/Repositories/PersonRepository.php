@@ -52,4 +52,9 @@ class PersonRepository extends AbstractRepository
         $this->deleteImage($person);
         $this->saveImage($file, $fileName);
     }
+
+    public function getByUserId() 
+    {
+        
+    }
 }

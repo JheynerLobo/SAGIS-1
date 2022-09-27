@@ -26,7 +26,7 @@ class CreatePersonCompanyTable extends Migration
 
             $table->timestamps();
 
-            $table->foreign('person_id')->references('id')->on('people')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreign('person_id')->references('id')->on('people')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('company_id')->references('id')->on('companies')->cascadeOnUpdate()->restrictOnDelete();
         });
     }

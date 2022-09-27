@@ -40,7 +40,7 @@ class FacultySeeder extends Seeder
             }
 
             $this->universityRepository->all()->map(function ($university) {
-                $randomNumber = rand(1, 3);
+                $randomNumber = rand(1, 2);
                 $this->facultyRepository
                     ->createFactory($randomNumber, ['university_id' => $university->id]);
             });

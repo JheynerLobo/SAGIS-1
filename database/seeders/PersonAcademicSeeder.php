@@ -48,7 +48,7 @@ class PersonAcademicSeeder extends Seeder
                     'program_id' => $pregrade->id,
                 ]);
 
-                $randomNumber = rand(1, 3);
+                $randomNumber = rand(1, 2);
 
                 do {
                     $randomProgram = $programs->except($pregrade->id)->random(1)->first();

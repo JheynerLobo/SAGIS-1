@@ -35,7 +35,7 @@ class PostSeeder extends Seeder
     {
         try {
             $this->postCategoryRepository->all()->map(function ($postCategory) {
-                $randomNumber = rand(25, 50);
+                $randomNumber = rand(5, 20);
 
                 do {
                     $this->postRepository->createFactory(1, [

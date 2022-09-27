@@ -118,8 +118,8 @@ trait AuthenticatesUsers
      */
     protected function sendLoginResponse(Request $request)
     {
-        dd("hola");
-        $request->session()->regenerate();
+        //dd("hola");
+        //$request->session()->regenerate();
 
         $this->clearLoginAttempts($request);
 
@@ -131,7 +131,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect()->intended($this->redirectPath());
+            : redirect()->route('admin.home');
     }
 
     /**

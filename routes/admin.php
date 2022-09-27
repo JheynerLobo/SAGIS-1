@@ -33,6 +33,7 @@ Route::get('home', [HomeController::class, 'home'])->name('admin.home');
 Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
 Route::get('graduates/{graduate}/edit-password', [GraduateController::class, 'edit_password'])->name('admin.graduates.edit_password');
 Route::patch('graduates/{graduate}/update-password', [GraduateController::class, 'update_password'])->name('admin.graduates.update_password');
+Route::delete('graduates/{graduate}',[GraduateController::class, 'destroy'])->name('admin.graduates.destroy');
 
 Route::resource('posts', PostController::class, ['as' => 'admin']);
 

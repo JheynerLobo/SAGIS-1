@@ -60,3 +60,15 @@ if (!function_exists('isSelectedOld')) {
         return $key == $value ? 'selected' : null;
     }
 }
+
+
+if(!function_exists('getParamObject')){
+
+    function getParamObject($object, $key){
+        return !is_null($object) && $object->$key ? $object->$key : 'N/N';
+    }
+
+}
+
+
+

@@ -26,7 +26,7 @@ class CreatePeopleTable extends Migration
             $table->unsignedBigInteger('birthdate_place_id');
             $table->date('birthdate');
 
-            $table->string('image_url');
+            $table->string('image_url')->nullable();
             $table->string('image')->nullable();
 
             $table->timestamps();

@@ -57,23 +57,59 @@
                                             <th>Programa</th> {{-- El programa del pregrado inicial estudiado --}}
                                             <th>Facultad</th> {{-- La facultad del pregrado inicial estudiado --}}
                                             <th>Universidad</th> {{-- La universidad del pregrado inicial estudiado --}}
-                                            <th>Estudios potsgrados</th>
+                                            {{-- <th>Estudios potsgrados</th> --}}
                                             <th>Nombre empresa</th>
                                             <th>Lugar empresa</th>
                                             <th>Salario</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($items as $item)
+
+                                        @forelse ($items as $index =>  $item)
+
                                             @php
-                                                $person = $item->person;
-                                                
+                                              
+                                              $person = $item->person;
+                                                // Forma anterior sirve solo cuando el graduado tiene todos los datos
                                                 $personAcademic = $person->personAcademic->first();
+
                                                 $program = $personAcademic->program;
+
+                                               // dd($program);
                                                 $faculty = $program->faculty;
+                                               // dd($faculty);
                                                 $university = $faculty->university;
-                                                
-                                                $personCompany = $person
+                                                //dd($university);
+
+                                                 //$faculty = getParamObject($program->faculty, 'name')  ;
+                                                 //dd($item);
+
+                                                  /*   
+                                                 if($index == count($items) - 1) {
+                                                        // Este código se ejecutará para todos menos el último
+                                                        $person = $item->person;
+                                                    
+                                                    $personAcademic = getParamObject($person, 'personAcademic')->first(); 
+                                                    $program =  getParamObject($personAcademic, 'program');
+   
+   
+                                                       dd($personAcademic);
+                                                    }
+
+                                           */
+                                                  
+                                                 //$university =  getParamObject($faculty, 'university'); 
+
+
+                                           /*       $year_person_academic = getParamObject($person, 'personAcademic');
+                                                 $name_program = getParamObject($personAcademic, 'program');
+                                                 $name_faculty = getParamObjEct($personAcademic, 'program');
+                                                 $name_university = getParamObject($personAcademic, 'program'); */
+
+ 
+                                               
+                                               
+                                                 $personCompany = $person
                                                     ->personCompany()
                                                     ->where('in_working', true)
                                                     ->first();
@@ -81,9 +117,13 @@
                                                 $salary = isset($personCompany) && $personCompany ? $personCompany->salary : 'N/N';
                                                 
                                                 $company_name = isset($personCompany) && $personCompany ? $personCompany->company->name : 'N/N';
-                                                $company_address = isset($personCompany) && $personCompany ? $personCompany->company->address : 'N/N';
+                                                $company_address = isset($personCompany) && $personCompany ? $personCompany->company->address : 'N/N'; 
                                             @endphp
+                                            
                                             <tr>
+
+
+
                                                 <td>{{ $person->fullName() }}</td>
                                                 <td>{{ $person->document }}</td>
                                                 <td>{{ $person->email }}</td>
@@ -92,16 +132,16 @@
                                                 <td>{{ $person->phone }}</td>
                                                 <td>{{ $person->telephone }}</td>
                                                 <td>{{ $person->address }}</td>
-                                                <td>{{ $item->email }}</td>
-                                                <td>{{ $personAcademic->year }}</td>
+                                                <td>{{ $item->email }}</td> 
+                                                <td>{{ $personAcademic->year }}</td> 
                                                 <td>{{ $program->name }}</td>
                                                 <td>{{ $faculty->name }}</td>
                                                 <td>{{ $university->name }}</td>
-                                                <td>{{ $item->email }}</td>
+                                              {{--  <td>{{ $item->email }}</td> --}}
                                                 <td>{{ $company_name }}</td>
                                                 <td>{{ $company_address }}</td>
-                                                <td>{{ $salary }} COP</td>
-                                            </tr>
+                                                <td>{{ $salary }} COP</td> 
+                                           </tr> 
                                         @empty
                                         @endforelse
                                     </tbody>
