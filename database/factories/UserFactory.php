@@ -17,7 +17,7 @@ class UserFactory extends Factory
         return [
             'code' => $this->faker->randomNumber(6),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => '$2y$10$CsKgTb7GbL1APWeYqBHhHeyObQ5TGjPnzqYcQPmmaipToS1WRYnvS', // password
+            'password' => 'password', // password
         ];
     }
 

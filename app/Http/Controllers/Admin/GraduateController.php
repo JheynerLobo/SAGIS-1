@@ -137,7 +137,8 @@ class GraduateController extends Controller
 
             $userParams['email'] = $userParams['company_email'];
             $userParams['person_id'] = $person->id;
-            $userParams['password'] = Hash::make('password');
+            $userParams['password'] = 'password';
+      
 
             unset($userParams['company_email']);
 

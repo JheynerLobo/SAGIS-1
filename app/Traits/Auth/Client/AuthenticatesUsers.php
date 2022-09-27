@@ -116,8 +116,7 @@ trait AuthenticatesUsers
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-             //: redirect()->route('home');
-             : redirect()->route('a');
+             : redirect()->route('home');
     }
 
     /**
