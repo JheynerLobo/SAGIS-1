@@ -39,5 +39,16 @@
         </div>
     </section>
 
+    
+@endsection
+
+@section('js')
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+@endsection
+
+@section('custom_js')
     @include('admin.partials.button_delete')
 @endsection
+
+

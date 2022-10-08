@@ -109,13 +109,20 @@
                                                             href="#" onclick="document.getElementById('delete-graduate').submit()">
                                                            
                                                               </a>  --}}
-
+{{-- 
                                                               <form action="{{ route('admin.graduates.destroy', $item->id) }}"
                                                                 id="{{ $item->id }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-sm btn-danger" style="width: 30px; height: 30px"><i class="fas fa-trash"
                                                                         onclick="destroy(event, {{ $item->id }}, '¡Se elimninará el graduado!')"></i></button>
+                                                            </form> --}}
+
+                                                              <form action="{{ route('admin.graduates.destroy', $item->id) }}"
+                                                                id="{{ $item->id }}" method="POST" class="formulario-eliminar">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
                                                             </form>
 
                                                              
@@ -157,7 +164,7 @@
         <!-- /.container-fluid -->
     </section>
 
-    @include('admin.partials.button_delete')
+  
 @endsection
 
 
@@ -175,9 +182,16 @@
     <script src="{{ asset('plugins/pdfmake/vfs_fonts.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>  
+
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 @endsection
 
 @section('custom_js')
+
+
+   @include('admin.partials.button_delete') 
+
     <script>
         $(function() {
             $("#example1").DataTable({
@@ -442,4 +456,5 @@
 
         });
     </script>
+
 @endsection

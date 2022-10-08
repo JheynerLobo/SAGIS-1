@@ -118,14 +118,24 @@ class GraduateController extends Controller
 
             DB::beginTransaction();
 
-            /** Saving Photo */
-            $fileParams = $this->saveImage($request);
-  
+           // dd($request->file('image'));
+        
+            if(!($request->file('image') == null)) {
+                         /** Saving Photo */
+                         $fileParams = $this->saveImage($request);
+            }
+   
 
             /** Creating Person */
             $personParams = $request->except(['code', 'company_email', 'image', '_token']);
             //$personParams = array_merge($personParams, $fileParams);
-            $personParams = array_merge($personParams,  $fileParams);
+
+            if(!($request->file('image') == null)) {
+                $personParams = array_merge($personParams,  $fileParams);
+            }else{
+                $personParams = array_merge($personParams);
+            }
+           
 
             $this->personRepository->create($personParams);
 
