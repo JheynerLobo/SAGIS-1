@@ -34,9 +34,7 @@
         <!-- Descripción -->
         <div class="form-group">
             <label>Descripción:</label>
-            <textarea name="description" rows="5" class="form-control @error('description') is-invalid @enderror">
-                {{ $item->description }}
-            </textarea>
+            <textarea name="description" rows="5" class="form-control @error('description') is-invalid @enderror">{{$item->description}}</textarea>
         </div>
         @error('description')
             <small class="text-danger">{{ $message }}</small>
@@ -56,7 +54,11 @@
 
         <!-- Submit -->
         <div class="form-group">
-            <button class="btn btn-sm btn-danger">Guardar</button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-sm btn-danger">Guardar</button>
+                <button class="btn btn-sm btn-warning ml-5"><a style="color:black;
+                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a> </button>
+            </div>
         </div>
         <!-- ./Submit -->
     </form>
@@ -118,7 +120,11 @@
 
         <!-- Submit -->
         <div class="form-group">
-            <button class="btn btn-sm btn-danger">Guardar</button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button class="btn btn-sm btn-danger">Guardar</button>
+                <button class="btn btn-sm btn-warning ml-5"><a style="color:black;
+                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a> </button>
+            </div>
         </div>
         <!-- ./Submit -->
     </form>

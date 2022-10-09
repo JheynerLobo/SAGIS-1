@@ -175,8 +175,9 @@ class GraduateController extends Controller
             $user->roles()->attach($this->role);
 
             DB::commit();
+            return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
 
-            return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+           // return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
@@ -266,16 +267,22 @@ class GraduateController extends Controller
         try {
             $params = $request->all();
 
-            $item = $this->userRepository->getById($id);
+          //  dd($params);
+          $item = $this->personRepository->getById($id);
 
-            $this->userRepository->update($item, $params);
+          //dd($item->user);
+           // $item = $this->userRepository->getById($id);
+            //dd($item);
 
-            return back()->with('alert', [
+            $this->userRepository->update($item->user, $params);
+
+            return  redirect()->route('admin.graduates.index')->with('alert', [
                 'title' => '¡Éxito!',
                 'icon' => 'success',
                 'message' => 'Se ha actualizado correctamente la contraseña'
             ]);
         } catch (\Exception $th) {
+            dd($th);
             return back()->with('alert', [
                 'title' => '¡Error!',
                 'icon' => 'error',

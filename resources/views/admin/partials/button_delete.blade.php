@@ -41,7 +41,8 @@
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, ¡Estoy seguro!'
+        confirmButtonText: 'Sí, ¡Estoy seguro!',
+        cancelButtonText: 'Cancelar',
         }).then((result) => {
         if (result.isConfirmed) {
             this.submit();

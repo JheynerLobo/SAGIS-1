@@ -112,7 +112,7 @@
         <!-- Code -->
         <div class="form-group">
             <label class="form-label">Código Institucional:</label>
-            <input type="text" class="form-control " name="code" value="{{ $item->code }}">
+            <input type="text" class="form-control " name="code" value="{{ $item->user->code }}">
         </div>
         @error('code')
             <small class="text-danger">{{ $message }}</small>
@@ -122,7 +122,7 @@
         <!-- CompanyEmail -->
         <div class="form-group">
             <label class="form-label">Correo Institucional(@ufps):</label>
-            <input type="email" class="form-control " name="company_email" value="{{ $item->user }}"
+            <input type="email" class="form-control " name="company_email" value="{{ $item->user->email }}"
                 pattern=".+@ufps.edu.co" size="30">
         </div>
         @error('company_email')
@@ -141,8 +141,16 @@
         <!-- ./Email -->
 
         <!-- Submit -->
-        <button type="submit" class="btn btn-danger">Guardar</button>
+        <div class="mt-4">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-danger">Guardar</button>
+                <button class="btn btn-warning ml-5"><a style="color:black;
+                    text-decoration: none;" href="{{ route('admin.graduates.index') }}">Regresar</a> </button>
+            </div>
+          
+        </div>
         <!-- ./Submit -->
+        
     </form>
     <!-- ./Form -->
 @else
@@ -300,10 +308,17 @@
         <!-- ./File -->
 
         <!-- Submit -->
-        <div class="mt-2">
-            <button type="submit" class="btn btn-danger">Guardar</button>
+        <div class="mt-4">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="submit" class="btn btn-danger">Guardar</button>
+                <button class="btn btn-warning ml-5"><a style="color:black;
+                    text-decoration: none;" href="{{ route('admin.graduates.index') }}">Regresar</a> </button>
+            </div>
+          
         </div>
         <!-- ./Submit -->
+
+       
     </form>
     <!-- ./Form -->
 @endif
