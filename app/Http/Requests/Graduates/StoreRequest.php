@@ -18,10 +18,10 @@ class StoreRequest extends FormRequest
         return Auth::guard('admin')->check();
     }
 
-    public function checkGraduate(){
+   /*  public function checkGraduate(){
         return !Auth::guard('admin')->check();
     }
- 
+  */
     /**
      * Get the validation rules that apply to the request.
      *
@@ -47,12 +47,12 @@ class StoreRequest extends FormRequest
             'code' => ['required', 'numeric', 'unique:users'],
             'email' => ['required', 'email', 'unique:people'],
             'company_email' => ['required', 'email', 'unique:users,email'],
-            //'image' => ['image', 'mimes:png,jpg']
+            'image' => ['image', 'mimes:png,jpg']
 
-           'image' => ['image', 'mimes:png,jpg', Rule::requiredIf(function() {
+           /* 'image' => ['image', 'mimes:png,jpg', Rule::requiredIf(function() {
                 return $this->checkGraduate();
             })]
- 
+  */
 
         ];
     }

@@ -22,11 +22,10 @@
                                 <a href="{{ route('admin.posts.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
                                         class="fas fa-edit"></i></a>
                                 <form action="{{ route('admin.posts.destroy', $item->id) }}"
-                                    id="{{ $item->id }}" method="post">
+                                    id="{{ $item->id }}" method="POST" class="formulario-eliminar">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-sm btn-danger"><i class="fas fa-trash"
-                                            onclick="destroy(event, {{ $item->id }}, '¡Se elimninará la publicación!')"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
                                 </form>
                             </div>
                         </td>

@@ -94,6 +94,8 @@
 
     @if ($alert = Session::get('alert'))
         <script>
+
+       /*  alert('Funcionando') */
             Swal.fire({
                 position: 'center',
                 icon: "{{ $alert['icon'] }}",
