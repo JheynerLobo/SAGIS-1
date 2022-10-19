@@ -198,7 +198,45 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print"],
+                "buttons":[ 
+            {
+                "extend":    'excelHtml5',
+                "text":      '<i class="fas fa-file-excel"></i> ',
+                "titleAttr": 'Exportar a Excel',
+                "className": 'btn btn-success',
+               "exportOptions": {
+                    "columns": [ 1,2,3,4,5]
+                }
+            },
+            {
+                "extend":    'pdfHtml5',
+                "text":      '<i class="fas fa-file-pdf"></i> ',
+                "titleAttr": 'Exportar a PDF',
+                "className": 'btn btn-danger',
+                      "exportOptions": {
+                    "columns": [1,2,3,4,5]
+                }
+            },
+            {
+                "extend":    'print',
+                "text":      '<i class="fa fa-print"></i> ',
+                "titleAttr": 'Imprimir',
+                "className": 'btn btn-info',
+                "exportOptions": {
+                    "columns": [1,2,3,4,5]
+                }
+            },
+            {
+                "extend":    'copy',
+                "text":      '<i class="fa fa-copy"></i> ',
+                "titleAttr": 'Copiar',
+                "className": 'btn btn-warning',
+                "exportOptions": {
+                    "columns": [1,2,3,4,5]
+                }
+            },
+            
+        ]           ,
                 "language": {
 
                     "processing": "Procesando...",
