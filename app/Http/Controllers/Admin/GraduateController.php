@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
+use App\Mail\MessageReceived;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Repositories\CityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Repositories\PersonRepository;
 use App\Repositories\ProgramRepository;
 use Illuminate\Support\Facades\Storage;
@@ -19,6 +21,7 @@ use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
 use App\Repositories\PersonAcademicRepository;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
+
 
 class GraduateController extends Controller
 {
@@ -173,6 +176,10 @@ class GraduateController extends Controller
             $user = $this->userRepository->getByAttribute('email', $userParams['email']);
 
             $user->roles()->attach($this->role);
+
+           // Mail::to($userParams['email'])->queue(new MessageReceived($userParams));
+
+           Mail::to($person->email)->queue(new MessageReceived($person, $userParams));
 
             DB::commit();
             return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
