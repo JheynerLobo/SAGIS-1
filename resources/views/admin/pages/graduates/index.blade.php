@@ -122,7 +122,7 @@
                                                                 id="{{ $item->id }}" method="POST" class="formulario-eliminar">
                                                                 @csrf
                                                                 @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
+                                                                <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
                                                             </form>
 
                                                              
@@ -190,11 +190,19 @@
 @section('custom_js')
 
 
-   @include('admin.partials.button_delete') 
+  {{--  @include('admin.partials.button_delete') --}} 
+
+ 
 
     <script>
         $(function() {
-            $("#example1").DataTable({
+            $("#example1")
+            .on('draw.dt', function () {
+            console.log('draw.dt');
+            eventFiredBtnDeleteSweetAlert(this);
+        })
+            
+            .DataTable({
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
@@ -494,5 +502,55 @@
 
         });
     </script>
+
+<script>
+
+    var eventFiredBtnDeleteSweetAlert = function(jE) {
+       
+        // Use sweetalert AFTER DataTables
+        $(jE).on('click', '.btnDelete', function(e) {
+           // alert("Funciona o nO")
+            e.preventDefault();
+    
+            var btnDelete = $(this);
+            Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, ¡Estoy seguro!',
+        cancelButtonText: 'Cancelar',
+                closeOnConfirm: true
+            }).then((result) => {
+        if (result.isConfirmed) {
+            btnDelete.closest('form').submit();
+            // this.submit();
+            } else {
+                return false;
+            }
+        
+        })
+            });
+     
+    };
+    //eventFiredBtnDeleteSweetAlert();
+    
+    
+    /* $('#example1').on('draw.dt', function () {
+          console.log('draw.dt');
+          eventFiredBtnDeleteSweetAlert(this);
+      })
+      // .on('responsive-resize.dt', function () {
+      //     console.log('responsive-resize.dt');
+      //      eventFiredBtnDeleteSweetAlert();
+      // })
+      .DataTable({
+     
+        responsive: true,
+       
+    }); */
+       </script>
 
 @endsection
