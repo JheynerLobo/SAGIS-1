@@ -55,12 +55,12 @@ class PostRepository extends AbstractRepository
      */
     public function transformParameters(array $params)
     {
-        if (empty($params)) {
+       /*  if (empty($params)) {
             $params = set_sub_month_date_filter($params, 'created_at_from', 1);
         }
 
         # Clean empty keys from array
-        $params = array_filter($params);
+        $params = array_filter($params); */
 
         return $params;
     }
