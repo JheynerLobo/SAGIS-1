@@ -101,16 +101,16 @@
 
             <div class="col-md-6 mb-5 colum">
 
-                <a href="{{ asset('img/G3.jpg') }}" data-lightbox="galeriaS" data-title="Nombre foto"> <img
+                <a href="{{ asset('img/G3.jpg') }}" data-lightbox="galeriaS" data-title="Estudiantes de Cloud Computing en Colombia"> <img
                         src="{{ asset('img/G3.jpg') }}" alt=""></a>
-                <div class="titulo">Titulo imagen ejemplo </div>
+                <div class="titulo">Estudiantes de Cloud Computing en Colombia </div>
             </div>
 
             <div class="col-md-6 mb-5 colum">
 
-                <a href="{{ asset('img/G4.jpg') }}" data-lightbox="galeriaS" data-title="Nombre foto"> <img
+                <a href="{{ asset('img/G4.jpg') }}" data-lightbox="galeriaS" data-title="Charla sobre IA"> <img
                         src="{{ asset('img/G4.jpg') }}" alt=""></a>
-                <div class="titulo">Titulo imagen ejemplo </div>
+                <div class="titulo">Charla sobre IA </div>
             </div>
 
         </div>
@@ -122,7 +122,7 @@
     <section class="contenido mt-3 mb-5">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <a href=" #"> <input class="boton2" id="botonServicios" type="button"
+            <a href=" {{ route('gallerys') }}"> <input class="boton2" id="botonServicios" type="button"
                     value="Ver todos"></a>
 
         </div>
