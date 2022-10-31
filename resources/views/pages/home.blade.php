@@ -87,16 +87,16 @@
         <div class="row galeria">
             <div class="col-md-6  mb-5 colum">
 
-                <a href="{{ asset('img/G1.jpg') }}" data-lightbox="galeriaS" data-title="Nombre foto"> <img
+                <a href="{{ asset('img/G1.jpg') }}" data-lightbox="galeriaS" data-title="Evento EISI"> <img
                         src="{{ asset('img/G1.jpg') }}" alt=""></a>
-                <div class="titulo">Titulo imagen ejemplo </div>
+                <div class="titulo">Evento EISI </div>
 
             </div>
 
             <div class="col-md-6 mb-5 colum">
-                <a href="{{ asset('img/G2.jpeg') }}" data-lightbox="galeriaS" data-title="Nombre foto"> <img
+                <a href="{{ asset('img/G2.jpeg') }}" data-lightbox="galeriaS" data-title="Evento Facebook Colombia Hack 2020"> <img
                         src="{{ asset('img/G2.jpeg') }}" alt=""></a>
-                <div class="titulo">Titulo imagen ejemplo </div>
+                <div class="titulo">Evento Facebook Colombia Hack 2020</div>
             </div>
 
             <div class="col-md-6 mb-5 colum">

@@ -12,6 +12,7 @@ use App\Http\Requests\Posts\UpdateRequest;
 
 use App\Repositories\PostRepository;
 use App\Repositories\PostCategoryRepository;
+use App\Repositories\PostImageRepository;
 
 class PostController extends Controller
 {
@@ -21,14 +22,19 @@ class PostController extends Controller
     /** @var PostCategoryRepository */
     protected $postCategoryRepository;
 
+     /** @var PostImageRepository */
+     protected $postImageRepository;
+
     public function __construct(
         PostRepository $postRepository,
-        PostCategoryRepository $postCategoryRepository
+        PostCategoryRepository $postCategoryRepository,
+        PostImageRepository $postImageRepository
     ) {
         $this->middleware('auth:admin');
 
         $this->postRepository = $postRepository;
         $this->postCategoryRepository = $postCategoryRepository;
+        $this->postImageRepository =  $postImageRepository;
     }
 
     /**
@@ -84,6 +90,28 @@ class PostController extends Controller
 
             $this->postRepository->create($request->all());
 
+            /** Searching created Post */
+            $post = $this->postRepository->getByAttribute('title', $request->title);
+
+            /* dd($post); */  
+            
+            
+            /* Probando imagenes por defecto */
+
+            $postImgParams['post_id'] = $post->id;
+            $postImgParams['asset_url'] = asset('img/aprobado.png');
+            $postImgParams['asset'] = null;
+            $postImgParams['is_header'] = 1;
+
+            $postImgParams2['post_id'] = $post->id;
+            $postImgParams2['asset_url'] = asset('img/rechazo.png');
+            $postImgParams2['asset'] = null;
+            $postImgParams2['is_header'] = 0;
+
+            $this->postImageRepository->create($postImgParams);
+            $this->postImageRepository->create($postImgParams2);
+
+            
             DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
