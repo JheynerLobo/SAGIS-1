@@ -103,6 +103,15 @@
                                                         </a>
                                                     </div>
 
+                                                  {{--   <div class="mr-3">
+                                                        <a style="text-decoration: none; color: #000000;"
+                                                            href="{{ route('admin.graduates.edit_academic', $item->person->id) }}">
+
+                                                            <button type="button" class="btn btn-sm btn-primary fas fa-user"
+                                                                style="width: 30px; height: 30px"></button>
+                                                        </a>
+                                                    </div> --}}
+
                                                     <div class="mr-3">
                                                        {{--  <a  class="btn btn-sm btn-danger fa fa-trash"
                                                          style="width: 30px; height: 30px"

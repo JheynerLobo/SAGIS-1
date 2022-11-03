@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\CityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
+use App\Repositories\UniversityRepository;
+use App\Repositories\FacultyRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -19,9 +21,10 @@ use App\Repositories\ProgramRepository;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
-use App\Repositories\PersonAcademicRepository;
-use App\Http\Requests\Graduates\UpdatePasswordRequest;
 use App\Http\Requests\Graduates\UpdateRequest;
+use App\Repositories\PersonAcademicRepository;
+use App\Http\Requests\Graduates\UpdateAcademicRequest;
+use App\Http\Requests\Graduates\UpdatePasswordRequest;
 
 class GraduateController extends Controller
 {
@@ -48,6 +51,13 @@ class GraduateController extends Controller
        /** @var ProgramRepository */
        protected $programRepository;
 
+        /** @var UniversityRepository */
+        protected $universityRepository;
+
+        
+        /** @var FacultyRepository */
+        protected $facultyRepository;
+
     /** @var \Spatie\Permission\Models\Role */
     protected $role;
 
@@ -58,7 +68,9 @@ class GraduateController extends Controller
         DocumentTypeRepository $documentTypeRepository,
         CityRepository $cityRepository,
         ProgramRepository $programRepository,
-        PersonAcademicRepository $personAcademicRepository
+        PersonAcademicRepository $personAcademicRepository, 
+        UniversityRepository $universityRepository,
+        FacultyRepository $facultyRepository
 
     ) {
         $this->middleware('auth:admin');
@@ -70,6 +82,8 @@ class GraduateController extends Controller
         $this->cityRepository = $cityRepository;
         $this->programRepository = $programRepository;
         $this->personAcademicRepository = $personAcademicRepository;
+        $this->universityRepository = $universityRepository;
+        $this->facultyRepository =  $facultyRepository;
 
         $this->role = $this->roleRepository->getByAttribute('name', 'graduate');
     }
@@ -255,6 +269,45 @@ class GraduateController extends Controller
         }
     }
 
+
+
+    public function edit_academic($id, $id_academic)
+    {
+        try {
+            $item = $this->personRepository->getById($id);
+
+            $users = $this->userRepository->getByRole($this->role->name);
+            
+
+            $documentTypes = $this->documentTypeRepository->all();
+            $cities = $this->cityRepository->allOrderBy('countries.id');
+
+            $academics_full = $this->personAcademicRepository->getUni();
+
+             //dd($academics_full);
+
+             $data_academic = $this->personAcademicRepository->getById($id_academic);
+
+             $programs_full = $this->personAcademicRepository->getProgramas();
+             $academic_levels =  $this->personAcademicRepository->getNiveles();
+
+             //dd($academic_levels);
+
+             //dd($data_academic->program->academicLevel->name);
+            $academics = $item->personAcademic;
+
+            $laborales = $item->personCompany;
+           //dd($id_academic);
+
+
+            //return $id;
+
+            return view('admin.pages.graduates.edit_academic', compact('item', 'documentTypes', 'cities', 'academics', 'laborales', 'users', 'academics_full', 'data_academic', 'programs_full', 'academic_levels'));
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -396,6 +449,72 @@ class GraduateController extends Controller
                 'title' => '¡Error!',
                 'icon' => 'error',
                 'message' => 'No se ha podido actualizar correctamente la contraseña'
+            ]);
+        }
+    }
+
+
+    public function update_academic(UpdateAcademicRequest $request, $id, $id_academic)
+    {
+        try {
+
+
+            $params_person_academic = $request->all();
+
+        
+             
+
+           $data_academic = $this->personAcademicRepository->getById($id_academic);
+
+             //dd($data_academic);
+             $program = $this->programRepository->getById($data_academic->program_id);
+            
+             //dd($params_person_academic);
+             $program_params = $request->only(['program_name', 'academic_level_id']);
+
+             $program_params['name'] = $program_params['program_name'];
+
+            unset($program_params['program_name']);
+
+
+             $program_params['academic_level_id'] = (int) $program_params['academic_level_id'];
+
+           
+
+            $university_params =$request->only(['university_name']);
+            $university_params['name'] = $university_params['university_name'];
+
+            unset($university_params['university_name']);
+
+            $faculty_params =$request->only(['faculty_name']);
+            $faculty_params['name'] = $faculty_params['faculty_name'];
+            unset($faculty_params['faculty_name']);
+
+            
+
+             //dd($program_params);
+
+
+             //dd($program);
+            
+            $this->programRepository->update($program, $program_params);
+            $this->facultyRepository->update($program->faculty, $faculty_params);
+            $this->universityRepository->update($program->faculty->university,$university_params);
+            $this->personAcademicRepository->update($data_academic, $params_person_academic);
+
+             
+
+            return  redirect()->route('admin.graduates.index')->with('alert', [
+                'title' => '¡Éxito!',
+                'icon' => 'success',
+                'message' => 'Se ha actualizado correctamente los datos academicos.'
+            ]);
+        } catch (\Exception $th) {
+            dd($th);
+            return back()->with('alert', [
+                'title' => '¡Error!',
+                'icon' => 'error',
+                'message' => 'No se ha podido actualizar correctamente los datos academicos.'
             ]);
         }
     }

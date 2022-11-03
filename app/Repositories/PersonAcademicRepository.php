@@ -24,4 +24,31 @@ class PersonAcademicRepository extends AbstractRepository
             ->orderBy('person_academic.year', 'ASC')
             ->get();
     }
+
+    public function getUni()
+    {
+        /* return $this->model
+            ->with('program')->get(); */
+
+            $u = DB::table('universities')->get();
+        return $u;
+    }
+
+    public function getProgramas()
+    {
+        /* return $this->model
+            ->with('program')->get(); */
+
+            $p = DB::table('programs')->get();
+        return $p;
+    }
+
+    public function getNiveles()
+    {
+        /* return $this->model
+            ->with('program')->get(); */
+
+            $n = DB::table('academic_levels')->get();
+        return $n;
+    }
 }

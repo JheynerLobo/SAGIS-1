@@ -72,9 +72,10 @@
                                             <th>N°</th>
                                             <th>Nivel Académico</th>
                                             <th>Nombre Programa</th>
+                                            <th>Facultad</th>
                                             <th>Universidad</th>
                                             <th>Año Graduado</th>
-                                           {{--  <th>¿Tiene estudios potsgrados? </th> --}}
+                                             <th>Acciones </th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,9 +84,11 @@
                                                 <td>{{ $loop->index }}</td>
                                                 <td>{{ $academic->program->academicLevel->name }}</td>
                                                 <td>{{ $academic->program->name }}</td>
+                                                <td>{{ $academic->program->faculty->name }}</td>
                                                 <td>{{ $academic->program->faculty->university->name }}</td>
                                                 <td>{{ $academic->year }}</td>
-                                                {{-- <td>SI</td> --}}
+                                               <td> <a href="{{ route('admin.graduates.edit_academic', [$item->id, $academic->id ] ) }}" class="btn btn-sm btn-danger">
+                                                Editar datos academicos</a></td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -95,6 +98,8 @@
                                     </tbody>
                                 </table>
                             </div>
+
+                           
                         </div>
                         <!-- /.card-body -->
 
