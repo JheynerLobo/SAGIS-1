@@ -2,8 +2,9 @@
 
 namespace App\Http\Requests\Graduates;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
@@ -41,9 +42,23 @@ class UpdateRequest extends FormRequest
 
             'code' => ['required', 'numeric', 'unique:users,id'],
             'email' => ['required', 'email', 'unique:people,id'],
-            'company_email' => ['required', 'email', 'unique:users,email'],
+            //Probando pero no valida bien aun
+           // 'company_email' => ['required', 'email', 'unique:users,email,'. $this->user],
+            /* 'company_email' =>  'required|email|unique:users,email,person_id'.$this->user, */
+            //'company_email' => ['required', 'email', Rule::unique('users')->ignore($this->user)],
+             'company_email' => [ 
+                'required', 
+                'email',
+                Rule::unique('users', 'id')->ignore($this->user)
+            
+            ],
+            //'company_email' => "required|unique:users,email,{$this->user}"
+    
+            
+            
+              //'company_email' => ['required', 'email'],
 
-            'image' => ['required', 'image', 'mimes:png,jpg']
+           /*  'image' => ['required', 'image', 'mimes:png,jpg'] */
 
         ];
     }

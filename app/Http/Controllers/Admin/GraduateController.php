@@ -21,7 +21,7 @@ use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
 use App\Repositories\PersonAcademicRepository;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
-
+use App\Http\Requests\Graduates\UpdateRequest;
 
 class GraduateController extends Controller
 {
@@ -227,7 +227,11 @@ class GraduateController extends Controller
             $documentTypes = $this->documentTypeRepository->all();
             $cities = $this->cityRepository->allOrderBy('countries.id');
 
-            return view('admin.pages.graduates.edit', compact('item', 'documentTypes', 'cities'));
+            $academics = $item->personAcademic;
+
+            $laborales = $item->personCompany;
+
+            return view('admin.pages.graduates.edit', compact('item', 'documentTypes', 'cities', 'academics', 'laborales'));
         } catch (\Exception $th) {
             throw $th->getMessage();
         }
@@ -258,9 +262,107 @@ class GraduateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        try {
+            //$data = $request->all();
+
+            $personParams = $request->only(['name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email',
+            'birthdate', 'birthdate_place_id']);
+
+            //dd($data );
+            $userParams = $request->only(['code', 'company_email']);
+            $userParams['email'] = $userParams['company_email'];
+
+            unset($userParams['company_email']);
+
+           //   dd($userParams );
+
+          
+            
+            //$person = $this->personRepository->getByAttribute('email', $request->email);
+            $person = $this->personRepository->getById($id);
+
+             /** Searching User */
+             //$user = $this->userRepository->getByAttribute('email', $userParams['email']);
+            $user = $this->userRepository->getByAttribute('person_id',$person->id);
+            // $user = $this->userRepository->getById($person->id);
+
+        
+
+
+            $this->personRepository->update($person, $personParams);
+
+            $this->userRepository->update($user, $userParams);
+
+
+
+
+           
+            
+            //$programs = $this->programRepository->getByAttribute('person_id',$person->id);
+          /*   $academics = $person->personAcademic;
+
+            $laborales = $person->personCompany;
+
+            $programs=array();
+
+
+            foreach ($academics as $is => $academic) {
+               
+               $personAcademicParams = $request->only( ['person_id', 'program_id', 'year'.$is]);
+
+               
+               $programs .= $is;
+               
+                
+           
+                $personAcademicParams['person_id'] = $person->id;
+                $personAcademicParams['program_id'] =   $academic->program->id; 
+                $personAcademicParams['year'.$is] = $academic->year;
+
+                $this->personAcademicRepository->update($academic, $personAcademicParams);
+
+               
+            }
+            dd($programs);
+           
+             */
+           
+           
+            
+
+           // $program = $academics[0]->program->id;
+            
+          // dd($program);
+            
+             //$personAcademicParams['program_id'] =  $academics->program->name; 
+           //  $personAcademicParams['year'] = 0;
+ 
+
+
+           // dd($user );
+
+
+
+
+
+           
+            
+           // DB::beginTransaction();
+
+            
+
+           // dd( $this->userRepository);
+
+
+          //  DB::commit();
+
+            return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
+        } catch (\Exception $th) {
+           // DB::rollBack();
+            return redirect()->route('admin.home')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
+        }
     }
 
     /**

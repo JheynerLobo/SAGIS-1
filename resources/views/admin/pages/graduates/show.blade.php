@@ -74,7 +74,7 @@
                                             <th>Nombre Programa</th>
                                             <th>Universidad</th>
                                             <th>Año Graduado</th>
-                                            <th>¿Tiene estudios potsgrados? </th>
+                                           {{--  <th>¿Tiene estudios potsgrados? </th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -85,7 +85,7 @@
                                                 <td>{{ $academic->program->name }}</td>
                                                 <td>{{ $academic->program->faculty->university->name }}</td>
                                                 <td>{{ $academic->year }}</td>
-                                                <td>SI</td>
+                                                {{-- <td>SI</td> --}}
                                             </tr>
                                         @empty
                                             <tr>
