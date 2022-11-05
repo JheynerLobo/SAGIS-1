@@ -61,6 +61,7 @@
                     <div class="card">
                         <div class="card-header  border-info">
                             <h3 class="card-title"><b>Datos académicos</b> </h3>
+                            
                         </div>
 
                         <!-- /.card-header -->
@@ -72,9 +73,10 @@
                                             <th>N°</th>
                                             <th>Nivel Académico</th>
                                             <th>Nombre Programa</th>
+                                            <th>Facultad</th>
                                             <th>Universidad</th>
                                             <th>Año Graduado</th>
-                                           {{--  <th>¿Tiene estudios potsgrados? </th> --}}
+                                             <th>Acciones </th> 
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -83,9 +85,31 @@
                                                 <td>{{ $loop->index }}</td>
                                                 <td>{{ $academic->program->academicLevel->name }}</td>
                                                 <td>{{ $academic->program->name }}</td>
+                                                <td>{{ $academic->program->faculty->name }}</td>
                                                 <td>{{ $academic->program->faculty->university->name }}</td>
                                                 <td>{{ $academic->year }}</td>
-                                                {{-- <td>SI</td> --}}
+                                               <td> 
+
+                                                <div class="icons-acciones">
+                                                    
+                                                    <div class="mr-3">
+                                                        <a style="text-decoration: none; color: #000000;"
+                                                        href="{{ route('admin.graduates.edit_academic', [$item->id, $academic->id ] ) }}">
+
+                                                            <button type="button" class="btn btn-sm btn-success fas fa-edit"
+                                                                style="width: 30px; height: 30px"></button>
+                                                        </a>
+                                                    </div>
+                                                
+                                                
+                                                
+                                                </div>
+                                              {{--   <a href="{{ route('admin.graduates.edit_academic', [$item->id, $academic->id ] ) }}" class="btn btn-sm btn-danger">
+                                                Editar datos academicos</a> --}}
+
+                                                
+                                            
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr>
@@ -94,7 +118,15 @@
                                         @endforelse
                                     </tbody>
                                 </table>
+
+                                <div class="mt-2">
+                                    <a href="{{ route('admin.graduates.create_academic', $item->id) }}" class="btn btn-sm btn-danger">
+                                        Añadir nuevo
+                                        Dato Académico</a>
+                                </div>
                             </div>
+
+                           
                         </div>
                         <!-- /.card-body -->
 

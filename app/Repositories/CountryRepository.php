@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Country;
+use Illuminate\Support\Facades\DB;
 use App\Repositories\AbstractRepository;
 
 class CountryRepository extends AbstractRepository
@@ -11,4 +12,21 @@ class CountryRepository extends AbstractRepository
     {
         $this->model = $model;
     }
+
+
+
+    public function getPais($pais_name)
+    {
+         $pais = DB::table('countries')->where('name', $pais_name)->value('name');
+        return $pais;
+    }
+
+
+
+    public function getPaisID($pais_name)
+    {
+            $pais_id = DB::table('countries')->where('name', $pais_name)->value('id');
+        return $pais_id;
+    }
+
 }

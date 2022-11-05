@@ -15,7 +15,7 @@ class Program extends Model
      *
      * @var array
      */
-    protected $fillable = ['faculty_id', 'level_id', 'name'];
+    protected $fillable = ['faculty_id', 'academic_level_id', 'name'];
 
 
 
