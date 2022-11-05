@@ -103,45 +103,16 @@
                                                         </a>
                                                     </div>
 
-                                                  {{--   <div class="mr-3">
-                                                        <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('admin.graduates.edit_academic', $item->person->id) }}">
-
-                                                            <button type="button" class="btn btn-sm btn-primary fas fa-user"
-                                                                style="width: 30px; height: 30px"></button>
-                                                        </a>
-                                                    </div> --}}
-
                                                     <div class="mr-3">
-                                                       {{--  <a  class="btn btn-sm btn-danger fa fa-trash"
-                                                         style="width: 30px; height: 30px"
-                                                            href="#" onclick="document.getElementById('delete-graduate').submit()">
-                                                           
-                                                              </a>  --}}
-{{-- 
-                                                              <form action="{{ route('admin.graduates.destroy', $item->id) }}"
-                                                                id="{{ $item->id }}" method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button class="btn btn-sm btn-danger" style="width: 30px; height: 30px"><i class="fas fa-trash"
-                                                                        onclick="destroy(event, {{ $item->id }}, '¡Se elimninará el graduado!')"></i></button>
-                                                            </form> --}}
 
                                                               <form action="{{ route('admin.graduates.destroy', $item->id) }}"
                                                                 id="{{ $item->id }}" method="POST" class="formulario-eliminar">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
-                                                            </form>
-
-                                                             
-                                            
+                                                            </form>                                                 
                                                     </div>
 
-                                                    {{-- <form id="delete-graduate" method="POST" 
-                                                    action="{{ route('admin.graduates.destroy', $item->person->id) }}" >
-                                                        @csrf @method('DELETE')
-                                                    </form> --}}
                                                 </div>
                                             </td>
                                         </tr>

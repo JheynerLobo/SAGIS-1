@@ -8,21 +8,24 @@ use App\Mail\MessageReceived;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Repositories\CountryRepository;
+use App\Repositories\StateRepository;
 use App\Repositories\CityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
-use App\Repositories\UniversityRepository;
-use App\Repositories\FacultyRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\PersonRepository;
+use App\Repositories\FacultyRepository;
 use App\Repositories\ProgramRepository;
 use Illuminate\Support\Facades\Storage;
+use App\Repositories\UniversityRepository;
 use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
 use App\Http\Requests\Graduates\UpdateRequest;
 use App\Repositories\PersonAcademicRepository;
+use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
 
@@ -45,6 +48,12 @@ class GraduateController extends Controller
     /** @var CityRepository */
     protected $cityRepository;
 
+        /** @var StateRepository */
+        protected $stateRepository;
+
+      /** @var CountryRepository */
+      protected $countryRepository;
+
      /** @var PersonAcademicRepository */
      protected $personAcademicRepository;
 
@@ -66,6 +75,8 @@ class GraduateController extends Controller
         PersonRepository $personRepository,
         RoleRepository $roleRepository,
         DocumentTypeRepository $documentTypeRepository,
+        CountryRepository $countryRepository,
+        StateRepository $stateRepository,
         CityRepository $cityRepository,
         ProgramRepository $programRepository,
         PersonAcademicRepository $personAcademicRepository, 
@@ -79,6 +90,8 @@ class GraduateController extends Controller
         $this->personRepository = $personRepository;
         $this->roleRepository = $roleRepository;
         $this->documentTypeRepository = $documentTypeRepository;
+        $this->countryRepository = $countryRepository;
+        $this->stateRepository = $stateRepository;
         $this->cityRepository = $cityRepository;
         $this->programRepository = $programRepository;
         $this->personAcademicRepository = $personAcademicRepository;
@@ -118,6 +131,50 @@ class GraduateController extends Controller
             // return $cities;
 
             return view('admin.pages.graduates.create', compact('documentTypes', 'cities'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+
+
+    public function create_academic($id)
+    {
+        try {
+          
+                $item = $this->personRepository->getById($id);
+
+                //dd($item );
+    
+                $users = $this->userRepository->getByRole($this->role->name);
+                
+    
+                //$documentTypes = $this->documentTypeRepository->all();
+                $cities = $this->cityRepository->allOrderBy('countries.id');
+    
+               // $academics_full = $this->personAcademicRepository->getUni();
+    
+                 //dd($academics_full);
+    
+                 //$data_academic = $this->personAcademicRepository->getById($id_academic);
+    
+                 //$programs_full = $this->personAcademicRepository->getProgramas();
+                 $academic_levels =  $this->personAcademicRepository->getNiveles();
+
+                 //dd($academic_levels);
+    
+                 //dd($academic_levels);
+    
+                 //dd($data_academic->program->academicLevel->name);
+                $academics = $item->personAcademic;
+    
+               // $laborales = $item->personCompany;
+               //dd($id_academic);
+    
+    
+                //return $id;
+    
+                return view('admin.pages.graduates.create_academic', compact('item',  'cities', 'academics',  'users', 'academic_levels'));
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -205,6 +262,162 @@ class GraduateController extends Controller
             return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
         }
     }
+
+
+    public function store_academic(StoreAcademicRequest $request, $id)
+    {
+        try {
+
+            DB::beginTransaction();
+
+
+                $data = $request->all();
+
+          // dd($data['university_place_id']== "-2");
+
+                $city_id = 0;
+                if($data['university_place_id']== "-2"){
+                    /* Pais */
+                    $countryParams = $request->only('country_name');
+                    $countryParams['name'] = $countryParams['country_name'];
+                    unset($countryParams['country_name']);
+
+                    $countryParams['slug'] = strtoupper(substr($countryParams['name'], 0, 3));
+
+
+                     /* Con esta consulta se comprueba si el pais que ingreso el usuario existe, si existe devuelve el pais sino NULL */
+                    $country= $this->countryRepository->getPais($countryParams['name']);
+
+                    //dd( $country);
+                    
+                    /* Si es NULL crea el PAIS  */
+                    if(is_null($country))  $this->countryRepository->create($countryParams);
+
+
+
+
+                    /* Estado/Departamento */
+                    $stateParams = $request->only('state_name');
+                    $country_id = $this->countryRepository->getPaisID($countryParams['name']);
+
+                    $stateParams['name'] = $stateParams['state_name'];
+                    unset($stateParams['state_name']);
+
+                    $stateParams['slug'] = strtoupper(substr($stateParams['name'], 0, 3));
+
+                    $stateParams['country_id'] = $country_id;
+
+                     /* Con esta consulta se comprueba si el estado que ingreso el usuario existe, si existe devuelve el estado sino NULL */
+                     $state= $this->stateRepository->getEstado($stateParams['name']);
+
+                    //dd($state);
+                    
+                     /* Si es NULL crea el ESTADO  */
+                     if(is_null($state))  $this->stateRepository->create($stateParams);
+
+
+                     /* Ciudad */
+                     $cityParams = $request->only('city_name');
+                     $state_id= $this->stateRepository->getStateID($stateParams['name']);
+   
+                     $cityParams['name'] = $cityParams['city_name'];
+                     unset($cityParams['city_name']);
+
+                     $cityParams['slug'] = strtoupper(substr($cityParams['name'], 0, 3));
+
+                     $cityParams['state_id'] = $state_id;
+
+                      /* Con esta consulta se comprueba si la ciudad que ingreso el usuario existe, si existe devuelve la ciudad sino NULL */
+                      $city= $this->cityRepository->getCity($cityParams['name']);
+                    
+                      /* Si es NULL crea la CIUDAD  */
+                      if(is_null($city))  $this->cityRepository->create($cityParams);  
+
+
+                      $city_id = $this->cityRepository->getCityID($cityParams['name']);
+
+                     
+
+                   // dd($state_id);
+
+                   // dd($data);
+                    
+                }else{
+                    $city_id = (int)$data['university_place_id'];
+                }
+
+                /* Universidad */
+
+                $universityParams = $request->only('university_name', 'address');
+                $universityParams['name'] = $universityParams['university_name'];
+                unset($universityParams['university_name']);
+
+                $universityParams['city_id'] = $city_id;
+
+                 /* Con esta consulta se comprueba si la universidad que ingreso el usuario existe, si existe devuelve la universidad sino NULL */
+                 $university= $this->universityRepository->getUniversity($universityParams['name']);
+                    
+                 /* Si es NULL crea la UNIVERSIDAD  */
+                 if(is_null($university))  $this->universityRepository->create($universityParams);
+
+                 /* Facultad */
+                 $facultyParams = $request->only('faculty_name');
+                 $university_id = $this->universityRepository->getUniversityID($universityParams['name']);
+
+                 $facultyParams['name'] = $facultyParams['faculty_name'];
+                 unset($facultyParams['faculty_name']);
+
+                 $facultyParams['university_id'] = $university_id;
+
+                  /* Con esta consulta se comprueba si la facultad que ingreso el usuario existe, si existe devuelve la facultad sino NULL */
+                /*   $faculty= $this->facultyRepository->getModelName($facultyParams['name']); */
+                    
+                  /* Si es NULL crea la FACULTAD  */
+                  /* if(is_null($faculty))   */
+                  $this->facultyRepository->create($facultyParams);
+
+                  /* Problema viene de aca */
+                $faculty_id = $this->facultyRepository->getModelID($facultyParams['name']);
+                //dd($faculty_id );
+
+                $program_params = $request->only('program_name', 'academic_level_id');
+                $program_params['name'] = $program_params['program_name'];
+                unset($program_params['program_name']);
+                $program_params['academic_level_id'] = (int)$program_params['academic_level_id'];
+                $program_params['faculty_id'] = $faculty_id;
+
+                  /* Con esta consulta se comprueba si el programa que ingreso el usuario existe, si existe devuelve el programa sino NULL */
+                /*   $program= $this->programRepository->getModelName($program_params['name']);
+ */
+                  //dd($program);
+                    
+                  /* Si es NULL crea el PROGRAMA  */
+                /*   if(is_null($program))   */
+                  
+                  $this->programRepository->create($program_params);
+
+                  $personAcademic_params = $request->only('year');
+                  $program_id = $this->programRepository->getModelID($program_params['name']);
+                  $personAcademic_params['program_id'] = $program_id ;
+                  $personAcademic_params['person_id'] = (int)$id;
+
+
+                  $this->personAcademicRepository->create( $personAcademic_params);
+
+    
+                 // dd($personAcademic_params  );
+                // dd($data);
+            DB::commit();
+            return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+
+           // return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+        }
+    }
+
 
     /**
      * Display the specified resource.

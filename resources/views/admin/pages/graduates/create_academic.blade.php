@@ -1,10 +1,18 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Editar Datos Academicos')
+@section('title', 'Crear Datos Academicos')
+
+@section('cargarJS')
+
+    
+        onload = "cargarPrincipal()";
+  
+
+@endsection
 
 @section('content-header')
     @include('dev.admin.partials.content-header', [
-        'title' => 'Edición de Datos Academicos',
+        'title' => 'Creación de Datos Academicos',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -45,13 +53,13 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Cambiar Datos Academicos del Graduado</b> </h3>
+                            <h3 class="card-title"><b>Crear Datos Academicos del Graduado</b> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del formulario.</small>
 
-                            @include('admin.pages.graduates.formEditAcademic')
+                            @include('admin.pages.graduates.formCreateAcademic')
                     
 
                         </div>
@@ -67,4 +75,8 @@
         <!-- /.container-fluid -->
     </section>
 
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

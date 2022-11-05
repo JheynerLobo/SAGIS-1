@@ -203,4 +203,19 @@ class AbstractRepository
         $this->model->truncate();
         DB::statement('SET FOREIGN_KEY_CHECKS=1 ;');
     }
+
+    public function getModelName($name)
+    {
+         $modelName = $this->model->where('name', $name)->value('name');
+        return $modelName;
+    }
+
+
+
+    public function getModelID($name)
+    {
+            $model_id = $this->model->where('name', $name)->latest()->value('id');
+        return $model_id;
+    }
 }
+

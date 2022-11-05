@@ -107,7 +107,7 @@
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-danger">Guardar</button>
             <button class="btn btn-warning ml-5"><a style="color:black;
-                    text-decoration: none;" href="{{ route('admin.graduates.index') }}">Regresar</a> </button>
+                    text-decoration: none;" href="{{ route('admin.graduates.show', $item->id) }}">Regresar</a> </button>
         </div>
 
     </div>

@@ -13,7 +13,7 @@
             ],
             [
                 'name' => 'Graduados',
-                'route' => route('admin.graduates.create'),
+                'route' => route('admin.graduates.index'),
                 'isActive' => null,
             ],
             [
