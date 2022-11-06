@@ -238,24 +238,21 @@ class GraduateController extends Controller
 
            // dd($programs);
             $personAcademicParams['program_id'] = $programs;
-            $personAcademicParams['year'] = 0;
+            $personAcademicParams['year'] = 2000;
 
             $this->personAcademicRepository->create($personAcademicParams);
 
 
             /** Searching User */
             $user = $this->userRepository->getByAttribute('email', $userParams['email']);
+            
+            //$user->roles()->attach($this->role);
+            $user->roles()->sync($this->role);
 
-            $user->roles()->attach($this->role);
-
-           // Mail::to($userParams['email'])->queue(new MessageReceived($userParams));
-
-           Mail::to($person->email)->queue(new MessageReceived($person, $userParams));
+            Mail::to($person->email)->queue(new MessageReceived($person, $userParams));
 
             DB::commit();
             return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
-
-           // return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
@@ -273,8 +270,6 @@ class GraduateController extends Controller
 
                 $data = $request->all();
 
-          // dd($data['university_place_id']== "-2");
-
                 $city_id = 0;
                 if($data['university_place_id']== "-2"){
                     /* Pais */
@@ -287,9 +282,6 @@ class GraduateController extends Controller
 
                      /* Con esta consulta se comprueba si el pais que ingreso el usuario existe, si existe devuelve el pais sino NULL */
                     $country= $this->countryRepository->getPais($countryParams['name']);
-
-                    //dd( $country);
-                    
                     /* Si es NULL crea el PAIS  */
                     if(is_null($country))  $this->countryRepository->create($countryParams);
 
@@ -335,12 +327,6 @@ class GraduateController extends Controller
 
 
                       $city_id = $this->cityRepository->getCityID($cityParams['name']);
-
-                     
-
-                   // dd($state_id);
-
-                   // dd($data);
                     
                 }else{
                     $city_id = (int)$data['university_place_id'];
@@ -403,14 +389,8 @@ class GraduateController extends Controller
 
 
                   $this->personAcademicRepository->create( $personAcademic_params);
-
-    
-                 // dd($personAcademic_params  );
-                // dd($data);
             DB::commit();
-            return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
-
-           // return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+            return redirect()->route('admin.graduates.show', $id)->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
@@ -554,73 +534,12 @@ class GraduateController extends Controller
             $user = $this->userRepository->getByAttribute('person_id',$person->id);
             // $user = $this->userRepository->getById($person->id);
 
-        
-
-
             $this->personRepository->update($person, $personParams);
 
             $this->userRepository->update($user, $userParams);
 
-
-
-
-           
-            
-            //$programs = $this->programRepository->getByAttribute('person_id',$person->id);
-          /*   $academics = $person->personAcademic;
-
-            $laborales = $person->personCompany;
-
-            $programs=array();
-
-
-            foreach ($academics as $is => $academic) {
-               
-               $personAcademicParams = $request->only( ['person_id', 'program_id', 'year'.$is]);
-
-               
-               $programs .= $is;
-               
-                
-           
-                $personAcademicParams['person_id'] = $person->id;
-                $personAcademicParams['program_id'] =   $academic->program->id; 
-                $personAcademicParams['year'.$is] = $academic->year;
-
-                $this->personAcademicRepository->update($academic, $personAcademicParams);
-
-               
-            }
-            dd($programs);
-           
-             */
-           
-           
-            
-
-           // $program = $academics[0]->program->id;
-            
-          // dd($program);
-            
-             //$personAcademicParams['program_id'] =  $academics->program->name; 
-           //  $personAcademicParams['year'] = 0;
- 
-
-
-           // dd($user );
-
-
-
-
-
-           
             
            // DB::beginTransaction();
-
-            
-
-           // dd( $this->userRepository);
-
 
           //  DB::commit();
 
@@ -703,13 +622,7 @@ class GraduateController extends Controller
             $faculty_params['name'] = $faculty_params['faculty_name'];
             unset($faculty_params['faculty_name']);
 
-            
 
-             //dd($program_params);
-
-
-             //dd($program);
-            
             $this->programRepository->update($program, $program_params);
             $this->facultyRepository->update($program->faculty, $faculty_params);
             $this->universityRepository->update($program->faculty->university,$university_params);
@@ -717,7 +630,7 @@ class GraduateController extends Controller
 
              
 
-            return  redirect()->route('admin.graduates.index')->with('alert', [
+            return  redirect()->route('admin.graduates.show', $id)->with('alert', [
                 'title' => '¡Éxito!',
                 'icon' => 'success',
                 'message' => 'Se ha actualizado correctamente los datos academicos.'
@@ -750,6 +663,45 @@ class GraduateController extends Controller
             DB::beginTransaction();
 
             $this->personRepository->delete($person);
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
+
+    }
+
+    public function destroy_academic($id, $id_academic)
+    {
+        try {
+
+            
+
+            $personAcademic = $this->personAcademicRepository->getById($id_academic);
+            $program = $this->programRepository->getById($personAcademic->program_id);
+            $faculty = $this->facultyRepository->getById($program->faculty_id);
+           /*  $university =$this->universityRepository->getById($faculty->university_id ); */
+
+
+        
+         /*    $graduate = $this->userRepository->getById($id);
+
+            $person = $this->personRepository->getById($graduate->person_id); */
+            
+            //dd($faculty);
+            
+
+            DB::beginTransaction();
+
+             $this->personAcademicRepository->delete($personAcademic);
+             $this->programRepository->delete($program);
+             $this->facultyRepository->delete($faculty);
+             /* $this->universityRepository->delete($university); */
 
            DB::commit();
             

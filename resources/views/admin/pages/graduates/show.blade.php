@@ -43,7 +43,7 @@
                                             <td>{{ $item->user->email }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>{{ $item->telephone }}</td>
-                                            <td>{{ $item->date }}</td>
+                                            <td>{{ $item->birthdate }}</td>
                                             <td>{{ $item->birthdatePlace->name }}</td>
                                             <td>{{ $item->address }}</td>
 
@@ -100,15 +100,19 @@
                                                                 style="width: 30px; height: 30px"></button>
                                                         </a>
                                                     </div>
+
+                                                    <div class="mr-3">
+                                                        <form action="{{ route('admin.graduates.destroy_academic', [$item->id, $academic->id ]) }}"
+                                                            id="{{ $item->id }}" method="POST" class="formulario-eliminar">
+                                                            @csrf @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
+                                                        </form>             
+                                                    </div>
                                                 
                                                 
                                                 
                                                 </div>
-                                              {{--   <a href="{{ route('admin.graduates.edit_academic', [$item->id, $academic->id ] ) }}" class="btn btn-sm btn-danger">
-                                                Editar datos academicos</a> --}}
-
-                                                
-                                            
+                                                                     
                                                 </td>
                                             </tr>
                                         @empty
@@ -199,8 +203,6 @@
 
 @section('js')
     <!-- DataTables  & Plugins -->
-
-    <!-- DataTables  & Plugins -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
@@ -213,10 +215,54 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
 
+        <!-- Select2 -->
+        <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 @endsection
 
 
 @section('custom_js')
+
+@include('admin.partials.button_delete')
+
+{{-- <script>
+            
+            var eventFiredBtnDeleteSweetAlert = function(jE) {
+                
+                // Use sweetalert AFTER DataTables
+                $(jE).on('click', '.btnDelete', function(e) {
+                    alert("Funciona o nO")
+                    e.preventDefault();
+            
+                    var btnDelete = $(this);
+                    Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, ¡Estoy seguro!',
+                cancelButtonText: 'Cancelar',
+                        closeOnConfirm: true
+                    }).then((result) => {
+                if (result.isConfirmed) {
+                    btnDelete.closest('form').submit();
+                    // this.submit();
+                    } else {
+                        return false;
+                    }
+                
+                })
+                    });
+            
+            };
+
+</script> --}}
+
+
     <script>
         $(function() {
             $('table.display').DataTable({
@@ -481,4 +527,5 @@
 
         });
     </script>
+
 @endsection

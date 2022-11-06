@@ -140,53 +140,6 @@
         @enderror
         <!-- ./Email -->
 
-
-            <!-- Academic Information -->
-          {{--   <div class="card">
-                <div class="card-header  border-info">
-                    <h3 class="card-title"><b>Datos académicos</b> </h3>
-                </div>
- --}}
-                <!-- /.card-header -->
-                {{-- <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="display table table-striped table-bordered" style="width:100%">
-                            <thead>
-                                <tr>
-                                    <th>N°</th>
-                                    <th>Nivel Académico</th>
-                                    <th>Nombre Programa</th>
-                                    <th>Universidad</th>
-                                    <th>Año Graduado</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($academics as $is => $academic)
-                                    <tr>
-                                        <td>{{ $loop->index }}</td>
-                                        <td>{{ $academic->program->academicLevel->name }}</td>
-                                        <td>{{ $academic->program->name }}</td>
-                                        <td>{{ $academic->program->faculty->university->name }}</td>
-                                        <div class="form-group">
-                                        <td> <input type="text" name="year{{ $is }}" value="{{ $academic->year }}" size="5"></td>
-                                    </div>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="12">Vacío.</td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                </div> --}}
-                <!-- /.card-body -->
-
-
-            {{-- </div> --}}
-            <!-- ./Academic Information -->
-
-
         <!-- Submit -->
         <div class="mt-4">
             <div class="btn-group" role="group" aria-label="Basic example">

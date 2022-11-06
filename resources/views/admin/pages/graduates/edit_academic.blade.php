@@ -45,7 +45,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Cambiar Datos Academicos del Graduado</b> </h3>
+                            <h3 class="card-title"><strong>Cambiar Datos Academicos del Graduado</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
