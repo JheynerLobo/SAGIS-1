@@ -105,7 +105,7 @@
                                                         <form action="{{ route('admin.graduates.destroy_academic', [$item->id, $academic->id ]) }}"
                                                             id="{{ $item->id }}" method="POST" class="formulario-eliminar">
                                                             @csrf @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
+                                                            <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
                                                         </form>             
                                                     </div>
                                                 
@@ -218,7 +218,6 @@
         <!-- Select2 -->
         <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 @endsection
 
