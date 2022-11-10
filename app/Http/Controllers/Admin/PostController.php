@@ -47,7 +47,7 @@ class PostController extends Controller
         try {
             $params = $this->postRepository->transformParameters($request->all());
             $query = $this->postRepository->search($params, null, 'postCategory');
-
+         
             $total = $query->count();
             $items = $this->postRepository->customPagination($query, $params, $request->get('page'), $total);
 

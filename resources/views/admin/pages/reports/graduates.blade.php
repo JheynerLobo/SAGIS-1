@@ -140,7 +140,7 @@
                                               {{--  <td>{{ $item->email }}</td> --}}
                                                 <td>{{ $company_name }}</td>
                                                 <td>{{ $company_address }}</td>
-                                                <td>{{ $salary }} COP</td> 
+                                                <td>${{ getFormatoNumber((int)$salary) }} COP</td> 
                                            </tr> 
                                         @empty
                                         @endforelse

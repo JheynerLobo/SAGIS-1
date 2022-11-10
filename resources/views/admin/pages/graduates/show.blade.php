@@ -172,7 +172,7 @@
                                                 <td>{{ $company->email }}</td>
                                                 <td>{{ $company->phone }}</td>
                                                 <td>{{ transformBoolToText($laboral->in_working, 'Si', 'No') }}</td>
-                                                <td>${{ $laboral->salary }}</td>
+                                                <td>${{ getFormatoNumber($laboral->salary) }}</td>
                                             </tr>
                                         @empty
                                             <tr>

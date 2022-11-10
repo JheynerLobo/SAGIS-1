@@ -56,3 +56,11 @@ if (!function_exists('transformBoolToText')) {
         return $bool ? $text : $text2;
     }
 }
+
+
+if (!function_exists('getFormatoNumber')) {
+function getFormatoNumber($number){
+    return  number_format($number);
+}
+
+}
