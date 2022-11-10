@@ -77,6 +77,9 @@ class ReportController extends Controller
     public function statistics()
     {
         try {
+            /* Número total de pots */
+            $posts = $this->postRepository->getTotalPosts()->count();
+           // dd($pots);
 
             /** Graduados en el Extranjero */
             $extraGraduates = $this->personCompanyRepository->searchExtranjeroGraduates()->count();
@@ -90,8 +93,11 @@ class ReportController extends Controller
             /** Salary MAX */
             $salaryMax = $this->personCompanyRepository->getSalary()->max('salary');
 
-            /** Without Job */
-            $withoutJobs = $this->personCompanyRepository->withoutJob();
+            /** With Job */
+            $graduadosConTrabajo = $this->personCompanyRepository->graduadosConTrabajo();
+
+            /* Graduados sin Trabajo */
+            $graduadoSinTrabajo = $graduates  -$graduadosConTrabajo;
 
             /** Countries */
             $countries = $this->countryRepository->all()->map(function ($map) {
@@ -123,12 +129,13 @@ class ReportController extends Controller
                 'graduates',
                 'salaryMin',
                 'salaryMax',
-                'withoutJobs',
+                'graduadosConTrabajo',
                 'countries',
                 'graduatesByCountry',
                 'arrayColors',
                 'years',
-                'graduatesByYearTotals'
+                'graduatesByYearTotals',
+                'posts', 'graduadoSinTrabajo'
             ));
         } catch (\Exception $th) {
             throw $th;

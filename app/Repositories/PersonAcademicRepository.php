@@ -25,6 +25,21 @@ class PersonAcademicRepository extends AbstractRepository
             ->get();
     }
 
+    public function getGraduatesPost(){
+
+        $table = $this->model->getTable();
+        $joinPrograms = "programs";
+        $joinAcademicLevels = "academic_levels";
+        $query = $this->model
+            ->select("{$table}.person_id")
+            ->join("{$joinPrograms}", "{$table}.program_id", "{$joinPrograms}.id")
+            ->join("{$joinAcademicLevels}", "{$joinPrograms}.academic_level_id", "{$joinAcademicLevels }.id")
+            ->where("{$joinAcademicLevels}.name", '!=', 'Pregrado');
+            
+            return $query->groupBy("{$table}.person_id")
+            ->get();
+    }
+
     public function getUni()
     {
         /* return $this->model

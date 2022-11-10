@@ -48,6 +48,32 @@ class PostRepository extends AbstractRepository
         return $query;
     }
 
+    public function getTotalPosts()
+    {
+
+        $query = $this->model
+            ->select('posts.id')
+            ->get();;
+
+        return $query;
+    }
+
+
+    public function getPotsNoticias()
+    {
+
+        $table = $this->model->getTable();
+        $joinPostCategories = "post_categories";
+        $query = $this->model
+            ->select("{$table}.id")
+            ->join("{$joinPostCategories}", "{$table}.post_category_id", "{$joinPostCategories}.id")
+            ->where('post_categories.name', 'like', '%Noticias%');
+
+        // return $this->all(['id'])->where('post_category_id', 1);
+
+        return $query;
+    }
+
     /**
      * @param array $params
      * 
@@ -55,7 +81,7 @@ class PostRepository extends AbstractRepository
      */
     public function transformParameters(array $params)
     {
-       /*  if (empty($params)) {
+        /*  if (empty($params)) {
             $params = set_sub_month_date_filter($params, 'created_at_from', 1);
         }
 

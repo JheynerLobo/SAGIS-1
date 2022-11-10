@@ -24,9 +24,36 @@ class PersonCompanyRepository extends AbstractRepository
 
             ->select('person_company.person_id');
 
-        $query->where('countries.slug', '!=', 'co');
+        
 
-        $query->where('person_company.in_working', true);
+        $query->where('person_company.in_working', true );
+        $query->where('countries.slug', '!=', 'co');
+      /*   $query->where('countries.slug','like','%co%'); */
+        
+
+
+        return $query
+            ->groupBy('person_company.person_id')
+            ->get();
+    }
+
+
+    public function getGraduadosTrabajanEnColombia()
+    {
+        $query = $this->model
+            ->join('people', 'people.id', 'person_company.person_id')
+            ->join('companies', 'companies.id', 'person_company.company_id')
+            ->join('cities', 'cities.id', 'companies.city_id')
+            ->join('states', 'states.id', 'cities.state_id')
+            ->join('countries', 'countries.id', 'states.country_id')
+
+            ->select('person_company.person_id');
+
+        
+
+        $query->where('person_company.in_working', true );
+        $query->where('countries.slug','like','%co%'); 
+        
 
 
         return $query
@@ -46,13 +73,13 @@ class PersonCompanyRepository extends AbstractRepository
             ->get();
     }
 
-    public function withoutJob()
+    public function graduadosConTrabajo()
     {
         $query = $this->model
             ->select('person_company.person_id');
 
         return $query
-            ->whereNotIn('person_id', function ($q) {
+            ->whereIn('person_id', function ($q) {
                 return $q
                     ->select('person_company.person_id')
                     ->from('person_company')
@@ -67,7 +94,7 @@ class PersonCompanyRepository extends AbstractRepository
     {
         $query = $this->model
             ->select([
-                DB::raw('count(person_company.person_id) AS total')
+                DB::raw('countries.id, count(person_company.person_id) AS total')
             ])
             ->join('companies', 'companies.id', 'person_company.company_id')
             ->join('cities', 'cities.id', 'companies.city_id')

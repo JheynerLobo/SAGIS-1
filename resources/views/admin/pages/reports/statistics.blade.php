@@ -56,7 +56,7 @@
                                     <!-- small card -->
                                     <div class="small-box bg-info">
                                         <div class="inner">
-                                            <h3>150</h3>
+                                            <h3>{{ $posts }}</h3>
 
                                             <p>Contenidos Informativos</p>
                                         </div>
@@ -101,7 +101,7 @@
                                     <!-- small card -->
                                     <div class="small-box bg-danger">
                                         <div class="inner">
-                                            <h3>${{ $salaryMin }}</h3>
+                                            <h3>${{ getFormatoNumber($salaryMin) }}</h3>
 
                                             <p>Salario mínimo</p>
                                         </div>
@@ -117,7 +117,7 @@
                                     <!-- small card -->
                                     <div class="small-box bg-success">
                                         <div class="inner">
-                                            <h3>{{ $withoutJobs }}</h3>
+                                            <h3>{{ $graduadoSinTrabajo }}</h3>
 
                                             <p>Graduados desempleados</p>
                                         </div>
@@ -133,7 +133,7 @@
                                     <!-- small card -->
                                     <div class="small-box bg-danger">
                                         <div class="inner">
-                                            <h3>${{ $salaryMax }}</h3>
+                                            <h3>${{ getFormatoNumber($salaryMax) }}</h3>
 
                                             <p>Salario máximo</p>
                                         </div>
