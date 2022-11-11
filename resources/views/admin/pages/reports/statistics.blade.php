@@ -73,7 +73,7 @@
                                         <div class="inner">
                                             <h3>{{ $extraGraduates }}</h3>
 
-                                            <p>Graduados en el extranjero</p>
+                                            <p>Graduados trabajando en empresas Extranjeras</p>
                                         </div>
                                         <div class="icon">
                                             <i class='fa fa-plane'></i>

@@ -21,10 +21,14 @@ use App\Repositories\FacultyRepository;
 use App\Repositories\ProgramRepository;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\UniversityRepository;
+use App\Repositories\CompanyRepository;
 use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
+use App\Repositories\PersonCompanyRepository;
 use App\Http\Requests\Graduates\UpdateRequest;
 use App\Repositories\PersonAcademicRepository;
+use App\Http\Requests\Graduates\StoreJobRequest;
+use App\Http\Requests\Graduates\UpdateJobRequest;
 use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
@@ -57,11 +61,19 @@ class GraduateController extends Controller
      /** @var PersonAcademicRepository */
      protected $personAcademicRepository;
 
+     
+     /** @var PersonCompanyRepository */
+     protected $personCompanyRepository;
+
+
        /** @var ProgramRepository */
        protected $programRepository;
 
         /** @var UniversityRepository */
         protected $universityRepository;
+
+         /** @var CompanyRepository */
+         protected $companyRepository;
 
         
         /** @var FacultyRepository */
@@ -81,7 +93,9 @@ class GraduateController extends Controller
         ProgramRepository $programRepository,
         PersonAcademicRepository $personAcademicRepository, 
         UniversityRepository $universityRepository,
-        FacultyRepository $facultyRepository
+        FacultyRepository $facultyRepository,
+        PersonCompanyRepository $personCompanyRepository,
+        CompanyRepository $companyRepository
 
     ) {
         $this->middleware('auth:admin');
@@ -97,6 +111,8 @@ class GraduateController extends Controller
         $this->personAcademicRepository = $personAcademicRepository;
         $this->universityRepository = $universityRepository;
         $this->facultyRepository =  $facultyRepository;
+        $this->personCompanyRepository = $personCompanyRepository;
+        $this->companyRepository = $companyRepository;
 
         $this->role = $this->roleRepository->getByAttribute('name', 'graduate');
     }
@@ -179,6 +195,27 @@ class GraduateController extends Controller
             throw $th;
         }
     }
+
+
+    public function create_jobs($id)
+    {
+        try {
+          
+                $item = $this->personRepository->getById($id);
+
+    
+                $users = $this->userRepository->getByRole($this->role->name);
+
+                $companies =  $this->personCompanyRepository->getCompanies();
+                $cities = $this->cityRepository->allOrderBy('countries.id');
+
+    
+                return view('admin.pages.graduates.create_jobs', compact('item',  'cities',   'users', 'companies'));
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -399,6 +436,127 @@ class GraduateController extends Controller
     }
 
 
+    public function store_jobs(StoreJobRequest $request, $id)
+    {
+        try {
+
+            DB::beginTransaction();
+
+
+                $data = $request->all();
+
+                //dd($data);
+
+                $city_id = 0;
+                if($data['company_place_id']== "-2"){
+                    /* Pais */
+                    $countryParams = $request->only('country_name');
+                    $countryParams['name'] = $countryParams['country_name'];
+                    unset($countryParams['country_name']);
+
+                    $countryParams['slug'] = strtoupper(substr($countryParams['name'], 0, 3));
+
+
+                     /* Con esta consulta se comprueba si el pais que ingreso el usuario existe, si existe devuelve el pais sino NULL */
+                    $country= $this->countryRepository->getPais($countryParams['name']);
+                    /* Si es NULL crea el PAIS  */
+                    if(is_null($country))  $this->countryRepository->create($countryParams);
+
+
+
+
+                    /* Estado/Departamento */
+                    $stateParams = $request->only('state_name');
+                    $country_id = $this->countryRepository->getPaisID($countryParams['name']);
+
+                    $stateParams['name'] = $stateParams['state_name'];
+                    unset($stateParams['state_name']);
+
+                    $stateParams['slug'] = strtoupper(substr($stateParams['name'], 0, 3));
+
+                    $stateParams['country_id'] = $country_id;
+
+                     /* Con esta consulta se comprueba si el estado que ingreso el usuario existe, si existe devuelve el estado sino NULL */
+                     $state= $this->stateRepository->getEstado($stateParams['name']);
+
+                    //dd($state);
+                    
+                     /* Si es NULL crea el ESTADO  */
+                     if(is_null($state))  $this->stateRepository->create($stateParams);
+
+
+                     /* Ciudad */
+                     $cityParams = $request->only('city_name');
+                     $state_id= $this->stateRepository->getStateID($stateParams['name']);
+   
+                     $cityParams['name'] = $cityParams['city_name'];
+                     unset($cityParams['city_name']);
+
+                     $cityParams['slug'] = strtoupper(substr($cityParams['name'], 0, 3));
+
+                     $cityParams['state_id'] = $state_id;
+
+                      /* Con esta consulta se comprueba si la ciudad que ingreso el usuario existe, si existe devuelve la ciudad sino NULL */
+                      $city= $this->cityRepository->getCity($cityParams['name']);
+                    
+                      /* Si es NULL crea la CIUDAD  */
+                      if(is_null($city))  $this->cityRepository->create($cityParams);  
+
+
+                      $city_id = $this->cityRepository->getCityID($cityParams['name']);
+                    
+                }else{
+                    $city_id = (int)$data['company_place_id'];
+                }
+
+                /* Compañia */
+                //dd($data['company_id']);
+                $company_id =0;
+                if($data['company_id']== "-2"){
+                    $companyParams = $request->only('name', 'email', 'address',  'phone');
+                    $companyParams['city_id'] = $city_id;
+                   // unset($companyParams['company_place_id']);
+                   // dd($companyParams);
+                     /* Con esta consulta se comprueba si la compañia que ingreso el usuario existe, si existe devuelve la compañia sino NULL */
+                    $company= $this->companyRepository->getModelName($companyParams['name']);
+
+                    //dd($company);
+
+                     /* Si es NULL crea la COMPAÑIA  */
+                 if(is_null($company))  $this->companyRepository->create($companyParams);
+
+                 
+
+                $company_id =$this->companyRepository->getModelID($companyParams['name']);
+
+               // dd($company_id);
+
+                }else{
+                    $company_id = (int)$data['company_id'];
+
+                }
+
+                 $paramsPersonCompany = $request->only(['company_id', 'salary', 'in_working']);
+                 $paramsPersonCompany['company_id'] =  $company_id;
+                 $paramsPersonCompany['person_id'] = (int)$id;
+                 $paramsPersonCompany['in_working'] = (int)$paramsPersonCompany['in_working'] ;
+                 $paramsPersonCompany['start_date'] =  date('Y-m-d H:i:s');
+                // dd($paramsPersonCompany);
+
+                 
+                  $this->personCompanyRepository->create($paramsPersonCompany);
+
+            DB::commit();
+            return redirect()->route('admin.graduates.show', $id)->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+        }
+    }
+
+
+
     /**
      * Display the specified resource.
      *
@@ -499,6 +657,28 @@ class GraduateController extends Controller
         } catch (\Exception $th) {
             throw $th->getMessage();
         }
+    }
+
+
+    public function edit_jobs($id, $id_company){
+
+        try {
+            $item = $this->personRepository->getById($id);
+
+             $data_company = $this->personCompanyRepository->getById($id_company);
+
+             $companies =  $this->personCompanyRepository->getCompanies();
+             //dd($companies);
+
+             //dd($data_company);
+
+
+            return view('admin.pages.graduates.edit_jobs', compact('item', 'data_company', 'companies'));
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
+
+
     }
 
     /**
@@ -645,6 +825,35 @@ class GraduateController extends Controller
         }
     }
 
+    public function update_jobs(UpdateJobRequest $request, $id, $id_job){
+        try {
+
+         $data_personCompanyParams = $request->only(['company_id', 'salary','in_working', ]);
+
+        
+         $personCompany = $this->personCompanyRepository->getById($id_job);
+
+
+          $this->personCompanyRepository->update($personCompany, $data_personCompanyParams);
+
+      
+
+            return  redirect()->route('admin.graduates.show', $id)->with('alert', [
+                'title' => '¡Éxito!',
+                'icon' => 'success',
+                'message' => 'Se ha actualizado correctamente los datos laborales.'
+            ]);
+        } catch (\Exception $th) {
+            dd($th);
+            return back()->with('alert', [
+                'title' => '¡Error!',
+                'icon' => 'error',
+                'message' => 'No se ha podido actualizar correctamente los datos laborales.'
+            ]);
+        }
+
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -713,6 +922,26 @@ class GraduateController extends Controller
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
 
+    }
+
+    public function destroy_jobs($id, $id_company){
+        try {
+            $personCompany = $this->personCompanyRepository->getById($id_company);
+            
+
+            DB::beginTransaction();
+
+             $this->personCompanyRepository->delete($personCompany);
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
     }
 
     /**
