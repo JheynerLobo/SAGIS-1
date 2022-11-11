@@ -109,4 +109,9 @@ class PersonCompanyRepository extends AbstractRepository
                 return $map->total;
             });
     }
+
+    public function getCompanies(){
+        $c = DB::table('companies')->get();
+        return $c;
+    }
 }

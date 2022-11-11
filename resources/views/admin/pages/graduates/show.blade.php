@@ -157,6 +157,7 @@
                                             <th>Telefono Empresa</th>
                                             <th>Actualmente laborando</th>
                                             <th>Salario</th>
+                                            <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -173,6 +174,32 @@
                                                 <td>{{ $company->phone }}</td>
                                                 <td>{{ transformBoolToText($laboral->in_working, 'Si', 'No') }}</td>
                                                 <td>${{ getFormatoNumber($laboral->salary) }}</td>
+                                                <td>
+                                                    <div class="icons-acciones">
+                                                    
+                                                        <div class="mr-3">
+                                                            <a style="text-decoration: none; color: #000000;"
+                                                            href="{{ route('admin.graduates.edit_jobs', [$item->id, $laboral->id ] ) }}">
+    
+                                                                <button type="button" class="btn btn-sm btn-success fas fa-edit"
+                                                                    style="width: 30px; height: 30px"></button>
+                                                            </a>
+                                                        </div>
+    
+                                                        <div class="mr-3">
+                                                            <form action="{{ route('admin.graduates.destroy_jobs', [$item->id, $laboral->id ]) }}"
+                                                                id="{{ $item->id }}" method="POST" class="formulario-eliminar">
+                                                                @csrf @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
+                                                            </form>             
+                                                        </div>
+                                                    
+                                                    
+                                                    
+                                                    </div>
+
+                                                </td>
+                                                
                                             </tr>
                                         @empty
                                             <tr>
@@ -182,6 +209,12 @@
                                     </tbody>
 
                                 </table>
+
+                                <div class="mt-2">
+                                    <a href="{{ route('admin.graduates.create_jobs', $item->id) }}" class="btn btn-sm btn-danger">
+                                        Añadir nuevo
+                                        Dato Laboral</a>
+                                </div>
                             </div>
                         </div>
                         <!-- /.card-body -->

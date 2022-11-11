@@ -77,7 +77,7 @@
                                     <div class="inner">
                                         <h3>{{ $graduadosColombia }}</h3>
 
-                                        <p>Graduados en Colombia</p>
+                                        <p>Graduados trabajando en empresas Colombianas</p>
                                     </div>
                                     <div class="icon">
                                         <i class='fa fa-globe'></i>
