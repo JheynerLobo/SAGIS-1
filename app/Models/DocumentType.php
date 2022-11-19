@@ -15,7 +15,7 @@ class DocumentType extends Model
  *
  * @var array
  */
-protected $fillable = ['name', 'description'];
+protected $fillable = ['name', 'description', 'slug'];
 
 /**
  * Get the DocumentType's name.
