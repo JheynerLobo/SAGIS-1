@@ -44,7 +44,7 @@
 
                      <li class="nav-item">
                         <a href="{{ route('admin.home') }}" class="nav-link">
-                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <em class="nav-icon fas fa-tachometer-alt"></em>
                             <p>
                                 Dashboard
     
@@ -53,7 +53,7 @@
                     </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.graduates.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-user"></i>
+                        <em class="nav-icon fas fa-user"></em>
                         <p>
                             Graduados
 
@@ -62,7 +62,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.posts.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <em class="nav-icon fas fa-th"></em>
                         <p>
                             Contenidos informativos
 
@@ -74,22 +74,22 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-chart-pie"></i>
+                        <em class="nav-icon fas fa-chart-pie"></em>
                         <p>
                             Reportes
-                            <i class="right fas fa-angle-left"></i>
+                            <em class="right fas fa-angle-left"></em>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin.reports.statistics') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <em class="far fa-circle nav-icon"></em>
                                 <p>Estadísticas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.reports.graduates') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <em class="far fa-circle nav-icon"></em>
                                 <p>Reportes</p>
                             </a>
                         </li>

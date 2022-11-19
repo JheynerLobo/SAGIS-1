@@ -48,7 +48,7 @@
 
                 <div class="card">
                     <div class="card-header  border-info">
-                        <h3 class="card-title"><b>Estadisticas Generales</b> </h3>
+                        <h3 class="card-title"><strong>Estadisticas Generales</strong> </h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -65,7 +65,7 @@
                                         <p>Contenidos Informativos</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="far fa-file"></i>
+                                        <em class="far fa-file"></em>
                                     </div>
 
                                 </div>
@@ -80,7 +80,7 @@
                                         <p>Graduados trabajando en empresas Colombianas</p>
                                     </div>
                                     <div class="icon">
-                                        <i class='fa fa-globe'></i>
+                                        <em class='fa fa-globe'></em>
                                     </div>
 
                                 </div>
@@ -95,7 +95,7 @@
                                         <p>Graduados registrados</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="fas fa-user-plus"></i>
+                                        <em class="fas fa-user-plus"></em>
                                     </div>
 
                                 </div>
@@ -110,7 +110,7 @@
                                         <p>Noticias</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="fas fa-newspaper"></i>
+                                        <em class="fas fa-newspaper"></em>
                                     </div>
 
                                 </div>
@@ -126,7 +126,7 @@
                                         <p>Graduados Verificados</p>
                                     </div>
                                     <div class="icon">
-                                        <i class='fa fa-check-circle'></i>
+                                        <em class='fa fa-check-circle'></em>
                                     </div>
 
                                 </div>
@@ -142,7 +142,7 @@
                                         <p>Graduados con estudios potsgrados</p>
                                     </div>
                                     <div class="icon">
-                                        <i class="fa fa-address-book"></i>
+                                        <em class="fa fa-address-book"></em>
                                     </div>
 
                                 </div>
