@@ -170,7 +170,7 @@
 
             <div class="card">
                 <div class="card-header  border-info">
-                    <h3 class="card-title"><strong> <i class="far fa-calendar-alt"></i>
+                    <h3 class="card-title"><strong> <em class="far fa-calendar-alt"></em>
                         Calendario</strong> </h3>
                 </div>
                 <!-- /.card-header -->
@@ -181,8 +181,6 @@
                                 <div class="card-header border-0">
                   
                                   <h3 class="card-title">
-                                   {{--  <i class="far fa-calendar-alt"></i>
-                                    Calendario --}}
                                   </h3>
    
                                   <!-- /. tools -->
