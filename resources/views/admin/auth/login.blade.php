@@ -89,6 +89,28 @@
                     <!-- ./Roles -->
 
                     <button type="submit" class="btn btn-danger btn-block btn-flat">Iniciar Sesión</button>
+
+                    <hr style="border-color: red;">
+                  
+
+                    <div class="d-flex  justify-content-center">
+                       
+                               
+                            <a style="text-decoration: none; color: #000000;"
+                                href="{{ route('login') }}">
+
+                                <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-user-graduate"
+                                    style="width: 45px; height: 45px"></button>
+                            </a>
+                    
+
+    
+
+                    </div>
+
+
+                  
+                    
                 </form>
 
 
