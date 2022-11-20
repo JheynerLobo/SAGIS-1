@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Crear Datos Academicos')
+@section('title', 'Crear Datos Académicos')
 
 @section('cargarJS')
 
@@ -12,7 +12,7 @@
 
 @section('content-header')
     @include('dev.admin.partials.content-header', [
-        'title' => 'Creación de Datos Academicos',
+        'title' => 'Creación de Datos Académicos',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -36,7 +36,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Crear Datos Academicos',
+                'name' => 'Datos Académicos',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -53,7 +53,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><strong>Crear Datos Academicos del Graduado</strong> </h3>
+                            <h3 class="card-title"><strong>Crear Datos Académicos del Graduado</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

@@ -1,33 +1,19 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Crear Datos Laborales')
-
-@section('cargarJS')
-
-    
-        onload = "cargarPrincipalJobs()";
-  
-
-@endsection
+@section('title', 'Editar Datos Personales')
 
 @section('content-header')
-    @include('dev.admin.partials.content-header', [
-        'title' => 'Creación de Datos Academicos',
+    @include('partials.content-header', [
+        'title' => 'Editar Datos Personales',
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('admin.home'),
-                'isActive' => null,
-            ],
-
-            [
-                'name' => 'Graduados',
-                'route' => route('admin.graduates.index'),
+                'route' => route('home'),
                 'isActive' => null,
             ],
             [
-                'name' => 'Datos Generales',
-                'route' => route('admin.graduates.show', $item->id),
+                'name' => 'Mi perfil',
+                'route' => route('profile'),
                 'isActive' => null,
             ],
             [
@@ -36,7 +22,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Datos Laborales',
+                'name' => 'Editar Datos personales',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -44,23 +30,34 @@
     ])
 @endsection
 
-@section('content')
+@section('css')
+<style>
+    body {
+        background-color: #f4f6f9;
+    }
 
-    <!-- Main content -->
+    </style>
+
+
+@endsection
+
+@section('content')
+  
+<!-- Main content -->
     <section class="content">
-        <div class="container-fluid">
+        <div class="container-fluid col-10 my-4">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><strong>Crear Datos Laborales del Graduado</strong> </h3>
+                            <h3 class="card-title"><b>Datos personales</b> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del formulario.</small>
+                            <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del
+                                formulario.</small>
 
-                            @include('admin.pages.graduates.formCreateJobs')
-                    
+                            @include('pages.formEdit')
 
                         </div>
                         <!-- /.card-body -->
@@ -78,5 +75,6 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
 @endsection

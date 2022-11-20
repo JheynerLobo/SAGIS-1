@@ -1,33 +1,19 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Crear Datos Laborales')
-
-@section('cargarJS')
-
-    
-        onload = "cargarPrincipalJobs()";
-  
-
-@endsection
+@section('title', 'Editar Datos Laborales')
 
 @section('content-header')
     @include('dev.admin.partials.content-header', [
-        'title' => 'Creación de Datos Academicos',
+        'title' => 'Edición de Datos Laborales',
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('admin.home'),
-                'isActive' => null,
-            ],
-
-            [
-                'name' => 'Graduados',
-                'route' => route('admin.graduates.index'),
+                'route' => route('home'),
                 'isActive' => null,
             ],
             [
-                'name' => 'Datos Generales',
-                'route' => route('admin.graduates.show', $item->id),
+                'name' => 'Datos laborales',
+                'route' => route('jobs'),
                 'isActive' => null,
             ],
             [
@@ -36,7 +22,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Datos Laborales',
+                'name' => 'Editar Datos Laborales',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -53,13 +39,13 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><strong>Crear Datos Laborales del Graduado</strong> </h3>
+                            <h3 class="card-title"><strong>Cambiar Datos Laborales del Graduado</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del formulario.</small>
 
-                            @include('admin.pages.graduates.formCreateJobs')
+                            @include('pages.formEditJob')
                     
 
                         </div>
@@ -75,8 +61,4 @@
         <!-- /.container-fluid -->
     </section>
 
-@endsection
-
-@section('js')
-    <script src="{{ asset('js/app.js') }}"></script>
 @endsection

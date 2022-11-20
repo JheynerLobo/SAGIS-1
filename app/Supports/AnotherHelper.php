@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('generateRandomPostAssets')) {
 
@@ -64,3 +65,15 @@ function getFormatoNumber($number){
 }
 
 }
+
+if (!function_exists('graduate_user')) {
+    function graduate_user(){
+        return  Auth::guard('web')->user();
+    }
+    
+    }
+
+
+
+
+

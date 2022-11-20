@@ -1,33 +1,28 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Crear Datos Laborales')
+@section('title', 'Crear Datos Académicos')
 
 @section('cargarJS')
 
     
-        onload = "cargarPrincipalJobs()";
+        onload = "cargarPrincipal()";
   
 
 @endsection
 
 @section('content-header')
-    @include('dev.admin.partials.content-header', [
-        'title' => 'Creación de Datos Academicos',
+    @include('partials.content-header', [
+        'title' => 'Creación de Datos Académicos',
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('admin.home'),
+                'route' => route('home'),
                 'isActive' => null,
             ],
 
             [
-                'name' => 'Graduados',
-                'route' => route('admin.graduates.index'),
-                'isActive' => null,
-            ],
-            [
-                'name' => 'Datos Generales',
-                'route' => route('admin.graduates.show', $item->id),
+                'name' => 'Datos académicos',
+                'route' => route('academics'),
                 'isActive' => null,
             ],
             [
@@ -36,7 +31,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Datos Laborales',
+                'name' => 'Crear Datos Académicos',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -47,19 +42,19 @@
 @section('content')
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content mt-4">
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><strong>Crear Datos Laborales del Graduado</strong> </h3>
+                            <h3 class="card-title"><strong>Crear Datos Académicos del Graduado</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
                             <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del formulario.</small>
 
-                            @include('admin.pages.graduates.formCreateJobs')
+                            @include('pages.formCreateAcademic')
                     
 
                         </div>

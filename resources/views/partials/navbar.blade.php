@@ -56,6 +56,8 @@
                         </a>
                         <ul class="dropdown-menu text-small " aria-labelledby="dropdownUser2">
                             <li><a class="dropdown-item" href="{{ route('profile') }}">Mi perfil</a></li>
+                            <li><a class="dropdown-item" href="{{ route('academics') }}">Datos académicos</a></li>
+                            <li><a class="dropdown-item" href="{{ route('jobs') }}">Datos laborales</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

@@ -1,0 +1,153 @@
+ <!-- Form -->
+ <form action="{{ route('profile.update') }}" method="POST">
+    @csrf @method('PATCH')
+
+    <!-- Name -->
+    <div class="form-group">
+        <label class="form-label">Nombres:</label>
+        <input type="text" class="form-control " name="name" value="{{ $item->name }}">
+    </div>
+    @error('name')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Name -->
+
+    <!-- Lastname -->
+    <div class="form-group">
+        <label class="form-label">Apellidos:</label>
+        <input type="text" class="form-control " name="lastname" value="{{ $item->lastname }}">
+    </div>
+    @error('lastname')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Lastname -->
+
+    <!-- DocumentType -->
+    <div class="form-group">
+        <label>Tipo de Documento:</label>
+        <select name="document_type_id" class="form-control select2bs4">
+            <option value="-1">Seleccione un tipo de documento..</option>
+            @forelse ($documentTypes as $documentType)
+                <option value="{{ $documentType->id }}"
+                    {{ isSelectedOld($item->document_type_id, $documentType->id) }}>{{ $documentType->name }}
+                </option>
+            @empty
+            @endforelse
+        </select>
+    </div>
+    @error('document_type_id')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./DocumentType -->
+
+    <!-- Document -->
+    <div class="form-group">
+        <label class="form-label">Documento:</label>
+        <input type="number" class="form-control " name="document" value="{{ $item->document }}">
+    </div>
+    @error('document')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Document -->
+
+    <!-- Birthdate -->
+    <div class="form-group">
+        <label>Fecha de Nacimiento</label>
+        <input type="date" class="form-control" name="birthdate" value="{{ $item->birthdate }}">
+    </div>
+    @error('birthdate')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Birthdate -->
+
+    <!-- BirthdatePlaceId -->
+    <div class="form-group">
+        <label>Lugar de Nacimiento:</label>
+        <select name="birthdate_place_id" class="form-control select2bs4">
+            <option value="-1">Seleccione el lugar de Nacimiento..</option>
+            @forelse ($cities as $city)
+                <option value="{{ $city->id }}"{{ isSelectedOld($item->birthdate_place_id, $city->id) }}>
+                    {{ 'País: ' . $city->state->country->name . ' Departamento: ' . $city->state->name . '  Ciudad: ' . $city->name }}
+                </option>
+            @empty
+            @endforelse
+        </select>
+    </div>
+    @error('birthdate_place_id')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./BirthdatePlaceId -->
+
+    <!-- Address -->
+    <div class="form-group">
+        <label class="form-label">Dirección de Residencia:</label>
+        <input type="text" class="form-control " name="address" value="{{ $item->address }}">
+    </div>
+    @error('address')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Address -->
+
+    <!-- Phone -->
+    <div class="form-group">
+        <label class="form-label">Celular Personal:</label>
+        <input type="text" class="form-control " name="phone" value="{{ $item->phone }}">
+    </div>
+    @error('phone')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Phone -->
+
+    <!-- Telephone -->
+    <div class="form-group">
+        <label class="form-label">Teléfono(Opcional):</label>
+        <input type="text" class="form-control " name="telephone" value="{{ $item->telephone }}">
+    </div>
+    @error('telephone')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Telephone -->
+
+    <!-- Code -->
+    <div class="form-group">
+        <label class="form-label">Código Institucional:</label>
+        <input type="text" class="form-control " name="code" value="{{ $item->user->code }}">
+    </div>
+    @error('code')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Code -->
+
+    <!-- CompanyEmail -->
+    <div class="form-group">
+        <label class="form-label">Correo Institucional(@ufps):</label>
+        <input type="email" class="form-control " name="company_email" value="{{ $item->user->email }}"
+            pattern=".+@ufps.edu.co" size="30">
+    </div>
+    @error('company_email')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./CompanyEmail -->
+
+    <!-- Email -->
+    <div class="form-group">
+        <label class="form-label">Correo Personal:</label>
+        <input type="email" class="form-control " name="email" value="{{ $item->email }}" size="30">
+    </div>
+    @error('email')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Email -->
+
+    <!-- Submit -->
+    <div class="mt-4">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="submit" class="btn btn-danger">Guardar</button>
+            <button class="btn btn-warning ml-5"><a style="color:black;
+                text-decoration: none;" href="{{ route('profile') }}">Regresar</a> </button>
+        </div>
+      
+    </div>
+    <!-- ./Submit -->
+    
+</form>

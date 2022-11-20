@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('tittle')</title>
+    <title>@yield('title')</title>
 
 
     <!-- Fuente de google: Open Sans - Regular 400 -->
@@ -20,6 +20,11 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+
+     <!-- DataTables -->
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+     <link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 
     <!--Importar CSS y script del menú -->
     <link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
@@ -35,17 +40,17 @@
 
 </head>
 
-<body>
-
-
+<body @yield('cargarJS') >
 
     <!-- Nav -->
     @include('partials.navbar')
     <!-- ./Nav -->
 
 
-
-    @yield('content')
+        <!-- Content Header -->
+        @yield('content-header')
+        <!-- ./Content Header -->
+        @yield('content')
 
 
     <!-- Footer -->
@@ -72,19 +77,20 @@
 
     @yield('js')
 
-    @if ($message = Session::get('alert_message'))
+    @if ($alert = Session::get('alert'))
         <script>
             Swal.fire({
                 position: 'center',
-                icon: "{{ $message['icon'] }}",
-                title: "{{ $message['title'] }}",
-                text: "{{ $message['text'] }}",
+                icon: "{{ $alert['icon'] }}",
+                title: "{{ $alert['title'] }}",
+                text: "{{ $alert['message'] }}",
                 showConfirmButton: true,
                 confirmButtonText: 'Ok',
                 timer: 3500
             })
         </script>
     @endif
+
 
     @yield('custom_js')
 
