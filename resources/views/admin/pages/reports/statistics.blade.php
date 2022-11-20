@@ -73,7 +73,7 @@
                                         <div class="inner">
                                             <h3>{{ $extraGraduates }}</h3>
 
-                                            <p>Graduados trabajando en empresas Extranjeras</p>
+                                            <p>Graduados en empresas Extranjeras</p>
                                         </div>
                                         <div class="icon">
                                             <i class='fa fa-plane'></i>
@@ -179,7 +179,7 @@
                         <!-- PIE CHART -->
 
                         <div class="card-body">
-                            <div class="chart-container" style="position: relative; height:80vh; width:80vw">
+                            <div class="chart-container" style="position: relative; height:79vh; width:79vw">
                                 <canvas id="pieChart" data-countries="{{ $countries }}"
                                     data-colors="{{ $arrayColors }}" data-total="{{ $graduatesByCountry }}"></canvas>
                             </div>

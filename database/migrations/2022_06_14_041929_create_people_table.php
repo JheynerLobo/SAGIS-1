@@ -26,6 +26,10 @@ class CreatePeopleTable extends Migration
             $table->unsignedBigInteger('birthdate_place_id');
             $table->date('birthdate');
 
+            $table->boolean('has_data_person')->default(0);
+            $table->boolean('has_data_academic')->default(0);
+            $table->boolean('has_data_company')->default(0);
+
             $table->string('image_url')->nullable();
             $table->string('image')->nullable();
 

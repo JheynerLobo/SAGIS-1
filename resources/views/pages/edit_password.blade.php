@@ -1,0 +1,106 @@
+@extends('layouts.app')
+
+@section('title', 'Editar Contraseña')
+
+@section('content-header')
+    @include('partials.content-header', [
+        'title' => 'Edición de Contraseña',
+        'items' => [
+            [
+                'name' => 'Inicio',
+                'route' => route('home'),
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Mi perfil',
+                'route' => route('profile'),
+                'isActive' => null,
+            ],
+            [
+                'name' => $item->name,
+                'route' => null,
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Editar Contraseña',
+                'route' => null,
+                'isActive' => 'active',
+            ],
+        ],
+    ])
+@endsection
+
+@section('content')
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <div class="card-header  border-info">
+                            <h3 class="card-title"><b>Cambiar Contraseña</b> </h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <small class="my-2 font-weight-bold float-right">Por favor llene todos los camppos del
+                                formulario.</small>
+
+                            <form action="{{ route('profile.update_password') }}" method="post">
+                                @csrf
+                                @method('PATCH')
+
+                                <!-- New Password -->
+                                <div class="form-group">
+                                    <label for="password">Nueva Contraseña:</label>
+                                    <input type="password" class="form-control form-control-sm" name="password"
+                                        placeholder="Escriba una nueva contraseña...">
+                                </div>
+                                @error('password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <!-- ./New Password -->
+
+                                <!-- Repeat New Password -->
+                                <div class="form-group">
+                                    <label for="password">Repetir Nueva Contraseña:</label>
+                                    <input type="password" class="form-control form-control-sm" name="repeat_password"
+                                        placeholder="Escriba una nueva contraseña...">
+                                </div>
+                                @error('repeat_password')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <!-- ./Repeat New Password -->
+
+                                <!-- Submit -->
+                                <div class="form-group">
+                                    <div class="btn-group" role="group" aria-label="Basic example">
+                                        <button class="btn btn-sm btn-danger">Guardar</button>
+                                        <button class="btn btn-sm btn-warning ml-5"><a style="color:black;
+                                            text-decoration: none;" href="{{ route('profile') }}">Regresar</a> </button>
+                                    </div>
+                                </div>
+
+                            
+                                   
+                                  
+                      
+                                <!-- ./Submit -->
+
+                            </form>
+
+
+                        </div>
+                        <!-- /.card-body -->
+
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container-fluid -->
+    </section>
+
+@endsection

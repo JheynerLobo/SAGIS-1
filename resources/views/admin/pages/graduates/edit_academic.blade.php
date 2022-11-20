@@ -1,10 +1,10 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Editar Datos Academicos')
+@section('title', 'Editar Datos Académicos')
 
 @section('content-header')
     @include('dev.admin.partials.content-header', [
-        'title' => 'Edición de Datos Academicos',
+        'title' => 'Edición de Datos Académicos',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -28,7 +28,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Editar Datos Academicos',
+                'name' => 'Datos Académicos',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -45,7 +45,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><strong>Cambiar Datos Academicos del Graduado</strong> </h3>
+                            <h3 class="card-title"><strong>Cambiar Datos Académicos del Graduado</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

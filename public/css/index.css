@@ -101,7 +101,7 @@
 } */
 
 
-.card{
+#card{
 	width: 100%;
 	margin: 20px;
 	border-radius: 6px;
@@ -111,12 +111,12 @@
 	transition: all 400ms ease-out;
 	cursor: default;
 }
-.card:hover{
+#card:hover{
 	box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
 	transform: translateY(-3%);
 }
 
-.card-text{
+#card-text{
     font-size: 18px;
     margin-top: 20px;
     display: -webkit-box;
@@ -143,7 +143,7 @@
     overflow: hidden;
 }
 
-.card-title{
+#card-title{
     font-size: 25px;
     margin-bottom: 7px;
 }

@@ -1,61 +1,27 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
-@section('title', 'Datos del graduado')
+@section('title', 'Datos Académicos')
+
+
+@section('css')
+    <style>
+        .disabled1 {
+    cursor: not-allowed;
+    pointer-events: none;
+}
+    </style>
+@endsection
 
 @section('content')
 
+
     <!-- Main content -->
-    <section class="content mt-4">
-        <div class="container-fluid">
+    <section class=" content mt-4">
+        <div class="container-fluid col-11 my-4">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><b>Datos personales</b> </h3>
-                        </div>
-
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Cédula</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Código</th>
-                                            <th>Celular</th>
-                                            <th>Correo institucional</th>
-                                            <th>Correo personal</th>
-                                            <th>Telefono fijo</th>
-                                            <th>Fecha nacimiento</th>
-                                            <th>Lugar nacimiento</th>
-                                            <th >Dirección residencia</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{{ $item->document }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>{{ $item->lastname }}</td>
-                                            <td>{{ $item->user->code }}</td>
-                                            <td>{{ $item->phone }}</td>
-                                            <td>{{ $item->user->email }}</td>
-                                            <td>{{ $item->email }}</td>
-                                            <td>{{ $item->telephone }}</td>
-                                            <td>{{ $item->birthdate }}</td>
-                                            <td>{{ $item->birthdatePlace->name }}</td>
-                                            <td>{{ $item->address }}</td>
-
-                                        </tr>
-                                    </tbody>
-
-                                </table>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
+              
+                    
 
                     <!-- Academic Information -->
                     <div class="card">
@@ -90,26 +56,58 @@
                                                 <td>{{ $academic->year }}</td>
                                                <td> 
 
-                                                <div class="icons-acciones">
-                                                    
-                                                    <div class="mr-3">
+                                                <div class="row icons-acciones ">
+
+                                                     @if ($loop->index == 0)
+
+                                                     <div class="col-md-6">
+                                                        <a style="text-decoration: none; color: #000000;" class="disabled1" 
+                                                        href="{{route('edit_academic',  $academic->id  ) }}" >
+                                                            
+                                                            <button type="button" class="btn btn-sm btn-success fas fa-edit"
+                                                                style="width: 30px; height: 30px" disabled></button>
+                                                        </a>
+
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <form action="{{ route('destroy_academic', $academic->id) }}"
+                                                            id="{{ $item->id }}" method="POST" class="formulario-eliminar">
+                                                            @csrf @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"
+                                                            disabled
+                                                            ><em class="fas fa-trash"></em></button>
+                                                        </form>            
+
+
+                                                    </div>
+
+                                                     @else
+                                                     <div class="col-md-6">
                                                         <a style="text-decoration: none; color: #000000;"
-                                                        href="{{ route('admin.graduates.edit_academic', [$item->id, $academic->id ] ) }}">
+                                                        href="{{ route('edit_academic',  $academic->id  ) }}">
 
                                                             <button type="button" class="btn btn-sm btn-success fas fa-edit"
                                                                 style="width: 30px; height: 30px"></button>
                                                         </a>
+
                                                     </div>
 
-                                                    <div class="mr-3">
-                                                        <form action="{{ route('admin.graduates.destroy_academic', [$item->id, $academic->id ]) }}"
+                                                    <div class="col-md-6">
+                                                        <form action="{{ route('destroy_academic', $academic->id) }}"
                                                             id="{{ $item->id }}" method="POST" class="formulario-eliminar">
                                                             @csrf @method('DELETE')
                                                             <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
-                                                        </form>             
+                                                        </form>            
+
+
                                                     </div>
-                                                
-                                                
+
+
+                                                         
+                                                     @endif
+
+                                       
                                                 
                                                 </div>
                                                                      
@@ -124,7 +122,7 @@
                                 </table>
 
                                 <div class="mt-2">
-                                    <a href="{{ route('admin.graduates.create_academic', $item->id) }}" class="btn btn-sm btn-danger">
+                                    <a href="{{ route('create_academic') }}" class="btn btn-sm btn-danger">
                                         Añadir nuevo
                                         Dato Académico</a>
                                 </div>
@@ -138,92 +136,9 @@
                     </div>
                     <!-- ./Academic Information -->
 
-                    <!-- Job Information -->
-                    <div class="card">
-                        <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Datos laborales</b> </h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="display table table-striped table-bordered" class="table1" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>N°</th>
-                                            <th>Nombre Empresa</th>
-                                            <th>Lugar Empresa</th>
-                                            <th>Dirección Empresa</th>
-                                            <th>Correo Empresa</th>
-                                            <th>Telefono Empresa</th>
-                                            <th>Actualmente laborando</th>
-                                            <th>Salario</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($laborales as $laboral)
-                                            @php
-                                                $company = $laboral->company;
-                                            @endphp
-                                            <tr>
-                                                <td>{{ $loop->index }}</td>
-                                                <td>{{ $company->name }}</td>
-                                                <td>{{ $company->city->name }}</td>
-                                                <td>{{ $company->address }}</td>
-                                                <td>{{ $company->email }}</td>
-                                                <td>{{ $company->phone }}</td>
-                                                <td>{{ transformBoolToText($laboral->in_working, 'Si', 'No') }}</td>
-                                                <td>${{ getFormatoNumber($laboral->salary) }}</td>
-                                                <td>
-                                                    <div class="icons-acciones">
-                                                    
-                                                        <div class="mr-3">
-                                                            <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('admin.graduates.edit_jobs', [$item->id, $laboral->id ] ) }}">
-    
-                                                                <button type="button" class="btn btn-sm btn-success fas fa-edit"
-                                                                    style="width: 30px; height: 30px"></button>
-                                                            </a>
-                                                        </div>
-    
-                                                        <div class="mr-3">
-                                                            <form action="{{ route('admin.graduates.destroy_jobs', [$item->id, $laboral->id ]) }}"
-                                                                id="{{ $item->id }}" method="POST" class="formulario-eliminar">
-                                                                @csrf @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
-                                                            </form>             
-                                                        </div>
-                                                    
-                                                    
-                                                    
-                                                    </div>
+               
 
-                                                </td>
-                                                
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="12">Vacío.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-
-                                </table>
-
-                                <div class="mt-2">
-                                    <a href="{{ route('admin.graduates.create_jobs', $item->id) }}" class="btn btn-sm btn-danger">
-                                        Añadir nuevo
-                                        Dato Laboral</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-
-
-                    </div>
-                    <!-- ./ Job Information -->
-
-                </div>
+                 </div> 
                 <!-- /.col -->
             </div>
             <!-- /.row -->
@@ -258,41 +173,6 @@
 @section('custom_js')
 
 @include('admin.partials.button_delete')
-
-{{-- <script>
-            
-            var eventFiredBtnDeleteSweetAlert = function(jE) {
-                
-                // Use sweetalert AFTER DataTables
-                $(jE).on('click', '.btnDelete', function(e) {
-                    alert("Funciona o nO")
-                    e.preventDefault();
-            
-                    var btnDelete = $(this);
-                    Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¡No podrás revertir esto!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, ¡Estoy seguro!',
-                cancelButtonText: 'Cancelar',
-                        closeOnConfirm: true
-                    }).then((result) => {
-                if (result.isConfirmed) {
-                    btnDelete.closest('form').submit();
-                    // this.submit();
-                    } else {
-                        return false;
-                    }
-                
-                })
-                    });
-            
-            };
-
-</script> --}}
 
 
     <script>

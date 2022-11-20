@@ -1,10 +1,10 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Editar Datos Academicos')
+@section('title', 'Editar Datos Laborales')
 
 @section('content-header')
     @include('dev.admin.partials.content-header', [
-        'title' => 'Edición de Datos Academicos',
+        'title' => 'Edición de Datos Laborales',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -28,7 +28,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Editar Datos Laborales',
+                'name' => 'Datos Laborales',
                 'route' => null,
                 'isActive' => 'active',
             ],
