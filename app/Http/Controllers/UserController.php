@@ -130,7 +130,7 @@ class UserController extends Controller
         try {
             //$data = $request->all();
 
-            $personParams = $request->only(['name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email',
+            $personParams = $request->only(['name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email', 'address',
             'birthdate', 'birthdate_place_id']);
 
             $userParams = $request->only(['code', 'company_email']);
