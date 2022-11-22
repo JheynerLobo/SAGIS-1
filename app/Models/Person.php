@@ -66,4 +66,31 @@ class Person extends Model
     {
         return $this->belongsTo(City::class, 'birthdate_place_id', 'id');
     }
+
+     /**
+     * 
+     * @return bool
+     */
+    public function has_data_person()
+    {
+        return  $this->has_data_person == 1 ? true : false;
+    }
+
+    /**
+     * 
+     * @return bool
+     */
+    public function has_data_academic()
+    {
+        return  $this->has_data_academic == 1 ? true : false;
+    }
+
+    /**
+     * 
+     * @return bool
+     */
+    public function has_data_company()
+    {
+        return  $this->has_data_company == 1 ? true : false;
+    }
 }

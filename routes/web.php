@@ -31,6 +31,9 @@ Route::patch('profile/update', [UserController::class, 'update'])->name('profile
 Route::get('profile/edit_password', [UserController::class, 'edit_password'])->name('profile.edit_password');
 Route::patch('profile/update_password', [UserController::class, 'update_password'])->name('profile.update_password');
 
+Route::get('profile/validate', [UserController::class, 'validate_person'])->name('validate_person');
+
+
 Route::get('academics', [UserController::class, 'show_academics'])->name('academics');
 
 Route::get('academic_studies/create', [UserController::class, 'create_academic'])->name('create_academic');
@@ -40,6 +43,8 @@ Route::get('academic_studies/{academic}/edit', [UserController::class, 'edit_aca
 Route::patch('academic_studies/{academic}/update', [UserController::class, 'update_academic'])->name('update_academic');
 
 Route::delete('academic_studies/{academic}/destroy', [UserController::class, 'destroy_academic'])->name('destroy_academic');
+
+Route::get('academic_studies/validate', [UserController::class, 'validate_academic'])->name('validate_academic');
 
 
 Route::get('jobs', [UserController::class, 'show_jobs'])->name('jobs');
@@ -51,6 +56,8 @@ Route::get('company_jobs/{academic}/edit', [UserController::class, 'edit_jobs'])
 Route::patch('company_jobs/{academic}/update', [UserController::class, 'update_jobs'])->name('update_jobs');
 
 Route::delete('company_jobs/{academic}/destroy', [UserController::class, 'destroy_jobs'])->name('destroy_jobs');
+
+Route::get('company_jobs/validate', [UserController::class, 'validate_jobs'])->name('validate_jobs');
 
 
 Route::get('home', [HomeController::class, 'home'])->name('home');

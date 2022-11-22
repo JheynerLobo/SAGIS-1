@@ -121,7 +121,7 @@
                                 <!-- small card -->
                                 <div class="small-box bg-success">
                                     <div class="inner">
-                                        <h3>{{ 5}}</h3>
+                                        <h3>{{ $graduadosVerificados}}</h3>
 
                                         <p>Graduados Verificados</p>
                                     </div>

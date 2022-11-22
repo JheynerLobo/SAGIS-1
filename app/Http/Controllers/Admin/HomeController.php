@@ -79,12 +79,6 @@ class HomeController extends  Controller
             /** Cantidad de Graduados */
             $graduates = $this->userRepository->getByRole('graduate')->count();
 
-            /** Salary MIN */
-            $salaryMin = $this->personCompanyRepository->getSalary()->min('salary');
-
-            /** Salary MAX */
-            $salaryMax = $this->personCompanyRepository->getSalary()->max('salary');
-
              /** With Job */
              $graduadosConTrabajo = $this->personCompanyRepository->graduadosConTrabajo();
 
@@ -94,49 +88,21 @@ class HomeController extends  Controller
              /* Graduados con Posts */
              $graduadosConPosts = $this->personAcademicRepository->getGraduatesPost()->count();
 
-            // dd($graduadosConPosts);
+            /* Graduados verificados */
+            $graduadosVerificados = $this->personRepository->getCantidadVerificados()->count();
 
 
-            /** Countries */
-            $countries = $this->countryRepository->all()->map(function ($map) {
-                return $map->name;
-            });
 
-            /** Worker by Countries */
-            $graduatesByCountry = $this->personCompanyRepository->graduatesByCountry();
-
-            $arrayColors = $graduatesByCountry->map(function ($map) {
-                return $this->faker->unique()->hexColor;
-            });
-
-            /** Graduates by Year */
-            $graduatesByYear = $this->personAcademicRepository->graduatesByYear();
-
-            $years = $graduatesByYear->map(function ($map) {
-                return $map->year;
-            });
-
-            $graduatesByYearTotals = $graduatesByYear->map(function ($map) {
-                return $map->total;
-            });
-
-            // return $years;
 
             return view('admin.pages.home', compact(
                 'extraGraduates',
                 'graduates',
-                'salaryMin',
-                'salaryMax',
-                'graduadosConTrabajo',
-                'countries',
-                'graduatesByCountry',
-                'arrayColors',
-                'years',
-                'graduatesByYearTotals',
+                'graduadosConTrabajo',  
                 'posts',
                 'graduadosColombia',
                 'postNotices',
-                'graduadosConPosts'
+                'graduadosConPosts',
+                'graduadosVerificados'
             ));
         } catch (\Exception $th) {
             throw $th;

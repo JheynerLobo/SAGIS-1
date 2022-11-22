@@ -38,6 +38,19 @@
 
     @yield('custom_css')
 
+    <style>
+
+
+.separador {
+    color:white;
+}
+#lista1 li {
+     display:inline;
+     padding-right:3px;
+  
+}
+    </style>
+
 </head>
 
 <body @yield('cargarJS') >
@@ -47,9 +60,37 @@
     <!-- ./Nav -->
 
 
+    
+    @auth
+        @if ((graduate_user()->person->has_data_person() == false) || (graduate_user()->person->has_data_academic() == false) || (graduate_user()->person->has_data_company() == false))
+        <div class="text-center border border-success bg-success pt-2 pb-2">
+            <h3 style="display:inline;" >¡Porfavor primero actualiza tus datos aquí:</h3>
+            <ul id="lista1" style="display:inline;" class=" pl-1">
+                @if(graduate_user()->person->has_data_person() == false)
+                <li >  <span class="separador">| </span><h3 style="display:inline;"><a href="{{route('profile')  }}" style="color:#000000;">personales</a></h3> </li>
+               
+            @endif
+            @if(graduate_user()->person->has_data_academic() == false)
+            <li >  <span class="separador">| </span><h3 style="display:inline;"><a href="{{route('academics')  }}" style="color:#000000;">académicos</a></h3></li>
+            @endif
+            @if(graduate_user()->person->has_data_company() == false)
+            <li >  <span class="separador">| </span><h3 style="display:inline;"><a href="{{route('jobs')  }}" style="color:#000000;">laborales</a></h3></li>
+            @endif
+
+            </ul>
+        </div>
+   @endif
+   @endauth
+
+
+    
+
+    
         <!-- Content Header -->
         @yield('content-header')
         <!-- ./Content Header -->
+       
+
         @yield('content')
 
 
