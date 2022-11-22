@@ -57,4 +57,23 @@ class PersonRepository extends AbstractRepository
     {
         
     }
+
+    public function getCantidadVerificados()
+    {
+
+        $table = $this->model->getTable();
+        $query = $this->model
+            ->select("{$table}.id")
+            ->where("{$table}.has_data_person", true)
+            ->where("{$table}.has_data_academic", true)
+            ->where("{$table}.has_data_company", true);
+
+
+        // return $this->all(['id'])->where('post_category_id', 1);
+
+        return $query
+        ->groupBy("{$table}.id")
+        ->get();
+
+    }
 }

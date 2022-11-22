@@ -117,7 +117,7 @@ class UserController extends Controller
     public function profile()
     {
         try {
-            $user = $this->userRepository->getById(Auth::guard('web')->user()->id);
+            $user = $this->userRepository->getById(Auth::guard('web')->user()->id);     
 
             return view('pages.profile');
         } catch (\Throwable $th) {
@@ -133,10 +133,13 @@ class UserController extends Controller
             $personParams = $request->only(['name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email', 'address',
             'birthdate', 'birthdate_place_id']);
 
+            $personParams['has_data_person'] = 1;
+
             $userParams = $request->only(['code', 'company_email']);
             $userParams['email'] = $userParams['company_email'];
 
             unset($userParams['company_email']);
+            
 
 
             $person = $this->personRepository->getById(graduate_user()->person_id);
@@ -221,6 +224,30 @@ class UserController extends Controller
                 'message' => 'No se ha podido actualizar correctamente la contraseña'
             ]);
         }
+    }
+
+    public function validate_person(){
+        try {
+            $person = $this->personRepository->getById(graduate_user()->person_id);
+    
+            $data_personParams['has_data_person'] = 1;
+    
+            DB::beginTransaction();
+    
+    
+                $this->personRepository->update($person, $data_personParams);
+    
+    
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha verificado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido verificar correctamente.', 'icon' => 'error']);
+        }
+    
     }
 
     public function show_academics(){
@@ -376,6 +403,12 @@ class UserController extends Controller
 
 
                   $this->personAcademicRepository->create( $personAcademic_params);
+
+                  $person = $this->personRepository->getById(graduate_user()->person_id);
+    
+                  $data_personParams['has_data_academic'] = 1;
+  
+                  $this->personRepository->update($person, $data_personParams);
             DB::commit();
             return redirect()->route('academics')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
@@ -461,6 +494,15 @@ class UserController extends Controller
             $faculty_params['name'] = $faculty_params['faculty_name'];
             unset($faculty_params['faculty_name']);
 
+            $person = $this->personRepository->getById(graduate_user()->person_id);
+    
+            $data_personParams['has_data_academic'] = 1;
+    
+    
+    
+    
+            $this->personRepository->update($person, $data_personParams);
+
 
             $this->programRepository->update($program, $program_params);
             $this->facultyRepository->update($program->faculty, $faculty_params);
@@ -492,6 +534,13 @@ class UserController extends Controller
             $personAcademic = $this->personAcademicRepository->getById($id_academic);
             $program = $this->programRepository->getById($personAcademic->program_id);
             $faculty = $this->facultyRepository->getById($program->faculty_id);
+            $person = $this->personRepository->getById(graduate_user()->person_id);
+    
+            $data_personParams['has_data_academic'] = 1;
+
+    
+    
+                
   
 
             DB::beginTransaction();
@@ -499,6 +548,7 @@ class UserController extends Controller
              $this->personAcademicRepository->delete($personAcademic);
              $this->programRepository->delete($program);
              $this->facultyRepository->delete($faculty);
+             $this->personRepository->update($person, $data_personParams);
 
            DB::commit();
             
@@ -511,6 +561,31 @@ class UserController extends Controller
         }
 
 
+    }
+
+
+    public function validate_academic(){
+        try {
+            $person = $this->personRepository->getById(graduate_user()->person_id);
+    
+            $data_personParams['has_data_academic'] = 1;
+    
+            DB::beginTransaction();
+    
+    
+                $this->personRepository->update($person, $data_personParams);
+    
+    
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha verificado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            return $th->getMessage();
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido verificar correctamente.', 'icon' => 'error']);
+        }
+    
     }
 
     public function show_jobs(){
@@ -653,6 +728,13 @@ class UserController extends Controller
                  $paramsPersonCompany['start_date'] =  date('Y-m-d H:i:s');
                 // dd($paramsPersonCompany);
 
+                $person = $this->personRepository->getById(graduate_user()->person_id);
+
+                $data_personParams['has_data_company'] = 1;
+           
+           
+                 $this->personRepository->update($person, $data_personParams);
+
                  
                   $this->personCompanyRepository->create($paramsPersonCompany);
 
@@ -687,8 +769,13 @@ public function update_jobs(UpdateJobRequest $request,  $id_job){
     
      $personCompany = $this->personCompanyRepository->getById($id_job);
 
+     $person = $this->personRepository->getById(graduate_user()->person_id);
+
+     $data_personParams['has_data_company'] = 1;
+
 
       $this->personCompanyRepository->update($personCompany, $data_personCompanyParams);
+      $this->personRepository->update($person, $data_personParams);
 
   
 
@@ -712,10 +799,14 @@ public function destroy_jobs( $id_company){
     try {
         $personCompany = $this->personCompanyRepository->getById($id_company);
         
+        $person = $this->personRepository->getById(graduate_user()->person_id);
+
+        $data_personParams['has_data_company'] = 1;
 
         DB::beginTransaction();
 
          $this->personCompanyRepository->delete($personCompany);
+         $this->personRepository->update($person, $data_personParams);
 
        DB::commit();
         
@@ -726,6 +817,30 @@ public function destroy_jobs( $id_company){
         return $th->getMessage();
         return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
     }
+}
+
+public function validate_jobs(){
+    try {
+        $person = $this->personRepository->getById(graduate_user()->person_id);
+
+        $data_personParams['has_data_company'] = 1;
+
+        DB::beginTransaction();
+
+
+            $this->personRepository->update($person, $data_personParams);
+
+
+       DB::commit();
+        
+       
+        return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha verificado correctamente.', 'icon' => 'success']);
+    } catch (\Exception $th) {
+        DB::rollBack();
+        return $th->getMessage();
+        return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido verificar correctamente.', 'icon' => 'error']);
+    }
+
 }
 
 }

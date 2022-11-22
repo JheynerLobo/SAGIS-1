@@ -81,8 +81,14 @@
                                                 </a>
                                             </td>
                                             <td>
-                                                <img src="{{ asset('img/aprobado.png') }}" alt=""
+                                                @if(($item->person->has_data_person() == true) && ($item->person->has_data_academic() == true) && ($item->person->has_data_company() == true))
+                                                    <img src="{{ asset('img/aprobado.png') }}" alt=""
                                                     style="display: block; width: 30px; height: 30px; margin:auto;">
+                                                @else
+                                                    <img src="{{ asset('img/rechazo.png') }}" alt=""
+                                                    style="display: block; width: 30px; height: 30px; margin:auto;">
+                                                @endif
+                                              
                                             </td>
                                             <td>
                                                 <div class="icons-acciones">

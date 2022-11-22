@@ -37,6 +37,10 @@
                     <!-- /.card-header -->
                     <div class="card-body">
 
+                        @if(graduate_user()->person->has_data_person() == false)
+                        <a href="{{ route('validate_person') }}" class="btn btn-sm btn-warning mb-3">Los datos personales están actualizados</a>
+                        @endif
+
                         <div class="row">
                             <!-- Contenido Principal de los datos del  cliente-->
                             <div class="d-flex flex-column col-7">
@@ -147,7 +151,7 @@
                                     <!-- /.card-body -->
                                 </div>
                                 <!-- /.card -->
-
+                       
 
                                 {{-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> --}}
 

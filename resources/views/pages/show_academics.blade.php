@@ -29,6 +29,7 @@
                             <h3 class="card-title"><b>Datos académicos</b> </h3>
                             
                         </div>
+                        
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -46,6 +47,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @if(graduate_user()->person->has_data_academic() == false)
+                                        <a href="{{ route('validate_academic') }}" class="btn btn-sm btn-warning ">No tengo más
+                                            datos académicos</a>
+                                        @endif
+
                                         @forelse ($academics as $academic)
                                             <tr>
                                                 <td>{{ $loop->index }}</td>
@@ -113,6 +119,8 @@
                                                                      
                                                 </td>
                                             </tr>
+                                        
+                                           
                                         @empty
                                             <tr>
                                                 <td colspan="12">Vacío.</td>

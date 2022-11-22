@@ -15,7 +15,7 @@
 
 
                 <!-- Job Information -->
-                <div class="card">
+                <div class="card mb-5 mt-3">
                     <div class="card-header  border-info">
                         <h3 class="card-title"><b>Datos laborales</b> </h3>
                     </div>
@@ -37,6 +37,10 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @if(graduate_user()->person->has_data_company() == false)
+                                    <a href="{{ route('validate_jobs') }}" class="btn btn-sm btn-warning ">No tengo más
+                                        datos laborales</a>
+                                    @endif
                                     @forelse ($laborales as $laboral)
                                     @php
                                     $company = $laboral->company;
@@ -55,16 +59,24 @@
 
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <a style="text-decoration: none; color: #000000;" href="{{ route('edit_jobs',  $laboral->id  ) }}">
+                                                        <a style="text-decoration: none; color: #000000;"
+                                                            href="{{ route('edit_jobs',  $laboral->id  ) }}">
 
-                                                            <button type="button" class="btn btn-sm btn-success fas fa-edit" style="width: 30px; height: 30px"></button>
+                                                            <button type="button"
+                                                                class="btn btn-sm btn-success fas fa-edit"
+                                                                style="width: 30px; height: 30px"></button>
                                                         </a>
 
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <form action="{{ route('destroy_jobs',  $laboral->id) }}" id="{{ $item->id }}" method="POST" class="formulario-eliminar">
+                                                        <form action="{{ route('destroy_jobs',  $laboral->id) }}"
+                                                            id="{{ $item->id }}" method="POST"
+                                                            class="formulario-eliminar">
                                                             @csrf @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-danger btnDelete"
+                                                                style="width: 30px; height: 30px"><em
+                                                                    class="fas fa-trash"></em></button>
                                                         </form>
 
                                                     </div>
@@ -75,6 +87,7 @@
                                         </td>
 
                                     </tr>
+                                     
                                     @empty
                                     <tr>
                                         <td colspan="12">Vacío.</td>
@@ -84,7 +97,7 @@
 
                             </table>
 
-                            <div class="mt-2">
+                            <div class="mt-3">
                                 <a href="{{ route('create_jobs') }}" class="btn btn-sm btn-danger">
                                     Añadir nuevo
                                     Dato Laboral</a>
