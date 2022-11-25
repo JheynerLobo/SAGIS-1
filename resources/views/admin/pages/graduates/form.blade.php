@@ -144,7 +144,7 @@
        <div class="form-group">
         <label>Foto de perfil:</label>
         <div class="text-center">
-            <img style="width: 340px; hight: 340px" src="{{ asset($item->fullAsset() ) }}" alt="">
+            <img style="width: 340px; height: 340px" src="{{ asset($item->fullAsset() ) }}" alt="">
 
         </div>
         <div class="mt-2">

@@ -56,7 +56,7 @@
          <div class="form-group">
             <label>Imagen principal:</label>
             <div class="text-center">
-                <img style="width: 340px; hight: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
+                <img style="width: 340px; height: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
 
             </div>
             <div class="mt-2">
