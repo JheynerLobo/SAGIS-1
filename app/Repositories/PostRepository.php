@@ -103,7 +103,7 @@ class PostRepository extends AbstractRepository
     {
         try {
 
-            $perPage = 10;
+            $perPage = 12;
             $pageName = 'page';
             $offset = ($pageNumber -  1) * $perPage;
 

@@ -47,6 +47,7 @@ class UpdateRequest extends FormRequest
                 Rule::unique('users', 'id')->ignore($this->user)
             
             ],
+            'image' => ['image', 'mimes:png,jpg,jpeg']
             //'company_email' => "required|unique:users,email,{$this->user}"
     
             

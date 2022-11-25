@@ -47,7 +47,7 @@ class StoreRequest extends FormRequest
             'code' => ['required', 'numeric', 'unique:users'],
             'email' => ['required', 'email', 'unique:people'],
             'company_email' => ['required', 'email', 'unique:users,email'],
-            'image' => ['image', 'mimes:png,jpg']
+            'image' => ['image', 'mimes:png,jpg,jpeg']
 
            /* 'image' => ['image', 'mimes:png,jpg', Rule::requiredIf(function() {
                 return $this->checkGraduate();

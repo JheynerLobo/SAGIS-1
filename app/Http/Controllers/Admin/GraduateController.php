@@ -229,7 +229,6 @@ class GraduateController extends Controller
 
             DB::beginTransaction();
 
-           // dd($request->file('image'));
         
             if(!($request->file('image') == null)) {
                          /** Saving Photo */
@@ -691,7 +690,9 @@ class GraduateController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         try {
-            //$data = $request->all();
+            // $data = $request->all();
+
+             //dd($data);
 
             $personParams = $request->only(['name', 'lastname', 'document_type_id', 'document', 'phone', 'telephone', 'email', 'address',
             'birthdate', 'birthdate_place_id']);
@@ -714,6 +715,25 @@ class GraduateController extends Controller
             $user = $this->userRepository->getByAttribute('person_id',$person->id);
             // $user = $this->userRepository->getById($person->id);
 
+
+            
+
+            if(!($request->file('image') == null)) {
+                /** Saving Photo */
+                $fileParams = $this->saveImage($request);
+            }
+
+
+              //$personParams = array_merge($personParams, $fileParams);
+  
+              if(!($request->file('image') == null)) {
+                  $personParams = array_merge($personParams,  $fileParams);
+              }else{
+                  $personParams = array_merge($personParams);
+              }
+
+
+
             $this->personRepository->update($person, $personParams);
 
             $this->userRepository->update($user, $userParams);
@@ -726,6 +746,7 @@ class GraduateController extends Controller
             return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
         } catch (\Exception $th) {
            // DB::rollBack();
+           dd($th);
             return redirect()->route('admin.home')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
         }
     }
