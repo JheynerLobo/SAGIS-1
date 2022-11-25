@@ -1,5 +1,5 @@
 @if ($editMode)
-    <form action="{{ route('admin.posts.update', $item->id) }}" method="post">
+    <form action="{{ route('admin.posts.update', $item->id) }}" method="post"  enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <!-- PostCategory -->
@@ -52,6 +52,26 @@
         @enderror
         <!-- ./Date -->
 
+         <!-- Imagen Principal -->
+         <div class="form-group">
+            <label>Imagen principal:</label>
+            <div class="text-center">
+                <img style="width: 340px; hight: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
+
+            </div>
+            <div class="mt-2">
+                <input type="file" class="form-control-file" name="imagen" accept="image/*" >
+            </div>   
+        </div>
+        @error('imagen')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <!-- ./Imagen principal -->
+
+        
+
+
+
         <!-- Submit -->
         <div class="form-group">
             <div class="btn-group" role="group" aria-label="Basic example">
@@ -63,7 +83,7 @@
         <!-- ./Submit -->
     </form>
 @else
-    <form action="{{ route('admin.posts.store') }}" method="post">
+    <form action="{{ route('admin.posts.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <!-- PostCategory -->
@@ -117,6 +137,18 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
         <!-- ./Date -->
+
+
+        <!-- File -->
+        <div class="form-group" >
+            <label for="exampleFormControlFile1">Fotos de noticias: <small class="text-muted">(Obligatorio) - La última foto seleccionada será la principal.</small></label>
+            <input type="file" class="form-control-file" name="image[]" multiple accept="image/*" required>
+        </div>
+        @error('image.*')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <!-- ./File -->
+
 
         <!-- Submit -->
         <div class="form-group">

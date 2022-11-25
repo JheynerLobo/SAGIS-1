@@ -48,6 +48,12 @@ return [
             'url' => env('APP_URL') . '/storage/images/people',
             'visibility' => 'public',
         ],
+        'posts' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/posts'),
+            'url' => env('APP_URL') . '/storage/images/posts',
+            'visibility' => 'public',
+        ],
 
         's3' => [
             'driver' => 's3',

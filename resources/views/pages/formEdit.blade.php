@@ -1,5 +1,5 @@
  <!-- Form -->
- <form action="{{ route('profile.update') }}" method="POST">
+ <form action="{{ route('profile.update') }}" method="POST"  enctype="multipart/form-data">
     @csrf @method('PATCH')
 
     <!-- Name -->
@@ -138,6 +138,23 @@
         <small class="text-danger">{{ $message }}</small>
     @enderror
     <!-- ./Email -->
+
+    <!-- Imagen Principal -->
+    <div class="form-group">
+        <label>Foto de perfil:</label>
+        <div class="text-center">
+            <img style="width: 340px; hight: 340px" src="{{ asset($item->fullAsset() ) }}" alt="">
+
+        </div>
+        <div class="mt-2">
+            <input type="file" class="form-control-file" name="image" accept="image/*" >
+        </div>   
+    </div>
+    @error('image')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+    <!-- ./Imagen principal -->
+
 
     <!-- Submit -->
     <div class="mt-4">

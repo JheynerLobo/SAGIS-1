@@ -13,6 +13,7 @@ use App\Http\Requests\Posts\UpdateRequest;
 use App\Repositories\PostRepository;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\PostImageRepository;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -88,34 +89,64 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
 
-            $this->postRepository->create($request->all());
+            $paramsRequest = $request->all();
+
+            //dd($paramsRequest);
+
+            /** Creating Post */
+            $postParams = $request->except(['image']);
+
+
+            $this->postRepository->create($postParams);
 
             /** Searching created Post */
             $post = $this->postRepository->getByAttribute('title', $request->title);
 
             /* dd($post); */  
-            
-            
-            /* Probando imagenes por defecto */
 
-            $postImgParams['post_id'] = $post->id;
-            $postImgParams['asset_url'] = asset('img/aprobado.png');
-            $postImgParams['asset'] = null;
-            $postImgParams['is_header'] = 1;
+            $files = $request->file('image');
 
-            $postImgParams2['post_id'] = $post->id;
-            $postImgParams2['asset_url'] = asset('img/rechazo.png');
-            $postImgParams2['asset'] = null;
-            $postImgParams2['is_header'] = 0;
+            //  dd($files);
 
-            $this->postImageRepository->create($postImgParams);
-            $this->postImageRepository->create($postImgParams2);
+            $fileParams = array();
+            if(!($request->file('image') == null)) {
 
+                foreach($files as $key => $file){
+                    //dd($key);
+                     /** Saving Photo */
+                 $fileParams[$key]  = $this->saveImageMultiple($file, $key);
+                }
+               
+            }
+
+           // dd($fileParams);
+
+            if(!($request->file('image') == null)) {
+
+                foreach($fileParams as $key => $fileParam){
+                    $postImgParams['post_id'] = $post->id;
+                    ($key == 0) ?  $postImgParams['is_header'] = 1 :   $postImgParams['is_header'] = 0;
+                  
+                    $postImg = array_merge($postImgParams,  $fileParam);
+
+                    $this->postImageRepository->create($postImg);
+                }
+            }
+           /*  else{
+                $postImgParams['post_id'] = $post->id;
+                $postImgParams['asset_url'] = 'https://media.tenor.com/3Yat5iUF8fgAAAAM/huh-quoi.gif';
+                $postImgParams['asset'] = null;
+                $postImgParams['is_header'] = 1;
+                $this->postImageRepository->create($postImgParams);
+            } */
+           
+        
             
             DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
+            dd($th);
             DB::rollBack();
 
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
@@ -146,9 +177,13 @@ class PostController extends Controller
 
             $postCategories = $this->postCategoryRepository->all();
 
-            return view('admin.pages.posts.edit', compact('item', 'postCategories'));
 
-            return redirect()->route('admin.posts,edit', $id)->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+
+            return view('admin.pages.posts.edit', compact('item', 'postCategories', 'imageHeader', 'images'));
+
+            //return redirect()->route('admin.posts,edit', compact('item', 'postCategories', 'imageHeader', 'images'))->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
         } catch (\Exception $th) {
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No hemos podido encontrar esta publicación.']);
         }
@@ -164,16 +199,47 @@ class PostController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         try {
-            DB::beginTransaction();
+           // DB::beginTransaction();
 
-            $post = $this->postRepository->getById($id);
+            $params = $request->all();
 
-            $this->postRepository->update($post, $request->all());
+            if(!($request->file('imagen') == null)) {
+                $paramsImagen = $request->only(['imagen']);
+            }
+            
 
-            DB::commit();
+            // dd($request->file('imagen') == null);
+
+             $post = $this->postRepository->getById($id);
+
+             $this->postRepository->update($post, $request->all());
+
+            if(!($request->file('imagen') == null)) {
+                /** Saving Photo */
+                $fileParams = $this->saveImage($paramsImagen['imagen']);
+            }
+                 //dd($fileParams);
+
+            $postImage = $this->postImageRepository->getByAttribute("post_id" , $post->id);
+
+            //dd( $postImage);
+
+            if(!($request->file('imagen') == null)) {
+                $postImgParams['post_id'] = $post->id;
+                 $postImgParams['is_header'] = 1;
+                  
+                    $postImg = array_merge($postImgParams,  $fileParams);
+                   // dd($postImg);
+                    
+
+                    $this->postImageRepository->update($postImage , $postImg);
+            }
+
+          //  DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
+           // dd($th);
             DB::rollBack();
 
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
@@ -204,4 +270,48 @@ class PostController extends Controller
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
     }
+
+
+    /**
+     * @param StoreRequest $request
+     * @param array $params
+     */
+    public function saveImage($file): array
+    {
+      //  $file = $request->file('image');
+
+        $params = [];
+
+        $fileName = time()  . '_post_image.' . $file->getClientOriginalExtension();
+
+        $this->postImageRepository->saveImage(File::get($file), $fileName);
+
+        $params['asset_url'] =  'storage/images/posts/';
+        $params['asset'] = $fileName;
+
+        return $params;
+
+    } 
+
+       /**
+     * @param StoreRequest $request
+     * @param array $params
+     */
+    public function saveImageMultiple($file, $iter): array
+    {
+      //  $file = $request->file('image');
+
+        $params = [];
+
+        $fileName = time() .$iter . '_post_image.' . $file->getClientOriginalExtension();
+
+        $this->postImageRepository->saveImage(File::get($file), $fileName);
+
+        $params['asset_url'] =  'storage/images/posts/';
+        $params['asset'] = $fileName;
+
+        return $params;
+
+    } 
 }
+

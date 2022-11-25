@@ -26,6 +26,7 @@ use App\Http\Requests\Graduates\UpdateJobRequest;
 use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
+use Illuminate\Support\Facades\File;
 
 class UserController extends Controller
 {
@@ -146,6 +147,23 @@ class UserController extends Controller
 
              /** Searching User */
             $user = $this->userRepository->getByAttribute('person_id',$person->id);
+
+
+
+            
+            if(!($request->file('image') == null)) {
+                /** Saving Photo */
+                $fileParams = $this->saveImage($request);
+            }
+
+
+              //$personParams = array_merge($personParams, $fileParams);
+  
+              if(!($request->file('image') == null)) {
+                  $personParams = array_merge($personParams,  $fileParams);
+              }else{
+                  $personParams = array_merge($personParams);
+              }
 
             $this->personRepository->update($person, $personParams);
 
@@ -842,5 +860,26 @@ public function validate_jobs(){
     }
 
 }
+
+/**
+     * 
+     * @param array $params
+     */
+    public function saveImage($request): array
+    {
+        $file = $request->file('image');
+
+        $params = [];
+
+        $fileName = time() . '_people_image.' . $file->getClientOriginalExtension();
+
+        $this->personRepository->saveImage(File::get($file), $fileName);
+
+        $params['image_url'] =  'storage/images/people/';
+        $params['image'] = $fileName;
+
+        return $params;
+
+    } 
 
 }

@@ -17,7 +17,7 @@
                 <h1 class="tituloinformacion"> {{ $item->title }} </h1>
                 <p class="fecha">{{ $item->date }}</p>
                 <div class="text-center  mt-4 mb-4">
-                    <img src="{{ $imageHeader->fullAsset() }}" class="imgInformacion img-fluid " alt="" />
+                    <img src="{{ asset($imageHeader->fullAsset()) }}" class="imgInformacion img-fluid " alt="" />
                 </div>
                 <p>{{ $item->description }}</p>
                 @if (count($images) > 0)
@@ -27,7 +27,7 @@
                             <div class="col-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img src="{{ $image->fullAsset() }}" alt="" class="img-fluid">
+                                        <img src="{{ asset($image->fullAsset()) }}" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
