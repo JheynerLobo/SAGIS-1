@@ -2,6 +2,14 @@
 
 @section('title', 'Actualizar Contenido Informativo')
 
+@section('cargarJS')
+
+    
+        onload = "cargarPrincipal()";
+  
+
+@endsection
+
 @section('css')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
@@ -36,6 +44,8 @@
     ])
 @endsection
 
+
+
 @section('content')
 
     <section class="content">
@@ -67,6 +77,7 @@
 @section('js')
     <!-- Select2 -->
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script src="{{ asset('js/posts.js') }}"></script>
 @endsection
 
 @section('custom_js')

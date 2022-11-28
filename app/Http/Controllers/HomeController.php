@@ -67,7 +67,17 @@ class HomeController extends Controller
             $imageHeader = $item->imageHeader();
             $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
 
-            return view($this->viewLocation . 'notices.show', compact('item', 'imageHeader', 'images'));
+            if($item->getCountVideo()>0){
+                $videoHeader = $item->videoHeader();
+                //$videos =$item->videos()->whereNotIn('id', [$videoHeader->id])->get();
+                return view($this->viewLocation . 'notices.show', compact('item', 'imageHeader', 'images', 'videoHeader'));
+            }else{
+
+                return view($this->viewLocation . 'notices.show', compact('item', 'imageHeader', 'images'));
+            }
+           
+
+            
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -103,7 +113,14 @@ class HomeController extends Controller
             $imageHeader = $item->imageHeader();
             $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
 
-            return view($this->viewLocation . 'courses.show', compact('item', 'imageHeader', 'images'));
+
+            if($item->getCountVideo()>0){
+                $videoHeader = $item->videoHeader();
+                return view($this->viewLocation . 'courses.show', compact('item', 'imageHeader', 'images', 'videoHeader'));
+            }else{
+                return view($this->viewLocation . 'courses.show', compact('item', 'imageHeader', 'images'));
+            }
+          
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -139,7 +156,15 @@ class HomeController extends Controller
             $imageHeader = $item->imageHeader();
             $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
 
-            return view($this->viewLocation . 'events.show', compact('item', 'imageHeader', 'images'));
+
+            
+            if($item->getCountVideo()>0){
+                $videoHeader = $item->videoHeader();
+                return view($this->viewLocation . 'events.show', compact('item', 'imageHeader', 'images', 'videoHeader'));
+            }else{
+                return view($this->viewLocation . 'events.show', compact('item', 'imageHeader', 'images'));
+            }
+
         } catch (\Throwable $th) {
             throw $th;
         }
@@ -199,4 +224,26 @@ class HomeController extends Controller
             throw $th;
         }
     }
+
+
+        /**
+     * @param int $id
+     */
+    public function showVideo($id)
+    {
+        try {
+            $item = $this->postRepository->getById($id);
+                    
+            if($item->getCountVideo()>0 && !is_null($item->videoHeader())){
+                $videoHeader = $item->videoHeader();
+                return view($this->viewLocation . 'videos.show', compact('item', 'videoHeader'));
+            }else{
+                return view($this->viewLocation . 'videos.show', compact('item'));
+            }
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
 }

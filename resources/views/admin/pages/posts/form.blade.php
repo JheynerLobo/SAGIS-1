@@ -1,12 +1,12 @@
 @if ($editMode)
-    <form action="{{ route('admin.posts.update', $item->id) }}" method="post"  enctype="multipart/form-data">
+    <form action="{{ route('admin.posts.update', [$item->id]) }}" method="post"  enctype="multipart/form-data">
         @csrf
         @method('PUT')
         <!-- PostCategory -->
         <div class="form-group">
             <label>Categoría de la Publicación:</label>
-            <select name="post_category_id"
-                class="form-control select2bs4 @error('post_category_id') is-invalid @enderror">
+            <select name="post_category_id" id="categories" onchange="seleccionarCategoria()"
+                class="form-control select2bs4 @error('post_category_id') is-invalid @enderror" >
                 <option value="-1">Seleccione una categoría de publicación..</option>
                 @foreach ($postCategories as $postCategory)
                     <option value="{{ $postCategory->id }}"
@@ -52,21 +52,71 @@
         @enderror
         <!-- ./Date -->
 
-         <!-- Imagen Principal -->
-         <div class="form-group">
+       {{--  {{dd($item->postCategory->name == "Vídeos" &&  $item->getCountimage()==0);  }} --}}
+    
+        @if($item->postCategory->name != "Vídeos" &&  $item->getCountimage()>=1)
+                     <!-- Imagen Principal -->
+         <div class="form-group" id="imageP">
             <label>Imagen principal:</label>
             <div class="text-center">
                 <img style="width: 340px; height: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
 
             </div>
             <div class="mt-2">
-                <input type="file" class="form-control-file" name="imagen" accept="image/*" >
+                <input type="file" class="form-control-file"  name="imagen"  accept="image/*" >
             </div>   
         </div>
         @error('imagen')
             <small class="text-danger">{{ $message }}</small>
         @enderror
         <!-- ./Imagen principal -->
+
+        <div class="form-group"  id="videoP">
+            <label>URL video de Youtube:</label>
+            <div class="mt-2">
+                @if($item->getCountVideo()>0 && !(is_null($item->videoHeader())))
+
+                @if($item->postCategory->name != "Galería" )
+                <small>Si desea eliminar el video, solamente coloque: <strong>NO</strong>; No aplica en categoría Vídeos.</small>
+                @endif
+               
+                    <input type="text"  value="{{ $videoHeader->fullAsset() }}" id="inputVideo" class="form-control-file" name="video"   >
+                @else
+                <input type="text" class="form-control-file"  id="inputVideo" name="video" >
+                @endif
+                
+            </div>   
+        </div>
+        @error('video')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+
+        @elseif ($item->postCategory->name == "Vídeos" &&  $item->getCountimage()==0)
+        <div class="form-group" style="display: none;" id="imageP">
+            
+            <div class="mt-2" >
+                <input type="file" class="form-control-file" id="inputImage"   name="imagen" accept="image/*"  required  >
+            </div>   
+        </div>
+        @error('imagen')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <div class="form-group"  id="videoP">
+            <label>URL video de Youtube:</label>
+            <div class="mt-2">
+                @if($item->postCategory->name != "Galería" )
+                <small>Si desea eliminar el video, solamente coloque: <strong>NO</strong>; No aplica en categoría Vídeos.</small>
+                @endif
+               
+                <input type="text"  value="{{ $videoHeader->fullAsset() }}"  id="inputVideo" class="form-control-file" name="video" required   >
+            </div>   
+        </div>
+        @error('video')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+
+            
+        @endif
 
         
 
@@ -89,7 +139,7 @@
         <!-- PostCategory -->
         <div class="form-group">
             <label>Categoría de la Publicación:</label>
-            <select name="post_category_id"
+            <select name="post_category_id" id="categories" onchange="seleccionarCategoria2()"
                 class="form-control select2bs4 @error('post_category_id') is-invalid @enderror">
                 <option value="-1">Seleccione una categoría de publicación..</option>
                 @foreach ($postCategories as $postCategory)
@@ -140,14 +190,27 @@
 
 
         <!-- File -->
-        <div class="form-group" >
+        <div class="form-group" id ="imageP" >
             <label for="exampleFormControlFile1">Fotos de noticias: <small class="text-muted">(Obligatorio) - La última foto seleccionada será la principal.</small></label>
-            <input type="file" class="form-control-file" name="image[]" multiple accept="image/*" required>
+            <input type="file" class="form-control-file" name="image[]" id="inputImage" multiple accept="image/*" required>
         </div>
         @error('image.*')
             <small class="text-danger">{{ $message }}</small>
         @enderror
         <!-- ./File -->
+
+        <div class="form-group"  id="videoP">
+            <label>URL video de Youtube:</label>
+            <div class="mt-2">        
+                <input type="text" class="form-control-file" id="videoInput" name="video" >
+               
+                
+            </div>   
+        </div>
+
+
+
+
 
 
         <!-- Submit -->

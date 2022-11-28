@@ -45,6 +45,8 @@
 @section('js')
     <!-- Select2 -->
     <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+
+    <script></script>
 @endsection
 
 @section('custom_js')

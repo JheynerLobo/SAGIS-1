@@ -3,6 +3,16 @@
 
 @section('tittle', 'Noticia')
 
+@section('css')
+<style>
+/* #img-fluid{
+    height: 300px;
+} */
+
+
+</style>
+@endsection
+
 
 @section('content')
 
@@ -16,8 +26,13 @@
                 </div>
                 <h1 class="tituloinformacion"> {{ $item->title }} </h1>
                 <p class="fecha">{{ $item->date }}</p>
-                <div class="text-center  mt-4 mb-4">
-                    <img src="{{ asset($imageHeader->fullAsset()) }}" class="imgInformacion img-fluid " alt="" />
+                <div class="text-center  d-flex justify-content-center  mt-4 mb-4">
+                    <div class="card" style="width: 32rem;" >
+                        <div class="card-body">
+                            <img src="{{ asset($imageHeader->fullAsset()) }}" class="imgInformacion img-fluid " alt="" />
+                        </div>
+                        </div>
+                   
                 </div>
                 <p>{{ $item->description }}</p>
                 @if (count($images) > 0)
@@ -27,7 +42,7 @@
                             <div class="col-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <img src="{{ asset($image->fullAsset()) }}" alt="" class="img-fluid">
+                                        <img src="{{ asset($image->fullAsset()) }}" alt="" class="img-fluid" id="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -35,6 +50,8 @@
                         @endforelse
                     </div>
                 @endif
+        
+
                 <div style="clear:both"></div>
                 <div style="clear:both; min-height:30px;"></div>
 

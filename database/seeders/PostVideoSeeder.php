@@ -67,7 +67,8 @@ class PostVideoSeeder extends Seeder
                     'is_header' => true
                 ]);
 
-                do {
+                /*  */
+              /*   do {
                     $randomVideo = rand(0, count($this->videosYT) - 1);
                     $this->postVideoRepository->create([
                         'post_id' => $post->id,
@@ -75,7 +76,8 @@ class PostVideoSeeder extends Seeder
                     ]);
 
                     $randomNumber--;
-                } while ($randomNumber > 0);
+                } while ($randomNumber > 0); */
+                /*  */
             });
         } catch (Exception $th) {
             print($th->getMessage());
