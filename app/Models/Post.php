@@ -47,6 +47,21 @@ class Post extends Model
         return $this->images()->where('is_header', true)->first();
     }
 
+    public function getCountimage()
+    {
+        return $this->images()->count();
+    }
+
+    public function getCountVideo()
+    {
+        return $this->videos()->count();
+    }
+
+    public function is_imageOne()
+    {
+        return $this->images()->count()== 1? true: false;
+    }
+
     /**
      * Get Images
      * 
@@ -107,4 +122,7 @@ class Post extends Model
     {
         return $this->documents()->count() > 0 ? true : false;
     }
+
+
+    
 }

@@ -53,10 +53,22 @@ class PostRepository extends AbstractRepository
 
         $query = $this->model
             ->select('posts.id')
-            ->get();;
+            ->get();
 
         return $query;
     }
+
+
+    public function getPosts()
+    {
+
+        $query = $this->model
+            ->select('*')
+            ->get();
+
+        return $query;
+    }
+
 
 
     public function getPotsNoticias()

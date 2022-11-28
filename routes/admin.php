@@ -54,6 +54,21 @@ Route::delete('graduates/{graduate}/company_jobs/{job}/destroy', [GraduateContro
 
 Route::resource('posts', PostController::class, ['as' => 'admin']);
 
+Route::get('posts/{post}/images', [PostController::class, 'images'])->name('admin.posts.images');
+Route::patch('posts/{post}/update_images', [PostController::class, 'update_images'])->name('admin.posts.update_images');
+
+
+Route::get('posts/{post}/images/create_image', [PostController::class, 'create_image'])->name('admin.posts.create_image');
+Route::post('posts/{post}/images/store_image', [PostController::class, 'store_image'])->name('admin.posts.store_image');
+
+Route::get('posts/{post}/images/{image}/edit_image', [PostController::class, 'edit_image'])->name('admin.posts.edit_image');
+Route::patch('posts/{post}/images/{image}/update_image', [PostController::class, 'update_image'])->name('admin.posts.update_image');
+
+Route::delete('posts/{post}/images/{image}/destroy_image', [PostController::class, 'destroy_image'])->name('admin.posts.destroy_image');
+
+
+//Route::get('graduates/{graduate}/academic_studies/{academic}/edit', [GraduateController::class, 'edit_academic'])->name('admin.graduates.edit_academic');
+
 Route::prefix('reports')->group(function () {
     Route::get('graduates', [ReportController::class, 'graduates'])->name('admin.reports.graduates');
     Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');

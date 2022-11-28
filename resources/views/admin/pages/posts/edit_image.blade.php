@@ -1,14 +1,7 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Registro de Contenido Informativo')
+@section('title', 'Actualizar Imagen')
 
-@section('cargarJS')
-
-    
-        onload = "cargarPrincipal2()";
-  
-
-@endsection
 
 @section('css')
     <!-- Select2 -->
@@ -18,7 +11,7 @@
 
 @section('content-header')
     @include('admin.partials.content-header', [
-        'title' => 'Contenido Informativo',
+        'title' => 'Editar Imagen',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -31,13 +24,25 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Registro',
+                'name' => 'Imagenes',
+                'route' => route('admin.posts.images', $item->id),
+                'isActive' => null,
+            ],
+            [
+                'name' => $item->title,
+                'route' => null,
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Editar',
                 'route' => null,
                 'isActive' => 'active',
             ],
         ],
     ])
 @endsection
+
+
 
 @section('content')
 
@@ -47,16 +52,14 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Formulario de Registro</h4>
+                            <h4>Formulario de Actualización de imagen</h4>
                         </div>
                         <div class="card-body">
-                            <p>Por favor, llenar todos los datos de información.</p>
-                            <small class="text-muted">Recuerda que acá se realiza el registro de la publicación, para una
-                                información más
-                                detallada debes realizarla dentro del perfil de la publicación.</small>
+                            <p>Por favor actualiza la imagen.</p>
+           
                             <hr>
-                            @include('admin.pages.posts.form', [
-                                'editMode' => false,
+                            @include('admin.pages.posts.formImage', [
+                                'editMode' => true,
                             ])
                         </div>
                     </div>
