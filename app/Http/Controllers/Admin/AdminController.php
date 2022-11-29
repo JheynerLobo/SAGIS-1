@@ -119,7 +119,8 @@ class AdminController extends Controller
         $this->personCompanyRepository = $personCompanyRepository;
         $this->companyRepository = $companyRepository;
 
-        $this->role = $this->roleRepository->getByAttribute('name', 'superadmin');
+        //$this->role = $this->roleRepository->getByAttribute('name', 'superadmin');
+        $this->role = $this->roleRepository->getByAttribute('name', 'graduate');
     }
 
 
