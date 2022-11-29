@@ -58,7 +58,7 @@ class PersonSeeder extends Seeder
             $this->personRepository->createFactory(1, [
                 'name' => 'Judith del pilar',
                 'lastname' => 'Rodríguez Tenjo',
-                'email' => 'judithdelpilarrt@ufps.edu.co',
+                'email' => 'judithdelpilarrtt@ufps.edu.co',
                 'document_type_id' => $ccDocument->id,
                 'birthdate_place_id' => $cucutaCity->id,
             ]);

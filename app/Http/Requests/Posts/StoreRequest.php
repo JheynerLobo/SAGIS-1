@@ -30,7 +30,8 @@ class StoreRequest extends FormRequest
             'title' => ['required', Rule::unique('posts', 'title')->where('post_category_id', $this->get('post_category_id'))],
             'description' => ['required', 'string'],
             'date' => ['required', 'date'],
-            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg']
+            'image' => ["required","array","max:5"], 
+            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg, array, max:5']
         ];
     }
 }

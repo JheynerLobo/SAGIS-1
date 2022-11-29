@@ -74,6 +74,10 @@
 @endsection
 
 @section('custom_js')
+
+<script>
+    datePickerId.max = new Date().toISOString().split("T")[0];
+</script>
     <script>
         //Initialize Select2 Elements
         $('.select2bs4').select2({

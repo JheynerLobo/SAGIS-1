@@ -40,7 +40,9 @@ Route::get('academic_studies/create', [UserController::class, 'create_academic']
 Route::post('academic_studies/store', [UserController::class, 'store_academic'])->name('store_academic');
 
 Route::get('academic_studies/{academic}/edit', [UserController::class, 'edit_academic'])->name('edit_academic');
+Route::get('academic_studies/{academic}/edit_first', [UserController::class, 'edit_academic_first'])->name('edit_academic_first');
 Route::patch('academic_studies/{academic}/update', [UserController::class, 'update_academic'])->name('update_academic');
+Route::patch('academic_studies/{academic}/update_first', [UserController::class, 'update_academic_first'])->name('update_academic_first');
 
 Route::delete('academic_studies/{academic}/destroy', [UserController::class, 'destroy_academic'])->name('destroy_academic');
 

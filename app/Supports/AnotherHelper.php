@@ -74,6 +74,14 @@ if (!function_exists('graduate_user')) {
     }
 
 
+    if (!function_exists('admin_user')) {
+        function admin_user(){
+            return  Auth::guard('admin')->user();
+        }
+        
+        }
+
+
 
 
 

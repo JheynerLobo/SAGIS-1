@@ -43,7 +43,7 @@
                         <div class="input-group-append">
                             <label class="input-group-text">Título:</label>
                         </div>
-                        <input type="text" class="form-control" placeholder="Buscar publicación"
+                        <input type="text" name="title" class="form-control" placeholder="Buscar publicación"
                             value="{{ getParamValue($params, 'title') }}">
                     </div>
                 </div>

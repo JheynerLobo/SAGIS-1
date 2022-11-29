@@ -166,11 +166,11 @@
                 <!-- /.col -->
 
             </div>
-            {{-- </div> --}}
+            </div>
             <!-- /.card -->
 
         </div>
         <!-- /.row -->
-    </div>
+    {{-- </div> --}}
     <!-- /.container-fluid -->
 @endsection

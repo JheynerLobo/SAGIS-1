@@ -44,7 +44,7 @@
         <!-- Date -->
         <div class="form-group">
             <label>Fecha de Publicación:</label>
-            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date"
+            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="datePickerId"
                 value="{{ $item->date }}">
         </div>
         @error('date')
@@ -180,7 +180,7 @@
         <!-- Date -->
         <div class="form-group">
             <label>Fecha de Publicación:</label>
-            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date"
+            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="datePickerId"
                 value="{{ old('date') }}">
         </div>
         @error('date')
@@ -197,6 +197,9 @@
         @error('image.*')
             <small class="text-danger">{{ $message }}</small>
         @enderror
+        @error('image')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
         <!-- ./File -->
 
         <div class="form-group"  id="videoP">

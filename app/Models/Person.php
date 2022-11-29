@@ -62,6 +62,12 @@ class Person extends Model
         return $this->hasOne(User::class);
     }
 
+
+    public function admin()
+    {
+        return $this->hasOne(Admin::class);
+    }
+
     public function birthdatePlace()
     {
         return $this->belongsTo(City::class, 'birthdate_place_id', 'id');

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Graduates;
+namespace App\Http\Requests\Admins;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +18,6 @@ class StoreRequest extends FormRequest
         return Auth::guard('admin')->check();
     }
 
-   /*  public function checkGraduate(){
-        return !Auth::guard('admin')->check();
-    }
-  */
     /**
      * Get the validation rules that apply to the request.
      *
@@ -43,17 +39,9 @@ class StoreRequest extends FormRequest
             'telephone' => ['required', 'string', 'min:6'],
             'address' => ['required', 'string'],
 
-
-            'code' => ['required', 'numeric', 'unique:users', 'between:100000,9999999'],
             'email' => ['required', 'email', 'unique:people'],
             'company_email' => ['required', 'email', 'unique:users,email'],
             'image' => ['image', 'mimes:png,jpg,jpeg']
-
-           /* 'image' => ['image', 'mimes:png,jpg', Rule::requiredIf(function() {
-                return $this->checkGraduate();
-            })]
-  */
-
         ];
     }
 }

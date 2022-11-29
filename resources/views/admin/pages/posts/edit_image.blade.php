@@ -24,7 +24,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Imagenes',
+                'name' => 'Imágenes',
                 'route' => route('admin.posts.images', $item->id),
                 'isActive' => null,
             ],
