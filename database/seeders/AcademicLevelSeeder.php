@@ -27,10 +27,10 @@ class AcademicLevelSeeder extends Seeder
     public function run()
     {
         $items = [
-            ['name' => 'pregrado'],
-            ['name' => 'especialización'],
-            ['name' => 'maestría'],
-            ['name' => 'doctorado'],
+            ['name' => 'Pregrado'],
+            ['name' => 'Especialización'],
+            ['name' => 'Maestría'],
+            ['name' => 'Doctorado'],
         ];
 
         try {

@@ -10,6 +10,7 @@ use App\Repositories\CityRepository;
 use App\Repositories\RoleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use App\Repositories\StateRepository;
 use App\Repositories\PersonRepository;
 use App\Repositories\CompanyRepository;
@@ -26,7 +27,7 @@ use App\Http\Requests\Graduates\UpdateJobRequest;
 use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
-use Illuminate\Support\Facades\File;
+use App\Http\Requests\Graduates\UpdateAcademicRequestFirst;
 
 class UserController extends Controller
 {
@@ -476,6 +477,28 @@ class UserController extends Controller
         }
     }
 
+    public function edit_academic_first($id_academic){
+        try {
+            $item = $this->personRepository->getById(graduate_user()->person_id);
+            $users = $this->userRepository->getByRole($this->role->name);
+            $documentTypes = $this->documentTypeRepository->all();
+            $cities = $this->cityRepository->allOrderBy('countries.id');
+            $academics_full = $this->personAcademicRepository->getUni();
+             $data_academic = $this->personAcademicRepository->getById($id_academic);
+             $programs_full = $this->personAcademicRepository->getProgramas();
+             $academic_levels =  $this->personAcademicRepository->getNiveles();
+            $academics = $item->personAcademic;
+            $laborales = $item->personCompany;
+
+            return view('pages.edit_academic_first', compact('item', 'documentTypes', 'cities', 'academics', 'laborales', 'users', 'academics_full', 'data_academic', 'programs_full', 'academic_levels'));
+        } catch (\Exception $th) {
+            throw $th->getMessage();
+        }
+
+
+    }
+
+
     public function update_academic(UpdateAcademicRequest $request, $id_academic)
     {
         try {
@@ -532,14 +555,54 @@ class UserController extends Controller
             return  redirect()->route('academics')->with('alert', [
                 'title' => '¡Éxito!',
                 'icon' => 'success',
-                'message' => 'Se ha actualizado correctamente los datos academicos.'
+                'message' => 'Se ha actualizado correctamente los datos académicos.'
             ]);
         } catch (\Exception $th) {
             dd($th);
             return back()->with('alert', [
                 'title' => '¡Error!',
                 'icon' => 'error',
-                'message' => 'No se ha podido actualizar correctamente los datos academicos.'
+                'message' => 'No se ha podido actualizar correctamente los datos académicos.'
+            ]);
+        }
+    }
+
+
+    public function update_academic_first(UpdateAcademicRequestFirst $request, $id_academic)
+    {
+        try {
+
+
+            $params_person_academic = $request->all();
+           // dd($params_person_academic);
+
+           $data_academic = $this->personAcademicRepository->getById($id_academic);
+
+           //dd($params_person_academic);
+
+
+            $person = $this->personRepository->getById(graduate_user()->person_id);
+            $data_personParams['has_data_academic'] = 1;
+    
+    
+    
+    
+            $this->personRepository->update($person, $data_personParams);
+            $this->personAcademicRepository->update($data_academic, $params_person_academic);
+
+             
+
+            return  redirect()->route('academics')->with('alert', [
+                'title' => '¡Éxito!',
+                'icon' => 'success',
+                'message' => 'Se ha actualizado correctamente los datos académicos.'
+            ]);
+        } catch (\Exception $th) {
+            dd($th);
+            return back()->with('alert', [
+                'title' => '¡Error!',
+                'icon' => 'error',
+                'message' => 'No se ha podido actualizar correctamente los datos académicos.'
             ]);
         }
     }

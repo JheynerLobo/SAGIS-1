@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\Auth\LoginController;
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
@@ -73,3 +74,27 @@ Route::prefix('reports')->group(function () {
     Route::get('graduates', [ReportController::class, 'graduates'])->name('admin.reports.graduates');
     Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');
 });
+
+
+Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
+
+Route::get('settings/edit', [AdminController::class, 'edit'])->name('admin.settings.edit');
+Route::patch('settings/update', [AdminController::class, 'update'])->name('admin.settings.update');
+
+Route::get('settings/edit_password', [AdminController::class, 'edit_password'])->name('admin.settings.edit_password');
+Route::patch('settings/update_password', [AdminController::class, 'update_password'])->name('admin.settings.update_password');
+
+
+Route::get('settings/create_admin', [AdminController::class, 'create_admin'])->name('admin.settings.create_admin');
+Route::post('settings/store_admin', [AdminController::class, 'store_admin'])->name('admin.settings.store_admin');
+
+
+Route::get('settings/{admin}/edit_admin', [AdminController::class, 'edit_admin'])->name('admin.settings.edit_admin');
+Route::patch('settings/{admin}/update_admin', [AdminController::class, 'update_admin'])->name('admin.settings.update_admin');
+
+Route::delete('settings/{admin}/destroy_admin', [AdminController::class, 'destroy_admin'])->name('admin.settings.destroy_admin');
+
+Route::get('settings/{admin}/edit_password_admin', [AdminController::class, 'edit_password_admin'])->name('admin.settings.edit_password_admin');
+Route::patch('settings/{admin}/update_password_admin', [AdminController::class, 'update_password_admin'])->name('admin.settings.update_password_admin');
+
+

@@ -1,11 +1,11 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Imagenes del contenido')
+@section('title', 'Imágenes del contenido')
 
 
 @section('content-header')
     @include('admin.partials.content-header', [
-        'title' => 'Imagenes',
+        'title' => 'Imágenes',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -23,7 +23,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Imagenes',
+                'name' => 'Imágenes',
                 'route' => null,
                 'isActive' => 'active',
             ],
@@ -44,7 +44,7 @@
                     <!-- Academic Information -->
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Imagenes del contenido:</b> </h3>
+                            <h3 class="card-title"><b>Imágenes del contenido:</b> </h3>
                             
                         </div>
 
@@ -55,8 +55,8 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th>N°</th>
-                                            <th>Imagenes</th>
-                                            <th>Imagen ID</th>
+                                            <th>Imágenes</th>
+                                           {{--  <th>Imagen ID</th> --}}
                                            
                                              <th>Acciones </th> 
                                         </tr>
@@ -65,7 +65,7 @@
                                         @forelse ($images as $image)
                                             <tr>
                                                 <td>{{ $loop->index+1 }}</td>
-                                                <td>{{ $image->id }}</td>
+                                                {{-- <td>{{ $image->id }}</td> --}}
 
                                                 <td>
                                                     <img src="{{ asset($image->fullAsset()) }}" alt="" width="150rem">

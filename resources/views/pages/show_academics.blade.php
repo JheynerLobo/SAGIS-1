@@ -67,8 +67,9 @@
                                                      @if ($loop->index == 0)
 
                                                      <div class="col-md-6">
-                                                        <a style="text-decoration: none; color: #000000;" class="disabled1" 
-                                                        href="{{route('edit_academic',  $academic->id  ) }}" >
+                                                       {{--  <a style="text-decoration: none; color: #000000;" class="disabled1"  --}}
+                                                        <a style="color: #000000;" 
+                                                        href="{{route('edit_academic_first',  $academic->id  ) }}" >
                                                             
                                                             <button type="button" class="btn btn-sm btn-success fas fa-edit"
                                                                 style="width: 30px; height: 30px" disabled></button>

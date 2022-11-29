@@ -11,4 +11,14 @@ class AdminRepository extends AbstractRepository
     {
         $this->model = $model;
     }
+
+    /**
+     * Get users by role
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getByRole(string $role)
+    {
+        return $this->model->role($role)->get();
+    }
 }

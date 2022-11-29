@@ -17,7 +17,7 @@
                     alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ Auth::guard('admin')->user()->person->fullName() }}</a>
+                <a href="{{ route('admin.settings') }}" class="d-block">{{ Auth::guard('admin')->user()->person->fullName() }}</a>
             </div>
         </div>
 
@@ -94,6 +94,16 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.settings') }}" class="nav-link">
+                        <em class="nav-icon fas fa-cog"></em>
+                        <p>
+                            Ajustes
+
+                        </p>
+                    </a>
                 </li>
 
 

@@ -9,11 +9,8 @@
 <body>
     <h1>Buenas ingeniero(a): {{$person->name}} {{$person->lastname}}, con los siguientes datos podra
     ingresar al aplicativo SAGIS:</h1>
+    <p>Link de la aplicación: <strong>https://sagis-production.up.railway.app/login</strong></p>
     <p>Correo electrónico: <strong>{{ $userParams['email'] }}</strong> </p>
     <p>Contraseña:<strong>password</strong></p>
-    {{-- <p><strong>Asunto:</strong> {{ $userParams['subject'] }}</p>
-    <p><strong>Contenido:</strong> {{ $userParams['content'] }}</p> --}}
-   {{--  {{ var_dump($msg) }} --}}
-    
 </body>
 </html>
