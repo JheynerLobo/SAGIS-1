@@ -395,7 +395,7 @@ class AdminController extends Controller
     {
         try {
 
-            DB::beginTransaction();
+            /* DB::beginTransaction(); */
 
         
             if(!($request->file('image') == null)) {
@@ -432,32 +432,32 @@ class AdminController extends Controller
             $this->adminRepository->create($adminParams);
 
             /**Creating PersonAcademic */
-           /*  $personAcademicParams = $request->only( ['person_id', 'program_id', 'year']);
-            $personAcademicParams['person_id'] = $person->id; */
+            $personAcademicParams = $request->only( ['person_id', 'program_id', 'year']);
+            $personAcademicParams['person_id'] = $person->id;
 
     
-           /* $programs = $this->programRepository->first()->id; */
+           $programs = $this->programRepository->first()->id;
 
          
-          /*   $personAcademicParams['program_id'] = $programs;
+            $personAcademicParams['program_id'] = $programs;
             $personAcademicParams['year'] = 2000;
 
-            $this->personAcademicRepository->create($personAcademicParams); */
+            $this->personAcademicRepository->create($personAcademicParams);
 
 
             /** Searching Admin */
             $admin = $this->adminRepository->getByAttribute('email', $adminParams['email']);
             
             //$user->roles()->attach($this->role);
-            $admin->roles()->sync($this->role);
+            /* $admin->roles()->sync($this->role); */
 
            /*  Mail::to($person->email)->queue(new MessageReceived($person, $userParams)); */
 
-            DB::commit();
+           /*  DB::commit(); */
             return redirect()->route('admin.settings')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
-            DB::rollBack();
-            dd($th);
+          /*   DB::rollBack();
+            dd($th); */
             return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
         }
     }
@@ -468,16 +468,16 @@ class AdminController extends Controller
             $admin = $this->adminRepository->getById($id);
             $person = $this->personRepository->getById($admin->person_id);
 
-            DB::beginTransaction();
+           /*  DB::beginTransaction(); */
 
             $this->personRepository->delete($person);
 
-           DB::commit();
+           /* DB::commit(); */
             
            
             return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
-            DB::rollBack();
+            /* DB::rollBack(); */
             return $th->getMessage();
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
