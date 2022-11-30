@@ -50,7 +50,7 @@
                 <div class="col-12 col-lg-6">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Datos personales</b> </h3>
+                            <h3 class="card-title"><strong>Datos personales</strong> </h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

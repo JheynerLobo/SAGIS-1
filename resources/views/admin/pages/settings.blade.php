@@ -49,7 +49,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Mis datos personales</b> </h3>
+                            <h3 class="card-title"><strong>Mis datos personales</strong> </h3>
                         </div>
     
     
@@ -164,9 +164,6 @@
                                         <!-- /.card-body -->
                                     </div>
                                     <!-- /.card -->
-                           
-    
-                                    {{-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> --}}
     
                                 </div>
     
@@ -193,7 +190,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Administradores registrados</b> </h3>
+                            <h3 class="card-title"><strong>Administradores registrados</strong> </h3>
 
                             <h6 class="font-weight-bold mt-5">Total de Admins: <a
                                     class="btn btn-sm btn-danger">{{ $getCountAdmins }}</a></h6>
@@ -256,7 +253,7 @@
                                                             id="{{ $admin->id }}" method="POST" class="formulario-eliminar">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button type="submit" disabled class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
+                                                            <button type="submit" disabled class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
                                                         </form>                 
 
                                                         @else
@@ -264,7 +261,7 @@
                                                                     id="{{ $admin->id }}" method="POST" class="formulario-eliminar">
                                                                     @csrf
                                                                     @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><i class="fas fa-trash"></i></button>
+                                                                    <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
                                                                 </form>                 
                                                     
                                                         
