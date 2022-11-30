@@ -44,13 +44,10 @@
 
                             <div class="mr-3">
                                 @if($item->postCategory->id != 5)
-                                <a href="{{ route('admin.posts.images', $item->id) }}" class="btn btn-sm btn-info"><i
-                                    class="fas fa-image"></i></a>
+                                <a href="{{ route('admin.posts.images', $item->id) }}" class="btn btn-sm btn-info"><em
+                                    class="fas fa-image"></em></a>
                                 @else
-                                
-                                    <button disabled><i class="fas fa-image"></i></button>
-    
-                              
+                                    <button disabled><em class="fas fa-image"></em></button>
                                 @endif
                                 
 
@@ -63,33 +60,24 @@
                                     method="POST" class="formulario-eliminar">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"><i
-                                            class="fas fa-trash"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-danger"><em
+                                            class="fas fa-trash"></em></button>
                                 </form>
                               
                             </div>
                           {{--   @else
                             <div class="mr-1">
-                                <button disabled><i class="fas fa-image"></i></button>
+                                <button disabled><em class="fas fa-image"></em></button>
 
                             </div>
 
                             @endif --}}
 
 
-
-
-
-
                         </div>
                     </td>
 
                     <td class="text-center ">
-
-
-
-                        
-
                             @if($item->postCategory->name != "Vídeos" && $item->getCountimage()>=1 &&
                             $item->postCategory->name != "Galería"&& !(is_null($item->videoHeader())))
 

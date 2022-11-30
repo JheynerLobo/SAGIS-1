@@ -40,11 +40,9 @@
             <div class="row">
                 <div class="col-12">
                    
-
-                    <!-- Academic Information -->
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Imágenes del contenido:</b> </h3>
+                            <h3 class="card-title"><strong>Imágenes del contenido:</strong> </h3>
                             
                         </div>
 
@@ -118,95 +116,8 @@
                         </div>
                         <!-- /.card-body -->
 
-
                     </div>
-                    <!-- ./Academic Information -->
-
-                    <!-- Job Information -->
-                    {{-- <div class="card">
-                        <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Datos laborales</b> </h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="display table table-striped table-bordered" class="table1" style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>N°</th>
-                                            <th>Nombre Empresa</th>
-                                            <th>Lugar Empresa</th>
-                                            <th>Dirección Empresa</th>
-                                            <th>Correo Empresa</th>
-                                            <th>Telefono Empresa</th>
-                                            <th>Actualmente laborando</th>
-                                            <th>Salario</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($laborales as $laboral)
-                                            @php
-                                                $company = $laboral->company;
-                                            @endphp
-                                            <tr>
-                                                <td>{{ $loop->index }}</td>
-                                                <td>{{ $company->name }}</td>
-                                                <td>{{ $company->city->name }}</td>
-                                                <td>{{ $company->address }}</td>
-                                                <td>{{ $company->email }}</td>
-                                                <td>{{ $company->phone }}</td>
-                                                <td>{{ transformBoolToText($laboral->in_working, 'Si', 'No') }}</td>
-                                                <td>${{ getFormatoNumber($laboral->salary) }}</td>
-                                                <td>
-                                                    <div class="icons-acciones">
-                                                    
-                                                        <div class="mr-3">
-                                                            <a style="text-decoration: none; color: #000000;"
-                                                            href="{{ route('admin.graduates.edit_jobs', [$item->id, $laboral->id ] ) }}">
     
-                                                                <button type="button" class="btn btn-sm btn-success fas fa-edit"
-                                                                    style="width: 30px; height: 30px"></button>
-                                                            </a>
-                                                        </div>
-    
-                                                        <div class="mr-3">
-                                                            <form action="{{ route('admin.graduates.destroy_jobs', [$item->id, $laboral->id ]) }}"
-                                                                id="{{ $item->id }}" method="POST" class="formulario-eliminar">
-                                                                @csrf @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger btnDelete" style="width: 30px; height: 30px"><em class="fas fa-trash"></em></button>
-                                                            </form>             
-                                                        </div>
-                                                    
-                                                    
-                                                    
-                                                    </div>
-
-                                                </td>
-                                                
-                                            </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="12">Vacío.</td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-
-                                </table>
-
-                                <div class="mt-2">
-                                    <a href="{{ route('admin.graduates.create_jobs', $item->id) }}" class="btn btn-sm btn-danger">
-                                        Añadir nuevo
-                                        Dato Laboral</a>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <!-- /.card-body -->
-
-
-                    {{-- </div> --}}
-                    <!-- ./ Job Information -->
-
                 </div>
                 <!-- /.col -->
             </div>

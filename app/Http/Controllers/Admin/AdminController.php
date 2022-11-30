@@ -165,7 +165,7 @@ class AdminController extends Controller
     
         }
 
-        function edit_admin($id){
+       public function edit_admin($id){
             try {
                 $item = $this->personRepository->getById($id);
 
@@ -458,8 +458,8 @@ class AdminController extends Controller
             return redirect()->route('admin.settings')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);
         } catch (\Exception $th) {
             DB::rollBack();
-            dd($th);
-            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+            //dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No se ha registrado correctamente.']);
         }
     }
 
@@ -479,7 +479,6 @@ class AdminController extends Controller
             return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
             DB::rollBack();
-            return $th->getMessage();
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
 
