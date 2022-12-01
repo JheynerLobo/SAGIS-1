@@ -102,7 +102,7 @@
 
     <!-- Telephone -->
     <div class="form-group">
-        <label class="form-label">Teléfono(Opcional):</label>
+        <label class="form-label">Teléfono:</label>
         <input type="text" class="form-control " name="telephone" value="{{ $item->telephone }}">
     </div>
     @error('telephone')
@@ -268,7 +268,7 @@
 
     <!-- Telephone -->
     <div class="form-group">
-        <label class="form-label">Teléfono(Opcional):</label>
+        <label class="form-label">Teléfono:</label>
         <input type="text" class="form-control " name="telephone" value="{{ $item->telephone }}">
     </div>
     @error('telephone')
