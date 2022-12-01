@@ -41,7 +41,7 @@
                 </div>
                 @endif
           
-                <p>{{ $item->description }}</p>
+                <p style="white-space: pre-wrap;">{{ $item->description }}</p>
                 
       
                 <div style="clear:both"></div>
