@@ -15,8 +15,11 @@ class PersonAcademicRepository extends AbstractRepository
 
     public function graduatesByYear()
     {
+        $joinPrograms = "programs";
         $query = $this->model
-            ->select(['person_academic.year', DB::raw('count(person_academic.person_id) AS total')]);
+            ->select(['person_academic.year', DB::raw('count(person_academic.person_id) AS total')])
+            ->join("{$joinPrograms}", "person_academic.program_id", "{$joinPrograms}.id")
+            ->where("{$joinPrograms}.id", 1);
 
         return $query
             // ->groupBy('person_academic.person_id')

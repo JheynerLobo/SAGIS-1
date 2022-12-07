@@ -217,5 +217,9 @@ class AbstractRepository
             $model_id = $this->model->where('name', $name)->latest()->value('id');
         return $model_id;
     }
+
+    public function last(){
+        return $this->model->latest()->first()->id;
+    }
 }
 

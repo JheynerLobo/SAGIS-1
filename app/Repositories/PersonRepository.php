@@ -76,4 +76,18 @@ class PersonRepository extends AbstractRepository
         ->get();
 
     }
+
+
+    public function getOnlyGraduates(){
+
+        $table = $this->model->getTable();
+        $query = $this->model
+            ->select("{$table}.id")
+            ->where("{$table}.id", "!=", 1)
+            ->where("{$table}.id", "!=", 2);
+
+         return $query
+        ->get();
+
+    }
 }

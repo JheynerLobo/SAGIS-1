@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Imports\UsersImport;
+
 use Illuminate\Http\Request;
 
+use App\Imports\PeopleImport;
 use App\Mail\MessageReceived;
-
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Repositories\CityRepository;
@@ -14,14 +16,15 @@ use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Repositories\StateRepository;
 use App\Repositories\PersonRepository;
+use App\Repositories\CompanyRepository;
 use App\Repositories\CountryRepository;
 use App\Repositories\FacultyRepository;
 use App\Repositories\ProgramRepository;
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\UniversityRepository;
-use App\Repositories\CompanyRepository;
 use App\Repositories\DocumentTypeRepository;
 use App\Http\Requests\Graduates\StoreRequest;
 use App\Repositories\PersonCompanyRepository;
@@ -29,6 +32,7 @@ use App\Http\Requests\Graduates\UpdateRequest;
 use App\Repositories\PersonAcademicRepository;
 use App\Http\Requests\Graduates\StoreJobRequest;
 use App\Http\Requests\Graduates\UpdateJobRequest;
+
 use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
@@ -150,6 +154,61 @@ class GraduateController extends Controller
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public function import_excel(Request $request){
+
+        try{
+     $file = $request->file('file');
+
+
+      /*   $person = $this->personRepository->last();
+        dd($person); */
+   
+    
+
+        //dd($request['name']);
+        //dd($file);
+
+      //  dd(new PeopleImport);
+        Excel::import(new PeopleImport, $file);
+
+        
+        return back()->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha importado los datos correctamente.']);
+    } catch (\Exception $th) {
+        dd($th);
+         return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No se han guardado los datos correctamente.']);
+    }
+
+    }
+
+    public function destroy_all(){
+        try {
+
+            $people = $this->personRepository->getOnlyGraduates();
+
+            
+            
+
+            DB::beginTransaction();
+
+            foreach($people as $person){
+
+                 $this->personRepository->delete($person);
+            }
+
+           
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se han eliminado todos los graduados correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
+
     }
 
 
@@ -283,6 +342,7 @@ class GraduateController extends Controller
             $user = $this->userRepository->getByAttribute('email', $userParams['email']);
             
             //$user->roles()->attach($this->role);
+            //dd($user->roles()->sync($this->role));
             $user->roles()->sync($this->role);
 
             Mail::to($person->email)->queue(new MessageReceived($person, $userParams));
@@ -292,7 +352,7 @@ class GraduateController extends Controller
         } catch (\Exception $th) {
             DB::rollBack();
             dd($th);
-            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'Se ha registrado correctamente.']);
+            return back()->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No se ha registrado correctamente.']);
         }
     }
 
