@@ -30,12 +30,78 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header  border-info">
-                            <h3 class="card-title"><b>Graduados registrados</b> </h3>
-                            <div class="mt-5">
-                                <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-danger">
-                                    Añadir nuevo
-                                    graduado</a>
+
+                         
+                            <div class="d-flex justify-content-start">
+                                <h3 class="card-title"><b>Graduados registrados</b> </h3>
                             </div>
+
+                        
+                           {{--      <div class="d-flex justify-content-start">
+                                   
+                                    <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-danger">
+                                        Añadir nuevo
+                                        graduado</a>
+                                
+                                </div>
+                             --}}
+                       
+
+                            
+        
+                                <div class="d-flex justify-content-end">
+
+                    
+                        
+                                 {{--    @php
+                                    foreach ($items as $key =>$item ) {
+                                        $ps[$key] = $item->person;
+                                    }
+                                         
+
+                                    @endphp
+                                            --}}
+                                        
+        
+                                <form action="{{ route('admin.graduates.destroy_all') }}"
+                                        method="POST" class="formulario-eliminar" class="form">
+                                        @csrf
+                                        
+                                        <button type="submit" class="btn btn-sm btn-danger btn-eliminar" id="delete">Eliminar Todo</button>
+                                    </form> 
+                                 
+                                </div>
+                                <div class="d-flex justify-content-between mt-2 ">
+                                    
+                                    <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-primary">
+                                        Añadir nuevo
+                                        graduado</a>
+                                   
+    
+                                    
+                                        <div class="mt-2">
+                                                <form action="{{ route('admin.graduates.import_excel') }}" method="POST" enctype="multipart/form-data" >
+                                                    @csrf
+            
+                                                    <input type="file" name="file" required>
+            
+                                                    <button class="btn btn-success">Importar graduados</button>
+            
+            
+            
+            
+                                                </form>
+                                        </div>
+    
+                                </div>
+
+
+                           
+
+                        
+                            
+
+                          
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -521,6 +587,64 @@
             });
      
     };
+/* 
+    $(".btn-eliminar").on("click", function (e) {
+        e.preventDefault();
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, ¡Estoy seguro!',
+        cancelButtonText: 'Cancelar',
+                closeOnConfirm: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            btnDelete.closest('form').submit();
+            // this.submit();
+            } else {
+                return false;
+            }
+        
+        })
+            }); */
+
+
+
+          /*   var eventFiredBtnDeleteSweetAlert2 = function(jS) { */
+                     
+       // Use sweetalert AFTER DataTables
+       $(".btn-eliminar").on('click', function(e) {
+       /*  alert("Funciona o nO") */
+           e.preventDefault();
+   
+           var btnDelete2 = $(this);
+           Swal.fire({
+       title: '¿Estás seguro?',
+       text: "¡No podrás revertir esto!",
+       icon: 'warning',
+       showCancelButton: true,
+       confirmButtonColor: '#3085d6',
+       cancelButtonColor: '#d33',
+       confirmButtonText: 'Sí, ¡Estoy seguro!',
+       cancelButtonText: 'Cancelar',
+               closeOnConfirm: true
+           }).then((result) => {
+       if (result.isConfirmed) {
+           btnDelete2.closest('form').submit();
+           // this.submit();
+           } else {
+               return false;
+           }
+       
+       })
+           });
+    
+   /* }; */
+     
+
     //eventFiredBtnDeleteSweetAlert();
     
     
@@ -538,5 +662,7 @@
        
     }); */
        </script>
+
+       
 
 @endsection
