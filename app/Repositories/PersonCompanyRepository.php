@@ -105,9 +105,43 @@ class PersonCompanyRepository extends AbstractRepository
 
         return $query
             ->groupBy('countries.id')
-            ->get()->map(function ($map) {
+          /*   ->orderby('countries.id', 'ASC') */
+         /*  ->get(); */
+            ->get()->map(function ($map)  {
+             
+            
+
+              /*   return [$map['id'] => $map['total']]; */
+                /* $map->id; */
                 return $map->total;
+
+                
             });
+
+          /*   ->get()->map(function ($map){
+                return [
+                    'id' => $map->id,
+                    'total' => $map->total
+                ];
+            }); */
+    }
+
+    public function graduatesByCountryName()
+    {
+        $query = $this->model
+            ->select([
+                DB::raw('countries.name, count(person_company.person_id) AS total')
+            ])
+            ->join('companies', 'companies.id', 'person_company.company_id')
+            ->join('cities', 'cities.id', 'companies.city_id')
+            ->join('states', 'states.id', 'cities.state_id')
+            ->join('countries', 'countries.id', 'states.country_id');
+
+        $query->where('person_company.in_working', true);
+
+        return $query
+            ->groupBy('countries.id')
+          ->get();
     }
 
     public function getCompanies(){

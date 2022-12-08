@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 use Faker\Generator as Faker;
 
+use function PHPSTORM_META\map;
+
 class ReportController extends Controller
 {
     /** @var PersonRepository */
@@ -104,6 +106,13 @@ class ReportController extends Controller
                 return $map->name;
             });
 
+            /* Countries workings */
+
+            $countriesWorking = $this->personCompanyRepository->graduatesByCountryName()->map(function ($map) {
+                return $map->name;
+            });
+
+           /*  dd($countries); */
             /** Worker by Countries */
             $graduatesByCountry = $this->personCompanyRepository->graduatesByCountry();
 
@@ -135,7 +144,9 @@ class ReportController extends Controller
                 'arrayColors',
                 'years',
                 'graduatesByYearTotals',
-                'posts', 'graduadoSinTrabajo'
+                'posts', 'graduadoSinTrabajo',
+               'countriesWorking'
+                
             ));
         } catch (\Exception $th) {
             throw $th;

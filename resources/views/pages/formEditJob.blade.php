@@ -59,8 +59,10 @@
     <div class="mt-4">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-danger">Guardar</button>
-            <button class="btn btn-warning ml-5"><a style="color:black;
-                    text-decoration: none;" href="{{ route('jobs') }}">Regresar</a> </button>
+            <div class="ml-5">
+                <a class="btn btn btn-warning " style="color:black;
+                text-decoration: none;" href="{{ route('jobs') }}">Regresar</a>
+            </div>
         </div>
 
     </div>

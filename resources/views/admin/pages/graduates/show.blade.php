@@ -2,6 +2,24 @@
 
 @section('title', 'Datos del graduado')
 
+@section('content-header')
+    @include('admin.partials.content-header', [
+        'title' => 'Datos Generales',
+        'items' => [
+            [
+                'name' => 'Inicio',
+                'route' => route('admin.home'),
+                'isActive' => null,
+            ],
+            [
+                'name' => 'Datos Generales',
+                'route' => null,
+                'isActive' => 'active',
+            ],
+        ],
+    ])
+@endsection
+
 @section('content')
 
     <!-- Main content -->

@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Request;
 
-use App\Http\Requests\Filters\NoticeFilterRequest;
-use App\Http\Requests\Filters\CourseFilterRequest;
-use App\Http\Requests\Filters\EventFilterRequest;
-use App\Http\Requests\Filters\GalleryFilterRequest;
-use App\Http\Requests\Filters\VideoFilterRequest;
-use App\Repositories\PostCategoryRepository;
 use App\Repositories\PostRepository;
+use App\Repositories\PostImageRepository;
+use App\Repositories\PostCategoryRepository;
+use App\Http\Requests\Filters\EventFilterRequest;
+use App\Http\Requests\Filters\VideoFilterRequest;
+use App\Http\Requests\Filters\CourseFilterRequest;
+use App\Http\Requests\Filters\NoticeFilterRequest;
+use App\Http\Requests\Filters\GalleryFilterRequest;
 
 class HomeController extends Controller
 {
@@ -21,20 +22,26 @@ class HomeController extends Controller
     /** @var PostRepository */
     protected $postRepository;
 
+    protected $postImageRepository;
+
     /** @var string */
     protected $viewLocation = 'pages.';
 
     public function __construct(
         PostCategoryRepository $postCategoryRepository,
-        PostRepository $postRepository
+        PostRepository $postRepository,
+        PostImageRepository $postImageRepository
     ) {
         $this->postCategoryRepository = $postCategoryRepository;
         $this->postRepository = $postRepository;
+        $this->postImageRepository =  $postImageRepository;
     }
 
     public function home()
     {
-        return view('pages.home');
+       
+      $postGalery = $this->postImageRepository->getPotsGaleria();
+        return view('pages.home', compact('postGalery'));
     }
 
     public function notices(NoticeFilterRequest $request)

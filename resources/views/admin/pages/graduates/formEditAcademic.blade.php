@@ -19,24 +19,6 @@
     @enderror
     <!-- ./Level Academic -->
 
-    <!-- Program -->
- {{--    <div class="form-group">
-        <label class="form-label">Nombre programa:</label>
-        <select name="program_name" class="form-control select2bs4">
-            <option value="-1">Seleccione el programa.</option>
-            @forelse ($programs_full as $program)
-
-            <option value="{{ $program->id }}" {{ isSelectedOld($program->name, $data_academic->program->name) }}>
-                {{ $program->name }}
-            </option>
-            @empty
-            @endforelse
-        </select>
-    </div>
-    @error('program_name')
-    <small class="text-danger">{{ $message }}</small>
-    @enderror --}}
-    <!-- ./Program -->
 
 
     <div class="form-group">
@@ -49,25 +31,6 @@
 
 
 
-
-    <!-- Uniersity -->
-   {{--  <div class="form-group">
-        <label>Universidad:</label>
-        <select name="university_name" class="form-control select2bs4 disabled">
-            <option value="-1">Seleccione la universidad.</option>
-            @forelse ($academics_full as $academicF)
-
-            <option value="{{ $academicF->id }}" {{ isSelectedOld($academicF->name, $data_academic->program->faculty->university->name) }}>
-                {{ $academicF->name }}
-            </option>
-            @empty
-            @endforelse
-        </select>
-    </div>
-    @error('university_name')
-    <small class="text-danger">{{ $message }}</small>
-    @enderror --}}
-    <!-- ./University -->
 
     <div class="form-group">
         <label class="form-label">Facultad:</label>
@@ -106,8 +69,10 @@
     <div class="mt-4">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-danger">Guardar</button>
-            <button class="btn btn-warning ml-5"><a style="color:black;
-                    text-decoration: none;" href="{{ route('admin.graduates.show', $item->id) }}">Regresar</a> </button>
+                    <div class="ml-5">
+                        <a class="btn btn-warning " style="color:black;
+                        text-decoration: none;" href="{{ route('admin.graduates.show', $item->id) }}">Regresar</a>
+                    </div>
         </div>
 
     </div>

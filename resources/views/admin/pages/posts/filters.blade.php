@@ -53,8 +53,21 @@
                 <a href="{{ route('admin.posts.create') }}" class="btn btn-primary btn-sm ml-2">Registrar</a>
             </div>
             <hr>
+          
             <h6 class="font-weight-bold">Total de Publicaciones: <a
                     class="btn btn-sm btn-danger">{{ $total }}</a></h6>
         </div>
     </form>
+    @if($total != 0)
+        <div class="btn-group mb-3">
+            <form action="{{ route('admin.posts.destroy_all') }}"
+            method="POST" class="formulario-eliminar" class="form">
+            @csrf
+            
+            <button type="submit" class="btn btn-sm btn-danger btn-eliminar" id="delete">Eliminar Todo</button>
+        </form>
+    
+        </div>
+    @endif
+   
 </div>

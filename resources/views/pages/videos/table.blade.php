@@ -20,7 +20,8 @@
                 </div>
             </div>
         @empty
-            <h4>No hay videos registrados.</h4>
+            <h4 class="mb-4">No hay videos registrados.</h4>
+            <img src="https://cdn-icons-png.flaticon.com/512/85/85488.png" alt="No hay">
         @endforelse
     </div>
 

@@ -35,6 +35,8 @@ Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
 
 Route::post('graduates/import_excel', [GraduateController::class, 'import_excel'])->name('admin.graduates.import_excel');
 Route::post('graduates/destroy_all', [GraduateController::class, 'destroy_all'])->name('admin.graduates.destroy_all');
+Route::post('graduates/send_email', [GraduateController::class, 'send_email'])->name('admin.graduates.send_email');
+
 
 Route::get('graduates/{graduate}/edit-password', [GraduateController::class, 'edit_password'])->name('admin.graduates.edit_password');
 Route::patch('graduates/{graduate}/update-password', [GraduateController::class, 'update_password'])->name('admin.graduates.update_password');
@@ -59,6 +61,8 @@ Route::delete('graduates/{graduate}/company_jobs/{job}/destroy', [GraduateContro
 
 Route::resource('posts', PostController::class, ['as' => 'admin']);
 
+
+
 Route::get('posts/{post}/images', [PostController::class, 'images'])->name('admin.posts.images');
 Route::patch('posts/{post}/update_images', [PostController::class, 'update_images'])->name('admin.posts.update_images');
 
@@ -71,6 +75,7 @@ Route::patch('posts/{post}/images/{image}/update_image', [PostController::class,
 
 Route::delete('posts/{post}/images/{image}/destroy_image', [PostController::class, 'destroy_image'])->name('admin.posts.destroy_image');
 
+Route::post('posts/destroy_all', [PostController::class, 'destroy_all'])->name('admin.posts.destroy_all');
 
 //Route::get('graduates/{graduate}/academic_studies/{academic}/edit', [GraduateController::class, 'edit_academic'])->name('admin.graduates.edit_academic');
 
