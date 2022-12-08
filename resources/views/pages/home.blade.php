@@ -83,8 +83,98 @@
     </section>
 
 
-    <div class="container">
-        <div class="row galeria">
+    <div class="container ">
+
+       {{--  @if($postGalery->count()<=4) --}}
+
+
+       @if($postGalery->count()==0)
+
+       <div class="row" id="galeria">
+
+        
+            <div class="col-md-12  mb-5">
+
+                <img src="https://img.icons8.com/ios/500/no-image.png" alt="No hay">
+                <div class="titulo" id="vinculoTitulo2">No hay imágenes en la galería.</div>
+                
+                
+
+            </div>
+                
+    
+    
+</div>
+
+
+       @elseif($postGalery->count()==1)
+       <div class="row" id="galeria">
+
+        @forelse ($postGalery  as $key=> $galery )
+
+            @if($key <=3)
+
+        
+            <div class="col-md-12  mb-5 ">
+
+                <a href="{{ asset($galery->fullAsset()) }}" data-lightbox="galeriaS" data-title="{{ ($galery->title) }}"> <img
+                        src="{{ asset($galery->fullAsset()) }}" alt=""></a>
+                <div class="titulo" id="vinculoTitulo2">{{ ($galery->title) }} </div>
+                
+                
+
+            </div>
+                
+            @endif
+        
+    
+
+        @empty
+
+        @endforelse
+    
+</div>
+
+       
+       @else
+       <div class="row galeria ">
+
+        @forelse ($postGalery  as $key=> $galery )
+
+            @if($key <=3)
+
+        
+            <div class="col-md-6  mb-5 colum">
+
+                <a href="{{ asset($galery->fullAsset()) }}" data-lightbox="galeriaS" data-title="{{ ($galery->title) }}"> <img
+                        src="{{ asset($galery->fullAsset()) }}" alt=""></a>
+                <div class="titulo" id="vinculoTitulo2">{{ ($galery->title) }} </div>
+                
+                
+
+            </div>
+                
+            @endif
+        
+    
+
+        @empty
+
+        @endforelse
+    
+</div>
+
+        
+       @endif
+
+        </div>
+
+    
+
+
+
+        
+       {{--  <div class="row galeria">
             <div class="col-md-6  mb-5 colum">
 
                 <a href="{{ asset('img/G1.jpg') }}" data-lightbox="galeriaS" data-title="Evento EISI"> <img
@@ -113,10 +203,16 @@
                 <div class="titulo">Charla sobre IA </div>
             </div>
 
-        </div>
+        </div> --}}
+
+            
+      
+        
 
 
-    </div>
+   
+
+    
 
 
     <section class="contenido mt-3 mb-5">

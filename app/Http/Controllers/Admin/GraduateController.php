@@ -130,7 +130,10 @@ class GraduateController extends Controller
         try {
             $items = $this->userRepository->getByRole($this->role->name);
 
-            return view('admin.pages.graduates.index', compact('items'));
+            $cantidadGraduates = $items->count();
+    
+
+            return view('admin.pages.graduates.index', compact('items', 'cantidadGraduates'));
         } catch (\Throwable $th) {
             //throw $th;
         }
@@ -208,6 +211,33 @@ class GraduateController extends Controller
             dd($th);
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
+
+    }
+
+
+    public function send_email(){
+
+        try {
+
+            $people = $this->personRepository->getOnlyGraduatesAll();
+
+            DB::beginTransaction();
+
+            foreach($people as $person){
+                $userParams =  $person->user;
+                Mail::to($person->email)->queue(new MessageReceived($person,$userParams));
+            }
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se han enviado las credenciales a todos los graduados correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+           // dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se han enviado las credenciales', 'icon' => 'error']);
+        }
+
 
     }
 

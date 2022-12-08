@@ -52,5 +52,26 @@ class PostImageRepository extends AbstractRepository
     }
 
 
+    public function getPotsGaleria()
+    {
+
+        $table = $this->model->getTable();
+        $joinPost = "posts";
+        $joinPostCategories = "post_categories";
+        $query = $this->model
+            ->select("*")
+            ->join("{$joinPost}", "{$table}.post_id", "{$joinPost}.id")
+            ->join("{$joinPostCategories}", "{$joinPost}.post_category_id", "{$joinPostCategories}.id")
+            ->where('post_categories.name', 'like', '%Galería%')
+            ->where('post_images.is_header', 1)
+            ->orderBy("{$table}.id", 'ASC');
+
+        // return $this->all(['id'])->where('post_category_id', 1);
+
+        return $query->get();
+    }
+
+
+
 
 }

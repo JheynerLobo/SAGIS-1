@@ -132,8 +132,10 @@
         <div class="form-group">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn btn-sm btn-danger">Guardar</button>
-                <button class="btn btn-sm btn-warning ml-5"><a style="color:black;
-                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a> </button>
+                <div class="ml-5">
+                    <a class="btn btn-sm btn-warning " style="color:black;
+                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a>
+                </div>
             </div>
         </div>
         <!-- ./Submit -->
@@ -221,8 +223,10 @@
         <div class="form-group">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn btn-sm btn-danger">Guardar</button>
-                <button class="btn btn-sm btn-warning ml-5"><a style="color:black;
-                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a> </button>
+                <div class="ml-5">
+                    <a class="btn btn-sm btn-warning " style="color:black;
+                    text-decoration: none;" href="{{ route('admin.posts.index') }}">Regresar</a>
+                </div>
             </div>
         </div>
         <!-- ./Submit -->

@@ -9,7 +9,7 @@
         'items' => [
             [
                 'name' => 'Inicio',
-                'route' => route('home'),
+                'route' => route('admin.home'),
                 'isActive' => null,
             ],
             [
@@ -36,41 +36,31 @@
                                 <h3 class="card-title"><b>Graduados registrados</b> </h3>
                             </div>
 
-                        
-                           {{--      <div class="d-flex justify-content-start">
-                                   
-                                    <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-danger">
-                                        Añadir nuevo
-                                        graduado</a>
+                                        
+                                @if($cantidadGraduates!=0)
                                 
-                                </div>
-                             --}}
-                       
+                                
 
-                            
-        
                                 <div class="d-flex justify-content-end">
 
-                    
-                        
-                                 {{--    @php
-                                    foreach ($items as $key =>$item ) {
-                                        $ps[$key] = $item->person;
-                                    }
-                                         
+                                    <form action="{{ route('admin.graduates.send_email') }}"
+                                    method="POST" class="formulario-eliminar" class="form ">
+                                    @csrf
+                                    
+                                    <button type="submit" class="btn btn-sm btn-warning btn-eliminar mr-2" id="delete"><em class="fas fa-mail-bulk"></em></button>
+                                </form> 
 
-                                    @endphp
-                                            --}}
-                                        
-        
-                                <form action="{{ route('admin.graduates.destroy_all') }}"
-                                        method="POST" class="formulario-eliminar" class="form">
-                                        @csrf
-                                        
-                                        <button type="submit" class="btn btn-sm btn-danger btn-eliminar" id="delete">Eliminar Todo</button>
-                                    </form> 
-                                 
-                                </div>
+                                   <form action="{{ route('admin.graduates.destroy_all') }}"
+                                           method="POST" class="formulario-eliminar" class="form">
+                                           @csrf
+                                           
+                                           <button type="submit" class="btn btn-sm btn-danger btn-eliminar" id="delete">Eliminar Todo</button>
+                                       </form> 
+                                    
+                                   </div>
+                                    
+                                @endif
+                              
                                 <div class="d-flex justify-content-between mt-2 ">
                                     
                                     <a href="{{ route('admin.graduates.create') }}" class="btn btn-sm btn-primary">
@@ -83,7 +73,7 @@
                                                 <form action="{{ route('admin.graduates.import_excel') }}" method="POST" enctype="multipart/form-data" >
                                                     @csrf
             
-                                                    <input type="file" name="file" required>
+                                                    <input type="file" name="file"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
             
                                                     <button class="btn btn-success">Importar graduados</button>
             
@@ -95,16 +85,12 @@
     
                                 </div>
 
-
-                           
-
-                        
-                            
-
-                          
+                
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <h6 class="font-weight-bold mb-3">Total de Graduados: <a
+                                class="btn btn-sm btn-danger">{{ $cantidadGraduates }}</a></h6>
 
 
                             <table id="example1" class="table table-bordered table-striped">
@@ -587,33 +573,7 @@
             });
      
     };
-/* 
-    $(".btn-eliminar").on("click", function (e) {
-        e.preventDefault();
-    Swal.fire({
-        title: '¿Estás seguro?',
-        text: "¡No podrás revertir esto!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, ¡Estoy seguro!',
-        cancelButtonText: 'Cancelar',
-                closeOnConfirm: true
-    }).then((result) => {
-        if (result.isConfirmed) {
-            btnDelete.closest('form').submit();
-            // this.submit();
-            } else {
-                return false;
-            }
-        
-        })
-            }); */
 
-
-
-          /*   var eventFiredBtnDeleteSweetAlert2 = function(jS) { */
                      
        // Use sweetalert AFTER DataTables
        $(".btn-eliminar").on('click', function(e) {
@@ -642,27 +602,6 @@
        })
            });
     
-   /* }; */
-     
-
-    //eventFiredBtnDeleteSweetAlert();
-    
-    
-    /* $('#example1').on('draw.dt', function () {
-          console.log('draw.dt');
-          eventFiredBtnDeleteSweetAlert(this);
-      })
-      // .on('responsive-resize.dt', function () {
-      //     console.log('responsive-resize.dt');
-      //      eventFiredBtnDeleteSweetAlert();
-      // })
-      .DataTable({
-     
-        responsive: true,
-       
-    }); */
        </script>
-
-       
 
 @endsection

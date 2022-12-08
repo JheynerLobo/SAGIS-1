@@ -61,17 +61,6 @@ class PostController extends Controller
             $items = $this->postRepository->customPagination($query, $params, $request->get('page'), $total);
 
 
-            /*    $posts = $this->postRepository->getPosts();
-
-            $cantidadImag = array();
-
-            foreach($posts as $key => $post){
-                $cantidadImag[$key] = $post->is_imageOne();
-
-            } */
-
-            //dd($items);
-
             $postCategories = $this->postCategoryRepository->all();
 
             return view('admin.pages.posts.index', compact('items'))
@@ -733,6 +722,32 @@ class PostController extends Controller
 
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
         }
+    }
+
+
+    public function destroy_all(){
+        try {
+
+            $posts = $this->postRepository->all();
+
+
+             DB::beginTransaction();
+
+            foreach($posts as $post){
+                 $this->postRepository->delete($post);
+            }
+
+
+           DB::commit();
+            
+           
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se han eliminado todos los contenidos correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+            dd($th);
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente todos los contenidos.', 'icon' => 'error']);
+        }
+
     }
 
 

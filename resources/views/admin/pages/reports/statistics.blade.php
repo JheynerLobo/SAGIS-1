@@ -175,12 +175,19 @@
                             </h3>
                         </div>
 
+                       {{--  {{ dd($graduatesByCountry->count()) }} --}}
+                            @if($graduatesByCountry->count()==0)
+                            <div class="card-body" >
+                                <h1 id="pieP">No hay registros</h1>
+                            </div>
+                            @else
 
-                        <!-- PIE CHART -->
+                              <!-- PIE CHART -->
 
                         <div class="card-body">
+                            <h1 id="pieP"  style="display: none;">Pie</h1>
                             <div class="chart-container" style="position: relative; height:79vh; width:79vw">
-                                <canvas id="pieChart" data-countries="{{ $countries }}"
+                                <canvas id="pieChart" data-countries="{{ $countriesWorking }}"
                                     data-colors="{{ $arrayColors }}" data-total="{{ $graduatesByCountry }}"></canvas>
                             </div>
 
@@ -188,6 +195,9 @@
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+
+                            @endif
+                      
 
 
                     </div>
@@ -259,9 +269,13 @@
     <script>
         $(function() {
 
+            let pie = document.getElementById('pieP');
+    let valuePie = pie.innerHTML;
 
+    console.log(valuePie);
 
-            //-------------
+    if(valuePie != "No hay registros"){
+         //-------------
             //- PIE CHART -
             //-------------
             // Get context with jQuery - using jQuery's .get() method.
@@ -291,6 +305,11 @@
                 data: pieData,
                 options: pieOptions
             })
+
+
+    }
+
+           
 
 
             //-------------

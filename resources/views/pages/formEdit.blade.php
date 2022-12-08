@@ -100,7 +100,7 @@
 
     <!-- Telephone -->
     <div class="form-group">
-        <label class="form-label">Teléfono(Opcional):</label>
+        <label class="form-label">Teléfono:</label>
         <input type="text" class="form-control " name="telephone" value="{{ $item->telephone }}">
     </div>
     @error('telephone')
@@ -160,8 +160,10 @@
     <div class="mt-4">
         <div class="btn-group" role="group" aria-label="Basic example">
             <button type="submit" class="btn btn-danger">Guardar</button>
-            <button class="btn btn-warning ml-5"><a style="color:black;
-                text-decoration: none;" href="{{ route('profile') }}">Regresar</a> </button>
+            <div class="ml-5">
+                <a class="btn btn btn-warning " style="color:black;
+                text-decoration: none;" href="{{ route('profile') }}">Regresar</a>
+            </div>
         </div>
       
     </div>

@@ -51,6 +51,7 @@
 
 @section('custom_js')
     @include('admin.partials.button_delete')
+
 @endsection
 
 
