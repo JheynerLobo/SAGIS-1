@@ -152,7 +152,7 @@ ___
 ### Autores:
 
 1. Jarlin Andres Fonseca Bermón 1151758 - jarlinandresfb@ufps.edu.co
-2. Yunior Joel Castilla Osorio 1151755 - osoriojunioryoelc@ufps.edu.co
+2. Junior Yoel Castilla Osorio 1151755 - osoriojunioryoelc@ufps.edu.co
 3. Manuel Felipe Mora Espitia 1151863 - manuelfelipeme@ufps.edu.co
 
 ___
