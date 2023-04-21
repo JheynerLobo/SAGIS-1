@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\GraduateController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ReportController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\SolicitudesController;
 
 
 /*
@@ -62,7 +64,6 @@ Route::delete('graduates/{graduate}/company_jobs/{job}/destroy', [GraduateContro
 Route::resource('posts', PostController::class, ['as' => 'admin']);
 
 
-
 Route::get('posts/{post}/images', [PostController::class, 'images'])->name('admin.posts.images');
 Route::patch('posts/{post}/update_images', [PostController::class, 'update_images'])->name('admin.posts.update_images');
 
@@ -84,6 +85,26 @@ Route::prefix('reports')->group(function () {
     Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');
 });
 
+Route::get('estadístics/Graduados',[ReportController::class,'index_estadisticas'])->name('admin.estadisticas.graduados');
+
+Route::get('experiences/create', [ExperienceController::class, 'create'])->name('admin.experiences.create');
+
+Route::get('experiences', [ExperienceController::class, 'index'])->name('admin.experiences');
+
+Route::post('experiences/store', [ExperienceController::class, 'store'])->name('admin.experiences.store');
+
+Route::patch('experiences/update',[ExperienceController::class, 'update'])->name('admin.experiences.update');
+
+Route::delete('experiences/{id}', [ExperienceController::class, 'destroy'])->name('admin.experiences.destroy');
+
+Route::get('experience/{id}/edit',[ExperienceController::class,'edit'])->name('admin.experiences.edit');
+
+Route::get('solicitudes',[SolicitudesController::class,'index'])->name('admin.solicitudes');
+
+Route::get('/paises-estados-municipios', function () {
+    $response = Http::get('https://ejemplo-api.com/paises-estados-municipios');
+    return $response->json();
+});
 
 Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
 

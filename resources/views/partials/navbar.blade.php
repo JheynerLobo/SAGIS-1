@@ -38,9 +38,29 @@
                         href="{{ route('videos') }}">VIDEOS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://jobboard.universia.net/graduadosufps">BOLSA
-                        DE EMPLEO</a>
+                    <a class="nav-link {{ isActiveRoute('experiences', 'active') }} "
+                        href="{{ route('experiences') }}">EXPERIENCIAS</a>
                 </li>
+                <li class="nav-item">
+                <div class="dropdown">
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
+                        BOLSA DE EMPLEO
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="">ING. SISTEMAS</a></li>
+                        <li><a class="dropdown-item" href="https://jobboard.universia.net/graduadosufps">UFPS</a></li>
+                    </ul>
+</div>
+                    <li class="nav-item">
+                    <a class="nav-link {{ isActiveRoute('solicitudes', 'active') }} "
+                        href="{{ route('solicitudes') }}">SOLICITUDES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link "
+                        href="#">ESTADÍSTICAS</a>
+                </li>
+                    
+
 
             </ul>
 

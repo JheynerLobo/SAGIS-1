@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Repositories\PostRepository;
 use App\Repositories\PostImageRepository;
 use App\Repositories\PostCategoryRepository;
+use App\Repositories\ExperienceRepository;
 use App\Http\Requests\Filters\EventFilterRequest;
 use App\Http\Requests\Filters\VideoFilterRequest;
 use App\Http\Requests\Filters\CourseFilterRequest;
@@ -24,17 +25,22 @@ class HomeController extends Controller
 
     protected $postImageRepository;
 
+    /** @var ExperienceRepository */
+    protected $experienceRepository;
+
     /** @var string */
     protected $viewLocation = 'pages.';
 
     public function __construct(
         PostCategoryRepository $postCategoryRepository,
         PostRepository $postRepository,
-        PostImageRepository $postImageRepository
+        PostImageRepository $postImageRepository,
+        ExperienceRepository $experienceRepository
     ) {
         $this->postCategoryRepository = $postCategoryRepository;
         $this->postRepository = $postRepository;
         $this->postImageRepository =  $postImageRepository;
+        $this->experienceRepository=$experienceRepository;
     }
 
     public function home()
@@ -246,6 +252,45 @@ class HomeController extends Controller
                 return view($this->viewLocation . 'videos.show', compact('item', 'videoHeader'));
             }else{
                 return view($this->viewLocation . 'videos.show', compact('item'));
+            }
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function experiences(VideoFilterRequest $request)
+    {
+
+        try {
+            $params = $this->experienceRepository->transformParameters($request->all());
+            $query = $this->experienceRepository->search($params);
+            $total = $query->count();
+
+            $items = $this->experienceRepository->customPagination($query, $params, $request->get('page'), $total);
+
+            return view($this->viewLocation . 'experiences.index', compact('items'))
+                ->nest('filters', $this->viewLocation . 'experiences.filters', compact('params', 'total'))
+                ->nest('table', $this->viewLocation . 'experiences.table', compact('items'));
+        } catch (Exception $th) {
+            throw $th;
+        }
+    }
+
+
+        /**
+     * @param int $id
+     */
+    public function showExperiences($id)
+    {
+        try {
+            $item = $this->experienceRepository->getById($id);
+                    
+            if($item->getCountVideo()>0 && !is_null($item->videoHeader())){
+                $videoHeader = $item->videoHeader();
+                return view($this->viewLocation . 'experiences.show', compact('item', 'videoHeader'));
+            }else{
+                return view($this->viewLocation . 'experiences.show', compact('item'));
             }
 
         } catch (\Throwable $th) {

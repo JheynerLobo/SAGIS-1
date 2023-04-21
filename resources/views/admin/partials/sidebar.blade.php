@@ -1,11 +1,12 @@
 <!-- Main Sidebar -->
+<head>
+<script src="https://kit.fontawesome.com/b10d6908a2.js" crossorigin="anonymous"></script>
+</head>
 <aside class="main-sidebar sidebar-light-danger elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link navbar-danger text-light">
-        <span class="logoMini ">
-            SAGIS
-        </span>
-        <span class="brand-text font-weight-light ">{{ Session::get('role_admin')->name }}</span>
+    <img src="{{ asset('img/logoSistemas.png') }}" alt="logo ing. de sistemas"
+    style="height:70px; width:230px">
     </a>
 
     <!-- Sidebar -->
@@ -44,7 +45,7 @@
 
                      <li class="nav-item">
                         <a href="{{ route('admin.home') }}" class="nav-link">
-                            <em class="nav-icon fas fa-tachometer-alt"></em>
+                        <i class="fa-sharp fa-solid fa-gauge-high"></i>
                             <p>
                                 Dashboard
     
@@ -53,7 +54,7 @@
                     </li>
                 <li class="nav-item">
                     <a href="{{ route('admin.graduates.index') }}" class="nav-link">
-                        <em class="nav-icon fas fa-user"></em>
+                    <i class="fa-solid fa-user"></i>
                         <p>
                             Graduados
 
@@ -61,11 +62,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('admin.posts.index') }}" class="nav-link">
-                        <em class="nav-icon fas fa-th"></em>
+                    <a href="{{ route('admin.posts.index') }}" 
+                    class="nav-link">
+                    <i class="fa-sharp fa-solid fa-file"></i>
                         <p>
                             Contenidos informativos
-
                         </p>
                     </a>
                 </li>
@@ -74,10 +75,10 @@
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <em class="nav-icon fas fa-chart-pie"></em>
+                    <i class="fa-sharp fa-solid fa-chart-pie"></i>
                         <p>
                             Reportes
-                            <em class="right fas fa-angle-left"></em>
+                            <em class="right fas fa-angle-down"></em>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
@@ -96,17 +97,65 @@
                     </ul>
                 </li>
 
+                
                 <li class="nav-item">
+                    <a href="{{ route('admin.experiences') }}" class="nav-link">
+                    <i class="fas fa-video"></i>
+                        <p>
+                            Experiencias de Graduados
+                        
+                        </p>
+                    </a>
+                </li>
+
+                        <li class="nav-item">
+                            <a href="{{route('admin.solicitudes')}}" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-file"></i>
+                                <p>Solicitudes y Trámites</p>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a href="{{route('admin.estadisticas.graduados')}}" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-file"></i>
+                                <p>Situación Graduados</p>
+                            </a>
+                        </li>
+
+                            <li class="nav-item">
+                    <a href="#" class="nav-link">
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                        <p>
+                            Vacantes
+                            <em class="right fas fa-angle-down"></em>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <em class="far fa-circle nav-icon"></em>
+                                <p>Publicar</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <em class="far fa-circle nav-icon"></em>
+                                <p>De Empresas</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                    <li class="nav-item">
                     <a href="{{ route('admin.settings') }}" class="nav-link">
-                        <em class="nav-icon fas fa-cog"></em>
+                    <i class="fa-solid fa-gear"></i>
                         <p>
                             Ajustes
 
                         </p>
                     </a>
                 </li>
-
-
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

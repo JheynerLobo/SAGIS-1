@@ -4,7 +4,9 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SolicitudesController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,7 +50,6 @@ Route::delete('academic_studies/{academic}/destroy', [UserController::class, 'de
 
 Route::get('academic_studies/validate', [UserController::class, 'validate_academic'])->name('validate_academic');
 
-
 Route::get('jobs', [UserController::class, 'show_jobs'])->name('jobs');
 
 Route::get('company_jobs/create', [UserController::class, 'create_jobs'])->name('create_jobs');
@@ -78,6 +79,11 @@ Route::get('gallerys/{id}', [HomeController::class, 'showGallery'])->name('galle
 
 Route::get('videos', [HomeController::class, 'videos'])->name('videos');
 Route::get('videos/{id}', [HomeController::class, 'showVideo'])->name('videos.show');
+
+Route::get('experiencias', [HomeController::class, 'experiences'])->name('experiences');
+Route::get('experiencias/{id}', [HomeController::class, 'showExperiences'])->name('experiences.show');
+
+Route::get('solicitudes',[SolicitudesController::class,'index'])->name('solicitudes');
 
 
 
