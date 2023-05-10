@@ -185,34 +185,7 @@ class GraduateController extends Controller
 
     }
 
-    public function destroy_all(){
-        try {
 
-            $people = $this->personRepository->getOnlyGraduates();
-
-            
-            
-
-            DB::beginTransaction();
-
-            foreach($people as $person){
-
-                 $this->personRepository->delete($person);
-            }
-
-           
-
-           DB::commit();
-            
-           
-            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se han eliminado todos los graduados correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
-            DB::rollBack();
-            dd($th);
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
-        }
-
-    }
 
 
     public function send_email(){

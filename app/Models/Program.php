@@ -16,7 +16,7 @@ class Program extends Model
      * @var array
      */
     protected $fillable = ['faculty_id', 'academic_level_id', 'name'];
-
+    
 
 
     /** Relation Methods */

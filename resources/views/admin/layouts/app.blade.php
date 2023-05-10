@@ -37,7 +37,7 @@
 
 
 
-<body @yield('cargarJS') class="hold-transition sidebar-mini">
+<body @yield('cargarJS') 
     <div class="wrapper">
 
         <!-- Navbar -->

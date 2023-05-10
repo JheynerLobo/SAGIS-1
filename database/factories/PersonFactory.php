@@ -26,3 +26,4 @@ class PersonFactory extends Factory
         ];
     }
 }
+

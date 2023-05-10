@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Str;
 
 class MessageReceived extends Mailable
 {
@@ -32,8 +33,10 @@ class MessageReceived extends Mailable
      *
      * @return $this
      */
-    public function build()
+
+     public function build()
     {
         return $this->view('emails.message-received');
     }
+    
 }

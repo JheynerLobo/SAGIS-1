@@ -1,7 +1,6 @@
 @if ($editMode)
     <form action="{{ route('admin.experiences.update', [$item->id]) }}" method="POST"  enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+        @csrf @method('PATCH')
         <!-- Title -->
         <div class="form-group">
             <label>Graduad@:</label>
@@ -35,7 +34,7 @@
         <!-- ./Date -->
 
         
-        <div class="form-group"  id="videoP">
+        <div class="form-group"  name="video" id="video">
             <label>URL video de Youtube:</label>
             <div class="mt-2">
                 
@@ -50,12 +49,10 @@
         @enderror
 
 
-    
-        <!-- Submit -->
+         <!-- Submit -->
         <div class="mt-4">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-danger " style="color:black;
-                    text-decoration: none;" href="{{ route('admin.experiences.update') }}">Actualizar</button>
+                <button type="submit" class="btn btn-danger">Actualizar</button>
                 <div class="ml-5">
                     <a class="btn btn-warning " style="color:black;
                     text-decoration: none;" href="{{ route('admin.experiences') }}">Regresar</a>
@@ -64,11 +61,11 @@
           
         </div>
         <!-- ./Submit -->
+        
     </form>
 @else
-    <form action="{{ route('admin.experiences.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('admin.experiences.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-
         <!-- Title -->
         <div class="form-group">
             <label>Graduad@:</label>
@@ -102,10 +99,10 @@
         @enderror
         <!-- ./Date -->
 
-        <div class="form-group"  id="videoP">
+        <div class="form-group"  id="video">
             <label>URL video de Youtube:</label>
             <div class="mt-2">        
-                <input type="text" class="form-control-file" id="videoInput" name="video" pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})" title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=">
+                <input type="text" class="form-control-file" id="videoInput" name="video" pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})" title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" required>
                {{-- ((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)--}}
                 
             </div>   

@@ -3,7 +3,7 @@
 @section('title', 'Registrar Admin')
 
 @section('content-header')
-@include('dev.admin.partials.content-header', [
+@include('admin.partials.content-header', [
 'title' => 'Registro de Administradores',
 'items' => [
 [

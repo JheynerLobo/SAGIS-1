@@ -3,7 +3,7 @@
 @section('title', 'Editar Datos Laborales')
 
 @section('content-header')
-    @include('dev.admin.partials.content-header', [
+    @include('admin.partials.content-header', [
         'title' => 'Edición de Datos Laborales',
         'items' => [
             [

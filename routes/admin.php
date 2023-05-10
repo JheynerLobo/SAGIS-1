@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\SolicitudesController;
+use App\Http\Controllers\Admin\EmpleosController;
 
 
 /*
@@ -34,6 +35,7 @@ Route::post('logout', [LoginController::class, 'logout'])->name('admin.logout');
 Route::get('home', [HomeController::class, 'home'])->name('admin.home');
 
 Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
+
 
 Route::post('graduates/import_excel', [GraduateController::class, 'import_excel'])->name('admin.graduates.import_excel');
 Route::post('graduates/destroy_all', [GraduateController::class, 'destroy_all'])->name('admin.graduates.destroy_all');
@@ -62,7 +64,7 @@ Route::patch('graduates/{graduate}/company_jobs/{job}/update', [GraduateControll
 Route::delete('graduates/{graduate}/company_jobs/{job}/destroy', [GraduateController::class, 'destroy_jobs'])->name('admin.graduates.destroy_jobs');
 
 Route::resource('posts', PostController::class, ['as' => 'admin']);
-
+Route::resource('experiences', ExperienceController::class, ['as' => 'admin']);
 
 Route::get('posts/{post}/images', [PostController::class, 'images'])->name('admin.posts.images');
 Route::patch('posts/{post}/update_images', [PostController::class, 'update_images'])->name('admin.posts.update_images');
@@ -87,24 +89,35 @@ Route::prefix('reports')->group(function () {
 
 Route::get('estadístics/Graduados',[ReportController::class,'index_estadisticas'])->name('admin.estadisticas.graduados');
 
-Route::get('experiences/create', [ExperienceController::class, 'create'])->name('admin.experiences.create');
+//Route::get('experiences/create', [ExperienceController::class, 'create'])->name('admin.experiences.create');
+
+Route::get('situationGraduates',[ReportController::class,'index_estadisticas'])->name('admin.situacionGraduados.index');
+
+Route::get('situationGraduate/create',[ReportController::class,'createSituation'])->name('admin.situacionGraduado.create');
+
+Route::patch('situationGraduate/update/{anio_graduation}/{anio_actual}', [ReportController::class,'update'])->name('admin.situationGraduate.update');
+
+Route::get('admin/situationGraduate/edit/{anio_graduation}/{anio_actual}', [ReportController::class, 'edit'])->name('admin.situationGraduate.edit');
+
+
+Route::post('situationGraduate/store',[ReportController::class, 'store'])->name('admin.situationGraduate.store');
+
+Route::get('situationGraduate/añoGraduacion',[ReportController::class,'filtrarPorAnio'])->name('admin.situationGraduateByAnio');
+
+Route::delete('/situationGraduate/{anio_graduation}/{anio_actual}/eliminar', [ReportController::class, 'delete'])->name('admin.situacionGraduados.destroy');
 
 Route::get('experiences', [ExperienceController::class, 'index'])->name('admin.experiences');
 
-Route::post('experiences/store', [ExperienceController::class, 'store'])->name('admin.experiences.store');
+//Route::post('experiences/store', [ExperienceController::class, 'store'])->name('admin.experiences.store');
 
-Route::patch('experiences/update',[ExperienceController::class, 'update'])->name('admin.experiences.update');
+//Route::put('experiences/update',[ExperienceController::class, 'update'])->name('admin.experiences.update');
 
-Route::delete('experiences/{id}', [ExperienceController::class, 'destroy'])->name('admin.experiences.destroy');
+//Route::delete('experiences/Hola/{id}', [ExperienceController::class, 'destroy'])->name('admin.experiences.destroy');
 
-Route::get('experience/{id}/edit',[ExperienceController::class,'edit'])->name('admin.experiences.edit');
+//Route::get('experience/edit/{id}',[ExperienceController::class,'edit'])->name('admin.experiences.edit');
 
 Route::get('solicitudes',[SolicitudesController::class,'index'])->name('admin.solicitudes');
 
-Route::get('/paises-estados-municipios', function () {
-    $response = Http::get('https://ejemplo-api.com/paises-estados-municipios');
-    return $response->json();
-});
 
 Route::get('settings', [AdminController::class, 'settings'])->name('admin.settings');
 
@@ -117,6 +130,12 @@ Route::patch('settings/update_password', [AdminController::class, 'update_passwo
 
 Route::get('settings/create_admin', [AdminController::class, 'create_admin'])->name('admin.settings.create_admin');
 Route::post('settings/store_admin', [AdminController::class, 'store_admin'])->name('admin.settings.store_admin');
+
+Route::get('empleos',[EmpleosController::class,'index'])->name('admin.empleos.index');
+
+Route::get('empleos/create', [EmpleosController::class, 'create'])->name('admin.empleos.create');
+
+Route::post('empleos/store',[EmpleosController::class, 'store'])->name('admin.empleos.store');
 
 
 Route::get('settings/{admin}/edit_admin', [AdminController::class, 'edit_admin'])->name('admin.settings.edit_admin');

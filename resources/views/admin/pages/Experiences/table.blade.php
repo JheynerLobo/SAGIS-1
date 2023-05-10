@@ -31,7 +31,7 @@
 
 
 
-                           {{--  @if($item->getCountimage()>= 2) --}}
+                           
                             <div class="mr-1">
                                 <form action="{{ route('admin.experiences.destroy', $item->id) }}"
                                     method="POST" class="formulario-eliminar">
@@ -42,13 +42,9 @@
                                 </form>
                               
                             </div>
-                          {{--   @else
-                            <div class="mr-1">
-                                <button disabled><em class="fas fa-image"></em></button>
+                          
 
                             </div>
-
-                            @endif --}}
 
 
                         </div>

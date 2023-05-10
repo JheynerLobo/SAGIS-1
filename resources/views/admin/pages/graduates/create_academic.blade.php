@@ -11,7 +11,7 @@
 @endsection
 
 @section('content-header')
-    @include('dev.admin.partials.content-header', [
+    @include('admin.partials.content-header', [
         'title' => 'Creación de Datos Académicos',
         'items' => [
             [

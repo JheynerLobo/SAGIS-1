@@ -160,7 +160,7 @@
         <!-- Submit -->
         <div class="mt-4">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <button type="submit" class="btn btn-danger">Guardar</button>
+                <button type="submit" class="btn btn-danger">Actualizar</button>
                 <div class="ml-5">
                     <a class="btn btn-warning " style="color:black;
                     text-decoration: none;" href="{{ route('admin.graduates.index') }}">Regresar</a>
@@ -253,7 +253,6 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
         <!-- ./BirthdatePlaceId -->
-
         <!-- Address -->
         <div class="form-group">
             <label class="form-label">Dirección de Residencia:</label>

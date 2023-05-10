@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Estadísticas Graduados')
+@section('title', 'Estadísticas Laborales 0Graduados')
 
 @section('content-header')
     @include('admin.partials.content-header', [
@@ -28,6 +28,10 @@
                 <!-- Filters -->
                 {!! $filters !!}
                 <!-- ./Filters -->
+
+                <!-- Table -->
+                {!! $table !!}
+                <!-- ./Table -->
 
                 
             </div>

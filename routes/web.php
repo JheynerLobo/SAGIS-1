@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CommandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SolicitudesController;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,10 @@ Route::get('videos/{id}', [HomeController::class, 'showVideo'])->name('videos.sh
 
 Route::get('experiencias', [HomeController::class, 'experiences'])->name('experiences');
 Route::get('experiencias/{id}', [HomeController::class, 'showExperiences'])->name('experiences.show');
+
+Route::get('SituacionGraduados',[ReportController::class, 'index_estadisticas_graduates'])->name('situacionGraduados');
+
+
 
 Route::get('solicitudes',[SolicitudesController::class,'index'])->name('solicitudes');
 

@@ -1,4 +1,4 @@
-@extends('dev.layouts.app')
+@extends('admin.layouts.app')
 
 @section('tittle', 'Inicio SAGIS')
 

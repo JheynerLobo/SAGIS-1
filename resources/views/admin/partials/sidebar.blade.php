@@ -116,12 +116,18 @@
                         </li>
                        
                         <li class="nav-item">
-                            <a href="{{route('admin.estadisticas.graduados')}}" class="nav-link">
-                            <i class="fa-sharp fa-solid fa-file"></i>
+                            <a href="{{route('admin.situacionGraduados.index')}}" class="nav-link">
+                            <i class="fa-solid fa-sack-dollar"></i>
                                 <p>Situación Graduados</p>
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{route('admin.situacionGraduados.index')}}" class="nav-link">
+                            <i class="fa-solid fa-star"></i>
+                                <p>Graduados con Calidad</p>
+                            </a>
+                        </li>
                             <li class="nav-item">
                     <a href="#" class="nav-link">
                     <i class="fa-solid fa-magnifying-glass-dollar"></i>
@@ -132,7 +138,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.empleos.index')}}" class="nav-link">
                                 <em class="far fa-circle nav-icon"></em>
                                 <p>Publicar</p>
                             </a>

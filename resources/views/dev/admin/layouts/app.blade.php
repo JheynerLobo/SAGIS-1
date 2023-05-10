@@ -34,15 +34,15 @@
 
 
 
-<body class="hold-transition sidebar-mini">
+<body>
     <div class="wrapper">
 
         <!-- Navbar -->
-        @include('dev.admin.partials.navbar')
+        @include('admin.partials.navbar')
         <!-- /.Navbar -->
 
         <!-- Main Sidebar Container -->
-        @include('dev.admin.partials.sidebar')
+        @include('admin.partials.sidebar')
         <!-- ./Main Sidebar -->
 
 
@@ -59,7 +59,7 @@
 
 
         <!-- Footer -->
-        @include('dev.admin.partials.footer')
+        @include('admin.partials.footer')
         <!-- -/Footer -->
 
         {{-- <!-- Control Sidebar -->

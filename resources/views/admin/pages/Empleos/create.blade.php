@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 
-@section('title', 'Registro de Estadística por año de graduados')
+@section('title', 'Registro de Empleos para graduados')
 
 @section('cargarJS')
 
@@ -18,7 +18,7 @@
 
 @section('content-header')
     @include('admin.partials.content-header', [
-        'title' => 'Estadísticas de Empleo Graduados',
+        'title' => 'Empleos para Graduados',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -26,8 +26,8 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Experiencias',
-                'route' => route('admin.situacionGraduados.index'),
+                'name' => 'Empleos',
+                'route' => route('admin.empleos.index'),
                 'isActive' => null,
             ],
             [
@@ -55,7 +55,7 @@
                                 información más
                                 detallada debes realizarla dentro del perfil de la experiencia.</small>
                             <hr>
-                            @include('admin.pages.situacionGraduados.form', [
+                            @include('admin.pages.Empleos.form', [
                                 'editMode' => false,
                             ])
                         </div>

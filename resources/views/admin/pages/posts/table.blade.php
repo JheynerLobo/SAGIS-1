@@ -6,7 +6,7 @@
                     <th>Foto/Video</th>
                     <th>Título</th>
                     <th>Categoría</th>
-                    <th>Description</th>
+                    <th>Descripción</th>
                     <th>Fecha de Publicación</th>
                     <th>Acciones</th>
                     <th>Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>

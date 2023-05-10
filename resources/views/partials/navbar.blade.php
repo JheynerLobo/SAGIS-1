@@ -56,8 +56,8 @@
                         href="{{ route('solicitudes') }}">SOLICITUDES</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link "
-                        href="#">ESTADÍSTICAS</a>
+                    <a class="nav-link {{isActiveRoute('situacionGraduados','active')}}"
+                        href="{{route('situacionGraduados')}}">ESTADÍSTICAS</a>
                 </li>
                     
 

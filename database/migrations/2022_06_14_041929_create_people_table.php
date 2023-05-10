@@ -36,7 +36,9 @@ class CreatePeopleTable extends Migration
             $table->timestamps();
 
             $table->foreign('document_type_id')->references('id')->on('document_types')->cascadeOnUpdate()->restrictOnDelete();
+
             $table->foreign('birthdate_place_id')->references('id')->on('cities')->cascadeOnUpdate()->restrictOnDelete();
+           
         });
     }
 

@@ -54,7 +54,7 @@
                                            method="POST" class="formulario-eliminar" class="form">
                                            @csrf
                                            
-                                           <button type="submit" class="btn btn-sm btn-danger btn-eliminar" id="delete">Eliminar Todo</button>
+                                        
                                        </form> 
                                     
                                    </div>

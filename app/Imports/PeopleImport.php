@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Person;
 use App\Models\PersonAcademic;
 use App\Models\Program;
+
 use Maatwebsite\Excel\Concerns\ToModel;
 
  use Maatwebsite\Excel\Concerns\WithHeadingRow;  
@@ -41,7 +42,7 @@ class PeopleImport implements ToModel, WithHeadingRow
                 'lastname' =>$row['apellidos'],
                 'document_type_id' => 1,
                 'document' =>$row['cc'],
-                'phone' => "N/N",
+                'phone' => $row['celular'],
                 'address' => "N/N",
                 'telephone' => "N/N",
                 'email' =>$row['correo'],
@@ -82,7 +83,7 @@ class PeopleImport implements ToModel, WithHeadingRow
                 'lastname' =>$row['apellidos'],
                 'document_type_id' => 1,
                 'document' =>$row['cc'],
-                'phone' => "N/N",
+                'phone' => $row['celular'],
                 'address' => "N/N",
                 'telephone' => "N/N",
                 'email' =>$row['correo'],
@@ -124,13 +125,13 @@ class PeopleImport implements ToModel, WithHeadingRow
                 'lastname' =>$row['apellidos'],
                 'document_type_id' => 1,
                 'document' =>$row['cc'],
-                'phone' => "N/N",
+                'phone' => $row['celular'],
                 'address' => "N/N",
                 'telephone' => "N/N",
                 'email' =>$row['correo_institucional'],
                 'birthdate_place_id' => 1,
                 'birthdate' => "1985-05-10",     
-        
+        dd(name)
             ]);
     
             $idUser = User::updateOrCreate([

@@ -21,7 +21,7 @@ class ExperienceController extends Controller
     protected $experienceRepository;
 
     /** @var ExperienceVideoRepository */
-    protected $ExperienceVideoRepository;
+    protected $experienceVideoRepository;
 
     public function __construct(
         ExperienceRepository $experienceRepository,
@@ -38,16 +38,13 @@ class ExperienceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
         try {
             $params = $this->experienceRepository->transformParameters($request->all());
             $query = $this->experienceRepository->search($params, null);
-
             $total = $query->count();
             $items = $this->experienceRepository->customPagination($query, $params, $request->get('page'), $total);
-
-
+    
             return view('admin.pages.experiences.index', compact('items'))
                 ->nest('filters', 'admin.pages.experiences.filters', compact('params', 'total'))
                 ->nest('table', 'admin.pages.experiences.table', compact('items'));
@@ -83,13 +80,14 @@ class ExperienceController extends Controller
 
      
         $videoParams = $request->only(['video']);
+        if($videoParams!=null){
             $video = substr($videoParams['video'], -11);
             $videoParams['experience_id'] = $experience->id;
             $videoParams['asset_url'] = $video;
             $videoParams['is_header'] = 1;
             unset($videoParams['video']);
 
-            $this->experienceVideoRepository->create($videoParams);
+            $this->experienceVideoRepository->create($videoParams);}
             return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
             dd($th);
@@ -109,25 +107,23 @@ class ExperienceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id){
+    public function update(UpdateRequest $request, $id) {
         try {
             $experienceParams = $request->only(['nombre', 'description', 'date']);
-
             $videoParams = $request->only(['video']);
-
+    
             $experience = $this->experienceRepository->getById($id);
-
-            $video = $this->ExperienceVideoRepository->getByAttribute('experience_id',$experience->$id);
-         
+            $video = $this->experienceVideoRepository->getByAttribute('experience_id', $experience->id);
+    
             $this->experienceRepository->update($experience, $experienceParams);
-
-            $this->ExperienceVideoRepository->update($video, $videoParams);
-
+            $this->experienceVideoRepository->update($video, $videoParams);
+    
             return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
+            
         } catch (\Exception $th) {
-           // DB::rollBack();
-           dd($th);
-            return redirect()->route('admin.home')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
+            dd($th);
+            return redirect()->route('admin.posts.index')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
+            
         }
     }
         /*try {
