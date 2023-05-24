@@ -26,7 +26,7 @@ class ExperienceVideo extends Model
         return $this->belongsTo(experience::class);
     }
 
-    /**
+   /**
      * Get the full asset
      * 
      * @return string
@@ -35,4 +35,5 @@ class ExperienceVideo extends Model
     {
         return "https://www.youtube.com/embed/" . $this->asset_url;
     }
+   
 }

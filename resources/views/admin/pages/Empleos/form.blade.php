@@ -1,9 +1,7 @@
 @if ($editMode)
-    <form action="#" method="post"  enctype="multipart/form-data">
+    <form action="{{ route('admin.empleos.update', [$item->id]) }}" method="post"  enctype="multipart/form-data">
         @csrf
         @method('PATCH')
-        
-
         <!-- Empresa -->
         <div class="form-group">
             <label>Empresa:</label>
@@ -47,67 +45,19 @@
         @enderror
         <!-- ./Date -->
 
-         <div class="form-group" id="imageP">
-            
-            <label>Imagen:</label>
-            <div class="text-center">
-                <img style="width: 200px; height: 200px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
-
-            </div>
-            <div class="mt-2">
-                <input type="file" class="form-control-file"  name="imagen"  accept="image/*" >
-            </div>   
-        </div>
-        @error('imagen')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-        <!-- ./Imagen principal -->
-
-        <div class="form-group"  id="video">
-            <label>URL video de Youtube:</label>
-            <div class="mt-2">
-                @if($item->getCountVideo()>0 && !(is_null($item->videoHeader())))
-               
-                    <input type="text"  value="{{ $videoHeader->fullAsset() }}" id="inputVideo" class="form-control-file" name="video" 
-                    pattern="((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)" 
-                    title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" >
-                @else
-                <input type="text" class="form-control-file"  id="inputVideo" name="video" 
-                pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})"
-                title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" >
-                @endif
-                
-            </div>   
-        </div>
-        @error('video')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-
        
-        <div class="form-group" style="display: none;" id="imageP">
-            
-            <div class="mt-2" >
-                <input type="file" class="form-control-file" id="inputImage"   name="imagen" accept="image/*"  required  >
-            </div>   
+
+        <!-- url_postulation -->
+        <div class="form-group">
+            <label>Url Postulación:</label>
+            <input type="text" class="form-control @error('url_postulation') is-invalid @enderror" name="url_postulation" id="url_postulation"
+                value="{{ $item->url_postulation }}">
         </div>
-        @error('imagen')
+        @error('url_postulation')
             <small class="text-danger">{{ $message }}</small>
         @enderror
-        <div class="form-group"  id="videoP">
-            <label>URL video de Youtube:</label>
-            <div class="mt-2">
-               
-                <input type="text"  value="{{ $videoHeader->fullAsset() }}"  id="inputVideo" class="form-control-file" name="video" required 
-                pattern="((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)" 
-                title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=, o si quiere eliminar el video NO, excepto en categoría Vídeos" >
-            </div>   
-        </div>
-        @error('video')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-
-
-        
+        <!-- ./url_postulation -->
+    
 
 
 
@@ -126,22 +76,20 @@
 @else
 <form action="{{ route('admin.empleos.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <!-- Title -->
+        <!-- Empresa -->
         <div class="form-group">
             <label>Empresa:</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" name="empresa"
-                value="{{ old('empresa') }}">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" name="empresa">
         </div>
         @error('empresa')
             <small class="text-danger">{{ $message }}</small>
         @enderror
-        <!-- ./Title -->
+        <!-- ./Empresa -->
 
         <!-- Cargo -->
         <div class="form-group">
             <label>Cargo:</label>
-            <input type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo"
-                value="{{ old('cargo') }}">
+            <input type="text" class="form-control @error('cargo') is-invalid @enderror" name="cargo">
         </div>
         @error('cargo')
             <small class="text-danger">{{ $message }}</small>
@@ -162,8 +110,7 @@
         <!-- Date -->
         <div class="form-group">
             <label>Fecha de Publicación:</label>
-            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="datePickerId"
-                value="{{ old('date') }}">
+            <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="datePickerId">
         </div>
         @error('date')
             <small class="text-danger">{{ $message }}</small>
@@ -173,8 +120,9 @@
 
         <!-- File -->
         <div class="form-group" id ="imageP" >
+           
             <label for="exampleFormControlFile1">Imagen: <small class="text-muted"></small></label>
-            <input type="file" class="form-control-file" name="image[]" id="inputImage" multiple accept="image/*" required>
+        <input type="file" class="form-control-file" name="imagen" id="imagen">
         </div>
         @error('image.*')
             <small class="text-danger">{{ $message }}</small>
@@ -184,15 +132,20 @@
     @enderror
         <!-- ./File -->
 
-        <div class="form-group"  id="videoP">
-            <label>URL video de Youtube:</label>
-            <div class="mt-2">        
-                <input type="text" class="form-control-file" id="videoInput" name="video" pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})" title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=">
-               {{-- ((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)--}}
-                
-            </div>   
+        <!-- Url Postulation -->
+        <div class="form-group" id ="url_postulation" >
+            <label for="exampleFormControlFile1">Url Postulación: <small class="text-muted"></small></label>
+            <input type="text" class="form-control-file" name="url_postulation" value="">
         </div>
+        @error('url_postulation')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        @error('url_postulation')
+        <small class="text-danger">{{ $message }}</small>
+    @enderror
+        <!-- ./File -->
 
+        
         <!-- Submit -->
         <div class="form-group">
             <div class="btn-group" role="group" aria-label="Basic example">

@@ -17,7 +17,8 @@ class EmpleoFactory extends Factory
             'empresa' => $this->faker->realText(50),
             'cargo' => $this->faker->realText(100),
             'description' => $this->faker->realText(500),
-            'date' => $this->faker->dateTimeBetween('-4 months', '-1 week')
+            'date' => $this->faker->dateTimeBetween('-4 months', '-1 week'),
+            'url_postulation'=> $this->faker->realText(50)
         ];
     }
 }

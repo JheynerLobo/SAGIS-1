@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\SolicitudesController;
 use App\Http\Controllers\Admin\EmpleosController;
+use App\Http\Controllers\Admin\GraduateQualityController;
 
 
 /*
@@ -65,6 +66,9 @@ Route::delete('graduates/{graduate}/company_jobs/{job}/destroy', [GraduateContro
 
 Route::resource('posts', PostController::class, ['as' => 'admin']);
 Route::resource('experiences', ExperienceController::class, ['as' => 'admin']);
+Route::resource('empleos', EmpleosController::class,['as'=>'admin']);
+
+
 
 Route::get('posts/{post}/images', [PostController::class, 'images'])->name('admin.posts.images');
 Route::patch('posts/{post}/update_images', [PostController::class, 'update_images'])->name('admin.posts.update_images');
@@ -108,6 +112,18 @@ Route::delete('/situationGraduate/{anio_graduation}/{anio_actual}/eliminar', [Re
 
 Route::get('experiences', [ExperienceController::class, 'index'])->name('admin.experiences');
 
+Route::get('GraduateQuality', [GraduateQualityController::class,'index'])->name('admin.graduateQuality.index');
+
+Route::get('GraduateQuality/create', [GraduateQualityController::class, 'create'])->name('admin.graduateQuality.create');
+
+Route::post('GraduateQuality/store', [GraduateQualityController::class, 'store'])->name('admin.graduateQuality.store');
+
+Route::get('GraduateQuality/edit/{id}', [GraduateQualityController::class, 'edit'])->name('admin.graduateQuality.edit');
+
+Route::patch('GraduateQuality/update/{id}', [GraduateQualityController::class,'update'])->name('admin.graduateQuality.update');
+
+Route::delete('GraduateQuality/delete/{id}', [GraduateQualityController::class, 'delete'])->name('admin.graduateQuality.delete');
+
 //Route::post('experiences/store', [ExperienceController::class, 'store'])->name('admin.experiences.store');
 
 //Route::put('experiences/update',[ExperienceController::class, 'update'])->name('admin.experiences.update');
@@ -132,10 +148,6 @@ Route::get('settings/create_admin', [AdminController::class, 'create_admin'])->n
 Route::post('settings/store_admin', [AdminController::class, 'store_admin'])->name('admin.settings.store_admin');
 
 Route::get('empleos',[EmpleosController::class,'index'])->name('admin.empleos.index');
-
-Route::get('empleos/create', [EmpleosController::class, 'create'])->name('admin.empleos.create');
-
-Route::post('empleos/store',[EmpleosController::class, 'store'])->name('admin.empleos.store');
 
 
 Route::get('settings/{admin}/edit_admin', [AdminController::class, 'edit_admin'])->name('admin.settings.edit_admin');

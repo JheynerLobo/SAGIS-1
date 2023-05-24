@@ -9,11 +9,13 @@ use App\Repositories\PostRepository;
 use App\Repositories\PostImageRepository;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\ExperienceRepository;
+use App\Repositories\EmpleoRepository;
 use App\Http\Requests\Filters\EventFilterRequest;
 use App\Http\Requests\Filters\VideoFilterRequest;
 use App\Http\Requests\Filters\CourseFilterRequest;
 use App\Http\Requests\Filters\NoticeFilterRequest;
 use App\Http\Requests\Filters\GalleryFilterRequest;
+use App\Http\Requests\Filters\EmpleoFilterRequest;
 
 class HomeController extends Controller
 {
@@ -28,6 +30,9 @@ class HomeController extends Controller
     /** @var ExperienceRepository */
     protected $experienceRepository;
 
+    /** @var EmpleoRepository */
+    protected $empleoRepository;
+
     /** @var string */
     protected $viewLocation = 'pages.';
 
@@ -35,12 +40,14 @@ class HomeController extends Controller
         PostCategoryRepository $postCategoryRepository,
         PostRepository $postRepository,
         PostImageRepository $postImageRepository,
-        ExperienceRepository $experienceRepository
+        ExperienceRepository $experienceRepository,
+        EmpleoRepository $empleoRepository
     ) {
         $this->postCategoryRepository = $postCategoryRepository;
         $this->postRepository = $postRepository;
         $this->postImageRepository =  $postImageRepository;
         $this->experienceRepository=$experienceRepository;
+        $this->empleoRepository=$empleoRepository;
     }
 
     public function home()
@@ -211,6 +218,7 @@ class HomeController extends Controller
             $item = $this->postRepository->getById($id);
 
             $imageHeader = $item->imageHeader();
+            
             $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
 
             return view($this->viewLocation . 'gallerys.show', compact('item', 'imageHeader', 'images'));
@@ -224,6 +232,7 @@ class HomeController extends Controller
         $postGallery = $this->postCategoryRepository->getByAttribute('name', 'Videos');
 
         try {
+            
             $params = $this->postRepository->transformParameters($request->all());
             $query = $this->postRepository->search($params, $postGallery->id);
             $total = $query->count();
@@ -263,8 +272,10 @@ class HomeController extends Controller
     {
 
         try {
+            
             $params = $this->experienceRepository->transformParameters($request->all());
             $query = $this->experienceRepository->search($params);
+            
             $total = $query->count();
 
             $items = $this->experienceRepository->customPagination($query, $params, $request->get('page'), $total);
@@ -292,6 +303,44 @@ class HomeController extends Controller
             }else{
                 return view($this->viewLocation . 'experiences.show', compact('item'));
             }
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function empleos(GalleryFilterRequest $request)
+    {
+        
+        try {
+
+            
+            $params = $this->empleoRepository->transformParameters($request->all());    
+            $query = $this->empleoRepository->search($params,null);         
+            $total = $query->count();
+            $items = $this->empleoRepository->customPagination($query, $params, $request->get('page'), $total);
+            return view($this->viewLocation . 'empleos.index', compact('items'))
+                ->nest('filters', $this->viewLocation . 'empleos.filters', compact('params', 'total'))
+                ->nest('table', $this->viewLocation . 'empleos.table', compact('items'));
+        } catch (Exception $th) {
+            throw $th;
+        }
+    }
+
+
+        /**
+     * @param int $id
+     */
+    public function showEmpleos($id)
+    {
+        try {
+            $item = $this->empleoRepository->getById($id);
+                   
+            $imageHeader = $item->imageHeader();
+                return view($this->viewLocation . 'empleos.show', compact('item', 'imageHeader'));
+            
+                return view($this->viewLocation . 'empleos.show', compact('item'));
+            
 
         } catch (\Throwable $th) {
             throw $th;

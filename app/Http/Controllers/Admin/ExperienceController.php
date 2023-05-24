@@ -86,8 +86,8 @@ class ExperienceController extends Controller
             $videoParams['asset_url'] = $video;
             $videoParams['is_header'] = 1;
             unset($videoParams['video']);
-
             $this->experienceVideoRepository->create($videoParams);}
+
             return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
         } catch (\Exception $th) {
             dd($th);
@@ -121,8 +121,8 @@ class ExperienceController extends Controller
             return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
             
         } catch (\Exception $th) {
-            dd($th);
-            return redirect()->route('admin.posts.index')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
+
+            return redirect()->route('admin.experiences')->with('alert', ['title' => __('messages.error'), 'icon' => 'error', 'text' => $th->getMessage()]);
             
         }
     }
@@ -258,16 +258,4 @@ class ExperienceController extends Controller
         }
     }
 
-
-
-    /**
-     * @param StoreRequest $request
-     * @param array $params
-     */
-  
-
-    /**
-     * @param StoreRequest $request
-     * @param array $params
-     */
 }

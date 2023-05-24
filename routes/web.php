@@ -84,6 +84,9 @@ Route::get('videos/{id}', [HomeController::class, 'showVideo'])->name('videos.sh
 Route::get('experiencias', [HomeController::class, 'experiences'])->name('experiences');
 Route::get('experiencias/{id}', [HomeController::class, 'showExperiences'])->name('experiences.show');
 
+Route::get('empleos', [HomeController::class, 'empleos'])->name('empleos');
+Route::get('empleos/{id}', [HomeController::class, 'showEmpleos'])->name('empleos.show');
+
 Route::get('SituacionGraduados',[ReportController::class, 'index_estadisticas_graduates'])->name('situacionGraduados');
 
 

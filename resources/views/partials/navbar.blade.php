@@ -16,38 +16,42 @@
                 <li class="nav-item">
                     <a class="nav-link {{ isActiveRoute('home', 'active') }}" aria-current="page"
                         href="{{ route('home') }}">INICIO</a>
+
+                        <li class="nav-item">
+                <div class="dropdown" >
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
+                        CONTENIDOS INFORMÁTICOS
+                    </button>
+                    <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('notices', 'active') }}"
+                        href="{{ route('notices') }}">NOTICIAS</a></li>
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('courses', 'active') }}" href="{{ route('courses') }}">CURSOS</a></li>
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('events', 'active') }}" href="{{ route('events') }}">EVENTOS</a></li>
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('gallerys', 'active') }}"href="{{ route('gallerys') }}">GALERIA</a></li>
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('videos', 'active') }}"href="{{ route('videos') }}">VIDEOS</a></li>
+                    </ul>
+</div>
                 </li>
+                
                 <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('notices', 'active') }}"
-                        href="{{ route('notices') }}">NOTICIAS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('courses', 'active') }}"
-                        href="{{ route('courses') }}">CURSOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('events', 'active') }}"
-                        href="{{ route('events') }}">EVENTOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('gallerys', 'active') }}"
-                        href="{{ route('gallerys') }}">GALERIA</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('videos', 'active') }}"
-                        href="{{ route('videos') }}">VIDEOS</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link {{ isActiveRoute('experiences', 'active') }} "
-                        href="{{ route('experiences') }}">EXPERIENCIAS</a>
-                </li>
+                <div class="dropdown" >
+                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
+                        GRADUADOS DE HONOR
+                    </button>
+                    <ul class="dropdown-menu" >
+                        <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('experiences', 'active') }} "
+                        href="{{ route('experiences') }}" style="text-align:center">EXPERIENCIAS</a></li>
+                        <li><a class="dropdown-item" href="#" style="text-align:center">PREMIO AL MERITO</a></li>
+                    </ul>
+</div>
                 <li class="nav-item">
                 <div class="dropdown">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
                         BOLSA DE EMPLEO
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">ING. SISTEMAS</a></li>
+                        <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('empleos', 'active') }} "
+                        href="{{ route('empleos') }}">ING. SISTEMAS</a></li>
                         <li><a class="dropdown-item" href="https://jobboard.universia.net/graduadosufps">UFPS</a></li>
                     </ul>
 </div>

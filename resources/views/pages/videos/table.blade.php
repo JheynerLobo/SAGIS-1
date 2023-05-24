@@ -1,7 +1,7 @@
 <div class="container ">
     <div class="row g-5">
         @forelse ($items as $item)
-            <div class="col-12 col-md-6 col-lg-4">
+        <div class="col-12 col-md-6 col-lg-4">
                 <div class="card " style="width: 21rem; height: 580px;" id="card">
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="{{ $item->videoHeader()->fullAsset() }}"

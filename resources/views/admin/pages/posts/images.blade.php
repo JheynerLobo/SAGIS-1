@@ -17,11 +17,7 @@
                 'route' => route('admin.posts.index'),
                 'isActive' => null,
             ],
-            [
-                'name' => $item->title,
-                'route' => null,
-                'isActive' => null,
-            ],
+            
             [
                 'name' => 'Imágenes',
                 'route' => null,

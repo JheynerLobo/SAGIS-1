@@ -17,7 +17,7 @@
                     <tr>
                         <th>Foto</th>
                         <th>Nombre</th>
-                        <th>Cedula</th>
+                        <th>Cédula</th>
                         <th>Código</th>
                         <th>Celular</th>
                         <th>Correo institucional</th>

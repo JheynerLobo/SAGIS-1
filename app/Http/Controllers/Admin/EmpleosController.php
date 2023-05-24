@@ -6,14 +6,14 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Empleos;
+use App\Models\Empleo;
+use App\Models\EmpleoImage;
 
 use App\Repositories\EmpleoRepository;
 use Illuminate\Support\Facades\File;
 
 use App\Http\Requests\Empleos\StoreRequest;
 use App\Repositories\EmpleoImageRepository;
-use App\Repositories\EmpleoVideoRepository;
 use App\Http\Requests\Empleos\UpdateRequest;
 use App\Http\Requests\Empleos\StoreRequestImage;
 use App\Http\Requests\Empleos\UpdateRequestImage;
@@ -26,19 +26,15 @@ class EmpleosController extends Controller
     /** @var EmpleoImageRepository */
     protected $empleoImageRepository;
 
-    /** @var EmpleoVideoRepository */
-    protected $empleoVideoRepository;
 
     public function __construct(
         EmpleoRepository $empleoRepository,
-        EmpleoImageRepository $empleoImageRepository,
-        EmpleoVideoRepository $empleoVideoRepository
+        EmpleoImageRepository $empleoImageRepository
     ) {
         $this->middleware('auth:admin');
 
         $this->empleoRepository = $empleoRepository;
         $this->empleoImageRepository =  $empleoImageRepository;
-        $this->empleoVideoRepository = $empleoVideoRepository;
     }
 
     /**
@@ -75,48 +71,109 @@ class EmpleosController extends Controller
     }
 
     public function store(StoreRequest $request){
-
+        
         try{
-            $empleo = new Empleo;
-            $empleo -> empresaa = $request->input('empresa');
-            $empleo -> cargo = $request->input('cargo');
-            $empleo -> cargo = $request->input('description');
-            $empleo -> date = $request->input('date');
-            $empleo->save();
+
+        DB::rollback();
+
+        $request->validate([
+            'empresa' => 'required|string',
+            'cargo' => 'required|string',
+            'description' => 'required|string',
+            'date' => 'required|date',
+            'url_postulation' => 'nullable|string',
+            'imagen' => 'nullable|image|max:1024',
+        ]);
     
-            $files = $request->file('image');
-            $videoParams = $request->only(['video']);
+        // Crear un nuevo registro en la entidad Empleo
+        $empleo = new Empleo;
+        $empleo->empresa = $request->input('empresa');
+        $empleo->cargo = $request->input('cargo');
+        $empleo->description = $request->input('description');
+        $empleo->date = $request->input('date');
+        $empleo->url_postulation = $request->input('url_postulation');
+        $empleo->save();
+    
+      
+        if ($request->hasFile('imagen')) {
+            $imagen = new EmpleoImage;
+            $imagen->empleo_id = $empleo->id;
+            $imagen->asset_url = $request->file('imagen')->store('empleos', 'empleos');
+            $imagen->asset = $request->file('imagen')->getClientOriginalName();
+            $imagen->is_header = 1;
+            $imagen->save();
+        }
 
-
-           
-
-                if(!is_null($videoParams['video'])){
-
-                    $video = substr($videoParams['video'], -11);
-                    $videoParams['empleo_id'] = $post->id;
-                    $videoParams['asset_url'] = $video;
-                    $videoParams['is_header'] = 1;
-                    unset($videoParams['video']);
-
-                    $this->empleoVideoRepository->create($videoParams);
-                }
-
-                $imageParams = $request->only(['image']);
-        if($imageParams!=null){
-            $image = substr($imageParams['image'], -11);
-            $imageParams['empleo_id'] = $experience->id;
-            $imageParams['asset_url'] = $video;
-            $imageParams['is_header'] = 1;
-            unset($imageParams['image']);
-            $this->experienceVideoRepository->create($imageParams);}
-
-                return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
+        return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
             } catch (\Exception $th) {
                 dd($th);
                 DB::rollBack();
     
                 return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
             }
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id){
+
+        try{
+
+            $item=Empleo::find($id);
+            $image=EmpleoImage::where('empleo_id'==$id);
+            
+            
+                return view('admin.pages.empleos.edit', compact('item','image'));
+
+        }
+        catch(\Exception $th) {
+           
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
+
         }
 
     }
+
+    public function update(UpdateRequest $request, $id) {
+        try {
+            $empleoParams = $request->only(['empresa', 'cargo','description', 'date', 'url_postulation']);
+    
+            $empleo = $this->empleoRepository->getById($id);
+    
+            $this->empleoRepository->update($empleo, $empleoParams);
+    
+            return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
+        }
+        catch (\Exception $th) {
+            return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido actualizar correctamente.', 'icon' => 'error']);
+
+        }
+    }
+
+    public function destroy($id){
+        try {
+            $empleo = $this->empleoRepository->getById($id);
+
+            DB::beginTransaction();
+            
+            $this->empleoRepository->delete($empleo);
+
+            DB::commit();
+
+            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha eliminado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            DB::rollBack();
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
+        }
+
+    }
+
+    }
+        
+

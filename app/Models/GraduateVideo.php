@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EmpleoVideo extends Model
+class GraduateVideo extends Model
 {
     use HasFactory;
 
@@ -14,16 +14,16 @@ class EmpleoVideo extends Model
      *
      * @var array
      */
-    protected $fillable = ['empleo_id', 'asset_url', 'is_header'];
+    protected $fillable = ['graduates_id', 'asset_url', 'is_header'];
 
     /**
-     * Get the Empleo
+     * Get the Experience
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function empleo()
+    public function graduate()
     {
-        return $this->belongsTo(Empleo::class);
+        return $this->belongsTo(Graduate::class);
     }
 
     /**
@@ -35,4 +35,5 @@ class EmpleoVideo extends Model
     {
         return "https://www.youtube.com/embed/" . $this->asset_url;
     }
+   
 }

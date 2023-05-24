@@ -35,4 +35,5 @@ class EmpleoImage extends Model
     {
         return $this->asset_url . $this->asset;
     }
+
 }

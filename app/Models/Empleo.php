@@ -14,7 +14,7 @@ class Empleo extends Model
      *
      * @var array
      */
-    protected $fillable = ['empresa', 'cargo', 'description', 'date'];
+    protected $fillable = ['empresa', 'cargo', 'description', 'date', 'url_postulation'];
 
 
     /**
@@ -26,6 +26,7 @@ class Empleo extends Model
     {
         return $this->hasMany(EmpleoImage::class);
     }
+
 
     /**
      * Get Images
@@ -42,38 +43,14 @@ class Empleo extends Model
         return $this->images()->count();
     }
 
-    public function getCountVideo()
-    {
-        return $this->videos()->count();
-    }
+   
 
     public function is_imageOne()
     {
         return $this->images()->count()== 1? true: false;
     }
 
-    /**
-     * Get Images
-     * 
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function videos()
-    {
-        return $this->hasMany(EmpleoVideo::class);
-    }
-
-    /**
-     * Get Images
-     * 
-     * @return \App\Models\EmpleoVideo
-     */
-    public function videoHeader()
-    {
-        return $this->videos()->where('is_header', true)->first();
-    }
-
-
-   
+    
 
     /**
      * Get if the empleos has images
@@ -85,15 +62,7 @@ class Empleo extends Model
         return $this->images()->count() > 0 ? true : false;
     }
 
-    /**
-     * Get if the empleos has videos
-     * 
-     * @return bool
-     */
-    public function hasVideos()
-    {
-        return $this->videos()->count() > 0 ? true : false;
-    }
+ 
 
     
 }

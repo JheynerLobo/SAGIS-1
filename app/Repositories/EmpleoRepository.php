@@ -18,7 +18,6 @@ class EmpleoRepository extends AbstractRepository
 
     /**
      * @param array $params
-     * @param int $postCategoryId
      * 
      * @return $query
      */
@@ -27,12 +26,9 @@ class EmpleoRepository extends AbstractRepository
         $query = $this->model
             ->select();
 
-        if (isset($with)) {
-            $query->with($with);
-        }
-
-        if (isset($params['cargo']) && $params['cargo']) {
-            $query->where('cargo', 'like', '%' . $params['cargo'] . '%');
+        
+        if (isset($params['empresa']) && $params['empresa']) {
+            $query->where('empresa', 'like', '%' . $params['empresa'] . '%');
         }
         if (isset($params['created_at_from']) && $params['created_at_from']) {
             $query->where('date', '>=', $params['created_at_from']);
@@ -105,9 +101,16 @@ class EmpleoRepository extends AbstractRepository
 
             if (isset($params['order_by'])) {
                 if ($params['order_by'] == 1) {
-                    $query->orderBy('title', 'ASC');
+                    $query->orderBy('empresa', 'ASC');
                 } else {
-                    $query->orderBy('title', 'DESC');
+                    $query->orderBy('empresa', 'DESC');
+                }
+            }
+            if (isset($params['order_by'])) {
+                if ($params['order_by'] == 1) {
+                    $query->orderBy('cargo', 'ASC');
+                } else {
+                    $query->orderBy('cargo', 'DESC');
                 }
             }
             $items = $query->get();

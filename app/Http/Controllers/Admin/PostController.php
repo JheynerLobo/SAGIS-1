@@ -216,8 +216,7 @@ class PostController extends Controller
             DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
-            dd($th);
+        } catch (\Exception $th) {;
             DB::rollBack();
 
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
@@ -724,31 +723,6 @@ class PostController extends Controller
         }
     }
 
-
-    public function destroy_all(){
-        try {
-
-            $posts = $this->postRepository->all();
-
-
-             DB::beginTransaction();
-
-            foreach($posts as $post){
-                 $this->postRepository->delete($post);
-            }
-
-
-           DB::commit();
-            
-           
-            return back()->with('alert', ['title' => '¡Éxito!', 'message' => 'Se han eliminado todos los contenidos correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
-            DB::rollBack();
-            dd($th);
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente todos los contenidos.', 'icon' => 'error']);
-        }
-
-    }
 
 
     /**

@@ -38,15 +38,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
+                <!--<div class="col-lg-3">
                     <div class="input-group mb-3">
                         <div class="input-group-append">
                             <label class="input-group-text">Cargo:</label>
                         </div>
                         <input type="text" name="nombre" class="form-control" placeholder="Buscar Graduad@"
-                            value="{{ getParamValue($params, 'nombre') }}">
+                            value="{{ getParamValue($params, 'empresa') }}">
                     </div>
-                </div>
+                </div>-->
             </div>
             @if($total != 0)
             <div class="btn-group">

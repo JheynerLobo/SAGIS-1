@@ -15,9 +15,11 @@ class CreateEmpleosTable extends Migration
     {
         Schema::create('empleos', function (Blueprint $table) {
             $table->id();
-            $table->string('cargo')->nullable();;
+            $table->string('empresa')->nullable();;
+            $table->string('cargo')->nullable();
             $table->longText('description')->nullable();
             $table->date('date');
+            $table->string('url_postulation')->nullable();
 
             $table->timestamps();
         });

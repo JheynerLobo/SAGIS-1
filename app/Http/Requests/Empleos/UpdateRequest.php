@@ -31,7 +31,8 @@ class UpdateRequest extends FormRequest
             'description' => ['string'],
             'date' => ['required', 'date'],
             'image' => ["array","max:5"], 
-            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg, array, max:5']
+            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg, array, max:5'],
+            'url_postulation' => ['string']
         ];
     }
 }

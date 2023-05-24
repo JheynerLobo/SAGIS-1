@@ -99,7 +99,7 @@
         <div class="row  g-5">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card " style="width: 21rem; height: 580px;">
-                    <iframe height="220px" src="https://www.youtube.com/embed/4I25nV9hXGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe height="220px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="card-body">
                         <p class="fecha">Mayo 05 2022</p>
                         <h5 class="card-title"> <a href="" class="vinculoTitulo">Conferencia de la "Innovación para la
@@ -116,7 +116,7 @@
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card" style="width: 21rem; height: 580px;">
-                    <iframe height="220px" src="https://www.youtube.com/embed/SRNmSeUqB0o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe height="220px"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 
                   {{--   <video src="video.webm" poster="presentacion.jpg" controls></video> --}}
                   
@@ -143,7 +143,7 @@
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card" style="width: 21rem; height: 580px;">
  
-                    <iframe height="220px" src="https://www.youtube.com/embed/3m9b4uOAnmg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe height="220px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="card-body">
                         <p class="fecha">Mayo 09 2022</p>
                         <h5 class="card-title"> <a href="" class="vinculoTitulo">Profesores Ponentes Semana CyT</a>
@@ -164,7 +164,7 @@
 
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="card" style="width: 21rem; height: 580px;">
-                    <iframe height="220px" src="https://www.youtube.com/embed/4I25nV9hXGA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe height="220px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <div class="card-body">
                         <p class="fecha">Mayo 05 2022</p>
                         <h5 class="card-title"> <a href="" class="vinculoTitulo">Cafe TIC 2021-2</a> </h5>

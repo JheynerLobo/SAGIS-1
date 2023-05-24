@@ -177,9 +177,7 @@ class ReportController extends Controller
         try {
             $item = DB::table('situations_graduates')->where('anio_graduation', $anio_graduation)->where('anio_actual', $anio_actual)->first();
             
-           if(!$item) {
-            abort(404);
-        }
+           
             return view('admin.pages.SituacionGraduados.edit', compact('item'));
         }
         catch (\Exception $th) {
@@ -191,11 +189,8 @@ class ReportController extends Controller
         try {
             
             $item = SituationsGraduates::where('anio_graduation', $anio_graduation)
-                ->where('anio_actual', $anio_actual)
-                ->firstOrFail();
-
-               
-    
+                ->where('anio_actual', $anio_actual);
+            
             $item->anio_graduation = intval($request->input('anio_graduation'));
             $item->anio_actual = intval($request->input('anio_actual'));
             $item->graduados = intval($request->input('graduados'));
@@ -204,8 +199,8 @@ class ReportController extends Controller
             $item->desempleados = intval($request->input('desempleados'));
             $item -> trabajando = round((($item -> independientes + $item -> dependientes)/($item -> independientes + $item -> dependientes+ $item -> desempleados))*100,2);
             
-            $item->save();        
-    
+            $item->save();
+
             return redirect()->route('admin.situacionGraduados.index')->with('alert', [
                 'title' => '¡Éxito!',
                 'icon' => 'success',
@@ -225,9 +220,7 @@ class ReportController extends Controller
 {
     try{
     $item = SituationsGraduates::where('anio_graduation', $anio_graduation)
-                      ->where('anio_actual', $anio_actual)
-                      ->first();
-    
+                      ->where('anio_actual', $anio_actual);
     $item->delete();
     
     return redirect()->route('admin.situacionGraduados.index')->with('alert', ['title' => '¡Éxito!',
@@ -342,7 +335,7 @@ class ReportController extends Controller
     public function eliminarRegistro($anio_graduation, $anio_actual)
 {
     $registro = situations_graduates::where('anio_graduation', $anio_graduacion)->where('anio_actual', $anio_actual)->first();
-
+    dd($registro);
     if($registro){
         $registro->delete();
         return view('admin.pages.SituacionGraduados.table')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success'], compact('registro'));

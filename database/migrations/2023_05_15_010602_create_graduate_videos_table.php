@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpleoVideosTable extends Migration
+class CreateGraduateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,16 @@ class CreateEmpleoVideosTable extends Migration
      */
     public function up()
     {
-        Schema::create('empleo_videos', function (Blueprint $table) {
+        Schema::create('graduate_videos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('empleo_id');
+            $table->unsignedBigInteger('graduates_id');
             $table->string('asset_url');
             // $table->string('video')->nullable();
             $table->boolean('is_header')->default(false);
 
             $table->timestamps();
 
-            $table->foreign('empleo_id')->references('id')->on('empleos')->cascadeOnUpdate()->cascadeOnDelete();
+            $table->foreign('graduates_id')->references('id')->on('graduates')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
@@ -33,6 +33,6 @@ class CreateEmpleoVideosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empleo_videos');
+        Schema::dropIfExists('graduate_videos');
     }
 }

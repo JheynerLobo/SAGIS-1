@@ -9,7 +9,7 @@
                     </table>
                 @endif
                 <table id="example1" class="table table-bordered table-striped" style="text-align:center">
-                    <h3 style="color:#f00; text-align:center">Año de Graduación: {{ $dato->anio_graduation }}</h3>
+                    <h3 style="color:#f00; text-align:center">Año de Graduación: {{ $dato->anio_graduation }}</h3><h4 style="color:#000">Total Graduados: {{$dato->graduados}}</h4>
                     <thead>
                         <tr>
                             <th>Año Registro</th>

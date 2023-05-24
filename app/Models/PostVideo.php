@@ -31,5 +31,8 @@ class PostVideo extends Model
      * 
      * @return string
      */
-   
+    public function fullAsset()
+    {
+        return "https://www.youtube.com/embed/" . $this->asset_url;
+    }
 }

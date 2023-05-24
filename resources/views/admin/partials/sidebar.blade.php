@@ -123,9 +123,16 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{route('admin.situacionGraduados.index')}}" class="nav-link">
-                            <i class="fa-solid fa-star"></i>
+                            <a href="{{route('admin.graduateQuality.index')}}" class="nav-link">
+                            <i class="fa-sharp fa-solid fa-file"></i>
                                 <p>Graduados con Calidad</p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                            <i class="fa-solid fa-star"></i>
+                                <p>Encuestas</p>
                             </a>
                         </li>
                             <li class="nav-item">

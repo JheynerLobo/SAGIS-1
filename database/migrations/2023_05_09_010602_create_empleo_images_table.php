@@ -18,7 +18,7 @@ class CreateEmpleoImagesTable extends Migration
             $table->unsignedBigInteger('empleo_id');
             $table->string('asset_url');
             $table->string('asset')->nullable();
-            $table->boolean('is_header')->default(false);
+            $table->boolean('is_header')->default(true);
 
             $table->timestamps();
 
