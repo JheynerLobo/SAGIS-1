@@ -26,7 +26,7 @@
                     <h1 class="pull-left" style="font-size:36px;">Vídeos</h1>
                 </div>
                 <h1 class="tituloinformacion"> {{ $item->title }} </h1>
-                <p class="fecha">{{ $item->date }}</p>
+                <h5 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h5>
                 @if($item->getCountVideo()>0 && !is_null($item->videoHeader()))
                 <div class="text-center  d-flex justify-content-center  mt-4 mb-4">
                     <div class="card" style="width: 35rem;" id="card">

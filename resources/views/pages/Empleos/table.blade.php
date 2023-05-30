@@ -9,9 +9,8 @@
                         alt="...">
                         @endif
                     <div class="card-body">
-                        <p class="fecha">{{ $item->date }}</p>
-                        <h5 class="card-title"  id="card-title"> <a href="" class="vinculoTitulo">{{ $item->empresa }}</a></h5>
-                        <p class="card-text" id="card-text">{{ $item->cargo }}</p>
+                    <h6 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h6>
+                        <h5 class="card-title"  id="card-title"> <a href="" class="vinculoTitulo">{{ $item->nombre }}</a></h5>
                         <p class="card-text" id="card-text">{{ $item->description }}</p>
                         <p class="card-text" id="card-text"> {{ $item->url_postulation }}</p>
                     </div>

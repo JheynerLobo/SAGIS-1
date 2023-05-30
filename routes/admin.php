@@ -37,6 +37,8 @@ Route::get('home', [HomeController::class, 'home'])->name('admin.home');
 
 Route::resource('graduates', GraduateController::class, ['as' => 'admin']);
 
+Route::resource('graduatesQuality', GraduateQualityController::class,['as'=>'admin']);
+
 
 Route::post('graduates/import_excel', [GraduateController::class, 'import_excel'])->name('admin.graduates.import_excel');
 Route::post('graduates/destroy_all', [GraduateController::class, 'destroy_all'])->name('admin.graduates.destroy_all');
@@ -84,6 +86,19 @@ Route::delete('posts/{post}/images/{image}/destroy_image', [PostController::clas
 
 Route::post('posts/destroy_all', [PostController::class, 'destroy_all'])->name('admin.posts.destroy_all');
 
+Route::get('graduates/{graduate}/images', [GraduateQualityController::class,'images'])->name('admin.graduateQuality.images');
+
+Route::patch('graduates/{graduate}/update_images', [GraduateQualityController::class, 'update_images'])->name('admin.graduateQuality.update_images');
+
+Route::get('graduates/{graduate}/images/create_image', [GraduateQualityController::class, 'create_image'])->name('admin.graduateQuality.create_image');
+Route::post('graduates/{graduate}/images/store_image', [GraduateQualityController::class, 'store_image'])->name('admin.graduateQuality.store_image');
+
+Route::get('graduates/{graduate}/images/{image}/edit_image', [GraduateQualityController::class, 'edit_image'])->name('admin.graduateQuality.edit_image');
+Route::patch('graduates/{graduate}/images/{image}/update_image', [GraduateQualityController::class, 'update_image'])->name('admin.graduateQuality.update_image');
+
+Route::delete('graduates/{graduate}/images/{image}/destroy_image', [GraduateQualityController::class, 'destroy_image'])->name('admin.graduateQuality.destroy_image');
+
+
 //Route::get('graduates/{graduate}/academic_studies/{academic}/edit', [GraduateController::class, 'edit_academic'])->name('admin.graduates.edit_academic');
 
 Route::prefix('reports')->group(function () {
@@ -122,7 +137,7 @@ Route::get('GraduateQuality/edit/{id}', [GraduateQualityController::class, 'edit
 
 Route::patch('GraduateQuality/update/{id}', [GraduateQualityController::class,'update'])->name('admin.graduateQuality.update');
 
-Route::delete('GraduateQuality/delete/{id}', [GraduateQualityController::class, 'delete'])->name('admin.graduateQuality.delete');
+Route::delete('GraduateQuality/destroy/{id}', [GraduateQualityController::class, 'delete'])->name('admin.graduateQuality.destroy');
 
 //Route::post('experiences/store', [ExperienceController::class, 'store'])->name('admin.experiences.store');
 

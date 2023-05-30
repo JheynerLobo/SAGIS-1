@@ -39,9 +39,8 @@
                         GRADUADOS DE HONOR
                     </button>
                     <ul class="dropdown-menu" >
-                        <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('experiences', 'active') }} "
-                        href="{{ route('experiences') }}" style="text-align:center">EXPERIENCIAS</a></li>
-                        <li><a class="dropdown-item" href="#" style="text-align:center">PREMIO AL MERITO</a></li>
+                        <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('experiences', 'active') }} "href="{{ route('experiences') }}" style="text-align:center">EXPERIENCIAS</a></li>
+                        <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('meritosGraduados', 'active') }} "href="{{ route('meritosGraduados') }}"  style="text-align:center">PREMIO AL MERITO</a></li>
                     </ul>
 </div>
                 <li class="nav-item">

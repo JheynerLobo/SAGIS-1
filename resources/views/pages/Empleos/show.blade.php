@@ -22,11 +22,11 @@
 
                 <div class="col-md-12 col-sm-12 col-xs-12"
                     style="margin-bottom:20px; border-bottom: 3px solid #aa1916; padding: 0;">
-                    <h1 class="pull-left" style="font-size:36px;">Empleos</h1>
+                    <h1 class="pull-left" style="font-size:36px;">Empleo</h1>
                 </div>
                 <h1 class="tituloinformacion"> {{ $item->empresa }} </h1>
-                <p class="cargo">{{ $item->cargo }}</p>
-                <p class="fechapostulation">{{$item->date}}</p>
+                <h5 class="cargo">Cargo a desempeñar: <strong>{{ $item->cargo }}</strong></h5>
+                <h3 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h3>
                 <div class="text-center  d-flex justify-content-center  mt-4 mb-4">
                     <div class="card" style="width: 32rem;" >
                         <div class="card-body">

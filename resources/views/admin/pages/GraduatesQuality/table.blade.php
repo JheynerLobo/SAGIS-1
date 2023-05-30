@@ -3,11 +3,13 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Video</th>
+                    <th>Imagen/Video</th>
                     <th>Graduado</th>
                     <th>Descripción</th>
                     <th>Fecha de Publicación</th>
                     <th>Acciones</th>
+                    <th>Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>
+                    </th>
 
                 </tr>
             </thead>
@@ -15,25 +17,40 @@
                 @forelse ($items as $item)
                 <tr>
                     <td>
+                        @if ($item->getCountimage()!=0)
+                        <img src="{{ asset($item->imageHeader()->fullasset()) }}" alt="" width="55rem">
+                        
+                        @else
                         <img src="https://www.uncommunitymanager.es/wp-content/uploads/seo_google_youtube.jpg" alt=""
                             width="55rem">
-                        
+                            @endif
                     </td>
                     <td>{{ $item->nombre }}</td>
                     <td style="white-space: pre-wrap;">{{ $item->description }}</td>
                     <td>{{ $item->date }}</td>
+
+
                     <td>
                         <div class="btn-group">
                             <div class="mr-3 ml-1">
-                                <a href="{{route('admin.graduateQuality.edit', $item->id)}}" method="POST" class="btn btn-sm btn-warning"><i
+                                <a href="{{ route('admin.graduateQuality.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
                                         class="fas fa-edit"></i></a>
                             </div>
+                            <div class="mr-3">
+                                @if($item->getCountimage()>=1)
+                                <a href="{{ route('admin.graduateQuality.images', $item->id) }}" class="btn btn-sm btn-info"><em
+                                    class="fas fa-image"></em></a>
+                                @else
+                                    <button disabled><em class="fas fa-image"></em></button>
+                                @endif
+                                
 
+                                
+                            </div>
 
-
-                           
+                           {{--  @if($item->getCountimage()>= 2) --}}
                             <div class="mr-1">
-                                <form action="{{ route('admin.graduateQuality.delete', $item->id) }}"
+                                <form action="{{ route('admin.graduateQuality.destroy', $item->id) }}" id="{{ $item->id }}"
                                     method="POST" class="formulario-eliminar">
                                     @csrf
                                     @method('DELETE')
@@ -42,13 +59,53 @@
                                 </form>
                               
                             </div>
-                          
+                          {{--   @else
+                            <div class="mr-1">
+                                <button disabled><em class="fas fa-image"></em></button>
 
                             </div>
+
+                            @endif --}}
 
 
                         </div>
                     </td>
+
+
+                    <td class="text-center ">
+                            @if($item->getCountimage()>=1 && !(is_null($item->videoHeader())))
+                            <div class="row">
+                            <div class="col-md-6">
+                                @if($item->getCountimage()>=1)
+                                <h3 class="text-primary">{{ $item->getCountimage() }}</h3>
+                                {{-- @else
+                                <h3 class="text-success">{{ $item->getCountVideo() }}</h3> --}}
+                                @endif
+                            </div>
+                            <div class="col-md-6">
+                                @if(!(is_null($item->videoHeader())))
+                                <h3 class="text-success">1</h3>
+                                @endif
+                            </div>
+                        </div>
+                            @elseif($item->getCountimage()>=1 )
+                            @if($item->getCountimage()>=1)
+                                <h3 class="text-primary">{{ $item->getCountimage() }}</h3>
+                                {{-- @else
+                                <h3 class="text-success">{{ $item->getCountVideo() }}</h3> --}}
+                                @endif
+                            @elseif(!(is_null($item->videoHeader())))
+                            @if( !(is_null($item->videoHeader())))
+                            <h3 class="text-success">1</h3>
+                            @endif
+                            @endif
+                        <div class="mr-3 ml-1">
+                        </div>
+                        <div class="mr-3">
+                        </div>
+                    </td>
+
+
 
                 </tr>
                 @empty

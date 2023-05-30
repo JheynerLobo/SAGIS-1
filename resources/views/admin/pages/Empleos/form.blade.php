@@ -45,7 +45,21 @@
         @enderror
         <!-- ./Date -->
 
-       
+                     <!-- Imagen Principal -->
+         <div class="form-group" id="imageP">
+            <label>Imagen principal:</label>
+            <div class="text-center">
+                <img style="width: 340px; height: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
+
+            </div>
+            <div class="mt-2">
+                <input type="file" class="form-control-file"  name="imagen">
+            </div>   
+        </div>
+        @error('imagen')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <!-- ./Imagen principal -->
 
         <!-- url_postulation -->
         <div class="form-group">
@@ -57,7 +71,6 @@
             <small class="text-danger">{{ $message }}</small>
         @enderror
         <!-- ./url_postulation -->
-    
 
 
 

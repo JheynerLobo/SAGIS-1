@@ -15,7 +15,7 @@
                     <h1 class="pull-left" style="font-size:36px;">Evento</h1>
                 </div>
                 <h1 class="tituloinformacion"> {{ $item->title }} </h1>
-                <p class="fecha">{{ $item->date }}</p>
+                <h5 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h5>
                 <div class="text-center  d-flex justify-content-center  mt-4 mb-4">
                     <div class="card" style="width: 32rem;" >
                         <div class="card-body">

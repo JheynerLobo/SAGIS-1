@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class GraduateVideo extends Model
+class GraduateImage extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class GraduateVideo extends Model
      *
      * @var array
      */
-    protected $fillable = ['graduate_id', 'asset_url', 'is_header'];
+    protected $fillable = ['graduate_id', 'asset_url', 'asset', 'is_header'];
 
     /**
      * Get the Graduate
@@ -33,7 +33,6 @@ class GraduateVideo extends Model
      */
     public function fullAsset()
     {
-        return "https://www.youtube.com/embed/" . $this->asset_url;
+        return $this->asset_url . $this->asset;
     }
-   
 }

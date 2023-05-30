@@ -121,4 +121,17 @@ class Authenticate
             return route('admin.login');
         }
     }
+
+    /**
+     * Get the path the admin should be redirected to when they are not authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
+     */
+    protected function companyRedirectTo($request)
+    {
+        if (!$request->expectsJson()) {
+            return route('companyLogin');
+        }
+    }
 }

@@ -26,13 +26,12 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         $id = $this->graduates;
-        $id_video=$this->graduateVideo;
 
         return [
             'nombre' => ['required','string'],
             'description' => ['required', 'string'],
             'date' => ['required', 'date'],
-            'video'=>['required','string']
+            'imagen' => ['image', 'mimes:png,jpg,jpeg']
         ];
     }
 }

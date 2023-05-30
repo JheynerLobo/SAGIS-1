@@ -195,24 +195,7 @@ class PostController extends Controller
                         $this->postImageRepository->create($postImg);
                     }
                 }
-
-
-
             }
-
-            //  dd($files);
-
-            
-            /*  else{
-                $postImgParams['post_id'] = $post->id;
-                $postImgParams['asset_url'] = 'https://media.tenor.com/3Yat5iUF8fgAAAAM/huh-quoi.gif';
-                $postImgParams['asset'] = null;
-                $postImgParams['is_header'] = 1;
-                $this->postImageRepository->create($postImgParams);
-            } */
-
-
-
             DB::commit();
 
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
@@ -247,12 +230,10 @@ class PostController extends Controller
 
             $postCategories = $this->postCategoryRepository->all();
 
-            //dd($item->getCountimage());
-
             if ($item->postCategory->name != "Vídeos" && $item->getCountimage() >= 1) {
                 $imageHeader = $item->imageHeader();
                 $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
-                  //  dd();
+                 
                 if ($item->getCountVideo() >= 1 && !(is_null($item->videoHeader()))) {
                     $videoHeader = $item->videoHeader();
                     $videos = $item->videos()->whereNotIn('id', [$videoHeader->id])->get();
@@ -275,9 +256,6 @@ class PostController extends Controller
 
                 return view('admin.pages.posts.edit', compact('item', 'postCategories', 'videoHeader', 'videos'));
             }
-
-
-            //return redirect()->route('admin.posts,edit', compact('item', 'postCategories', 'imageHeader', 'images'))->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
         } catch (\Exception $th) {
             dd($th);
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No hemos podido encontrar esta publicación.']);
@@ -290,12 +268,8 @@ class PostController extends Controller
             $item = $this->postRepository->getById($id);
 
             $postCategories = $this->postCategoryRepository->all();
-
-            //dd($item->getCountimage());
-
             
             if ($item->postCategory->name != "Vídeos" && $item->getCountimage() >= 1) {
-
 
                 if ($item->getCountimage() >= 1 && !(is_null($item->imageHeader()))) {
                      $imageHeader = $item->imageHeader();
@@ -305,14 +279,10 @@ class PostController extends Controller
                     return view('admin.pages.posts.images', compact('item', 'postCategories'));
                 }
             } 
-
-            //return redirect()->route('admin.posts,edit', compact('item', 'postCategories', 'imageHeader', 'images'))->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
         } catch (\Exception $th) {
             dd($th);
             return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No hemos podido encontrar esta publicación.']);
         }
-
-
     }
 
 
@@ -336,9 +306,6 @@ class PostController extends Controller
             dd($th);
             return redirect()->route('admin.posts.images',$item->id)->with('alert', ['title' => '¡Error!', 'icon' => 'error', 'message' => 'No hemos podido encontrar esta publicación.']);
         }
-
-
-
     }
 
 
@@ -558,7 +525,7 @@ class PostController extends Controller
                         $postImgParams['is_header'] = 1;
     
                         $postImg = array_merge($postImgParams,  $fileParams);
-                        // dd($postImg);
+                        
     
     
                         $this->postImageRepository->create($postImg);
@@ -570,7 +537,7 @@ class PostController extends Controller
                         $postImgParams['is_header'] = 1;
     
                         $postImg = array_merge($postImgParams,  $fileParams);
-                        // dd($postImg);
+                        
     
     
                         $this->postImageRepository->update($postImage, $postImg);
@@ -579,7 +546,6 @@ class PostController extends Controller
 
                 }
 
-                //dd( $postImage);
 
                 
                 if($post->getCountVideo()>0 && !(is_null($post->videoHeader()))) {
@@ -595,7 +561,6 @@ class PostController extends Controller
                     /** Saving Photo */
                     $fileParams = $this->saveImage($paramsImagen['imagen']);
                 }
-                //dd($fileParams);
 
                 $postImage = $this->postImageRepository->getByAttribute("post_id", $post->id);
 
@@ -607,7 +572,7 @@ class PostController extends Controller
                         $postImgParams['is_header'] = 1;
     
                         $postImg = array_merge($postImgParams,  $fileParams);
-                        // dd($postImg);
+                      
     
     
                         $this->postImageRepository->update($postImage, $postImg);
@@ -620,7 +585,7 @@ class PostController extends Controller
                         $postImgParams['is_header'] = 1;
     
                         $postImg = array_merge($postImgParams,  $fileParams);
-                        // dd($postImg);
+                       
     
     
                         $this->postImageRepository->create($postImg);
@@ -632,10 +597,6 @@ class PostController extends Controller
                 $videoParams = $request->only(['video']);
                 $video = substr($videoParams['video'], -11);
                 
-                //dd(isset($videoParams));
-                  //      dd($post->getCountVideo());
-
-                 // dd($post->getCountVideo()>0&& !(is_null($post->videoHeader())));
                 
                 if($post->getCountVideo()>0&& !(is_null($post->videoHeader())) ) {
 
@@ -764,4 +725,154 @@ class PostController extends Controller
 
         return $params;
     }
+
+
+
+    public function update2(UpdateRequest $request, $id)
+    {
+        try {
+            $params = $request->all();
+            if (!($request->file('imagen') == null)) {
+                $paramsImagen = $request->only(['imagen']);
+            }
+            $graduate = $this->graduatesRepository->getById($id);
+            $this->graduatesRepository->update($graduate, $request->all());
+            if ($params['post_category_id'] == "5") {
+                $imageHeader = $post->imageHeader();
+                if (isset($imageHeader)) {
+                    $images = $post->images()->whereNotIn('id', [$imageHeader->id])->get();
+                    $this->postImageRepository->delete($imageHeader);
+                    foreach ($images as $image) {
+                        $this->postImageRepository->delete($image);
+                    }
+                }
+                $videoParams2 = $request->only(['video']);
+                $video = substr($videoParams2['video'], -11);
+                if($post->getCountVideo()>0 && !(is_null($post->videoHeader())) ) {
+                    if(!is_null($videoParams2['video'])){
+                        if(strtoupper($videoParams2['video'])!="NO"  ){
+                            $postVideo = $this->postVideoRepository->getByAttribute("post_id", $post->id);
+                              $videoParams2['post_id'] = $post->id;
+                              $videoParams2['asset_url'] = $video;
+                              $videoParams2['is_header'] = 1;
+                              unset($videoParams2['video']);
+                              //dd($postVideo);
+                              $this->postVideoRepository->update($postVideo, $videoParams2);
+                        }
+                    }
+                 }else{
+                    if(!is_null($videoParams2['video'])){
+
+                        if(strtoupper($videoParams2['video'])!="NO"){
+                           // dd("Probando NO");
+                            $videoParams2['post_id'] = $post->id;
+                        $videoParams2['asset_url'] = $video;
+                        $videoParams2['is_header'] = 1;
+                        unset($videoParams2['video']);
+    
+                        $this->postVideoRepository->create($videoParams2);
+                        }
+                    }
+                    }
+            } else if ($params['post_category_id'] == "4") {
+                if (!($request->file('imagen') == null)) {
+                    /** Saving Photo */
+                    $fileParams = $this->saveImage($paramsImagen['imagen']);
+                }
+                $postImage = $this->postImageRepository->getByAttribute("post_id", $post->id);
+                if(is_null($postImage)){
+                    if (!($request->file('imagen') == null)) {
+                        $postImgParams['post_id'] = $post->id;
+                        $postImgParams['is_header'] = 1;
+                        $postImg = array_merge($postImgParams,  $fileParams);
+                        $this->postImageRepository->create($postImg);
+                    }
+                }else{
+                    if (!($request->file('imagen') == null)) {
+                        $postImgParams['post_id'] = $post->id;
+                        $postImgParams['is_header'] = 1;
+                        $postImg = array_merge($postImgParams,  $fileParams);
+                      $this->postImageRepository->update($postImage, $postImg);
+                    }
+                }
+                if($post->getCountVideo()>0 && !(is_null($post->videoHeader()))) {
+                    $videoHeader = $post->videoHeader();
+                    $this->postVideoRepository->delete($videoHeader);
+                }
+            } else {
+                if (!($request->file('imagen') == null)) {
+                    /** Saving Photo */
+                    $fileParams = $this->saveImage($paramsImagen['imagen']);
+                }
+                $postImage = $this->postImageRepository->getByAttribute("post_id", $post->id);
+                if($post->getCountimage()>0&& !(is_null($post->imageHeader())) ) {
+                    if (!($request->file('imagen') == null)) {
+                        $postImgParams['post_id'] = $post->id;
+                        $postImgParams['is_header'] = 1;
+                        $postImg = array_merge($postImgParams,  $fileParams);
+                        $this->postImageRepository->update($postImage, $postImg);
+                    }
+                }else{
+                    if (!($request->file('imagen') == null)) {
+                        $postImgParams['post_id'] = $post->id;
+                        $postImgParams['is_header'] = 1;
+                        $postImg = array_merge($postImgParams,  $fileParams);
+                        $this->postImageRepository->create($postImg);
+                    }
+                }
+                $videoParams = $request->only(['video']);
+                $video = substr($videoParams['video'], -11);
+                if($post->getCountVideo()>0&& !(is_null($post->videoHeader())) ) {
+                    if(!is_null($videoParams['video'])){
+                        if(strtoupper($videoParams['video'])=="NO"){
+                                $videoHeader = $post->videoHeader();
+                                  $this->postVideoRepository->delete($videoHeader);
+                        }else{
+                            $postVideo = $this->postVideoRepository->getByAttribute("post_id", $post->id);
+                              $videoParams['post_id'] = $post->id;
+                              $videoParams['asset_url'] = $video;
+                              $videoParams['is_header'] = 1;
+                              unset($videoParams['video']);
+                              $this->postVideoRepository->update($postVideo, $videoParams);
+                        }
+                    }
+                 }else{
+                    if(!is_null($videoParams['video'])){
+                        if(strtoupper($videoParams['video'])!="NO"){
+                        $videoParams['post_id'] = $post->id;
+                        $videoParams['asset_url'] = $video;
+                        $videoParams['is_header'] = 1;
+                        unset($videoParams['video']);
+                        $this->postVideoRepository->create($videoParams);
+                        }
+                    }
+                    }
+                }
+            return redirect()->route('admin.posts.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
+            dd($th);
+            DB::rollBack();
+
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
+        }
+    }
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 }

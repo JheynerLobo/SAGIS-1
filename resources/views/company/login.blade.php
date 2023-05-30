@@ -25,7 +25,7 @@
         <div class="card">
             <div class="login-logo">
                 <img src="{{ asset('img/logo_sistemas.jpg') }}" alt="">
-                <h1>Seguimiento y Acompañamiento de Graduados
+                <h1>Empresas
                     <hr>
                     <b>SAGIS</b>
                 </h1>
@@ -105,7 +105,7 @@
                                 href="{{ route('login') }}">
                                 <a style="text-decoration: none; color: #000000;"
                                 href="#">
-                                <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-sharp fa-solid fa-building"
+                                <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-user-graduate"
                                     style="width: 45px; height: 45px; margin-left: 30px"></button>
                                     </a>
                                     </div>

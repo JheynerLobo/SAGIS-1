@@ -70,8 +70,4 @@ class PostImageRepository extends AbstractRepository
 
         return $query->get();
     }
-
-
-
-
 }

@@ -10,12 +10,14 @@ use App\Repositories\PostImageRepository;
 use App\Repositories\PostCategoryRepository;
 use App\Repositories\ExperienceRepository;
 use App\Repositories\EmpleoRepository;
+use App\Repositories\GraduatesRepository;
 use App\Http\Requests\Filters\EventFilterRequest;
 use App\Http\Requests\Filters\VideoFilterRequest;
 use App\Http\Requests\Filters\CourseFilterRequest;
 use App\Http\Requests\Filters\NoticeFilterRequest;
 use App\Http\Requests\Filters\GalleryFilterRequest;
 use App\Http\Requests\Filters\EmpleoFilterRequest;
+
 
 class HomeController extends Controller
 {
@@ -33,6 +35,9 @@ class HomeController extends Controller
     /** @var EmpleoRepository */
     protected $empleoRepository;
 
+    /** @var GraduatesRepository */
+    protected $graduatesRepository; 
+
     /** @var string */
     protected $viewLocation = 'pages.';
 
@@ -41,13 +46,15 @@ class HomeController extends Controller
         PostRepository $postRepository,
         PostImageRepository $postImageRepository,
         ExperienceRepository $experienceRepository,
-        EmpleoRepository $empleoRepository
+        EmpleoRepository $empleoRepository,
+        GraduatesRepository $graduatesRepository
     ) {
         $this->postCategoryRepository = $postCategoryRepository;
         $this->postRepository = $postRepository;
         $this->postImageRepository =  $postImageRepository;
         $this->experienceRepository=$experienceRepository;
         $this->empleoRepository=$empleoRepository;
+        $this->graduatesRepository=$graduatesRepository;
     }
 
     public function home()
@@ -327,7 +334,7 @@ class HomeController extends Controller
         }
     }
 
-
+   
         /**
      * @param int $id
      */
@@ -341,6 +348,45 @@ class HomeController extends Controller
             
                 return view($this->viewLocation . 'empleos.show', compact('item'));
             
+
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function meritosGraduado(GalleryFilterRequest $request){
+        try{
+        $params = $this->graduatesRepository->transformParameters($request->all());    
+        $query = $this->graduatesRepository->search($params,null);         
+        $total = $query->count();
+        $items = $this->graduatesRepository->customPagination($query, $params, $request->get('page'), $total);
+        return view($this->viewLocation . 'graduadosCalidad.index', compact('items'))
+            ->nest('filters', $this->viewLocation . 'graduadosCalidad.filters', compact('params', 'total'))
+            ->nest('table', $this->viewLocation . 'graduadosCalidad.table', compact('items'));
+    } catch (Exception $th) {
+        throw $th;
+    }
+}
+
+/**
+     * @param int $id
+     */
+    public function meritoGraduadoShow($id)
+    {
+        try {
+            $item = $this->graduatesRepository->getById($id);
+            if($item->getCountimage()>0){
+            $imageHeader = $item->imageHeader();
+            $images = $item->images()->whereNotIn('id', [$imageHeader->id])->get();
+            }
+
+            
+            if($item->getCountVideo()>0){
+                $videoHeader = $item->videoHeader();
+                return view($this->viewLocation . 'graduadosCalidad.show', compact('item', 'imageHeader', 'images', 'videoHeader'));
+            }else{
+                return view($this->viewLocation . 'graduadosCalidad.show', compact('item', 'imageHeader', 'images'));
+            }
 
         } catch (\Throwable $th) {
             throw $th;

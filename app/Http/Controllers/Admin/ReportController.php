@@ -245,12 +245,9 @@ class ReportController extends Controller
             $situacionGraduate -> trabajando = round((($situacionGraduate -> independientes + $situacionGraduate -> dependientes)/($situacionGraduate -> independientes + $situacionGraduate -> dependientes+ $situacionGraduate -> desempleados))*100,2);
             $situacionGraduate->save();
 
-            
-            return redirect()->route('admin.situacionGraduados.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);}
-          catch (\Exception $th) {
-
+            return redirect()->route('admin.situacionGraduados.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
+        } catch (\Exception $th) {
             DB::rollBack();
-
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente. Verifica que los datos ya no esten registrados.', 'icon' => 'error']);
         }
     }

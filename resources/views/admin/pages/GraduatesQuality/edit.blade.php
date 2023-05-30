@@ -12,7 +12,7 @@
 
 @section('content-header')
     @include('admin.partials.content-header', [
-        'title' => 'Actualizar Graduado',
+        'title' => 'Actualizar Reconocimiento',
         'items' => [
             [
                 'name' => 'Inicio',
@@ -20,7 +20,7 @@
                 'isActive' => null,
             ],
             [
-                'name' => 'Experiencias',
+                'name' => 'Reconocimientos',
                 'route' => route('admin.graduateQuality.index'),
                 'isActive' => null,
             ],
@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body">
                             <p>Por favor, llenar todos los datos de información.</p>
-                            <small class="text-muted">Recuerda que acá se realiza la actualización de los datos del graduad@.</small>
+                            <small class="text-muted">Recuerda que acá se realiza la actualización de los datos del reconocimiento del graduad@.</small>
                             <hr>
                             @include('admin.pages.GraduatesQuality.form', ['editMode' => true,])
                         </div>

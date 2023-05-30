@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Empleos;
+namespace App\Http\Requests\GraduateQuality;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class StoreRequestImage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,10 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->graduate;
+
         return [
-            'empresa' => ['string'],
-            'cargo'=> ['string'],
-            'description' => ['string'],
-            'date' => ['required', 'date'],
-            'image' => ["array","max:5"], 
-            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg, max:10240']
+            'image' => ['required', 'image', 'mimes:png,jpg,jpeg']
         ];
     }
 }

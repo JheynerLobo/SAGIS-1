@@ -8,7 +8,7 @@
                             allowfullscreen></iframe>
                     </div>
                     <div class="card-body">
-                        <p class="fecha">{{ $item->date }}</p>
+                    <h6 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h6>
                         <h5 class="card-title"  id="card-title"> <a href="" class="vinculoTitulo">{{ $item->title }}</a></h5>
                         <p class="card-text" id="card-text">{{ $item->description }}</p>
                     </div>

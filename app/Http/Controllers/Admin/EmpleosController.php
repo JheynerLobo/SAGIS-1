@@ -125,9 +125,9 @@ class EmpleosController extends Controller
 
             $item=Empleo::find($id);
             $image=EmpleoImage::where('empleo_id'==$id);
+            $imageHeader = $item->imageHeader();
             
-            
-                return view('admin.pages.empleos.edit', compact('item','image'));
+                return view('admin.pages.empleos.edit', compact('item','image','imageHeader'));
 
         }
         catch(\Exception $th) {
@@ -146,11 +146,33 @@ class EmpleosController extends Controller
             $empleo = $this->empleoRepository->getById($id);
     
             $this->empleoRepository->update($empleo, $empleoParams);
+            
+            if (!($request->file('imagen') == null)) {
+                
+                $fileParams = $this->saveImage($paramsImagen['imagen']);
+            }
+            $empleoImage = $this->empleoImageRepository->getByAttribute("empleo_id", $empleo->id);
+            
+            if(is_null($empleoImage)){
+                if (!($request->file('imagen') == null)) {
+                    $empleoImgParams['empleo_id'] = $empleo->id;
+                    $empleoImgParams['is_header'] = 1;
+                    $empleoImg = array_merge($empleoImgParams,  $fileParams);
+                    $this->empleoImageRepository->create($empleoImg);
+                }
+            }else{
+                if (!($request->file('imagen') == null)) {
+                    $empleoImgParams['empleo_id'] = $empleo->id;
+                    $empleoImgParams['is_header'] = 1;
+                    $empleoImg = array_merge($empleoImgParams,  $fileParams);
+                  $this->empleoImageRepository->update($empleoImage, $empleoImg);
+                }
+            }
     
             return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
         }
         catch (\Exception $th) {
-            return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido actualizar correctamente.', 'icon' => 'error']);
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido actualizar correctamente.', 'icon' => 'error']);
 
         }
     }

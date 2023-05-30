@@ -33,35 +33,77 @@
         @enderror
         <!-- ./Date -->
 
-        
-        <div class="form-group"  name="video" id="video">
+
+        @if($item->getCountimage()>=1)
+                     <!-- Imagen Principal -->
+         <div class="form-group" id="imageP">
+            <label>Imagen principal:</label>
+            <div class="text-center">
+                <img style="width: 340px; height: 340px" src="{{ asset($imageHeader->fullAsset() ) }}" alt="">
+
+            </div>
+            <div class="mt-2">
+                <input type="file" class="form-control-file"  name="imagen"  accept="image/*" >
+            </div>   
+        </div>
+        @error('imagen')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <!-- ./Imagen principal -->
+
+        <div class="form-group"  id="videoP">
             <label>URL video de Youtube:</label>
             <div class="mt-2">
-                
+                @if(!(is_null($item->videoHeader())))
+
                
-                <input type="text"  value="{{ $videoHeader->fullAsset() }}"  id="inputVideo" class="form-control-file" name="video" required 
-                pattern="((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)" 
+                    <input type="text"  value="{{ $videoHeader->fullAsset() }}" id="inputVideo" class="form-control-file" name="video" 
+                    pattern="((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)" 
+                    title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=, o si quiere eliminar el video NO, excepto en categoría Vídeos" >
+                @else
+                <input type="text" class="form-control-file"  id="inputVideo" name="video" 
+                pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})"
                 title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" >
+                @endif
             </div>   
         </div>
         @error('video')
             <small class="text-danger">{{ $message }}</small>
         @enderror
 
-
+        @elseif ($item->getCountimage()==0)
+        <div class="form-group" style="display: none;" id="imageP">
+            
+            <div class="mt-2" >
+                <input type="file" class="form-control-file" id="inputImage"   name="imagen" accept="image/*">
+            </div>   
+        </div>
+        @error('imagen')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+        <div class="form-group"  id="videoP">
+            <label>URL video de Youtube:</label>
+            <div class="mt-2">
+                <input type="text"  value="{{ $videoHeader->fullAsset() }}"  id="inputVideo" class="form-control-file" name="video"  
+                pattern="((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)" 
+                title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=, o si quiere eliminar el video NO, excepto en categoría Vídeos" >
+            </div>   
+        </div>
+        @error('video')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror   
+        @endif
          <!-- Submit -->
         <div class="mt-4">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="submit" class="btn btn-danger">Actualizar</button>
                 <div class="ml-5">
                     <a class="btn btn-warning " style="color:black;
-                    text-decoration: none;" href="{{ route('admin.experiences') }}">Regresar</a>
+                    text-decoration: none;" href="{{ route('admin.graduateQuality.index') }}">Regresar</a>
                 </div>
             </div>
-          
         </div>
         <!-- ./Submit -->
-        
     </form>
 @else
     <form action="{{ route('admin.graduateQuality.store') }}" method="POST" enctype="multipart/form-data">
@@ -99,10 +141,24 @@
         @enderror
         <!-- ./Date -->
 
+         <!-- File -->
+        <div class="form-group" id ="imageP" >
+           
+           <label for="exampleFormControlFile1">Imagen Principal: <small class="text-muted"></small></label>
+       <input type="file" class="form-control-file" name="imagen" id="imagen" required>
+       </div>
+       @error('image.*')
+           <small class="text-danger">{{ $message }}</small>
+       @enderror
+       @error('image')
+       <small class="text-danger">{{ $message }}</small>
+   @enderror
+       <!-- ./File -->
+
         <div class="form-group"  id="video">
             <label>URL video de Youtube:</label>
             <div class="mt-2">        
-                <input type="text" class="form-control-file" id="videoInput" name="video" pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})" title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" required>
+                <input type="text" class="form-control-file" id="videoInput" name="video" pattern="(?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})" title="Debe comenzar por https://youtu.be/ o https://www.youtube.com/watch?v=" >
                {{-- ((?:https?:\/\/)?(?:www\.)?youtu(?:\.be\/|be.com\/\S*(?:watch|embed)(?:(?:(?=\/[-a-zA-Z0-9_]{11,}(?!\S))\/)|(?:\S*v=|v\/)))([-a-zA-Z0-9_]{11,})|NO)--}}
                 
             </div>   

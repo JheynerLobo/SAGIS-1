@@ -36,6 +36,10 @@ class RoleSeeder extends Seeder
                 'name' => 'graduate',
                 'fullname' => 'Estudiante Graduado'
             ],
+            [
+                'name' => 'company',
+                'fullname' => 'Empresa'
+            ],
         ];
 
         try {

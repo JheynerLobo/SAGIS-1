@@ -34,10 +34,50 @@ class Graduates extends Model
         return $this->videos()->count();
     }
 
+    /**
+     * Get Images
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany(GraduateImage::class, 'graduate_id');
+    }
+
+     /**
+     * Get Images
+     * 
+     * @return \App\Models\GraduateImage
+     */
+    public function imageHeader()
+    {
+        return $this->images()->where('is_header', true)->first();
+    }
+
+    public function getCountimage()
+    {
+        return $this->images()->count();
+    }
+
+    public function is_imageOne()
+    {
+        return $this->images()->count()== 1? true: false;
+    }
+
+    /**
+     * Get if the graduate has images
+     * 
+     * @return bool
+     */
+    public function hasImages()
+    {
+        return $this->images()->count() > 0 ? true : false;
+    }
+
     
     public function videos()
     {
-        return $this->hasMany(GraduateVideo::class);
+        return $this->hasMany(GraduateVideo::class, 'graduate_id');
     }
 
     /**

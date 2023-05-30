@@ -98,10 +98,16 @@
                                
                             <a style="text-decoration: none; color: #000000;"
                                 href="{{ route('login') }}">
-
+                        <div class="row">
                                 <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-user-graduate"
-                                    style="width: 45px; height: 45px"></button>
-                            </a>
+                                    style="width: 45px; height: 45px; margin-right: 30px"></button></a>
+                                    <a style="text-decoration: none; color: #000000;"
+                                href="#">
+                                <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-sharp fa-solid fa-building"
+                                    style="width: 45px; height: 45px; margin-left: 30px"></button>
+                                    </a>
+                                    </div>   
+                            
                     
 
     

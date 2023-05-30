@@ -24,6 +24,7 @@ Route::redirect('/', 'login');
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login'])->name('loggin');
+Route::post('countryLogin',[LoginController::class,'companyLogin'])->name('companyLogin');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('profile', [UserController::class, 'profile'])->name('profile');
@@ -88,6 +89,10 @@ Route::get('empleos', [HomeController::class, 'empleos'])->name('empleos');
 Route::get('empleos/{id}', [HomeController::class, 'showEmpleos'])->name('empleos.show');
 
 Route::get('SituacionGraduados',[ReportController::class, 'index_estadisticas_graduates'])->name('situacionGraduados');
+
+Route::get('meritosGraduados',[HomeController::class,'meritosGraduado'])->name('meritosGraduados');
+
+Route::get('Reconocimiento/{id}',[HomeController::class,'meritoGraduadoShow'])->name('meritosGraduados.show');
 
 
 

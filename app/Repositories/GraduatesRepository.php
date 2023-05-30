@@ -43,7 +43,7 @@ class GraduatesRepository extends AbstractRepository
         return $query;
     }
 
-    public function getTotalGragduates()
+    public function getTotalGraduates()
     {
 
         $query = $this->model
