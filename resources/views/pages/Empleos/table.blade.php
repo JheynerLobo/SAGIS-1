@@ -9,10 +9,13 @@
                         alt="...">
                         @endif
                     <div class="card-body">
-                    <h6 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h6>
-                        <h5 class="card-title"  id="card-title"> <a href="" class="vinculoTitulo">{{ $item->nombre }}</a></h5>
+                    <h6 class="card-title"><strong>Empresa:</strong> {{ $item->empresa }}</h6>   
+                    <br> 
+                    <h6 class="card-title"> <strong>Cargo:</strong> {{ $item->cargo }}</h6>
+                    <br>
+                    <h4 class="card-title"><strong>Fecha Publicación:</strong> {{ $item->date }}</h4>
+                        <br>
                         <p class="card-text" id="card-text">{{ $item->description }}</p>
-                        <p class="card-text" id="card-text"> {{ $item->url_postulation }}</p>
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('empleos.show', $item->id) }}" class="botonGC btn btn-danger">Leer

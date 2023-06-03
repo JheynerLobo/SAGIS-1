@@ -6,16 +6,7 @@
     @include('partials.content-header', [
         'title' => 'Estadísticas Graduados',
         'items' => [
-            [
-                'name' => 'Inicio',
-                'route' => route('admin.home'),
-                'isActive' => null,
-            ],
-            [
-                'name' => 'Estadísticas',
-                'route' => null,
-                'isActive' => 'active',
-            ],
+            
         ],
     ])
 @endsection

@@ -25,6 +25,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
             'anio_graduation' => ['required','integer'],
             'graduados'=>['required','integer'],
@@ -32,7 +33,6 @@ class UpdateRequest extends FormRequest
             'independientes' => ['required', 'integer'],
             'dependientes' => ['required', 'integer'],
             'desempleados' => ['required', 'integer']
-        
         ];
     }
 }

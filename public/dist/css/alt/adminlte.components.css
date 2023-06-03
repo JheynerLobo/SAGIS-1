@@ -582,7 +582,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-danger .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-off-danger .custom-control-input ~ .custom-control-label::after {
@@ -595,7 +595,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-danger .custom-control-input:checked:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-on-danger .custom-control-input:checked ~ .custom-control-label::after {
@@ -920,7 +920,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-red .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-off-red .custom-control-input ~ .custom-control-label::after {
@@ -933,7 +933,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-red .custom-control-input:checked:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-on-red .custom-control-input:checked ~ .custom-control-label::after {
@@ -1353,15 +1353,15 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-danger:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger::-webkit-slider-thumb {
@@ -1873,15 +1873,15 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-red:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red::-webkit-slider-thumb {
@@ -2372,7 +2372,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-danger:focus ~ .custom-control-label::before {
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba#AA1614;
 }
 
 .custom-control-input-danger:focus:not(:checked) ~ .custom-control-label::before {
@@ -2710,7 +2710,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-red:focus ~ .custom-control-label::before {
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba#AA1614;
 }
 
 .custom-control-input-red:focus:not(:checked) ~ .custom-control-label::before {
@@ -10610,7 +10610,7 @@ html.maximized-card {
 }
 
 .toast.bg-danger {
-  background-color: rgba(220, 53, 69, 0.9) !important;
+  background-color: rgba(#AA1614) !important;
 }
 
 .toast.bg-danger .close {
@@ -10619,7 +10619,7 @@ html.maximized-card {
 }
 
 .toast.bg-danger .toast-header {
-  background-color: rgba(220, 53, 69, 0.85);
+  background-color: rgba(#AA1614);
   color: #fff;
 }
 
@@ -10782,7 +10782,7 @@ html.maximized-card {
 }
 
 .toast.bg-red {
-  background-color: rgba(220, 53, 69, 0.9) !important;
+  background-color: rgba(#AA1614) !important;
 }
 
 .toast.bg-red .close {
@@ -10791,7 +10791,7 @@ html.maximized-card {
 }
 
 .toast.bg-red .toast-header {
-  background-color: rgba(220, 53, 69, 0.85);
+  background-color: rgba(#AA1614);
   color: #fff;
 }
 

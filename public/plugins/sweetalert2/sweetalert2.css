@@ -356,7 +356,7 @@
   font-size: 1em;
 }
 .swal2-styled.swal2-deny:focus {
-  box-shadow: 0 0 0 3px rgba(220, 55, 65, 0.5);
+  box-shadow: 0 0 0 3px #AA1614;
 }
 .swal2-styled.swal2-cancel {
   border: 0;

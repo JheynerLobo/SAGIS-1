@@ -56,7 +56,7 @@ class EmpleoImageRepository extends AbstractRepository
     {
 
         $table = $this->model->getTable();
-        $joinEmpleos = "emepleos";
+        $joinEmpleos = "empleos";
         $query = $this->model
             ->select("*")
             ->join("{$joinEmpleos}", "{$table}.empleo_id", "{$joinEmpleos}.id")

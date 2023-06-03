@@ -1,14 +1,14 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Estadísticas Graduados')
 
 @section('content-header')
-    @include('admin.partials.content-header', [
+    @include('partials.content-header', [
         'title' => 'Estadísticas Graduados',
         'items' => [
             [
                 'name' => 'Estadísticas de Todos los años',
-                'route' => route('admin.situacionGraduados.index'),
+                'route' => route('situacionGraduados'),
                 'isActive' => null,
             ],
             

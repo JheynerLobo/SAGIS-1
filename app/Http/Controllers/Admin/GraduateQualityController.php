@@ -18,7 +18,12 @@ use App\Repositories\GraduateImageRepository;
 use App\Http\Requests\GraduateQuality\UpdateRequest;
 use App\Http\Requests\GraduateQuality\UpdateRequestImage;
 use App\Http\Requests\GraduateQuality\StoreRequestImage;
-
+use Google_Client;
+use Google_Service_YouTube;
+use Google_Service_YouTube_Video;
+use Google_Service_YouTube_VideoSnippet;
+use Google_Service_YouTube_VideoStatus;
+use Google_Service_YouTube_VideoFileDetails;
 
 class GraduateQualityController extends Controller
 {
@@ -80,30 +85,7 @@ class GraduateQualityController extends Controller
         }
     }
 
-    /*public function store(Request $request){
-        try{
-        $graduate = new Graduates;
-        $graduate -> nombre = $request->input('nombre');
-        $graduate -> description = $request->input('description');
-        $graduate -> date = $request->input('date');
-        $graduate->save();
-        $videoParams = $request->only(['video']);
-        if($videoParams!=null){
-            $video = substr($videoParams['video'], -11);
-            $videoParams['graduates_id'] = $graduate->id;
-            $videoParams['asset_url'] = $video;
-            $videoParams['is_header'] = 1;
-            unset($videoParams['video']);
-            $this->graduateVideoRepository->create($videoParams);}
-
-            return redirect()->route('admin.graduateQuality.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
-            dd($th);
-            DB::rollBack();
-
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
-        }
-    }
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -130,26 +112,78 @@ class GraduateQualityController extends Controller
         $graduate->date = $request->input('date');
         $graduate->save();
 
-
        
-        if ($request->hasFile('imagen')) {
-            $imagen = new GraduateImage;
-            $imagen->graduate_id = $graduate->id;
-            $imagen->asset_url = $request->file('imagen')->store('graduates', 'graduates');
-            $imagen->asset = $request->file('imagen')->getClientOriginalName();
-            $imagen->is_header = 1;
-            $imagen->save();
+
+
+        if (!($request->file('imagen') == null)) {
+            $paramsImagen = $request->only(['imagen']);
+            
         }
+        if (!($request->file('imagen') == null)) {
+            $fileParams = $this->saveImage($paramsImagen['imagen']);
+            
+        }
+        $graduateImage = $this->graduateImageRepository->getByAttribute("graduate_id", $graduate->id);
+        if(is_null($graduateImage)){
+            if (!($request->file('imagen') == null)) {
+                $graduateImgParams['graduate_id'] = $graduate->id;
+                $graduateImgParams['is_header'] = 1;
+                $graduateImg = array_merge($graduateImgParams,  $fileParams);
+                $this->graduateImageRepository->create($graduateImg);
+            }
+        }
+
 
         $videoParams = $request->only(['video']);
         $graduate->url=$request->input('video');
+        
         if($graduate->url!=null){
             $video = substr($videoParams['video'], -11);
             $videoParams['graduate_id'] = $graduate->id;
             $videoParams['asset_url'] = $video;
             $videoParams['is_header'] = 1;
             unset($videoParams['video']);
-            $this->graduateVideoRepository->create($videoParams);}
+            $this->graduateVideoRepository->create($videoParams);
+           /* $client = new Google_Client();
+            $client->setDeveloperKey('AIzaSyANjY63UoBmn4iptzUnS-IPFJyCDDGMpBA');
+            
+            $youtube = new Google_Service_YouTube($client);
+            
+            // Crear instancia de Google_Service_YouTube_Video
+            $video = new Google_Service_YouTube_Video();
+
+// Crear instancia de Google_Service_YouTube_VideoSnippet
+$snippet = new Google_Service_YouTube_VideoSnippet();
+$snippet->setTitle('Reconocimiento del graduado: ' . $graduate->nombre);
+$snippet->setDescription('Video de reconocimiento a ' . $graduate->nombre . ' por méritos alcanzados');
+$snippet->setTags(['etiqueta1', 'etiqueta2']);
+
+// Establecer el snippet en el video
+$video->setSnippet($snippet);
+
+// Crear instancia de Google_Service_YouTube_VideoStatus
+$status = new Google_Service_YouTube_VideoStatus();
+$status->setPrivacyStatus('private'); // Establecer la privacidad del video (private, public, unlisted)
+
+// Establecer el status en el video
+$video->setStatus($status);
+
+
+// Crear instancia de Google_Service_YouTube_VideoFileDetails
+$fileDetails = new Google_Service_YouTube_VideoFileDetails();
+$fileDetails->setFileName($graduate->url);
+
+
+// Establecer los detalles del archivo en el video
+$video->setFileDetails($fileDetails);
+
+$response = $youtube->videos->insert('snippet,status', $video, $insertParams);
+
+// Obtener el ID del video resubido
+$videoId = $response['id'];
+*/
+        
+        }
         
             
             DB::commit();
@@ -157,36 +191,11 @@ class GraduateQualityController extends Controller
         }
          catch(\Exception $th) {
             DB::rollBack();
+            $errorMessage = $th->getMessage();
             return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
         }
     }
 
-    /*    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    /*public function update(UpdateRequest $request, $id) {
-        try {
-            $graduateParams = $request->only(['nombre', 'description', 'date']);
-            $videoParams = $request->only(['video']);
-    
-            $graduate = $this->graduatesRepository->getById($id);
-            $video = $this->graduateVideoRepository->getByAttribute('graduates_id', $graduate->id);
-    
-            $this->graduatesRepository->update($graduate, $graduateParams);
-            $this->graduateVideoRepository->update($video, $videoParams);
-    
-            return redirect()->route('admin.graduateQuality.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha actualizado correctamente.']);
-            
-        } catch (\Exception $th) {
-
-            return redirect()->route('admin.graduateQuality.index')->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido eliminar correctamente.', 'icon' => 'error']);
-            
-        }
-    }*/
 
     /**
      * Display the specified resource.

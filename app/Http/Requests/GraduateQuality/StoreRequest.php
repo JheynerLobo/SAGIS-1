@@ -29,6 +29,7 @@ class StoreRequest extends FormRequest
             'nombre' => ['required'],
             'description' => ['required', 'string'],
             'date' => ['required', 'date'],
+            'image.*' => ['nullablle','image', 'mimes:png,jpg,jpeg, max:10240']
         ];
     }
 }

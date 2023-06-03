@@ -6,8 +6,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="input-group">
-                        <input type="search" name="nombre" class="form-control form-control-lg"
-                            placeholder="Buscar" value="{{ getParamValue($params, 'nombre') }}">
+                        <input type="search" name="cargo" class="form-control form-control-lg"
+                            placeholder="Buscar" value="{{ getParamValue($params, 'cargo') }}">
                     </div>
                 </div>
             </div>

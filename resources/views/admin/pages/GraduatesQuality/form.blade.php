@@ -145,7 +145,7 @@
         <div class="form-group" id ="imageP" >
            
            <label for="exampleFormControlFile1">Imagen Principal: <small class="text-muted"></small></label>
-       <input type="file" class="form-control-file" name="imagen" id="imagen" required>
+       <input type="file" class="form-control-file" name="imagen" id="imagen">
        </div>
        @error('image.*')
            <small class="text-danger">{{ $message }}</small>

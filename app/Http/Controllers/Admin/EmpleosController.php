@@ -76,15 +76,7 @@ class EmpleosController extends Controller
 
         DB::rollback();
 
-        $request->validate([
-            'empresa' => 'required|string',
-            'cargo' => 'required|string',
-            'description' => 'required|string',
-            'date' => 'required|date',
-            'url_postulation' => 'nullable|string',
-            'imagen' => 'nullable|image|max:1024',
-        ]);
-    
+          
         // Crear un nuevo registro en la entidad Empleo
         $empleo = new Empleo;
         $empleo->empresa = $request->input('empresa');
@@ -95,13 +87,18 @@ class EmpleosController extends Controller
         $empleo->save();
     
       
-        if ($request->hasFile('imagen')) {
-            $imagen = new EmpleoImage;
-            $imagen->empleo_id = $empleo->id;
-            $imagen->asset_url = $request->file('imagen')->store('empleos', 'empleos');
-            $imagen->asset = $request->file('imagen')->getClientOriginalName();
-            $imagen->is_header = 1;
-            $imagen->save();
+        if (!($request->file('imagen') == null)) {
+            $paramsImagen = $request->only(['imagen']);
+            $fileParams = $this->saveImage($paramsImagen['imagen']);
+        }
+        $empleoImage = $this->empleoImageRepository->getByAttribute("empleo_id", $empleo->id);
+        if(is_null($empleoImage)){
+            if (!($request->file('imagen') == null)) {
+                $empleoImgParams['empleo_id'] = $empleo->id;
+                $empleoImgParams['is_header'] = 1;
+                $empleoImg = array_merge($empleoImgParams,  $fileParams);
+                $this->empleoImageRepository->create($empleoImg);
+            }
         }
 
         return redirect()->route('admin.empleos.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
@@ -146,13 +143,14 @@ class EmpleosController extends Controller
             $empleo = $this->empleoRepository->getById($id);
     
             $this->empleoRepository->update($empleo, $empleoParams);
+            $paramsImagen = $request->only(['imagen']);
             
             if (!($request->file('imagen') == null)) {
-                
                 $fileParams = $this->saveImage($paramsImagen['imagen']);
             }
-            $empleoImage = $this->empleoImageRepository->getByAttribute("empleo_id", $empleo->id);
             
+            $empleoImage = $this->empleoImageRepository->getByAttribute("empleo_id", $empleo->id);
+           
             if(is_null($empleoImage)){
                 if (!($request->file('imagen') == null)) {
                     $empleoImgParams['empleo_id'] = $empleo->id;
@@ -196,6 +194,25 @@ class EmpleosController extends Controller
 
     }
 
+    /**
+     * @param StoreRequest $request
+     * @param array $params
+     */
+    public function saveImage($file): array
+    {
+        //  $file = $request->file('image');
+
+        $params = [];
+
+        $fileName = time()  . '_empleo_image.' . $file->getClientOriginalExtension();
+
+        $this->empleoImageRepository->saveImage(File::get($file), $fileName);
+
+        $params['asset_url'] =  'storage/images/empleos/';
+        $params['asset'] = $fileName;
+
+        return $params;
+    }
     }
         
 

@@ -30,6 +30,10 @@ class EmpleoRepository extends AbstractRepository
         if (isset($params['empresa']) && $params['empresa']) {
             $query->where('empresa', 'like', '%' . $params['empresa'] . '%');
         }
+
+        if (isset($params['cargo']) && $params['cargo']) {
+            $query->where('cargo', 'like', '%' . $params['cargo'] . '%');
+        }
         if (isset($params['created_at_from']) && $params['created_at_from']) {
             $query->where('date', '>=', $params['created_at_from']);
         }

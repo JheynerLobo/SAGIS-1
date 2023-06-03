@@ -5668,7 +5668,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-big-counter-danger .pace .pace-progress::after {
-  color: rgba(220, 53, 69, 0.2);
+  color: rgba#AA1614;
 }
 
 .pace-bounce-danger .pace .pace-activity {
@@ -5697,7 +5697,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-center-circle-danger .pace .pace-progress {
-  background: rgba(220, 53, 69, 0.8);
+  background: rgba#AA1614;
   color: #fff;
 }
 
@@ -5732,17 +5732,17 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-corner-indicator-danger .pace .pace-activity::before {
-  border-right-color: rgba(220, 53, 69, 0.2);
-  border-left-color: rgba(220, 53, 69, 0.2);
+  border-right-color: rgba#AA1614;
+  border-left-color: rgba#AA1614;
 }
 
 .pace-corner-indicator-danger .pace .pace-activity::after {
-  border-top-color: rgba(220, 53, 69, 0.2);
-  border-bottom-color: rgba(220, 53, 69, 0.2);
+  border-top-color: rgba#AA1614;
+  border-bottom-color: rgba#AA1614;
 }
 
 .pace-fill-left-danger .pace .pace-progress {
-  background-color: rgba(220, 53, 69, 0.2);
+  background-color: rgba#AA1614;
 }
 
 .pace-flash-danger .pace .pace-progress {
@@ -7371,7 +7371,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-big-counter-red .pace .pace-progress::after {
-  color: rgba(220, 53, 69, 0.2);
+  color: rgba#AA1614;
 }
 
 .pace-bounce-red .pace .pace-activity {
@@ -7400,7 +7400,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-center-circle-red .pace .pace-progress {
-  background: rgba(220, 53, 69, 0.8);
+  background: rgba#AA1614;
   color: #fff;
 }
 
@@ -7435,17 +7435,17 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-corner-indicator-red .pace .pace-activity::before {
-  border-right-color: rgba(220, 53, 69, 0.2);
-  border-left-color: rgba(220, 53, 69, 0.2);
+  border-right-color: rgba#AA1614;
+  border-left-color: rgba#AA1614;
 }
 
 .pace-corner-indicator-red .pace .pace-activity::after {
-  border-top-color: rgba(220, 53, 69, 0.2);
-  border-bottom-color: rgba(220, 53, 69, 0.2);
+  border-top-color: rgba#AA1614;
+  border-bottom-color: rgba#AA1614;
 }
 
 .pace-fill-left-red .pace .pace-progress {
-  background-color: rgba(220, 53, 69, 0.2);
+  background-color: rgba#AA1614;
 }
 
 .pace-flash-red .pace .pace-progress {

@@ -14,7 +14,7 @@
                 <th>Graduados No Cotizantes</th>
                 <th>% Trabajando Por Año</th>
                 <th>Promedio Total Por Cotizantes</th>
-                <th>Acciones</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -31,20 +31,7 @@
                             {{ round($promedioTrabajando, 2) }} %
                         </td>
                     @endif
-                    <td>
-                        <div class="btn-group">
-                            <div class="mr-3 ml-1">
-                                <a href="{{ route('admin.situationGraduate.edit',array($dato->anio_graduation, $dato->anio_actual)) }}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                            </div>
-                            <div class="mr-1">
-                                <form action="{{route('admin.situacionGraduados.destroy',[$dato->anio_graduation, $dato->anio_actual])}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger"><em class="fas fa-trash"></em></button>
-                                </form>
-                            </div>
-                        </div>
-                    </td>
+                    
                 </tr>
             @endforeach
         </tbody>

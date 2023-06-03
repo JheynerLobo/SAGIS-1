@@ -8,7 +8,7 @@
 {{-- <style>
     .responsive-iframe {
   width: 50%;
-  height: 550px;
+  height: 800px;
   /* min-height: 60vh; // Change this based on your own preferences */
 }
 </style> --}}
@@ -22,10 +22,9 @@
             <div id="informacionContent" class=" mb-margin-bottom-30 shadow-wrapper">
 
                 <div class="col-md-12 col-sm-12 col-xs-12"
-                    style="margin-bottom:20px; border-bottom: 3px solid #aa1916; padding: 0;">
-                    <h1 class="pull-left" style="font-size:36px; color: #AA1916;">Roconociento a {{$item->nombre}}</h1>
+                    style="margin-bottom:20px; border-bottom: 3px solid #AA1614; padding: 0;">
+                    <h1 class="pull-left" style="font-size:36px; color: #AA1614; font-style: oblique; font-size:60px; text-align:center">Roconocimiento a {{$item->nombre}}</h1>
                 </div>
-                <h5 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h5>
 
                 @if($item->getCountVideo() > 0 && !is_null($item->videoHeader()) )
                 

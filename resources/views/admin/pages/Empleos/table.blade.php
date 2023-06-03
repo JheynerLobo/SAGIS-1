@@ -3,6 +3,7 @@
         <table class="table table-sm table-hover table-bordered table-striped table-sortable">
             <thead>
                 <tr>
+                    <th>Imagen/Video</th>
                     <th>Empresa</th>
                     <th>Cargo</th>
                     <th>Description</th>
@@ -16,7 +17,15 @@
             <tbody>
                 @forelse ($items as $item)
                 <tr>
-                    
+                <td>
+                        @if ($item->getCountimage()!=0)
+                        <img src="{{ asset($item->imageHeader()->fullasset()) }}" alt="" width="55rem">
+                        
+                        @else
+                        <img src="https://www.uncommunitymanager.es/wp-content/uploads/seo_google_youtube.jpg" alt=""
+                            width="55rem">
+                            @endif
+                    </td>
                     <td>{{ $item->empresa }}</td>
                     <td>{{ $item->cargo }}</td>
                     <td style="white-space: pre-wrap;">{{ $item->description }}</td>

@@ -30,8 +30,7 @@ class StoreRequest extends FormRequest
             'cargo'=> ['string'],
             'description' => ['string'],
             'date' => ['required', 'date'],
-            'image' => ["array","max:5"], 
-            'image.*' => ['required', 'image', 'mimes:png,jpg,jpeg, max:10240']
+            'image.*' => ['nullablle','image', 'mimes:png,jpg,jpeg, max:10240']
         ];
     }
 }

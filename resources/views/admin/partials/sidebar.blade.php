@@ -27,7 +27,7 @@
             <div class="input-group" data-widget="sidebar-search" data-highlight-class='text-dark'
                 data-not-found-text='No encontrado'>
                 <input class="form-control form-control-sidebar " type="search" placeholder="Buscar"
-                    aria-label="Search" highlightClass="text-dark">
+                    aria-label="Search" highlightClass="text-dark" style="height:20%">
                 <div class="input-group-append">
                     <button class="btn btn-sidebar">
                         <i class="fas fa-search fa-fw"></i>

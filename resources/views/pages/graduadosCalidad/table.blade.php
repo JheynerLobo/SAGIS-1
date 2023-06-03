@@ -20,7 +20,7 @@
                 </div>
             </div>
         @empty
-             <h4 class="mb-4">No hay noticias registradas.</h4>
+             <h4 class="mb-4">No hay Empleos registradas.</h4>
              <img src="https://img.icons8.com/ios/500/no-image.png" alt="No hay">
         @endforelse
     </div>

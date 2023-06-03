@@ -82,6 +82,9 @@
    @endif
    @endauth
 
+   <img src="{{ asset('img/banner.png') }}" alt="logo ing. de sistemas"
+    style="height:150px; width:1500px">
+
 
     
 

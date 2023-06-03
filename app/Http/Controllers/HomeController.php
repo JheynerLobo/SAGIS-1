@@ -11,12 +11,15 @@ use App\Repositories\PostCategoryRepository;
 use App\Repositories\ExperienceRepository;
 use App\Repositories\EmpleoRepository;
 use App\Repositories\GraduatesRepository;
+use App\Repositories\SituationGraduateRepository;
 use App\Http\Requests\Filters\EventFilterRequest;
 use App\Http\Requests\Filters\VideoFilterRequest;
 use App\Http\Requests\Filters\CourseFilterRequest;
 use App\Http\Requests\Filters\NoticeFilterRequest;
 use App\Http\Requests\Filters\GalleryFilterRequest;
 use App\Http\Requests\Filters\EmpleoFilterRequest;
+use Illuminate\Support\Facades\DB;
+use App\Models\SituationsGraduates;
 
 
 class HomeController extends Controller
@@ -38,6 +41,9 @@ class HomeController extends Controller
     /** @var GraduatesRepository */
     protected $graduatesRepository; 
 
+    /** @var SituationGraduateRepository */
+    protected $situationGraduateRepository;
+
     /** @var string */
     protected $viewLocation = 'pages.';
 
@@ -47,7 +53,8 @@ class HomeController extends Controller
         PostImageRepository $postImageRepository,
         ExperienceRepository $experienceRepository,
         EmpleoRepository $empleoRepository,
-        GraduatesRepository $graduatesRepository
+        GraduatesRepository $graduatesRepository,
+        SituationGraduateRepository $situationGraduateRepository
     ) {
         $this->postCategoryRepository = $postCategoryRepository;
         $this->postRepository = $postRepository;
@@ -55,6 +62,7 @@ class HomeController extends Controller
         $this->experienceRepository=$experienceRepository;
         $this->empleoRepository=$empleoRepository;
         $this->graduatesRepository=$graduatesRepository;
+        $this->situationGraduateRepository=$situationGraduateRepository;;
     }
 
     public function home()
@@ -392,5 +400,6 @@ class HomeController extends Controller
             throw $th;
         }
     }
+
 
 }

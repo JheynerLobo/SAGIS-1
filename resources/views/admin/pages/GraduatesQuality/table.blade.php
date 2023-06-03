@@ -3,12 +3,12 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Imagen/Video</th>
-                    <th>Graduado</th>
-                    <th>Descripción</th>
-                    <th>Fecha de Publicación</th>
-                    <th>Acciones</th>
-                    <th>Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>
+                    <th style="vertical-align: middle;text-align:center;">Imagen/Video</th>
+                    <th style="vertical-align: middle;text-align:center;">Graduado</th>
+                    <th style="vertical-align: middle;text-align:center;">Descripción</th>
+                    <th style="vertical-align: middle;text-align:center;">Fecha de Publicación</th>
+                    <th style="vertical-align: middle;text-align:center;">Acciones</th>
+                    <th style="vertical-align: middle;text-align:center;">Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>
                     </th>
 
                 </tr>
@@ -25,12 +25,12 @@
                             width="55rem">
                             @endif
                     </td>
-                    <td>{{ $item->nombre }}</td>
-                    <td style="white-space: pre-wrap;">{{ $item->description }}</td>
-                    <td>{{ $item->date }}</td>
+                    <td style="vertical-align: middle;">{{ $item->nombre }}</td>
+                    <td style="white-space: pre-wrap;vertical-align: middle;">{{ $item->description }}</td>
+                    <td style="vertical-align: middle;">{{ $item->date }}</td>
 
 
-                    <td>
+                    <td style="vertical-align: middle;">
                         <div class="btn-group">
                             <div class="mr-3 ml-1">
                                 <a href="{{ route('admin.graduateQuality.edit', $item->id) }}" class="btn btn-sm btn-warning"><i
@@ -72,7 +72,7 @@
                     </td>
 
 
-                    <td class="text-center ">
+                    <td class="text-center" style="vertical-align: middle;">
                             @if($item->getCountimage()>=1 && !(is_null($item->videoHeader())))
                             <div class="row">
                             <div class="col-md-6">

@@ -28,7 +28,7 @@ class StoreRequestImage extends FormRequest
         $id = $this->empleo;
 
         return [
-            'image' => ['required', 'image', 'mimes:png,jpg,jpeg']
+            'image' => ['image', 'mimes:png,jpg,jpeg']
         ];
     }
 }

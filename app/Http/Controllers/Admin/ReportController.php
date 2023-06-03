@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\SituationsGraduates;
 use App\Http\Controllers\Controller;
-use App\Repositories\CountryRepository;
-use App\Repositories\PersonAcademicRepository;
-use App\Repositories\PersonCompanyRepository;
-use App\Repositories\PersonRepository;
-use App\Repositories\PostRepository;
-use App\Repositories\RoleRepository;
-use App\Repositories\UserRepository;
 use App\Repositories\SituationGraduateRepository;
 use App\Http\Requests\SituationGraduate\StoreRequest;
 use App\Http\Requests\SituationGraduate\UpdateRequest;
+use App\Repositories\PostRepository;
+use App\Repositories\PersonCompanyRepository;
+use App\Repositories\UserRepository;
+use App\Repositories\CountryRepository;
+use App\Repositories\PersonAcademicRepository;
+use App\Repositories\RoleRepository;
+
 use Illuminate\Support\Facades\DB;
 
 
@@ -25,152 +25,122 @@ use function PHPSTORM_META\map;
 
 class ReportController extends Controller
 {
-    /** @var PersonRepository */
-    protected $personRepository;
+  
 
-    /** @var UserRepository */
-    protected $userRepository;
-
-    /** @var RoleRepository */
-    protected $roleRepository;
+    /** @var SituationGraduateRepository */
+    protected $situationGraduateRepository;
 
     /** @var PostRepository */
     protected $postRepository;
 
-    /** @var CountryRepository */
-    protected $countryRepository;
-
     /** @var PersonCompanyRepository */
     protected $personCompanyRepository;
+
+    /** @var UserRepository */
+    protected $userRepository;
+
+    /** @var CountryRepository */
+    protected $countryRepository;
 
     /** @var PersonAcademicRepository */
     protected $personAcademicRepository;
 
-    /** @var SituationGraduateRepository */
-    protected $situationGraduateRepository;
+    /** @var RoleRepository */
+    protected $roleRepository;
 
     /** @var Faker */
     protected $faker;
 
     public function __construct(
-        PersonRepository $personRepository,
-        UserRepository $userRepository,
-        RoleRepository $roleRepository,
-        PostRepository $postRepository,
-        CountryRepository $countryRepository,
-        PersonCompanyRepository $personCompanyRepository,
-        PersonAcademicRepository $personAcademicRepository,
+        
         SituationGraduateRepository $situationGraduateRepository,
+        PostRepository $postRepository,
+        PersonCompanyRepository $personCompanyRepository,
+        UserRepository $userRepository,
+        CountryRepository $countryRepository,
+        PersonAcademicRepository $personAcademicRepository,
+        RoleRepository $roleRepository,
         Faker $faker,
     ) {
         $this->middleware('auth:admin');
 
-        $this->personRepository = $personRepository;
-        $this->userRepository = $userRepository;
-        $this->roleRepository = $roleRepository;
-        $this->postRepository = $postRepository;
-        $this->countryRepository = $countryRepository;
-        $this->personCompanyRepository = $personCompanyRepository;
-        $this->personAcademicRepository = $personAcademicRepository;
+        
         $this->situationGraduateRepository=$situationGraduateRepository;
+        $this->postRepository=$postRepository;
+        $this->personCompanyRepository=$personCompanyRepository;
+        $this->userRepository=$userRepository;
+        $this->countryRepository=$countryRepository;
+        $this->personAcademicRepository=$personAcademicRepository;
+        $this->roleRepository=$roleRepository;
         $this->faker = $faker;
     }
 
-    public function graduates()
-    {
-        try {
-            $graduateRole = $this->roleRepository->getByAttribute('name', 'graduate');
-            $items = $graduateRole->users;
 
-            return view('admin.pages.reports.graduates', compact('items'));
-        } catch (\Exception $th) {
-            throw $th;
-        }
-    }
+    public function index_estadisticas(Request $request)
+{
+    try {
+        $selectedAnio = $request->input('anio_graduation'); // Obtener el valor del año seleccionado
 
-    public function index_estadisticas(Request $request){
-        try {
-            $params = $this->situationGraduateRepository->transformParameters($request->all());
-            $query = $this->situationGraduateRepository->search($params, null);
-            $selectedYear = $request->input('anio');
-            $datos = DB::table('situations_graduates')
-                ->orderBy('anio_graduation')
-                ->get();
+        $params = $this->situationGraduateRepository->transformParameters($request->all());
+        $query = $this->situationGraduateRepository->search($params, null);
+        
+        // Obtener todos los datos sin filtrar
+        $datos = DB::table('situations_graduates')
+            ->orderBy('anio_graduation')
+            ->get();
 
-              /*  $resultados = DB::table('situations_graduates')
-                ->select('anio_graduation', DB::raw('SUM(trabajando) as total'))
-                ->groupBy('anio_graduation')
-                ->get();
+            $datos2 = DB::table('situations_graduates')
+            ->select('anio_graduation', DB::raw('AVG(trabajando) as promedio_trabajando'), DB::raw('COUNT(*) as cantidad_registros'))
+            ->groupBy('anio_graduation')
+            ->orderBy('anio_graduation')
+            ->get();
+            
 
-                $registros = DB::table('situations_graduates')->groupBy('anio_graduation')->selectRaw('anio_graduation, count(*) as total')->get();*/
-
-       
-                
-                $aniosGraduacion = situationsGraduates::orderBy('anio_graduation')->pluck('anio_graduation');
-            $items = $this->situationGraduateRepository->customPagination($query, $params, $request->get('page'));
+        $aniosGraduacion = situationsGraduates::orderBy('anio_graduation')->pluck('anio_graduation');
+        
+        
 
         return view('admin.pages.situacionGraduados.index')
-        ->nest('filters','admin.pages.situacionGraduados.filters', compact('aniosGraduacion'))
-        ->nest('table','admin.pages.situacionGraduados.table', compact('items', 'datos'));
-        }
-        catch (\Throwable $th) {
-            return redirect()->route('admin.situacionGraduados.index')->with('alert', [
-                'title' => '¡Error!',
-                'icon' => 'error',
-                'message' => 'No hemos podido Agregar  ese registro verifica los datos ingresados y el que has ingresado.'
-            ]);
-        }
+            ->nest('filters','admin.pages.situacionGraduados.filters', compact('aniosGraduacion'))
+            ->nest('table','admin.pages.situacionGraduados.table', compact( 'datos','datos2'));
+    } catch (\Throwable $th) {
+        return redirect()->route('admin.situacionGraduados.index')->with('alert', [
+            'title' => '¡Error!',
+            'icon' => 'error',
+            'message' => 'No hemos podido agregar ese registro. Verifica los datos ingresados.'
+        ]);
     }
+}
 
-    /*public function index_estadisticas_graduates(Request $request){
-        try {
-            $params = $this->situationGraduateRepository->transformParameters($request->all());
-            $query = $this->situationGraduateRepository->search($params, null);
-            $datos = DB::table('situations_graduates')
-                ->orderBy('anio_graduation')
-                ->get();
-
-                $resultados = DB::table('situations_graduates')
-                ->select('anio_graduation', DB::raw('SUM(trabajando) as total'))
-                ->groupBy('anio_graduation')
-                ->get();
-
-                $registros = DB::table('situations_graduates')->groupBy('anio_graduation')->selectRaw('anio_graduation, count(*) as total')->get();
-
-                $item = SituationsGraduates::where('anio_graduation', $anioGraduation)
-            ->where('anio_actual', $anioActual)
-            ->first();
-                $aniosGraduacion = situationsGraduates::orderBy('anio_graduation')->pluck('anio_graduation');
-            $items = $this->situationGraduateRepository->customPagination($query, $params, $request->get('page'));
-
-        return view('pages.SituacionGraduados.index')
-        ->nest('filters','pages.situacionGraduados.filters', compact('aniosGraduacion'))
-        ->nest('table','pages.situacionGraduados.table', compact('items', 'datos','item'));
-        }
-        catch (\Throwable $th) {
-            throw $th;
-        }
-    }*/
 
     public function filtrarPorAnio(Request $request)
 {
-    $anio = $request->input('anio_graduation');
-    $params = $this->situationGraduateRepository->transformParameters($request->all());
-    $query = $this->situationGraduateRepository->search($params, null);
-   
-    $datosFiltrados = DB::table('situations_graduates')->whereYear('created_at', $anio)->get();
+    $anio = intval($request->input('anio_selected'));
 
-    $aniosGraduacion = DB::table('situations_graduates')->orderBy('anio_graduation')->pluck('anio_graduation');
-            $items = $this->situationGraduateRepository->customPagination($query, $params, $request->get('page'));
+    if ($anio == 0) {
+        return back()->with('alert', [
+            'title' => '¡Error!',
+            'icon' => 'error',
+            'message' => 'Selecciona un año para filtrar.'
+        ]);
+    } else {
+        $datosFiltrados = DB::table('situations_graduates')->where('anio_graduation', $anio)->get();
 
-    return view('admin.pages.SituacionGraduados.index-table-filtrered', ['datos' => $datosFiltrados])
-    ->nest('filters','admin.pages.situacionGraduados.filters', compact('aniosGraduacion'))
-        ->nest('tableFiltrada','admin.pages.SituacionGraduados.tableFiltrada', ['items', 'datos' => $datosFiltrados]);;
+        $datos = DB::table('situations_graduates')
+        ->select(DB::raw('AVG(trabajando) as promedio_trabajando'), DB::raw('COUNT(*) as cantidad_registros'))
+        ->where('anio_graduation', $anio)
+        ->get();
+        $aniosGraduacion = DB::table('situations_graduates')->orderBy('anio_graduation')->pluck('anio_graduation');
+        $cantidadRegistros = $datosFiltrados->count();
+
+        return view('admin.pages.SituacionGraduados.index-table-filtrered', compact('datosFiltrados'))
+            ->nest('filters', 'admin.pages.situacionGraduados.filters', compact('aniosGraduacion'))
+            ->nest('tableFiltrada', 'admin.pages.SituacionGraduados.tableFiltrada', compact( 'datosFiltrados', 'anio','cantidadRegistros','datos'));
+    }
 }
 
     public function createSituation(){
         return view('admin.pages.SituacionGraduados.create');
-        
     }
 
     public function edit($anio_graduation,$anio_actual){
@@ -185,36 +155,37 @@ class ReportController extends Controller
         }
     }
 
-    public function update(UpdateRequest $request, $anio_graduation, $anio_actual) {
-        try {
-            
-            $item = SituationsGraduates::where('anio_graduation', $anio_graduation)
-                ->where('anio_actual', $anio_actual);
-            
-            $item->anio_graduation = intval($request->input('anio_graduation'));
-            $item->anio_actual = intval($request->input('anio_actual'));
-            $item->graduados = intval($request->input('graduados'));
-            $item->independientes = intval($request->input('independientes'));
-            $item->dependientes = intval($request->input('dependientes'));
-            $item->desempleados = intval($request->input('desempleados'));
-            $item -> trabajando = round((($item -> independientes + $item -> dependientes)/($item -> independientes + $item -> dependientes+ $item -> desempleados))*100,2);
-            
-            $item->save();
+    public function update(UpdateRequest $request, $anio_graduation, $anio_actual)
+{
+    try {
+        $situacionGraduate = SituationsGraduates::where('anio_graduation', $anio_graduation)
+            ->where('anio_actual', $anio_actual)
+            ->firstOrFail();
 
-            return redirect()->route('admin.situacionGraduados.index')->with('alert', [
-                'title' => '¡Éxito!',
-                'icon' => 'success',
-                'message' => 'Se ha actualizado correctamente.'
-            ]);
-        } catch(\Exception $th) {
-           
-            return redirect()->route('admin.situacionGraduados.index')->with('alert', [
-                'title' => '¡Error!',
-                'icon' => 'error',
-                'message' => 'No hemos podido actualizar esta publicación.'
-            ]);
+        $situacionGraduate->anio_graduation = intval($request->input('anio_graduation'));
+        $situacionGraduate->graduados = intval($request->input('graduados'));
+        $situacionGraduate->anio_actual = intval($request->input('anio_actual'));
+        $situacionGraduate->independientes = intval($request->input('independientes'));
+        $situacionGraduate->dependientes = intval($request->input('dependientes'));
+        $situacionGraduate->desempleados = intval($request->input('desempleados'));
+        $situacionGraduate->trabajando = round((($situacionGraduate->independientes + $situacionGraduate->dependientes) / ($situacionGraduate->independientes + $situacionGraduate->dependientes + $situacionGraduate->desempleados)) * 100, 2);
+        $suma = $situacionGraduate->desempleados + $situacionGraduate->dependientes + $situacionGraduate->independientes;
+
+        if ($situacionGraduate->graduados !== $suma) {
+            throw new \Exception('El valor ingresado en "graduados" debe ser igual a la suma de "desempleados", "dependientes" e "independientes".');
         }
+
+        $situacionGraduate->save();
+
+        return redirect()->route('admin.situacionGraduados.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha actualizado correctamente.', 'icon' => 'success']);
+    } catch (\Exception $th) {
+        return back()->with('alert', [
+            'title' => '¡Error!',
+            'icon' => 'error',
+            'message' => 'No hemos podido actualizar esta publicación.'
+        ]);
     }
+}
 
     public function delete($anio_graduation, $anio_actual)
 {
@@ -236,19 +207,36 @@ class ReportController extends Controller
     public function store(StoreRequest $request){
         try{
             $situacionGraduate = new SituationsGraduates;
-            $situacionGraduate -> anio_graduation = $request->input('anio_graduation');
-            $situacionGraduate -> anio_actual = $request->input('anio_actual');
-            $situacionGraduate -> graduados = $request->input('graduados');
-            $situacionGraduate -> independientes = $request->input('independientes');
-            $situacionGraduate -> dependientes = $request->input('dependientes');
-            $situacionGraduate -> desempleados = $request->input('desempleados');
-            $situacionGraduate -> trabajando = round((($situacionGraduate -> independientes + $situacionGraduate -> dependientes)/($situacionGraduate -> independientes + $situacionGraduate -> dependientes+ $situacionGraduate -> desempleados))*100,2);
+            $situacionGraduate->anio_graduation = intval($request->input('anio_graduation'));
+            $situacionGraduate->graduados = intval($request->input('graduados'));
+            $situacionGraduate->anio_actual = intval($request->input('anio_actual'));
+            $situacionGraduate->independientes = intval($request->input('independientes'));
+            $situacionGraduate->dependientes = intval($request->input('dependientes'));
+            $situacionGraduate->desempleados = intval($request->input('desempleados'));
+            $situacionGraduate->trabajando = round((($situacionGraduate -> independientes + $situacionGraduate -> dependientes)/($situacionGraduate -> independientes + $situacionGraduate -> dependientes+ $situacionGraduate -> desempleados))*100,2);
+            $suma = $situacionGraduate->desempleados + $situacionGraduate->dependientes + $situacionGraduate->independientes;
+            if ($situacionGraduate->graduados !== $suma) {
+                throw new \Exception('El valor ingresado en "graduados" debe ser igual a la suma de "desempleados", "dependientes" e "independientes".');
+            }
             $situacionGraduate->save();
+        
 
             return redirect()->route('admin.situacionGraduados.index')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
+        }catch (\Exception $th) {
             DB::rollBack();
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente. Verifica que los datos ya no esten registrados.', 'icon' => 'error']);
+            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente. Verifica que los datos ya no esten registrados o que los datos ingresados concuerden.', 'icon' => 'error']);
+        }
+    }
+
+    public function graduates()
+    {
+        try {
+            $graduateRole = $this->roleRepository->getByAttribute('name', 'graduate');
+            $items = $graduateRole->users;
+
+            return view('admin.pages.reports.graduates', compact('items'));
+        } catch (\Exception $th) {
+            throw $th;
         }
     }
     

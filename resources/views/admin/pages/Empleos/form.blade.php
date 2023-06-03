@@ -137,12 +137,7 @@
             <label for="exampleFormControlFile1">Imagen: <small class="text-muted"></small></label>
         <input type="file" class="form-control-file" name="imagen" id="imagen">
         </div>
-        @error('image.*')
-            <small class="text-danger">{{ $message }}</small>
-        @enderror
-        @error('image')
-        <small class="text-danger">{{ $message }}</small>
-    @enderror
+        
         <!-- ./File -->
 
         <!-- Url Postulation -->
@@ -156,7 +151,7 @@
         @error('url_postulation')
         <small class="text-danger">{{ $message }}</small>
     @enderror
-        <!-- ./File -->
+        <!-- ./Url Postulation -->
 
         
         <!-- Submit -->

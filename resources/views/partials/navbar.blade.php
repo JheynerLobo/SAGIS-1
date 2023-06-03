@@ -22,7 +22,7 @@
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
                         CONTENIDOS INFORMÁTICOS
                     </button>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu" style="background-color:#B43432" >
                         <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('notices', 'active') }}"
                         href="{{ route('notices') }}">NOTICIAS</a></li>
                         <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('courses', 'active') }}" href="{{ route('courses') }}">CURSOS</a></li>
@@ -38,7 +38,7 @@
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
                         GRADUADOS DE HONOR
                     </button>
-                    <ul class="dropdown-menu" >
+                    <ul class="dropdown-menu" style="background-color:#B43432">
                         <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('experiences', 'active') }} "href="{{ route('experiences') }}" style="text-align:center">EXPERIENCIAS</a></li>
                         <li><a class="dropdown-item" class="nav-link {{ isActiveRoute('meritosGraduados', 'active') }} "href="{{ route('meritosGraduados') }}"  style="text-align:center">PREMIO AL MERITO</a></li>
                     </ul>
@@ -48,7 +48,7 @@
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background:#B43432;margin-top:6px;color:white">
                         BOLSA DE EMPLEO
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu" style="background-color:#B43432">
                         <li><a class="dropdown-item"  class="nav-link {{ isActiveRoute('empleos', 'active') }} "
                         href="{{ route('empleos') }}">ING. SISTEMAS</a></li>
                         <li><a class="dropdown-item" href="https://jobboard.universia.net/graduadosufps">UFPS</a></li>

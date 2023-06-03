@@ -2367,7 +2367,7 @@ textarea.form-control {
   font-size: 0.875rem;
   line-height: 1.5;
   color: #fff;
-  background-color: rgba(220, 53, 69, 0.9);
+  background-color: rgba(#AA1614);
   border-radius: 0.25rem;
 }
 
@@ -2394,7 +2394,7 @@ textarea.form-control {
 
 .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
   border-color: #dc3545;
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 0 rgba#AA1614;
 }
 
 .was-validated select.form-control:invalid, select.form-control.is-invalid {
@@ -2415,7 +2415,7 @@ textarea.form-control {
 
 .was-validated .custom-select:invalid:focus, .custom-select.is-invalid:focus {
   border-color: #dc3545;
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 0 rgba#AA1614;
 }
 
 .was-validated .form-check-input:invalid ~ .form-check-label, .form-check-input.is-invalid ~ .form-check-label {
@@ -2442,7 +2442,7 @@ textarea.form-control {
 }
 
 .was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before, .custom-control-input.is-invalid:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 0 rgba#AA1614;
 }
 
 .was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label::before, .custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label::before {
@@ -2455,7 +2455,7 @@ textarea.form-control {
 
 .was-validated .custom-file-input:invalid:focus ~ .custom-file-label, .custom-file-input.is-invalid:focus ~ .custom-file-label {
   border-color: #dc3545;
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 0 rgba#AA1614;
 }
 
 .form-inline {
@@ -3062,7 +3062,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-danger:focus, .btn-outline-danger.focus {
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.5);
+  box-shadow: 0 0 0 0 rgba(#AA1614);
 }
 
 .btn-outline-danger.disabled, .btn-outline-danger:disabled {
@@ -3079,7 +3079,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-danger.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.5);
+  box-shadow: 0 0 0 0 rgba(#AA1614);
 }
 
 .btn-outline-light {
@@ -5315,7 +5315,7 @@ a.badge-danger:hover, a.badge-danger:focus {
 
 a.badge-danger:focus, a.badge-danger.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(#AA1614);
 }
 
 .badge-light {
@@ -18022,7 +18022,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-danger .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-off-danger .custom-control-input ~ .custom-control-label::after {
@@ -18035,7 +18035,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-danger .custom-control-input:checked:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-on-danger .custom-control-input:checked ~ .custom-control-label::after {
@@ -18360,7 +18360,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-red .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-off-red .custom-control-input ~ .custom-control-label::after {
@@ -18373,7 +18373,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-red .custom-control-input:checked:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-switch.custom-switch-on-red .custom-control-input:checked ~ .custom-control-label::after {
@@ -18793,15 +18793,15 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-danger:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-danger::-webkit-slider-thumb {
@@ -19313,15 +19313,15 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-red:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba(220, 53, 69, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 2px rgba#AA1614;
 }
 
 .custom-range.custom-range-red::-webkit-slider-thumb {
@@ -19812,7 +19812,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-danger:focus ~ .custom-control-label::before {
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba#AA1614;
 }
 
 .custom-control-input-danger:focus:not(:checked) ~ .custom-control-label::before {
@@ -20150,7 +20150,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-red:focus ~ .custom-control-label::before {
-  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  box-shadow: inset 0 0 0 rgba(0, 0, 0, 0), 0 0 0 0.2rem rgba#AA1614;
 }
 
 .custom-control-input-red:focus:not(:checked) ~ .custom-control-label::before {
@@ -23030,7 +23030,7 @@ html.maximized-card {
 }
 
 .toast.bg-danger {
-  background-color: rgba(220, 53, 69, 0.9) !important;
+  background-color: rgba(#AA1614) !important;
 }
 
 .toast.bg-danger .close, .toast.bg-danger .mailbox-attachment-close {
@@ -23039,7 +23039,7 @@ html.maximized-card {
 }
 
 .toast.bg-danger .toast-header {
-  background-color: rgba(220, 53, 69, 0.85);
+  background-color: rgba(#AA1614);
   color: #fff;
 }
 
@@ -23202,7 +23202,7 @@ html.maximized-card {
 }
 
 .toast.bg-red {
-  background-color: rgba(220, 53, 69, 0.9) !important;
+  background-color: rgba(#AA1614) !important;
 }
 
 .toast.bg-red .close, .toast.bg-red .mailbox-attachment-close {
@@ -23211,7 +23211,7 @@ html.maximized-card {
 }
 
 .toast.bg-red .toast-header {
-  background-color: rgba(220, 53, 69, 0.85);
+  background-color: rgba(#AA1614);
   color: #fff;
 }
 
@@ -28829,7 +28829,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-big-counter-danger .pace .pace-progress::after {
-  color: rgba(220, 53, 69, 0.2);
+  color: rgba#AA1614;
 }
 
 .pace-bounce-danger .pace .pace-activity {
@@ -28858,7 +28858,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-center-circle-danger .pace .pace-progress {
-  background: rgba(220, 53, 69, 0.8);
+  background: rgba#AA1614;
   color: #fff;
 }
 
@@ -28893,17 +28893,17 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-corner-indicator-danger .pace .pace-activity::before {
-  border-right-color: rgba(220, 53, 69, 0.2);
-  border-left-color: rgba(220, 53, 69, 0.2);
+  border-right-color: rgba#AA1614;
+  border-left-color: rgba#AA1614;
 }
 
 .pace-corner-indicator-danger .pace .pace-activity::after {
-  border-top-color: rgba(220, 53, 69, 0.2);
-  border-bottom-color: rgba(220, 53, 69, 0.2);
+  border-top-color: rgba#AA1614;
+  border-bottom-color: rgba#AA1614;
 }
 
 .pace-fill-left-danger .pace .pace-progress {
-  background-color: rgba(220, 53, 69, 0.2);
+  background-color: rgba#AA1614;
 }
 
 .pace-flash-danger .pace .pace-progress {
@@ -30532,7 +30532,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-big-counter-red .pace .pace-progress::after {
-  color: rgba(220, 53, 69, 0.2);
+  color: rgba#AA1614;
 }
 
 .pace-bounce-red .pace .pace-activity {
@@ -30561,7 +30561,7 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-center-circle-red .pace .pace-progress {
-  background: rgba(220, 53, 69, 0.8);
+  background: rgba#AA1614;
   color: #fff;
 }
 
@@ -30596,17 +30596,17 @@ select.form-control-sm ~ .select2-container--default .select2-selection--multipl
 }
 
 .pace-corner-indicator-red .pace .pace-activity::before {
-  border-right-color: rgba(220, 53, 69, 0.2);
-  border-left-color: rgba(220, 53, 69, 0.2);
+  border-right-color: rgba#AA1614;
+  border-left-color: rgba#AA1614;
 }
 
 .pace-corner-indicator-red .pace .pace-activity::after {
-  border-top-color: rgba(220, 53, 69, 0.2);
-  border-bottom-color: rgba(220, 53, 69, 0.2);
+  border-top-color: rgba#AA1614;
+  border-bottom-color: rgba#AA1614;
 }
 
 .pace-fill-left-red .pace .pace-progress {
-  background-color: rgba(220, 53, 69, 0.2);
+  background-color: rgba#AA1614;
 }
 
 .pace-flash-red .pace .pace-progress {

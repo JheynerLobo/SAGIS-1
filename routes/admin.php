@@ -106,7 +106,6 @@ Route::prefix('reports')->group(function () {
     Route::get('statistics', [ReportController::class, 'statistics'])->name('admin.reports.statistics');
 });
 
-Route::get('estadístics/Graduados',[ReportController::class,'index_estadisticas'])->name('admin.estadisticas.graduados');
 
 //Route::get('experiences/create', [ExperienceController::class, 'create'])->name('admin.experiences.create');
 
@@ -121,7 +120,7 @@ Route::get('admin/situationGraduate/edit/{anio_graduation}/{anio_actual}', [Repo
 
 Route::post('situationGraduate/store',[ReportController::class, 'store'])->name('admin.situationGraduate.store');
 
-Route::get('situationGraduate/añoGraduacion',[ReportController::class,'filtrarPorAnio'])->name('admin.situationGraduateByAnio');
+Route::get('situationGraduate/añoGraduacion', [ReportController::class, 'filtrarPorAnio'])->name('admin.situationGraduateByAnio');
 
 Route::delete('/situationGraduate/{anio_graduation}/{anio_actual}/eliminar', [ReportController::class, 'delete'])->name('admin.situacionGraduados.destroy');
 

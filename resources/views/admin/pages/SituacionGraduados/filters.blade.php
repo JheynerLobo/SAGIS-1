@@ -12,26 +12,22 @@
             }
         </style>
 </head>
-<form method="GET">
+<form method="GET" action="{{ route('admin.situationGraduateByAnio') }}">
     <div class="caja">
     
-    <select name="anio_graduacion" id="anio_graduacion" style="background: transparent; border: none font-size: 14px; height: 30px; padding: 5px; width: 100px;">
+    <select name="anio_selected"  style="background: transparent; border: none font-size: 14px; height: 30px; padding: 5px; width: 100px; margin-top:5px">
     @php $lastDato = null; @endphp
+    <option >Año:</option>
         @foreach ($aniosGraduacion as $anio)
         @if ($lastDato !== $anio)
-        <label for="anio">Selecciona un año:</label>
+        
             <option value="{{ $anio }}">{{ $anio }}</option>
             @php $lastDato = $anio; @endphp
         @endif
         @endforeach
     </select>
-
-</form>
-
-            
-            <a href="{{route('admin.situationGraduateByAnio')}}">
                 <button class="btn btn-danger btn-sm">Filtrar</button>
-             
+                </form>
                 <a href="{{route('admin.situacionGraduado.create')}}" class="btn btn-primary btn-sm ml-2">Registrar Situación</a>
             </div>
             <hr>    
