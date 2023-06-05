@@ -32,7 +32,7 @@ use App\Http\Requests\Graduates\UpdateRequest;
 use App\Repositories\PersonAcademicRepository;
 use App\Http\Requests\Graduates\StoreJobRequest;
 use App\Http\Requests\Graduates\UpdateJobRequest;
-
+use Illuminate\Support\Str;
 use App\Http\Requests\Graduates\StoreAcademicRequest;
 use App\Http\Requests\Graduates\UpdateAcademicRequest;
 use App\Http\Requests\Graduates\UpdatePasswordRequest;
@@ -313,13 +313,13 @@ class GraduateController extends Controller
 
             /** Searching created Person */
             $person = $this->personRepository->getByAttribute('email', $request->email);
-
+            $password = Str::random(8);
             /** Creating User */
             $userParams = $request->only(['code', 'company_email']);
 
             $userParams['email'] = $userParams['company_email'];
             $userParams['person_id'] = $person->id;
-            $userParams['password'] = 'password';
+            $userParams['password'] = $password;
       
 
             unset($userParams['company_email']);
@@ -348,7 +348,8 @@ class GraduateController extends Controller
             //dd($user->roles()->sync($this->role));
             $user->roles()->sync($this->role);
 
-            Mail::to($person->email)->queue(new MessageReceived($person, $userParams));
+            Mail::to($person->email)->queue(new MessageReceived($person, $userParams['password'],$userParams['email']));
+
 
             DB::commit();
             return redirect()->route('admin.graduates.index')->with('alert', ['title' => '¡Éxito!', 'icon' => 'success', 'message' => 'Se ha registrado correctamente.']);

@@ -8,13 +8,13 @@
         @endforeach
         <thead>
             <tr>
-                <th>Año Registro</th>
-                <th>Graduados Independientes</th>
-                <th>Graduados Dependientes</th>
-                <th>Graduados No Cotizantes</th>
-                <th>% Trabajando Por Año</th>
-                <th>Promedio Total Por Cotizantes</th>
-                <th>Acciones</th>
+                <th style="vertical-align: middle;text-align:center;">Año Registro</th>
+                <th style="vertical-align: middle;text-align:center;">Graduados Independientes</th>
+                <th style="vertical-align: middle;text-align:center;">Graduados Dependientes</th>
+                <th style="vertical-align: middle;text-align:center;">Graduados No Cotizantes</th>
+                <th style="vertical-align: middle;text-align:center;">% Trabajando Por Año</th>
+                <th style="vertical-align: middle;text-align:center;">Promedio Total Por Cotizantes</th>
+                <th style="vertical-align: middle;text-align:center;">Acciones</th>
             </tr>
         </thead>
         <tbody>

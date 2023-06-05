@@ -25,8 +25,7 @@ use function PHPSTORM_META\map;
 
 class ReportController extends Controller
 {
-  
-
+   
     /** @var SituationGraduateRepository */
     protected $situationGraduateRepository;
 
@@ -51,8 +50,10 @@ class ReportController extends Controller
     /** @var Faker */
     protected $faker;
 
+    /** @var string */
+    protected $viewLocation = 'pages.';
+
     public function __construct(
-        
         SituationGraduateRepository $situationGraduateRepository,
         PostRepository $postRepository,
         PersonCompanyRepository $personCompanyRepository,
@@ -74,43 +75,42 @@ class ReportController extends Controller
         $this->roleRepository=$roleRepository;
         $this->faker = $faker;
     }
-
-
+  
     public function index_estadisticas(Request $request)
-{
-    try {
-        $selectedAnio = $request->input('anio_graduation'); // Obtener el valor del año seleccionado
-
-        $params = $this->situationGraduateRepository->transformParameters($request->all());
-        $query = $this->situationGraduateRepository->search($params, null);
-        
-        // Obtener todos los datos sin filtrar
-        $datos = DB::table('situations_graduates')
-            ->orderBy('anio_graduation')
-            ->get();
-
-            $datos2 = DB::table('situations_graduates')
-            ->select('anio_graduation', DB::raw('AVG(trabajando) as promedio_trabajando'), DB::raw('COUNT(*) as cantidad_registros'))
-            ->groupBy('anio_graduation')
-            ->orderBy('anio_graduation')
-            ->get();
+    {
+        try {
+            $selectedAnio = $request->input('anio_graduation'); // Obtener el valor del año seleccionado
+    
+            $params = $this->situationGraduateRepository->transformParameters($request->all());
+            $query = $this->situationGraduateRepository->search($params, null);
             
-
-        $aniosGraduacion = situationsGraduates::orderBy('anio_graduation')->pluck('anio_graduation');
-        
-        
-
+            // Obtener todos los datos sin filtrar
+            $datos = DB::table('situations_graduates')
+                ->orderBy('anio_graduation')
+                ->get();
+    
+                $datos2 = DB::table('situations_graduates')
+                ->select('anio_graduation', DB::raw('AVG(trabajando) as promedio_trabajando'), DB::raw('COUNT(*) as cantidad_registros'))
+                ->groupBy('anio_graduation')
+                ->orderBy('anio_graduation')
+                ->get();
+                
+    
+            $aniosGraduacion = situationsGraduates::orderBy('anio_graduation')->pluck('anio_graduation');
+            
+            
+    
         return view('admin.pages.situacionGraduados.index')
             ->nest('filters','admin.pages.situacionGraduados.filters', compact('aniosGraduacion'))
             ->nest('table','admin.pages.situacionGraduados.table', compact( 'datos','datos2'));
-    } catch (\Throwable $th) {
+        } catch (\Throwable $th) {
         return redirect()->route('admin.situacionGraduados.index')->with('alert', [
-            'title' => '¡Error!',
-            'icon' => 'error',
-            'message' => 'No hemos podido agregar ese registro. Verifica los datos ingresados.'
-        ]);
+                'title' => '¡Error!',
+                'icon' => 'error',
+                'message' => 'No hemos podido agregar ese registro. Verifica los datos ingresados.'
+            ]);
+        }
     }
-}
 
 
     public function filtrarPorAnio(Request $request)
@@ -146,8 +146,8 @@ class ReportController extends Controller
     public function edit($anio_graduation,$anio_actual){
         try {
             $item = DB::table('situations_graduates')->where('anio_graduation', $anio_graduation)->where('anio_actual', $anio_actual)->first();
-            
-           
+   
+
             return view('admin.pages.SituacionGraduados.edit', compact('item'));
         }
         catch (\Exception $th) {

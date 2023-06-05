@@ -3,13 +3,13 @@
         <table class="table table-sm table-hover table-bordered table-striped table-sortable">
             <thead>
                 <tr>
-                    <th>Imagen/Video</th>
-                    <th>Empresa</th>
-                    <th>Cargo</th>
-                    <th>Description</th>
-                    <th>Fecha de Publicación</th>
-                    <th>Url Postulación</th>
-                    <th>Acciones</th>
+                    <th style="vertical-align: middle;text-align:center;">Imagen/Video</th>
+                    <th style="vertical-align: middle;text-align:center;">Empresa</th>
+                    <th style="vertical-align: middle;text-align:center;">Cargo</th>
+                    <th style="vertical-align: middle;text-align:center;">Description</th>
+                    <th style="vertical-align: middle;text-align:center;">Fecha de Publicación</th>
+                    <th style="vertical-align: middle;text-align:center;">Url Postulación</th>
+                    <th style="vertical-align: middle;text-align:center;">Acciones</th>
                     
 
                 </tr>
@@ -22,8 +22,7 @@
                         <img src="{{ asset($item->imageHeader()->fullasset()) }}" alt="" width="55rem">
                         
                         @else
-                        <img src="https://www.uncommunitymanager.es/wp-content/uploads/seo_google_youtube.jpg" alt=""
-                            width="55rem">
+                        <p>Sin imagen</p>
                             @endif
                     </td>
                     <td>{{ $item->empresa }}</td>

@@ -3,11 +3,11 @@
         <table id="example1" class="table table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Video</th>
-                    <th>Graduado</th>
-                    <th>Descripción</th>
-                    <th>Fecha de Publicación</th>
-                    <th>Acciones</th>
+                    <th style="vertical-align: middle;text-align:center;">Video</th>
+                    <th style="vertical-align: middle;text-align:center;">Graduado</th>
+                    <th style="vertical-align: middle;text-align:center;">Descripción</th>
+                    <th style="vertical-align: middle;text-align:center;">Fecha de Publicación</th>
+                    <th style="vertical-align: middle;text-align:center;">Acciones</th>
 
                 </tr>
             </thead>

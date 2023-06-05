@@ -8,8 +8,8 @@
                         alt="...">
                         @endif
                     <div class="card-body">
-                        <h5 class="nombre">Graduado: <strong>{{$item->nombre}}</strong></h5>
-                        <h6 class="fecha">Fecha Publicación: <strong>{{ $item->date }}</strong></h6>
+                        <h5 class="nombre"><strong>Graduado: </strong>{{$item->nombre}}</h5>
+                        <h6 class="fecha"><strong>Fecha Publicación: </strong>{{ $item->date }}</h6>
                         <h5 class="card-title"  id="card-title"> <a href="" class="vinculoTitulo">{{ $item->title }}</a></h5>
                         <p class="card-text" id="card-text">{{ $item->description }}</p>
                     </div>

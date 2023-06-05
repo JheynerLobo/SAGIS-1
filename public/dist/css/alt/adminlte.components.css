@@ -577,7 +577,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-danger .custom-control-input ~ .custom-control-label::before {
-  background-color: #dc3545;
+  background-color: #AA1916;
   border-color: #921925;
 }
 
@@ -590,7 +590,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-danger .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #dc3545;
+  background-color: #AA1916;
   border-color: #921925;
 }
 
@@ -915,7 +915,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-off-red .custom-control-input ~ .custom-control-label::before {
-  background-color: #dc3545;
+  background-color: #AA1916;
   border-color: #921925;
 }
 
@@ -928,7 +928,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-switch.custom-switch-on-red .custom-control-input:checked ~ .custom-control-label::before {
-  background-color: #dc3545;
+  background-color: #AA1916;
   border-color: #921925;
 }
 
@@ -1365,7 +1365,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-danger::-webkit-slider-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-danger::-webkit-slider-thumb:active {
@@ -1373,7 +1373,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-danger::-moz-range-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-danger::-moz-range-thumb:active {
@@ -1381,7 +1381,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-danger::-ms-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-danger::-ms-thumb:active {
@@ -1885,7 +1885,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-red::-webkit-slider-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-red::-webkit-slider-thumb:active {
@@ -1893,7 +1893,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-red::-moz-range-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-red::-moz-range-thumb:active {
@@ -1901,7 +1901,7 @@ body.text-sm .input-group-text {
 }
 
 .custom-range.custom-range-red::-ms-thumb {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .custom-range.custom-range-red::-ms-thumb:active {
@@ -2359,8 +2359,8 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-danger:checked ~ .custom-control-label::before {
-  border-color: #dc3545;
-  background-color: #dc3545;
+  border-color: #AA1916;
+  background-color: #AA1916;
 }
 
 .custom-control-input-danger.custom-control-input-outline:checked[type="checkbox"] ~ .custom-control-label::after {
@@ -2697,8 +2697,8 @@ body.text-sm .input-group-text {
 }
 
 .custom-control-input-red:checked ~ .custom-control-label::before {
-  border-color: #dc3545;
-  background-color: #dc3545;
+  border-color: #AA1916;
+  background-color: #AA1916;
 }
 
 .custom-control-input-red.custom-control-input-outline:checked[type="checkbox"] ~ .custom-control-label::after {
@@ -5927,7 +5927,7 @@ body.text-sm .input-group-text {
 }
 
 .card-danger:not(.card-outline) > .card-header {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .card-danger:not(.card-outline) > .card-header,
@@ -5940,7 +5940,7 @@ body.text-sm .input-group-text {
 }
 
 .card-danger.card-outline {
-  border-top: 3px solid #dc3545;
+  border-top: 3px solid #AA1916;
 }
 
 .card-danger.card-outline-tabs > .card-header a:hover {
@@ -5949,7 +5949,7 @@ body.text-sm .input-group-text {
 
 .card-danger.card-outline-tabs > .card-header a.active,
 .card-danger.card-outline-tabs > .card-header a.active:hover {
-  border-top: 3px solid #dc3545;
+  border-top: 3px solid #AA1916;
 }
 
 .bg-danger > .card-header .btn-tool,
@@ -6863,7 +6863,7 @@ body.text-sm .input-group-text {
 }
 
 .card-red:not(.card-outline) > .card-header {
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 
 .card-red:not(.card-outline) > .card-header,
@@ -6876,7 +6876,7 @@ body.text-sm .input-group-text {
 }
 
 .card-red.card-outline {
-  border-top: 3px solid #dc3545;
+  border-top: 3px solid #AA1916;
 }
 
 .card-red.card-outline-tabs > .card-header a:hover {
@@ -6885,7 +6885,7 @@ body.text-sm .input-group-text {
 
 .card-red.card-outline-tabs > .card-header a.active,
 .card-red.card-outline-tabs > .card-header a.active:hover {
-  border-top: 3px solid #dc3545;
+  border-top: 3px solid #AA1916;
 }
 
 .bg-red > .card-header .btn-tool,
@@ -7848,7 +7848,7 @@ html.maximized-card {
 }
 
 .todo-list > li .tools {
-  color: #dc3545;
+  color: #AA1916;
   display: none;
   float: right;
 }
@@ -7903,7 +7903,7 @@ html.maximized-card {
 }
 
 .todo-list .danger {
-  border-left-color: #dc3545;
+  border-left-color: #AA1916;
 }
 
 .todo-list .light {
@@ -7955,7 +7955,7 @@ html.maximized-card {
 }
 
 .todo-list .red {
-  border-left-color: #dc3545;
+  border-left-color: #AA1916;
 }
 
 .todo-list .orange {
@@ -11772,7 +11772,7 @@ html.maximized-card {
 
 .alert-danger {
   color: #fff;
-  background-color: #dc3545;
+  background-color: #AA1916;
   border-color: #d32535;
 }
 

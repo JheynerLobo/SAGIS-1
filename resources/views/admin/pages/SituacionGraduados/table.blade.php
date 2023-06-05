@@ -13,13 +13,13 @@
                     <h3 style="color:#5e2129">Total Graduados: {{$dato->graduados}}</h3>
                     <thead>
                         <tr>
-                            <th>Año Registro</th>
-                            <th>Graduados Independientes</th>
-                            <th>Graduados Dependientes</th>
-                            <th>Graduados No Cotizantes</th>
-                            <th>% Trabajando Por Año</th>
-                            <th>% Promedio Total</th>
-                            <th>Acciones</th>
+                            <th style="vertical-align: middle;text-align:center;">Año Registro</th>
+                            <th style="vertical-align: middle;text-align:center;">Graduados Independientes</th>
+                            <th style="vertical-align: middle;text-align:center;">Graduados Dependientes</th>
+                            <th style="vertical-align: middle;text-align:center;">Graduados No Cotizantes</th>
+                            <th style="vertical-align: middle;text-align:center;">% Trabajando Por Año</th>
+                            <th style="vertical-align: middle;text-align:center;">% Promedio Total</th>
+                            <th style="vertical-align: middle;text-align:center;">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -15,15 +15,15 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Foto</th>
-                        <th>Nombre</th>
-                        <th>Cédula</th>
-                        <th>Código</th>
-                        <th>Celular</th>
-                        <th>Correo institucional</th>
-                        <th>Ver datos completos</th>
-                        <th>Estado verificado</th>
-                        <th>Acciones</th>
+                        <th style="vertical-align: middle;text-align:center;">Foto</th>
+                        <th style="vertical-align: middle;text-align:center;">Nombre</th>
+                        <th style="vertical-align: middle;text-align:center;">Cédula</th>
+                        <th style="vertical-align: middle;text-align:center;">Código</th>
+                        <th style="vertical-align: middle;text-align:center;">Celular</th>
+                        <th style="vertical-align: middle;text-align:center;">Correo institucional</th>
+                        <th style="vertical-align: middle;text-align:center;">Ver datos completos</th>
+                        <th style="vertical-align: middle;text-align:center;">Estado verificado</th>
+                        <th style="vertical-align: middle;text-align:center;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>

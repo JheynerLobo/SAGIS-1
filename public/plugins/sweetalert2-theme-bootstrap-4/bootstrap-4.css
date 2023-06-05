@@ -529,8 +529,8 @@
 .swal2-input.swal2-inputerror,
 .swal2-file.swal2-inputerror,
 .swal2-textarea.swal2-inputerror {
-  border-color: #dc3545 !important;
-  box-shadow: 0 0 2px #dc3545 !important;
+  border-color: #AA1916 !important;
+  box-shadow: 0 0 2px #AA1916 !important;
 }
 .swal2-input:focus,
 .swal2-file:focus,
@@ -673,8 +673,8 @@
   font-size: 3.75em;
 }
 .swal2-icon.swal2-error {
-  border-color: #dc3545;
-  color: #dc3545;
+  border-color: #AA1916;
+  color: #AA1916;
 }
 .swal2-icon.swal2-error .swal2-x-mark {
   position: relative;
@@ -687,7 +687,7 @@
   width: 2.9375em;
   height: 0.3125em;
   border-radius: 0.125em;
-  background-color: #dc3545;
+  background-color: #AA1916;
 }
 .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left] {
   left: 1.0625em;
@@ -1424,8 +1424,8 @@ body.swal2-toast-shown .swal2-container.swal2-bottom-end, body.swal2-toast-shown
 }
 .swal2-input.swal2-inputerror:focus,
 .swal2-textarea.swal2-inputerror:focus {
-  border-color: #dc3545;
-  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+  border-color: #AA1916;
+  box-shadow: 0 0 0 0.2rem #AA1614 !important;
 }
 
 .swal2-styled.swal2-confirm {

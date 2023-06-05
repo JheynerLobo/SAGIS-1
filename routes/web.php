@@ -88,9 +88,9 @@ Route::get('experiencias/{id}', [HomeController::class, 'showExperiences'])->nam
 Route::get('empleos', [HomeController::class, 'empleos'])->name('empleos');
 Route::get('empleos/{id}', [HomeController::class, 'showEmpleos'])->name('empleos.show');
 
-Route::get('SituacionGraduados',[ReportController::class, 'index_estadisticas'])->name('situacionGraduados');
+Route::get('SituacionGraduados',[HomeController::class, 'index_estadisticas'])->name('situacionGraduados');
 
-Route::get('situacionsGraduates/añoGraduacion', [ReportController::class, 'filtrarPorAnio'])->name('situationGraduateByAnio');
+Route::get('situacionsGraduates/añoGraduacion', [HomeController::class, 'filtrarPorAnio'])->name('situationGraduateByAnio');
 
 Route::get('meritosGraduados',[HomeController::class,'meritosGraduado'])->name('meritosGraduados');
 

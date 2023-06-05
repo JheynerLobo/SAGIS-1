@@ -2,11 +2,11 @@
     <div class="row g-5">
         @forelse ($items as $item)
         <div class="col-12 col-md-6 col-lg-4">
-                <div class="card " style="width: 21rem; height: 500px;" id="card">
+                <div class="card " style="width: 21rem; height: 450px;" id="card">
                 @if ($item->imageHeader() && $item->imageHeader()->fullAsset())
                     <img src="{{ asset($item->imageHeader()->fullAsset()) }}"
-                     class="cd card-img-top" height="200px"
-                        alt="...">
+                     class="cd card-img-top" style="width:12rem; height:250px; display: block; margin-left: auto;
+                    margin-right:auto;" alt="...">
                         @endif
                     <div class="card-body">
                     <h6 class="card-title"><strong>Empresa:</strong> {{ $item->empresa }}</h6>   

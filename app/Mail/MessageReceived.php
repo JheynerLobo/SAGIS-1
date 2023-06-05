@@ -15,17 +15,20 @@ class MessageReceived extends Mailable
     public $subject = "Datos de Ingreso SAGIS";
     public $person;
 
-    public $userParams;
+    public $email;
+    public $password;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($person, $userParams)
+
+    public function __construct($person, $password, $email)
     {
+        $this->email= $email;
         $this->person = $person;
-        $this->userParams = $userParams;
+        $this->password = $password;
     }
 
     /**

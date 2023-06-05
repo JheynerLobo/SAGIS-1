@@ -3,13 +3,13 @@
         <table class="table table-sm table-hover table-bordered table-striped">
             <thead>
                 <tr>
-                    <th>Foto/Video</th>
-                    <th>Título</th>
-                    <th>Categoría</th>
-                    <th>Descripción</th>
-                    <th>Fecha de Publicación</th>
-                    <th>Acciones</th>
-                    <th>Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>
+                    <th style="vertical-align: middle;text-align:center;">Foto/Video</th>
+                    <th style="vertical-align: middle;text-align:center;">Título</th>
+                    <th style="vertical-align: middle;text-align:center;">Categoría</th>
+                    <th style="vertical-align: middle;text-align:center;">Descripción</th>
+                    <th style="vertical-align: middle;text-align:center;">Fecha de Publicación</th>
+                    <th style="vertical-align: middle;text-align:center;">Acciones</th>
+                    <th style="vertical-align: middle;text-align:center;">Cantidad de <span class="text-primary">Fotos</span>/<span class="text-success">Videos</span>
                     </th>
 
                 </tr>

@@ -9,7 +9,7 @@
 </head>
 <body>
     <p>Buenas ingeniero(a): {{$person->name}} {{$person->lastname}}, el <strong>Programa de Ingeniería de Sistemas de la UFPS</strong> le informa que ha sido registrado en el sistema web SAGIS para graduados, con los siguientes datos podrá ingresar al aplicativo SAGIS:</p>
-    <p>Correo electrónico: <strong>{{ $userParams['email'] }}</strong> </p>
-    <p>Contraseña:<strong>password</strong></p>
+    <p>Correo electrónico: <strong>{{ $email }}</strong> </p>
+    <p>Contraseña:<strong>{{$password}}</strong></p>
 </body>
 </html>
