@@ -151,13 +151,13 @@ ___
 
 ### Autores:
 
-## En la Materia de Análisis y Diseño e Ingeniería de Software
+#### En la Materia de Análisis y Diseño e Ingeniería de Software
 
 1. Jarlin Andres Fonseca Bermón 1151758 - jarlinandresfb@ufps.edu.co
 2. Junior Yoel Castilla Osorio 1151755 - osoriojunioryoelc@ufps.edu.co
 3. Manuel Felipe Mora Espitia 1151863 - manuelfelipeme@ufps.edu.co
 
-## En Prácticas Empresariales
+#### En Prácticas Empresariales
 
 5. Jheyner Alexander Lobo Duarte 1151785 - jheyneralexanderld@ufps.edu.co
 ___
