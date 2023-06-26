@@ -60,7 +60,13 @@ class ExperienceController extends Controller
         $experience = new Experience;
         $experience->nombre = $request->input('nombre');
         $experience->description = $request->input('description');
-        
+        if (!$request->filled('description')) {
+            return back()->with('alert', [
+                'title' => '¡Advertencia!',
+                'message' => 'Debe escribir una descripción.',
+                'icon' => 'warning'
+            ]);
+        }
         $date = $request->input('date');
         if (!$request->filled('date')) {
             return back()->with('alert', [
