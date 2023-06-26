@@ -11,7 +11,7 @@
             <div id="informacionContent" class=" mb-margin-bottom-30 shadow-wrapper">
 
                 <div class="col-md-12 col-sm-12 col-xs-12"
-                    style="margin-bottom:20px; border-bottom: 3px solid #AA1914; padding: 0;">
+                    style="margin-bottom:20px; border-bottom: 3px solid #AA1614; padding: 0;">
                     <h1 class="pull-left" style="font-size:36px;">Curso</h1>
                 </div>
                 <h1 class="tituloinformacion"> {{ $item->title }} </h1>

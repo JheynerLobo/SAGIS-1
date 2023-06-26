@@ -5,7 +5,7 @@
         <div class="form-group">
             <label>Graduad@:</label>
             <input type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"
-                value="{{ $item->nombre }}">
+                value="{{ $item->nombre }}" required>
         </div>
         @error('nombre')
             <small class="text-danger">{{ $message }}</small>
@@ -75,7 +75,7 @@
         <div class="form-group">
             <label>Graduad@:</label>
             <input type="text" class="form-control @error('nombre') is-invalid @enderror" name="nombre"
-                value="{{ old('nombre') }}">
+                value="{{ old('nombre') }}" required>
         </div>
         @error('nombre')
             <small class="text-danger">{{ $message }}</small>
@@ -86,7 +86,7 @@
         <div class="form-group">
             <label>Descripción:</label>
             <textarea name="description" cols="30" rows="5"
-                class="form-control @error('description') is-invalid @enderror"></textarea>
+                class="form-control @error('description') is-invalid @enderror" required></textarea>
         </div>
         @error('description')
             <small class="text-danger">{{ $message }}</small>

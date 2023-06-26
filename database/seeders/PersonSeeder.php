@@ -38,7 +38,7 @@ class PersonSeeder extends Seeder
     public function run()
     {
         try {
-            $randomNumber = env('RANDOM_PEOPLE', 75);
+            
 
             $documentTypes = $this->documentTypeRepository->all();
             $cities = $this->cityRepository->all();
@@ -63,13 +63,6 @@ class PersonSeeder extends Seeder
                 'birthdate_place_id' => $cucutaCity->id,
             ]);
 
-            do {
-                $this->personRepository->createFactory(1, [
-                    'document_type_id' => $documentTypes->random(1)->first()->id,
-                    'birthdate_place_id' => $cities->random(1)->first()->id
-                ]);
-                $randomNumber--;
-            } while ($randomNumber > 0);
         } catch (Exception $th) {
             print($th->getMessage());
         }

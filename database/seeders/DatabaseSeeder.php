@@ -34,10 +34,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             UserSeeder::class,
 
-            PostCategorySeeder::class,
-            PostSeeder::class,
-            PostImageSeeder::class,
-            PostVideoSeeder::class
+            PostCategorySeeder::class
         ]);
     }
 }

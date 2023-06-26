@@ -437,7 +437,6 @@ class HomeController extends Controller
         }
     }
 
-
     public function filtrarPorAnio(Request $request)
 {
     $anio = intval($request->input('anio_selected'));

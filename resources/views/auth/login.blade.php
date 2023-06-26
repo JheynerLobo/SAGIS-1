@@ -103,11 +103,7 @@
                                     style="width: 45px; height: 45px"></button></a>
                                     <a style="text-decoration: none; color: #000000;"
                                 href="{{ route('login') }}">
-                                <a style="text-decoration: none; color: #000000;"
-                                href="#">
-                                <button type="button" class="btn btn-outline-danger border border-danger border-4 fas fa-sharp fa-solid fa-building"
-                                    style="width: 45px; height: 45px; margin-left: 30px"></button>
-                                    </a>
+                                
                                     </div>
                             </a>
                     

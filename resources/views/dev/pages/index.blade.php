@@ -48,7 +48,7 @@
                 <div class="col-md-10">
                     <h1 class="text-center" style="color: #858585; font-weight: boild;">SOBRE NOSOTROS</h1>
                     <h1 class="text-center"> <b>Programa de Ingenieria de Sistemas </b> </h1>
-                    <hr size="30" style="background-color: #AA1914; ">
+                    <hr size="30" style="background-color: #AA1614; ">
                     <p class="texto">El Programa de Ingeniería de Sistemas de la Universidad Francisco de Paula Santander
                         recibió licencia de funcionamiento emanada del ICFES según el Acuerdo 277 de 19 diciembre de 1985 y
                         fue aprobado mediante Resolución No. 001791 de Julio de 1991, emanada del Instituto Colombiano de
@@ -74,7 +74,7 @@
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-                    <h1>NUESTRA <p style="color: #AA1914; display: inline;">GALERÍA</p>
+                    <h1>NUESTRA <p style="color: #AA1614; display: inline;">GALERÍA</p>
                     </h1>
                 </div>
                 <div class="col-md-1"></div>

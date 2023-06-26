@@ -40,25 +40,18 @@ class AdminSeeder extends Seeder
     {
         try {
             $rolesAdmin = $this->roleRepository->all()->where('guard_name', 'admin');
-            $jarlinPerson = $this->personRepository->getByAttribute('document', '1006287478');
             $ingSistemas = $this->personRepository->getByAttribute('email', 'judithdelpilarrt@ufps.edu.co');
 
             /** Creating Admins */
-            $this->adminRepository->createFactory(1, [
-                'person_id' => $jarlinPerson->id,
-                'email' => 'jarlinandresfb@ufps.edu.co'
-            ]);
-
+            
             $this->adminRepository->createFactory(1, [
                 'person_id' => $ingSistemas->id,
                 'email' => 'ingsistemas@ufps.edu.co',
             ]);
 
             /** Getting Admins */
-            $adminJarlin = $this->adminRepository->getByAttribute('person_id', $jarlinPerson->id);
             $adminSistemas = $this->adminRepository->getByAttribute('person_id', $ingSistemas->id);
 
-            $adminJarlin->roles()->attach($rolesAdmin->random(1)->first());
             $adminSistemas->roles()->attach($rolesAdmin->random(1)->first());
         } catch (Exception $th) {
             print($th->getMessage());
