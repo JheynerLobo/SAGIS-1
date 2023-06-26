@@ -54,48 +54,51 @@ class ExperienceController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        try {
-            $experience = $this->experienceRepository->all();
-
-            return view('admin.pages.experiences.create');
-        } catch (\Throwable $th) {
-            //throw $th;
-        }
-    }
-
-    public function store(Request $request){
-        try{
+    public function store(Request $request)
+{
+    try {
         $experience = new Experience;
-        $experience -> nombre = $request->input('nombre');
-        $experience -> description = $request->input('description');
-        $experience -> date = $request->input('date');
+        $experience->nombre = $request->input('nombre');
+        $experience->description = $request->input('description');
+        
+        $date = $request->input('date');
+        if (!$request->filled('date')) {
+            return back()->with('alert', [
+                'title' => '¡Advertencia!',
+                'message' => 'Debe seleccionar una fecha.',
+                'icon' => 'warning'
+            ]);
+        }
+        $experience->date = $date;
+        
         $experience->save();
 
-     
         $videoParams = $request->only(['video']);
-        if($videoParams!=null){
+        if ($videoParams != null) {
             $video = substr($videoParams['video'], -11);
             $videoParams['experience_id'] = $experience->id;
             $videoParams['asset_url'] = $video;
             $videoParams['is_header'] = 1;
             unset($videoParams['video']);
-            $this->experienceVideoRepository->create($videoParams);}
-
-            return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
-        } catch (\Exception $th) {
-            dd($th);
-            DB::rollBack();
-
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
+            $this->experienceVideoRepository->create($videoParams);
         }
+
+        return redirect()->route('admin.experiences')->with('alert', [
+            'title' => '¡Éxito!',
+            'message' => 'Se ha registrado correctamente.',
+            'icon' => 'success'
+        ]);
+    } catch (\Exception $th) {
+        dd($th);
+        DB::rollBack();
+
+        return back()->with('alert', [
+            'title' => '¡Error!',
+            'message' => 'No se ha podido registrar correctamente. ' . $th->getMessage(),
+            'icon' => 'error'
+        ]);
     }
+}
 
 
 
@@ -126,35 +129,25 @@ class ExperienceController extends Controller
             
         }
     }
-        /*try {
-            $experience = $this->experienceRepository->getById($id);
-            $this->experienceRepository->update($experience, $request->all());
 
-                $videoParams2 = $request->only(['video']);
-                $video = substr($videoParams2['video'], -11);
-                        
-                            $experienceVideo = $this->experienceVideoRepository->getByAttribute("experience_id", $experience->id);
-                              $videoParams2['experience_id'] = $experience->id;
-                              $videoParams2['asset_url'] = $video;
-                              $videoParams2['is_header'] = 1;
-                              unset($videoParams2['video']);
-                              $this->experienceVideoRepository->update($experienceVideo, $videoParams2);
-                              return redirect()->route('admin.experiences')->with('alert', ['title' => '¡Éxito!', 'message' => 'Se ha registrado correctamente.', 'icon' => 'success']);
-                       
-                    
-    } catch (\Exception $th) {
-        dd($th);
-            DB::rollBack();
 
-            return back()->with('alert', ['title' => '¡Error!', 'message' => 'No se ha podido registrar correctamente.', 'icon' => 'error']);
-        }*/
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        try {
+            $experience = $this->experienceRepository->all();
+
+            return view('admin.pages.experiences.create');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
     
-
-
-
-
-
-
 
     /**
      * Display the specified resource.
